@@ -1,0 +1,25 @@
+.showcase {
+  padding-bottom: $layout-gutter-width / 2;
+  @media screen and (min-width: $layout-breakpoint-sm) {
+    padding-bottom: $layout-gutter-width;
+  }
+
+  md-tabs {
+    // opacity: 1;
+    max-height: 350px;
+    min-height: 350px;
+      height: 350px;
+
+    &.ng-hide {
+      // opacity: 0;
+      min-height: 0;
+      height: 0;
+      max-height: 0;
+    }
+
+    &.ng-hide-add,
+    &.ng-hide-remove {
+      transition: all cubic-bezier(0, 1, 0.5, 1) .5s;
+    }
+  }
+}

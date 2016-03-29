@@ -1,0 +1,19 @@
+<div class="showcase" layout="column" ng-cloak>
+  <md-content>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h3 ng-bind="::$ctrl.title"></h3>
+        <span flex></span>
+        <md-progress-circular class="md-accent md-hue-3" md-diameter="24" ng-if="$ctrl.loading"></md-progress-circular>
+        <md-button class="toolbar-button" aria-label="View Source" ng-click="$ctrl.toggleSource()">
+          <i class="material-icons">code</i>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-tabs ng-if="$ctrl.loaded" ng-show="$ctrl.showSource" md-selected="$ctrl.selected" md-border-bottom md-dynamic-height>
+      <md-tab ng-repeat="tab in $ctrl.tabs" label="{{::tab.title}}">
+        <ui-codemirror ui-codemirror-opts="::tab.options" ng-model="::tab.content"></ui-codemirror>
+      </md-tab>
+    </md-tabs>
+  </md-content>
+</div>

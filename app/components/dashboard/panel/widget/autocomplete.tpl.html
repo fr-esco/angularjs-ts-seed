@@ -1,0 +1,22 @@
+<div ng-controller="AutocompleteController as vm">
+  <md-content ng-show="$showOptions" class="options">
+    <md-radio-group ng-model="vm.disableCaching">
+      <md-radio-button ng-value="true">Disable caching</md-radio-button>
+      <md-radio-button ng-value="false">Enable caching</md-radio-button>
+    </md-radio-group>
+  </md-content>
+
+  <md-content class="md-padding">
+    <md-autocomplete placeholder="Search country" md-selected-item="vm.selectedCountry" md-search-text="vm.searchText" md-no-cache="vm.disableCaching"
+    md-items="item in vm.querySearch(vm.searchText)" md-item-text="item.display">
+      <span md-highlight-text="vm.searchText">{{item.display}}</span>
+    </md-autocomplete>
+
+    <p>Selected country:
+      <strong>{{vm.selectedCountry.display || 'No country selected'}}</strong>
+    </p>
+    <p>Country code:
+      <strong>{{vm.selectedCountry.code || 'No country selected'}}</strong>
+    </p>
+  </md-content>
+</div>

@@ -1,0 +1,23 @@
+<md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="md-whiteframe-z2 md-sidenav-left">
+  <md-toolbar md-theme="custom" class="md-hue-1 md-whiteframe-z2">
+    <md-button layout="row" layout-align="center center" class="md-toolbar-tools md-warn" href="http://flatlogic.github.io/angular-material-dashboard">
+      <h1>AMD</h1>
+    </md-button>
+  </md-toolbar>
+  <md-button ng-repeat-start="item in $ctrl.menuItems" layout="column" layout-align="center center" flex class="capitalize" ng-click="$ctrl.selectItem(item)"
+  ng-link="item.link">
+  <!--ui-sref-active="md-warn" ui-sref="{{item.sref}}">-->
+    <div hide-sm hide-md class="md-tile-content">
+      <i class="material-icons md-36">{{item.icon}}</i>
+    </div>
+    <div class="md-tile-content">
+      {{item.name}}
+    </div>
+  </md-button>
+  <md-divider ng-repeat-end></md-divider>
+  <md-button ng-click="$ctrl.showActions($event)" layout-align="center center">
+    <div class="md-tile-content">
+      Actions
+    </div>
+  </md-button>
+</md-sidenav>

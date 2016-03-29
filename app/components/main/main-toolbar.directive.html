@@ -1,0 +1,15 @@
+<md-toolbar layout="row" layout-align="end center">
+  <md-button hide-sm class="toolbar-button" aria-label="Search">
+    <i class="material-icons">search</i>
+  </md-button>
+  <md-button hide-sm class="toolbar-button" aria-label="Notifications">
+    <i class="material-icons">notifications</i>
+    <span class="notifications-label">7</span>
+  </md-button>
+  <md-button hide-sm class="toolbar-button" aria-label="Settings" ng-click="$ctrl.toggleRightSidebar()">
+    <i class="material-icons">settings</i>
+  </md-button>
+  <md-button hide-gt-sm ng-click="$ctrl.toggleItemsList()" aria-label="Menu">
+    <i class="material-icons">menu</i>
+  </md-button>
+</md-toolbar>

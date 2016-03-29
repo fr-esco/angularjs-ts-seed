@@ -1,0 +1,76 @@
+{
+  "rules": {
+    "member-access": true,
+    "member-ordering": [
+      true,
+      "public-before-private",
+      "static-before-instance",
+      "variables-before-functions"
+    ],
+    "no-any": false,
+    "no-internal-module": false,
+    "no-var-requires": true,
+    "use-strict": [
+      true,
+      "check-module"
+    ],
+    "eofline": true,
+    "indent": [
+      true,
+      "spaces"
+    ],
+    "max-line-length": [
+      true,
+      160
+    ],
+    "no-require-imports": true,
+    "no-trailing-whitespace": true,
+    "object-literal-sort-keys": false,
+    "trailing-comma": [
+      false,
+      {
+        "multiline": "always",
+        "singleline": "never"
+      }
+    ],
+    "align": [
+      true,
+      "statements"
+    ],
+    "class-name": true,
+    "comment-format": [
+      true,
+      "check-space"
+    ],
+    "interface-name": false,
+    "jsdoc-format": true,
+    "no-consecutive-blank-lines": true,
+    "no-constructor-vars": false,
+    "quotemark": [
+      true,
+      "single",
+      "avoid-escape"
+    ],
+    "semicolon": [
+      true,
+      "always"
+    ],
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-leading-underscore",
+      "allow-trailing-underscore"
+    ],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-module",
+      "check-separator",
+      "check-type",
+      "check-typecast"
+    ]
+  }
+}
