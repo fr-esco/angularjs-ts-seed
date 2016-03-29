@@ -45,6 +45,7 @@ export default class MainComponent implements at.OnInit {
     this.mdBottomSheet.show({
       parent: angular.element(document.getElementById('content')),
       templateUrl: 'bottom-sheet/bottom-sheet.tpl.html',
+<<<<<<< HEAD
       controller: BottomSheetController,
       controllerAs: 'vm',
       bindToController: true,
@@ -52,6 +53,16 @@ export default class MainComponent implements at.OnInit {
     }).then(clickedItem => {
       clickedItem && this.log.debug(clickedItem.name + ' clicked!');
     });
+=======
+      controller: 'BottomSheetController',
+      controllerAs: 'vm',
+      bindToController: true,
+      targetEvent: $event
+    }); /*
+    .then(clickedItem => {
+      clickedItem && this.log.debug(clickedItem.name + ' clicked!');
+    }); */
+>>>>>>> origin/develop
   }
 
   public showSimpleToast(title: string) {
@@ -80,6 +91,7 @@ export default class MainComponent implements at.OnInit {
     this.mdSidenav('right').close().then(() => this.log.debug('Right sidenav closed'));
   }
 }
+<<<<<<< HEAD
 
 @at.inject('$mdBottomSheet')
 class BottomSheetController {
@@ -95,3 +107,5 @@ class BottomSheetController {
     this.mdBottomSheet.hide(action);
   }
 }
+=======
+>>>>>>> origin/develop
