@@ -15,7 +15,7 @@ const ngComponentName = 'tsfnShowcase';
 @at.component(ngModuleName, ngComponentName, {
   bindings: {
     fileList: '<',
-    lazy: '<',
+    lazy: '<?',
     title: '@'
   },
   templateUrl: 'showcase/showcase.component.html'

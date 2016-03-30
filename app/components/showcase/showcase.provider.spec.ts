@@ -9,11 +9,11 @@ import ShowcaseService from './showcase.provider';
 let $module = angular.mock.module;
 let $inject = angular.mock.inject;
 let $dump = (arg: any): void => console.log(angular.mock.dump(arg));
+// let $dump = (arg: any): void => console.log(arg);
 
 describe('# Showcase Provider', () => {
   const loaded = ['ngProvider', 'showcase', 'has loaded an', 'ShowcaseProviderService'].join(' ');
 
-  // $log.debug.logs[0] will contain the module initialization logs
   let $log;
   let provider: ShowcaseProvider;
   let service: ShowcaseService;
@@ -99,6 +99,55 @@ describe('# Showcase Provider', () => {
     it('should log DEBUG', () => {
       expect($log.debug.logs).toContain([loaded]);
       expect($log.info.logs).not.toContain([loaded]);
+    });
+  });
+
+  describe('## Features of service', () => {
+    let $httpBackend, $rootScope;
+
+    beforeEach(() => {
+      $module(ngModuleName);
+
+      $inject((_showcase_, _$httpBackend_, _$rootScope_) => {
+        service = _showcase_;
+        $httpBackend = _$httpBackend_;
+        $rootScope = _$rootScope_;
+      });
+    });
+
+    it('should load files', $inject($timeout => {
+      let fake = (method, url) => {
+        let parts = url.split('/'),
+          file = parts[parts.length - 1];
+        return [200, file];
+      };
+      $httpBackend
+        .expect('GET', /(\.html|\.ts)$/)
+        .respond(fake);
+      $httpBackend
+        .expect('GET', /(\.html|\.ts)$/)
+        .respond(fake);
+
+      let fileList = ['example.html', 'example.ts'];
+      let all = service.load(fileList);
+
+      $timeout.flush(1000);
+      expect($timeout.verifyNoPendingTasks).not.toThrow();
+
+      expect($httpBackend.flush).not.toThrow();
+
+      all.then(content => {
+        fileList.forEach(file => {
+          expect(content[file]).toBe(file);
+        });
+      });
+
+      $rootScope.$apply();
+    }));
+
+    afterEach(() => {
+      expect($httpBackend.verifyNoOutstandingExpectation).not.toThrow();
+      expect($httpBackend.verifyNoOutstandingRequest).not.toThrow();
     });
   });
 });

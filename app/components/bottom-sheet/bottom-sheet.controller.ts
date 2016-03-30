@@ -6,7 +6,7 @@ const ngControllerName = 'BottomSheetController';
 
 @at.controller(ngModuleName, ngControllerName)
 @at.inject('$log', '$mdBottomSheet')
-class BottomSheetController {
+export default class BottomSheetController {
   public actions = [
     { name: 'Share', icon: 'share', url: 'https://www.google.com' },
     { name: 'Star', icon: 'star', url: 'https://www.google.com' }

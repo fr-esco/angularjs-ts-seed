@@ -54,4 +54,5 @@ export default class ShowcaseProviderService {
       .then(response => response.data)), Math.random() * 1000);
     return deferred.promise;
   }
+
 }
