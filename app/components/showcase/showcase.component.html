@@ -2,7 +2,7 @@
   <md-content>
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h3 ng-bind="::$ctrl.title"></h3>
+        <h3 ng-bind="::$ctrl.title || 'Showcase'"></h3>
         <span flex></span>
         <md-progress-circular class="md-accent md-hue-3" md-diameter="24" ng-if="$ctrl.loading"></md-progress-circular>
         <md-button class="toolbar-button" aria-label="View Source" ng-click="$ctrl.toggleSource()">
@@ -10,9 +10,12 @@
         </md-button>
       </div>
     </md-toolbar>
-    <md-tabs ng-if="$ctrl.loaded" ng-show="$ctrl.showSource" md-selected="$ctrl.selected" md-border-bottom md-dynamic-height>
+    <md-tabs ng-if="$ctrl.loaded" ng-show="$ctrl.showSource" md-selected="$ctrl.selected" md-border-bottom>
       <md-tab ng-repeat="tab in $ctrl.tabs" label="{{::tab.title}}">
-        <ui-codemirror ui-codemirror-opts="::tab.options" ng-model="::tab.content"></ui-codemirror>
+        <ui-codemirror ui-codemirror-opts="::tab.options" ng-if="::!$ctrl.markdown(tab)" ng-model="::tab.content"></ui-codemirror>
+        <md-content layout-padding ng-if="::$ctrl.markdown(tab, true)" md-theme="dark">
+          <p class="markdown" ng-bind-html="::tab.content"></p>
+        </md-content>
       </md-tab>
     </md-tabs>
   </md-content>

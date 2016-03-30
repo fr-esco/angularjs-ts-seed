@@ -1,6 +1,7 @@
 import Common    from './common/common';
 import Example   from './example/example';
 import Material  from './material/material';
+import Markdown  from './markdown/markdown';
 import Main      from './main/main';
 import Dashboard from './dashboard/dashboard';
 import Message   from './message/message';

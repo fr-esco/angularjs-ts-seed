@@ -1,6 +1,6 @@
 /// <reference path="../../../typings/browser.d.ts" />
 
-import Showcase from './showcase';
+import Markdown from './markdown';
 
 'use strict';
 
@@ -8,13 +8,13 @@ let $module = angular.mock.module;
 let $inject = angular.mock.inject;
 let $dump = (arg: any): void => console.log(angular.mock.dump(arg));
 
-describe('# Showcase Module', () => {
-  beforeEach($module(Showcase));
+describe('# Markdown Module', () => {
+  beforeEach($module(Markdown));
 
   describe('## Existence', () => {
     let mod;
 
-    beforeEach(() => mod = angular.module(Showcase));
+    beforeEach(() => mod = angular.module(Markdown));
 
     it('should exist', () => {
       expect(mod).not.toBeUndefined();
@@ -24,8 +24,7 @@ describe('# Showcase Module', () => {
     it('should have deps', () => {
       expect(mod.requires).toContain('ngComponentRouter');
       expect(mod.requires).toContain('app.components.material');
-      expect(mod.requires).toContain('ui.codemirror');
-      expect(mod.requires).toContain('app.components.markdown');
+      expect(mod.requires).toContain('ng-showdown');
     });
   });
 
@@ -39,7 +38,7 @@ describe('# Showcase Module', () => {
     });
 
     it('should log registration', () => {
-      let loaded = ['ngModule', Showcase, 'loaded'].join(' ');
+      let loaded = ['ngModule', Markdown, 'loaded'].join(' ');
       expect($log.debug.logs).toContain([loaded]);
     });
   });

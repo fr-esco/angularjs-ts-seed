@@ -14,13 +14,13 @@ const ngComponentName = 'tsfnShowcase';
 
 @at.component(ngModuleName, ngComponentName, {
   bindings: {
-    fileList: '<',
+    fileList: '<?',
     lazy: '<?',
     title: '@'
   },
   templateUrl: 'showcase/showcase.component.html'
 })
-@at.inject('showcase', '$log', '$q', '$timeout')
+@at.inject('showcase', '$log', '$q', '$sanitize', '$timeout', '$showdown')
 export default class ShowcaseComponent implements at.OnInit {
   public fileList: string[];
   public lazy: boolean;
@@ -43,8 +43,15 @@ export default class ShowcaseComponent implements at.OnInit {
   constructor(private showcase: ShowcaseService,
     private log: angular.ILogService,
     private q: angular.IQService,
-    private timeout: angular.ITimeoutService) {
+    private sanitize: angular.sanitize.ISanitizeService,
+    private timeout: angular.ITimeoutService,
+    private showdown) {
     log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+
+    this.fileList = [
+      'components/showcase/showcase.scss',
+      'components/showcase/showcase.readme.md'
+    ];
   }
 
   public $onInit() {
@@ -54,6 +61,16 @@ export default class ShowcaseComponent implements at.OnInit {
 
   public toggleSource() {
     this.load().then(loaded => loaded ? this.toggleSourceInternal() : this.q.reject());
+  }
+
+  public markdown(tab: ITab, convert = false) {
+    if (tab.options.mode === 'md') {
+      if (convert)
+        tab.content = this.sanitize(this.showdown.makeHtml(tab.content));
+      return true;
+    }
+
+    return false;
   }
 
   private toggleSourceInternal() {
