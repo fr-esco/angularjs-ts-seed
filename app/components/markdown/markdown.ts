@@ -4,7 +4,7 @@ import ngModuleName from './markdown.module';
 // import './markdown.component';
 // import './markdown.controller';
 // import './markdown.directive';
-// import './markdown.filter';
+import './markdown.filter';
 // import './markdown.provider';
 // import './markdown.service';
 

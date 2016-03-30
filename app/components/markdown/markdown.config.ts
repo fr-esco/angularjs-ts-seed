@@ -1,10 +1,20 @@
 'use strict';
 
-let config = ($showdownProvider) => {
-  $showdownProvider.setOption('omitExtraWLInCodeBlocks', true);
-  $showdownProvider.setOption('sanitize', true);
+let decorator = ($sanitize: angular.sanitize.ISanitizeService, $delegate) => {
+  let makeHtml = $delegate.makeHtml;
+  $delegate.makeHtml = (markdown: string) => $sanitize(makeHtml(markdown));
+  return $delegate;
 };
 
-config.$inject = ['$showdownProvider'];
+decorator.$inject = ['$sanitize', '$delegate'];
+
+let config = ($provide, $showdownProvider) => {
+  $showdownProvider
+    .setOption('omitExtraWLInCodeBlocks', true);
+
+  $provide.decorator('$showdown', decorator);
+};
+
+config.$inject = ['$provide', '$showdownProvider'];
 
 export default config;

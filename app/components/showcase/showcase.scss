@@ -24,6 +24,9 @@
   }
 
   .markdown {
-    padding: 0 $layout-gutter-width;
+    padding: 0 $layout-gutter-width / 2;
+    @media screen and (min-width: $layout-breakpoint-sm) {
+      padding: 0 $layout-gutter-width;
+    }
   }
 }
