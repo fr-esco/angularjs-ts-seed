@@ -9,9 +9,9 @@ var faker = require('faker');
 var fs = require('fs');
 var join = require('path').join;
 
-gulp.task('fake', function() {
+var db = join(PATH.dest.test.all, PATH.dest.test.rest.db);
 
-  var db = join(PATH.dest.test.all, PATH.dest.test.rest.db);
+gulp.task('rest.fake', function() {
 
   var data = {
     people: times(10).map(aPerson)
