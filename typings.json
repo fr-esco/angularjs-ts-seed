@@ -14,6 +14,7 @@
     "jasmine-expect": "github:DefinitelyTyped/DefinitelyTyped/jasmine-expect/jasmine-expect.d.ts#50609913de56f251022dbd3c0cdbf34629dbe904",
     "jquery": "github:DefinitelyTyped/DefinitelyTyped/jquery/jquery.d.ts#470954c4f427e0805a2d633636a7c6aa7170def8",
     "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#20e1eb9616922d382d918cc5a21870a9dbe255f5",
-    "nvd3": "registry:dt/nvd3#1.8.1+20160317120654"
+    "nvd3": "registry:dt/nvd3#1.8.1+20160317120654",
+    "restangular": "registry:dt/restangular#1.4.0+20160317120654"
   }
 }
