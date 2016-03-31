@@ -32,8 +32,9 @@ function times(n, value) {
   return temp;
 }
 
-function aPerson() {
+function aPerson(old, index) {
   return {
+    id: index,
     first: faker.name.firstName(),
     last: faker.name.lastName(),
     phone: faker.phone.phoneNumber(),
