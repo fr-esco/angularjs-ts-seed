@@ -11,7 +11,7 @@ const ngComponentName = 'tsfnMain';
   $routeConfig: [
     { path: '/dashboard', name: 'Dashboard', component: 'tsfnDashboard', data: { title: 'Dashboard' }, useAsDefault: true },
     { path: '/profile', name: 'Profile', component: 'tsfnProfile', data: { title: 'Profile' } },
-    { path: '/table', name: 'Table', component: 'tsfnTable', data: { title: 'Table' } }
+    { path: '/table/...', name: 'Table', component: 'tsfnTable', data: { title: 'Table' } }
   ]
 })
 @at.inject('navigationService', '$log', '$q', '$mdSidenav', '$mdBottomSheet', '$mdMenu', '$mdToast')

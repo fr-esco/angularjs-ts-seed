@@ -1,6 +1,6 @@
-/// <reference path="../../../typings/browser.d.ts" />
+/// <reference path="../../../../typings/browser.d.ts" />
 
-import ngModuleName from './table';
+import Row from './row';
 
 'use strict';
 
@@ -8,13 +8,13 @@ let $module = angular.mock.module;
 let $inject = angular.mock.inject;
 let $dump = (arg: any): void => console.log(angular.mock.dump(arg));
 
-describe('# Table Module', () => {
-  beforeEach($module(ngModuleName));
+describe('# Row Module', () => {
+  beforeEach($module(Row));
 
   describe('## Existence', () => {
     let mod;
 
-    beforeEach(() => mod = angular.module(ngModuleName));
+    beforeEach(() => mod = angular.module(Row));
 
     it('should exist', () => {
       expect(mod).not.toBeUndefined();
@@ -24,8 +24,6 @@ describe('# Table Module', () => {
     it('should have deps', () => {
       expect(mod.requires).toContain('ngComponentRouter');
       expect(mod.requires).toContain('app.components.material');
-      expect(mod.requires).toContain('app.components.showcase');
-      expect(mod.requires).toContain('app.components.table.row');
     });
   });
 
@@ -39,7 +37,7 @@ describe('# Table Module', () => {
     });
 
     it('should log registration', () => {
-      let loaded = ['ngModule', ngModuleName, 'loaded'].join(' ');
+      let loaded = ['ngModule', Row, 'loaded'].join(' ');
       expect($log.debug.logs).toContain([loaded]);
     });
   });

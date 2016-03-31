@@ -51,6 +51,13 @@ describe('# Showcase Component', () => {
         spyOn(controller, 'load');
       });
 
+      it('should initialize file list', () => {
+        controller.fileList = undefined;
+        controller.$onInit();
+        expect(controller.fileList).toBeArrayOfStrings();
+        expect(controller.fileList).toBeArrayOfSize(2);
+      });
+
       it('should load sources', () => {
         controller.$onInit();
         expect(controller.load).toHaveBeenCalled();
@@ -85,6 +92,37 @@ describe('# Showcase Component', () => {
       expect(controller.toggleSourceInternal).not.toHaveBeenCalled();
       expect(controller.showSource).toBe(false);
     }));
+
+    it('should not convert markdown', () => {
+      let tab = {
+        name: 'showcase.readme.md',
+        options: { mode: 'md' },
+        content: 'abc'
+      };
+      expect(controller.markdown(tab)).toBe(true);
+      expect(tab.content).toBe('abc');
+    });
+
+    it('should convert markdown', () => {
+      let tab = {
+        name: 'showcase.readme.md',
+        options: { mode: 'md' },
+        content: 'abc'
+      };
+      expect(controller.markdown(tab, true)).toBe(true);
+      expect(tab.content).toBe('<p>abc</p>');
+    });
+
+    it('should not convert anything', () => {
+      let tab = {
+        name: 'showcase.scss',
+        options: { mode: 'sass' },
+        content: '.example {color: red; }'
+      };
+      expect(controller.markdown(tab)).toBe(false);
+      expect(controller.markdown(tab, true)).toBe(false);
+      expect(tab.content).toBe('.example {color: red; }');
+    });
 
     describe('### Load Feature', () => {
       beforeEach($inject($q => {

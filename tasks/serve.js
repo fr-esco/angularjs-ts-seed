@@ -50,19 +50,22 @@ gulp.task('serve.dev', ['build.dev'], function() {
   watch(PATH.src.scss, function() {
     gulp.start('build.styles.dev');
   });
-  // watch('./app/**', function() {
-  //   gulp.start('build.app.dev');
-  // });
 
-  // app.use(serveStatic(join(__dirname, '..', PATH.dest.dev.all)));
-
-  app.use('/', express.static(join(__dirname, '..', PATH.dest.dev.all)));
-  // this instruction enables .ts debugging and in-page source code display
-  app.use('/components', express.static(join(__dirname, '..', 'app', 'components')));
-  app.use('/lib', express.static(join(__dirname, '..', PATH.dest.dev.lib)));
-  app.all('/*', function(req, res, next) {
-    // Just send the index.html for other files to support HTML5Mode
-    res.sendFile('index.html', { root: join(__dirname, '..', PATH.dest.dev.all) });
+  app.use('*/components', express.static(join(__dirname, '..', 'app', 'components')));
+  app.use('*/lib', express.static(join(__dirname, '..', PATH.dest.dev.lib)));
+  app.use(express.static(join(__dirname, '..', PATH.dest.dev.all)));
+  app.get('/*', function(req, res) {
+    // console.log(req.url);
+    var resource = (/([.a-z-]+\.(css|js))/.exec(req.url) || [])[0];
+    if (resource) {
+      var index = req.url.indexOf('components');
+      if (index > -1) {
+        resource = req.url.substring(index, req.url.indexOf('?'));
+      }
+      // console.log(req.url, resource);
+      res.sendFile(join(__dirname, '..', PATH.dest.dev.all, resource));
+    } else
+      res.sendFile(join(__dirname, '..', PATH.dest.dev.all, 'index.html'));
   });
 
   app.listen(port, function() {
@@ -80,12 +83,18 @@ gulp.task('serve.prod', ['build.prod'], function() {
     gulp.start('build.app.prod');
   });
 
-  app.use('/', express.static(join(__dirname, '..', PATH.dest.prod.all)));
+  // app.use('/', express.static(join(__dirname, '..', PATH.dest.prod.all)));
+  // app.use('/components', express.static(join(__dirname, '..', 'app', 'components')));
+  // app.use('/lib', express.static(join(__dirname, '..', PATH.dest.prod.lib)));
+  // app.all('/*', function(req, res, next) {
+  //   // Just send the index.html for other files to support HTML5Mode
+  //   res.sendFile('index.html', { root: join(__dirname, '..', PATH.dest.prod.all) });
+  // });
+
   app.use('/components', express.static(join(__dirname, '..', 'app', 'components')));
-  app.use('/lib', express.static(join(__dirname, '..', PATH.dest.prod.lib)));
-  app.all('/*', function(req, res, next) {
-    // Just send the index.html for other files to support HTML5Mode
-    res.sendFile('index.html', { root: join(__dirname, '..', PATH.dest.prod.all) });
+  app.use(express.static(join(__dirname, '..', PATH.dest.prod.all)));
+  app.get('/*', function(req, res) {
+    res.sendFile(join(__dirname, '..', PATH.dest.prod.all, 'index.html'));
   });
 
   app.listen(port, function() {

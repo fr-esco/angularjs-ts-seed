@@ -2,7 +2,6 @@
 
 import routing from './app.route';
 import {components} from './components/components';
-import {Service}   from './services/names-list';
 
 const ngMainComponentName = 'tsfnApp';
 
@@ -14,7 +13,6 @@ let app = angular.module('app', [
   // 'ngTouch',
   'nvd3',
   components.name,
-  Service.NamesList.moduleName,
 ]).config(routing)
   .value('$routerRootComponent', ngMainComponentName);
 
