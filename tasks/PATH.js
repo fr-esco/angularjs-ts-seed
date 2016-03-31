@@ -10,7 +10,11 @@ module.exports = {
     },
     test: {
       all: 'test',
-      report: 'test/report'
+      report: 'test/report',
+      rest: {
+        port: 3000,
+        db: 'db.json'
+      }
     },
     prod: {
       all: 'dist/prod',
