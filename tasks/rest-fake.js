@@ -13,12 +13,16 @@ var db = join(PATH.dest.test.all, PATH.dest.test.rest.db);
 
 gulp.task('rest.fake', function() {
 
+  gutil.log(gutil.colors.blue('Generating data...'));
   var data = {
-    people: times(10).map(aPerson)
+    people: times(10).map(aPerson),
+    posts: times(10).map(aPost),
+    tags: times(10).map(aTag)
   };
+  gutil.log(gutil.colors.blue('Data generated'));
 
   fs.writeFileSync(db, JSON.stringify(data, null, 2), 'utf-8');
-
+  gutil.log(gutil.colors.green('Data saved in ' + db));
 });
 
 function times(n, value) {
@@ -39,5 +43,28 @@ function aPerson(old, index) {
     last: faker.name.lastName(),
     phone: faker.phone.phoneNumber(),
     email: faker.internet.email()
+  };
+}
+function aPost() {
+  return {
+    id: faker.random.uuid(),
+    createdAt: faker.date.recent(),
+    title: faker.lorem.words(),
+    content: faker.lorem.paragraphs(),
+    comments: times(5).map(aComment)
+  };
+}
+function aComment() {
+  return {
+    id: faker.random.uuid(),
+    createdAt: faker.date.recent(),
+    content: faker.lorem.sentences()
+  };
+}
+function aTag() {
+  return {
+    id: faker.random.uuid(),
+    createdAt: faker.date.recent(),
+    name: faker.lorem.word()
   };
 }
