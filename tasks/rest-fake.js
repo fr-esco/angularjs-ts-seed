@@ -19,6 +19,9 @@ gulp.task('rest.fake', function() {
     posts: times(10).map(aPost),
     tags: times(10).map(aTag)
   };
+  data.posts.forEach(function(post) {
+    data.comments = times(5).map(aComment(post));
+  });
   gutil.log(gutil.colors.blue('Data generated'));
 
   fs.writeFileSync(db, JSON.stringify(data, null, 2), 'utf-8');
@@ -50,15 +53,17 @@ function aPost() {
     id: faker.random.uuid(),
     createdAt: faker.date.recent(),
     title: faker.lorem.words(),
-    content: faker.lorem.paragraphs(),
-    comments: times(5).map(aComment)
+    content: faker.lorem.paragraphs()
   };
 }
-function aComment() {
-  return {
-    id: faker.random.uuid(),
-    createdAt: faker.date.recent(),
-    content: faker.lorem.sentences()
+function aComment(post) {
+  return function() {
+    return {
+      id: faker.random.uuid(),
+      createdAt: faker.date.recent(),
+      postId: post.id,
+      content: faker.lorem.sentences()
+    };
   };
 }
 function aTag() {
