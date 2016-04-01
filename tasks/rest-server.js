@@ -3,7 +3,7 @@
 var PATH = require('./PATH');
 
 var gulp = require('gulp');
-var jsonServer = require('gulp-json-srv');
+var jsonServer = require('json-mock');
 var gutil = require('gulp-util');
 
 var join = require('path').join;
@@ -24,10 +24,15 @@ function server() {
     .help('s')
     .argv;
 
-  jsonServer.start({
-    data: db,
-    port: PATH.dest.test.rest.port
-  });
+  // jsonServer.start({
+  //   data: db,
+  //   port: PATH.dest.test.rest.port
+  // });
+  var server = jsonServer.create();         // Express server
+  server.use(jsonServer.defaults);          // Default middlewares (logger, public, cors)
+  server.use(jsonServer.router(db));        // Express router
+
+  server.listen(PATH.dest.test.rest.port);
 
   if (argv.gui)
     openResource(url);

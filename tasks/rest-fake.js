@@ -17,10 +17,11 @@ gulp.task('rest.fake', function() {
   var data = {
     people: times(10).map(aPerson),
     posts: times(10).map(aPost),
-    tags: times(10).map(aTag)
+    tags: times(10).map(aTag),
+    comments: []
   };
   data.posts.forEach(function(post) {
-    data.comments = times(5).map(aComment(post));
+    data.comments = data.comments.concat(times(5).map(aComment(post)));
   });
   gutil.log(gutil.colors.blue('Data generated'));
 
@@ -39,27 +40,27 @@ function times(n, value) {
   return temp;
 }
 
-function aPerson(old, index) {
+function aPerson() {
   return {
-    id: index,
+    id: faker.random.uuid(),
     first: faker.name.firstName(),
     last: faker.name.lastName(),
     phone: faker.phone.phoneNumber(),
     email: faker.internet.email()
   };
 }
-function aPost() {
+function aPost(old, index) {
   return {
-    id: faker.random.uuid(),
+    id: index,
     createdAt: faker.date.recent(),
     title: faker.lorem.words(),
     content: faker.lorem.paragraphs()
   };
 }
 function aComment(post) {
-  return function() {
+  return function(old, index) {
     return {
-      id: faker.random.uuid(),
+      id: index,
       createdAt: faker.date.recent(),
       postId: post.id,
       content: faker.lorem.sentences()
