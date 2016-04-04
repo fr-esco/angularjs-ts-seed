@@ -62,6 +62,7 @@
     "gulp-zip": "^3.2.0",
     "jasmine-core": "^2.4.1",
     "json-mock": "^0.1.0",
+    "json-server": "^0.8.9",
     "karma": "^0.12.37",
     "karma-chrome-launcher": "^0.2.2",
     "karma-commonjs": "0.0.13",

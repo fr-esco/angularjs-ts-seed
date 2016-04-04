@@ -1,15 +1,15 @@
 <div class="post">
 
-  <md-toolbar>
+  <md-toolbar md-theme="dark">
     <div class="md-toolbar-tools">
       <h3><span ng-bind="$ctrl.title"></span></h3>
       <span flex></span>
-      <form>
+      <form ng-submit="$ctrl.search()">
         <md-input-container md-no-float>
           <input id="search" placeholder="Search..." ng-model="$ctrl.searchText">
         </md-input-container>
       </form>
-      <md-button class="toolbar-button" aria-label="Search">
+      <md-button class="toolbar-button" aria-label="Search" ng-click="$ctrl.search()">
         <i class="material-icons">search</i>
       </md-button>
     </div>
@@ -25,7 +25,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="post in ::$ctrl.posts track by post.id">
+          <tr ng-repeat="post in $ctrl.posts track by post.id">
             <td>
               <a ng-link="['PostDetail', {id: post.id}]" ng-bind="::post.title"></a>
             </td>
