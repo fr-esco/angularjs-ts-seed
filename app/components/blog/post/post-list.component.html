@@ -2,7 +2,7 @@
 
   <md-toolbar md-theme="dark">
     <div class="md-toolbar-tools">
-      <h3><span ng-bind="$ctrl.title"></span></h3>
+      <h3><span ng-bind="::$ctrl.title"></span></h3>
       <span flex></span>
       <form ng-submit="$ctrl.search()">
         <md-input-container md-no-float>

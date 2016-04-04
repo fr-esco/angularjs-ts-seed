@@ -11,7 +11,7 @@ const ngComponentName = 'tsfnPostList';
   templateUrl: 'blog/post/post-list.component.html'
 })
 @at.inject('postClient', '$log')
-export default class PostListComponent implements at.OnInit, at.OnActivate {
+export default class PostListComponent implements at.OnActivate {
   public title: string;
   public posts: IPost[];
 
@@ -20,10 +20,6 @@ export default class PostListComponent implements at.OnInit, at.OnActivate {
   constructor(private postClient: PostClient,
     private log: angular.ILogService) {
     log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
-  }
-
-  public $onInit() {
-
   }
 
   public $routerOnActivate(next: at.ComponentInstruction) {

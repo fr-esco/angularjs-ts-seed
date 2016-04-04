@@ -1,5 +1,19 @@
-<h3 ng-bind="$ctrl.title"></h3>
+<div class="post">
 
-<md-content layout="column" md-theme="dark">
-  <p>Dettaglio</p>
-</md-content>
+  <md-toolbar md-theme="dark">
+    <div class="md-toolbar-tools">
+      <h3><span ng-bind="::$ctrl.post.title"></span></h3>
+      <span flex></span>
+      <md-button class="toolbar-button" aria-label="Edit" ng-click="$ctrl.edit()">
+        <i class="material-icons">create</i>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-content layout="column">
+    <div md-whiteframe="2" layout-padding>
+      <p class="md-body-1 text-" ng-bind-html="::$ctrl.post.content"></p>
+    </div>
+  </md-content>
+
+</div>
