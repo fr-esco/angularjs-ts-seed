@@ -1,7 +1,7 @@
-/// <reference path="<%= toComponents %>/../../typings/browser.d.ts" />
+/// <reference path="../../../../typings/browser.d.ts" />
 
-import ngModuleName from './<%= modName %>';
-import <%= upCaseName %>Service from './<%= name %>.service';
+import ngModuleName from './post';
+import PostClientService from './post-client.service';
 
 'use strict';
 
@@ -9,17 +9,17 @@ let $module = angular.mock.module;
 let $inject = angular.mock.inject;
 let $dump = (arg: any): void => console.log(angular.mock.dump(arg));
 
-describe('# <%= upCaseName %> Service', () => {
+describe('# PostClient Service', () => {
   let $log, $rootScope;
-  let service: <%= upCaseName %>Service;
+  let service: PostClientService;
 
   beforeEach(() => {
     $module(ngModuleName);
 
-    $inject((_$log_, _$rootScope_, _<%= fullName %>_) => {
+    $inject((_$log_, _$rootScope_, _post-client_) => {
       $log = _$log_;
       $rootScope = _$rootScope_;
-      service = _<%= fullName %>_;
+      service = _post-client_;
     });
   });
 
@@ -29,14 +29,14 @@ describe('# <%= upCaseName %> Service', () => {
       expect(service).not.toBeNull();
     });
 
-    it('should be an instance of <%= upCaseName %>Service', () => {
-      expect(service).toEqual(jasmine.any(<%= upCaseName %>Service));
+    it('should be an instance of PostClientService', () => {
+      expect(service).toEqual(jasmine.any(PostClientService));
     });
   });
 
   describe('## Log enabled', () => {
     it('should log registration', () => {
-      let loaded = ['ngService', '<%= name %>', 'loaded'].join(' ');
+      let loaded = ['ngService', 'post-client', 'loaded'].join(' ');
       expect($log.debug.logs).toContain([loaded]);
     });
   });

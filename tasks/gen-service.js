@@ -70,6 +70,7 @@ function generator() {
     .pipe(template({
       name: name,
       upCaseName: cap(camel(name)),
+      fullName: camel(name),
       modName: modName,
       toComponents: toComponents.join('/')
     }))

@@ -51,7 +51,7 @@ function aPerson() {
 }
 function aPost(old, index) {
   return {
-    id: index,
+    id: index + 1,
     createdAt: faker.date.recent(),
     title: faker.lorem.words(),
     content: faker.lorem.paragraphs()
@@ -60,7 +60,7 @@ function aPost(old, index) {
 function aComment(post) {
   return function(old, index) {
     return {
-      id: index,
+      id: index + 1,
       createdAt: faker.date.recent(),
       postId: post.id,
       content: faker.lorem.sentences()

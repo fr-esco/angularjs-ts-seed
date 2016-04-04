@@ -2,9 +2,9 @@ import ngModuleName from './<%= modName %>.module';
 
 'use strict';
 
-// the provider will be available as '<%= name %>Provider'
-// the created service will be available as '<%= name %>'
-const ngProviderName = '<%= name %>';
+// the provider will be available as '<%= fullName %>Provider'
+// the created service will be available as '<%= fullName %>'
+const ngProviderName = '<%= fullName %>';
 
 interface I<%= upCaseName %>Provider extends angular.IServiceProvider {
   makeNoise(value: boolean): void;
