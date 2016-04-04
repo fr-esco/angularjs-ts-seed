@@ -36,7 +36,7 @@ describe('# <%= upCaseName %> Service', () => {
 
   describe('## Log enabled', () => {
     it('should log registration', () => {
-      let loaded = ['ngService', '<%= name %>', 'loaded'].join(' ');
+      let loaded = ['ngService', '<%= fullName %>', 'loaded'].join(' ');
       expect($log.debug.logs).toContain([loaded]);
     });
   });

@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/browser.d.ts" />
 
-import Post from './post';
+import Comment from './comment';
 
 'use strict';
 
@@ -8,13 +8,13 @@ let $module = angular.mock.module;
 let $inject = angular.mock.inject;
 let $dump = (arg: any): void => console.log(angular.mock.dump(arg));
 
-describe('# Post Module', () => {
-  beforeEach($module(Post));
+describe('# Comment Module', () => {
+  beforeEach($module(Comment));
 
   describe('## Existence', () => {
     let mod;
 
-    beforeEach(() => mod = angular.module(Post));
+    beforeEach(() => mod = angular.module(Comment));
 
     it('should exist', () => {
       expect(mod).not.toBeUndefined();
@@ -39,7 +39,7 @@ describe('# Post Module', () => {
     });
 
     it('should log registration', () => {
-      let loaded = ['ngModule', Post, 'loaded'].join(' ');
+      let loaded = ['ngModule', Comment, 'loaded'].join(' ');
       expect($log.debug.logs).toContain([loaded]);
     });
   });

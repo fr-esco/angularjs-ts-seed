@@ -36,7 +36,7 @@ describe('# PostClient Service', () => {
 
   describe('## Log enabled', () => {
     it('should log registration', () => {
-      let loaded = ['ngService', 'post-client', 'loaded'].join(' ');
+      let loaded = ['ngService', 'postClient', 'loaded'].join(' ');
       expect($log.debug.logs).toContain([loaded]);
     });
   });

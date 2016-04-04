@@ -12,8 +12,9 @@
 
   <md-content layout="column">
     <div md-whiteframe="2" layout-padding>
-      <p class="md-body-1 text-" ng-bind-html="::$ctrl.post.content"></p>
+      <p class="md-body-1" ng-bind-html="::$ctrl.post.content"></p>
     </div>
+    <md-button ng-bind="$ctrl.comments.length"></md-button>
   </md-content>
 
 </div>
