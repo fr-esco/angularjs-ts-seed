@@ -1,5 +1,39 @@
-<h3 ng-bind="$ctrl.title"></h3>
+<div class="post">
 
-<md-content layout="column" md-theme="dark">
-  <md-table></md-table>
-</md-content>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h3><span ng-bind="$ctrl.title"></span></h3>
+      <span flex></span>
+      <form>
+        <md-input-container md-no-float>
+          <input id="search" placeholder="Search..." ng-model="$ctrl.searchText">
+        </md-input-container>
+      </form>
+      <md-button class="toolbar-button" aria-label="Search">
+        <i class="material-icons">search</i>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-content layout="column">
+    <div class="table-responsive-vertical" md-whiteframe="2">
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Created</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="post in ::$ctrl.posts track by post.id">
+            <td>
+              <a ng-link="['PostDetail', {id: post.id}]" ng-bind="::post.title"></a>
+            </td>
+            <td ng-bind="::post.createdAt | date"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </md-content>
+
+</div>
