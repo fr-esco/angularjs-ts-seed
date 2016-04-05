@@ -11,7 +11,7 @@ const ngComponentName = 'tsfnPostComments';
 @at.component(ngModuleName, ngComponentName, {
   bindings: {
     post: '<',
-    title: '@'
+    title: '@sectionTitle'
   },
   templateUrl: 'blog/post/post-comments.component.html'
 })
