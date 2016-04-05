@@ -1,4 +1,4 @@
-<div class="post-comment">
+<div class="post-comment" layout="column">
 
   <md-toolbar md-theme="dark">
     <div class="md-toolbar-tools">
@@ -10,8 +10,8 @@
     </div>
   </md-toolbar>
 
-  <md-content layout="column">
-    <div ng-repeat="comment in $ctrl.comments track by comment.id">
+  <div layout-padding layout-xs="column" layout="row" layout-wrap>
+    <div flex-xs="100" flex="50" ng-repeat="comment in $ctrl.comments track by comment.id">
       <md-card>
         <md-card-title>
           <md-card-title-text>
@@ -19,9 +19,19 @@
             <span class="md-subhead">Author</span>
           </md-card-title-text>
         </md-card-title>
-        <md-card-content ng-bind-html="::comment.content"></md-card-content>
+        <md-card-content layout="row" layout-align="space-between">
+          <div ng-bind-html="::comment.content"></div>
+          <md-card-actions layout="column">
+            <md-button class="md-icon-button" aria-label="Read" ng-click="$ctrl.view($event, comment.id)">
+              <i class="material-icons">chrome_reader_mode</i>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Delete" ng-click="$ctrl.delete(comment.id)">
+              <i class="material-icons">delete_forever</i>
+            </md-button>
+          </md-card-actions>
+        </md-card-content>
       </md-card>
     </div>
-  </md-content>
+  </div>
 
 </div>

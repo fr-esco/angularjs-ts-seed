@@ -34,7 +34,6 @@ $table-border-color:            #e0e0e0;
   > tbody,
   > tfoot {
     > tr {
-      @include transition(all, 0.3s, ease);
       > th,
       > td {
         text-align: left;

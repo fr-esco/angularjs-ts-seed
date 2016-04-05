@@ -15,14 +15,15 @@ const ngComponentName = 'tsfnPostComments';
   },
   templateUrl: 'blog/post/post-comments.component.html'
 })
-@at.inject('postClient', '$log')
+@at.inject('postClient', '$log', '$mdDialog')
 export default class PostCommentsComponent implements at.OnInit, at.OnChanges {
   public title: string;
   public post: IPost;
   public comments: IComment[];
 
   constructor(private postClient: PostClient,
-    private log: angular.ILogService) {
+    private log: angular.ILogService,
+    private mdDialog: angular.material.IDialogService) {
     log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
   }
 
@@ -39,5 +40,18 @@ export default class PostCommentsComponent implements at.OnInit, at.OnChanges {
       else
         this.comments = [];
     }
+  }
+
+  public view($event: PointerEvent, commentId: number) {
+    let alert: angular.material.IAlertDialog;
+    this.postClient.comment(this.post, commentId)
+      .then(comment =>
+        alert = this.mdDialog.alert()
+          .targetEvent($event)
+          .ok('ok')
+          .title(commentId + '')
+          .htmlContent(comment.content))
+      .then(() => this.mdDialog.show(alert))
+      .finally(() => alert = undefined);
   }
 }

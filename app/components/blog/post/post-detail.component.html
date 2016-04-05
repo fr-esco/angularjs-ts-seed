@@ -1,4 +1,4 @@
-<div class="post">
+<div class="post" layout="column">
 
   <md-toolbar md-theme="dark">
     <div class="md-toolbar-tools">
@@ -10,12 +10,10 @@
     </div>
   </md-toolbar>
 
-  <md-content layout="column">
-    <div md-whiteframe="2" layout-padding>
-      <p class="md-body-1" ng-bind-html="::$ctrl.post.content"></p>
-    </div>
+  <div layout-padding>
+    <p class="md-body-1" ng-bind-html="::$ctrl.post.content"></p>
+  </div>
 
-    <tsfn-post-comments title="Comments" post="::$ctrl.post"></tsfn-post-comments>
-  </md-content>
+  <tsfn-post-comments title="Comments" post="::$ctrl.post"></tsfn-post-comments>
 
 </div>
