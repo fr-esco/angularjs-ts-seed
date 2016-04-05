@@ -10,16 +10,19 @@ const ngComponentName = 'tsfnPostList';
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'blog/post/post-list.component.html'
 })
-@at.inject('postClient', '$log')
+@at.inject('postClient', '$filter', '$log')
 export default class PostListComponent implements at.OnActivate {
   public title: string;
   public posts: IPost[];
 
   public searchText: string;
+  private filterText;
 
   constructor(private postClient: PostClient,
+    private filter: angular.IFilterService,
     private log: angular.ILogService) {
     log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+    this.filterText = filter('filter');
   }
 
   public $routerOnActivate(next: at.ComponentInstruction) {
@@ -29,8 +32,8 @@ export default class PostListComponent implements at.OnActivate {
   }
 
   public search() {
-    let filter = { title_like: this.searchText };
+    let filter = this.searchText ? { q: this.searchText } : null;
     return this.postClient.search(filter)
-      .then(data => this.posts = data);
+      .then(data => this.posts = this.filterText(data, { title: this.searchText }));
   }
 }

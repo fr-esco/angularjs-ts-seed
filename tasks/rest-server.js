@@ -3,8 +3,8 @@
 var PATH = require('./PATH');
 
 var gulp = require('gulp');
-// var jsonServer = require('json-mock');
-var jsonServer = require('json-server');
+var jsonServer = require('json-mock');
+// var jsonServer = require('json-server');
 var gutil = require('gulp-util');
 
 var join = require('path').join;
@@ -30,11 +30,11 @@ function server() {
   //   port: PATH.dest.test.rest.port
   // });
   var server = jsonServer.create();         // Express server
-  server.use(jsonServer.defaults());        // Default middlewares (logger, public, cors)
+  server.use(jsonServer.defaults);        // Default middlewares (logger, public, cors)
   // Simple hack
-  server.use('/posts/:postId/comments/:commentId', function(req, res) {
-    res.redirect('/comments/' + req.params.commentId);
-  });
+  // server.use('/posts/:postId/comments/:commentId', function(req, res) {
+  //   res.redirect('/comments/' + req.params.commentId);
+  // });
   server.use(jsonServer.router(db));        // Express router
 
   server.listen(PATH.dest.test.rest.port);

@@ -48,4 +48,14 @@ export default class PostClientService {
     return this.baseElement(postId).one(this.commentClient.baseUrl, commentId).get<IComment>();
   }
 
+  public commentDelete(post: IPost, comment: IComment);
+  public commentDelete(post: number, comment: IComment);
+  public commentDelete(post: IPost, comment: number);
+  public commentDelete(post: number, comment: number);
+  public commentDelete(post, comment) {
+    let postId = typeof post === 'number' ? post : post.id;
+    let commentId = typeof comment === 'number' ? comment : comment.id;
+    return this.baseElement(postId).one(this.commentClient.baseUrl, commentId).remove();
+  }
+
 }

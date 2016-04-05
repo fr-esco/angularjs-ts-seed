@@ -54,4 +54,19 @@ export default class PostCommentsComponent implements at.OnInit, at.OnChanges {
       .then(() => this.mdDialog.show(alert))
       .finally(() => alert = undefined);
   }
+
+  public delete($event: PointerEvent, comment: IComment) {
+    let confirm = this.mdDialog.confirm()
+      .targetEvent($event)
+      .ariaLabel('Delete Confirmation')
+      .ok('ok')
+      .cancel('cancel')
+      .title(['Delete ', comment.id, '?'].join(''))
+      .textContent(['Delete ', comment.id, '?'].join(''));
+    this.mdDialog.show(confirm)
+      .then(() => this.postClient.commentDelete(this.post, comment))
+      .then(() => this.comments.indexOf(comment))
+      .then(index => this.comments.splice(index, 1))
+      .finally(() => confirm = undefined);
+  }
 }
