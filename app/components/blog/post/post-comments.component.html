@@ -1,0 +1,27 @@
+<div class="post-comment">
+
+  <md-toolbar md-theme="dark">
+    <div class="md-toolbar-tools">
+      <h3><span ng-bind="::$ctrl.title"></span></h3>
+      <span flex></span>
+      <md-button class="toolbar-button" aria-label="Add" ng-click="$ctrl.add()">
+        <i class="material-icons">add_circle_outline</i>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-content layout="column">
+    <div ng-repeat="comment in $ctrl.comments track by comment.id">
+      <md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline" ng-bind="'#' + ($index + 1)"></span>
+            <span class="md-subhead">Author</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content ng-bind-html="::comment.content"></md-card-content>
+      </md-card>
+    </div>
+  </md-content>
+
+</div>

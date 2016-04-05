@@ -26,8 +26,6 @@ export default class PostDetailComponent implements at.OnActivate {
   public $routerOnActivate(next: at.ComponentInstruction) {
     return this.postClient.read(next.params['id'])
       .then(data => (data.content = this.markdown(data.content)) && data)
-      .then(data => this.post = data)
-      .then(data => this.postClient.comments(data))
-      .then(data => this.comments = data);
+      .then(data => this.post = data);
   }
 }

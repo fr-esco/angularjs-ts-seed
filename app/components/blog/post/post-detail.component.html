@@ -14,7 +14,8 @@
     <div md-whiteframe="2" layout-padding>
       <p class="md-body-1" ng-bind-html="::$ctrl.post.content"></p>
     </div>
-    <md-button ng-bind="$ctrl.comments.length"></md-button>
+
+    <tsfn-post-comments title="Comments" post="::$ctrl.post"></tsfn-post-comments>
   </md-content>
 
 </div>
