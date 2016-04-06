@@ -2,7 +2,7 @@
 
 export interface IPost {
   id: number;
-  createdAt: Date;
+  createdAt: string;
   title: string;
   content: string;
 }
