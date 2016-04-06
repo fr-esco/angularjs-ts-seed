@@ -31,6 +31,13 @@ export default class PostClientService {
     return this.baseList.get<IPost>(id);
   }
 
+  public delete(post: IPost);
+  public delete(post: number);
+  public delete(post) {
+    let postId = typeof post === 'number' ? post : post.id;
+    return this.baseElement(postId).remove();
+  }
+
   public comments(post: IPost, params?);
   public comments(post: number, params?);
   public comments(post, params?) {

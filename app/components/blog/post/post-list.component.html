@@ -12,6 +12,9 @@
       <md-button class="toolbar-button" aria-label="Search" ng-click="$ctrl.search()">
         <i class="material-icons">search</i>
       </md-button>
+      <md-button class="toolbar-button" aria-label="Create" ng-click="$ctrl.create()">
+        <i class="material-icons">add_circle_outline</i>
+      </md-button>
     </div>
   </md-toolbar>
 
@@ -22,6 +25,7 @@
           <tr>
             <th>Title</th>
             <th>Created</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -30,6 +34,14 @@
               <a ng-link="['PostDetail', {id: post.id}]" ng-bind="::post.title"></a>
             </td>
             <td ng-bind="::post.createdAt | date"></td>
+            <td>
+              <md-button class="md-icon-button md-raised" aria-label="Update" ng-click="$ctrl.update($event, post)">
+                <i class="material-icons">create</i>
+              </md-button>
+              <md-button class="md-icon-button md-raised" aria-label="Delete" ng-click="$ctrl.delete($event, post)">
+                <i class="material-icons">delete_forever</i>
+              </md-button>
+            </td>
           </tr>
         </tbody>
       </table>

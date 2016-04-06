@@ -10,7 +10,7 @@ const ngComponentName = 'tsfnPostList';
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'blog/post/post-list.component.html'
 })
-@at.inject('postClient', '$filter', '$log')
+@at.inject('postClient', '$filter', '$log', '$mdDialog')
 export default class PostListComponent implements at.OnActivate {
   public title: string;
   public posts: IPost[];
@@ -20,7 +20,8 @@ export default class PostListComponent implements at.OnActivate {
 
   constructor(private postClient: PostClient,
     private filter: angular.IFilterService,
-    private log: angular.ILogService) {
+    private log: angular.ILogService,
+    private mdDialog: angular.material.IDialogService) {
     log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
     this.filterText = filter('filter');
   }
@@ -35,5 +36,20 @@ export default class PostListComponent implements at.OnActivate {
     let filter = this.searchText ? { q: this.searchText } : null;
     return this.postClient.search(filter)
       .then(data => this.posts = this.filterText(data, { title: this.searchText }));
+  }
+
+  public delete($event: PointerEvent, post: IPost) {
+    let confirm = this.mdDialog.confirm()
+      .targetEvent($event)
+      .ariaLabel('Delete Confirmation')
+      .ok('ok')
+      .cancel('cancel')
+      .title(['Delete ', post.id, '?'].join(''))
+      .textContent(['Delete ', post.id, '?'].join(''));
+    this.mdDialog.show(confirm)
+      .then(() => this.postClient.delete(post))
+      .then(() => this.posts.indexOf(post))
+      .then(index => this.posts.splice(index, 1))
+      .finally(() => confirm = undefined);
   }
 }

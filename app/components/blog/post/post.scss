@@ -9,4 +9,8 @@
       padding-top: $layout-gutter-width;
     }
   }
+
+  .table td {
+    vertical-align: inherit;
+  }
 }
