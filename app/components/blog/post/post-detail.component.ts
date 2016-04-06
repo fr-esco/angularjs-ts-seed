@@ -11,9 +11,8 @@ const ngComponentName = 'tsfnPostDetail';
   templateUrl: 'blog/post/post-detail.component.html'
 })
 @at.inject('postClient', '$filter', '$log')
-export default class PostDetailComponent implements at.OnActivate {
+export default class PostDetailComponent implements angular.OnActivate {
   public post: IPost;
-  public comments; // TO-REMOVE
   private markdown;
 
   constructor(private postClient: PostClient,

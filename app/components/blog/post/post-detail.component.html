@@ -4,7 +4,7 @@
     <div class="md-toolbar-tools">
       <h3><span ng-bind="::$ctrl.post.title"></span></h3>
       <span flex></span>
-      <md-button class="toolbar-button" aria-label="Update" ng-click="$ctrl.update($event)">
+      <md-button class="toolbar-button" aria-label="Update" ng-link="['PostUpdate', { id: $ctrl.post.id }]">
         <i class="material-icons">create</i>
       </md-button>
     </div>

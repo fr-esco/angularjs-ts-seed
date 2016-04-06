@@ -38,6 +38,14 @@ export default class PostClientService {
     return this.baseElement(postId).remove();
   }
 
+  public create(post: IPost) {
+    return this.baseList.post<IPost>(post);
+  }
+
+  public update(post: IPost) {
+    return this.baseList.post<IPost>(post);
+  }
+
   public comments(post: IPost, params?);
   public comments(post: number, params?);
   public comments(post, params?) {

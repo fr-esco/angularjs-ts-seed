@@ -1,0 +1,14 @@
+<div class="post">
+
+  <md-toolbar md-theme="dark">
+    <div class="md-toolbar-tools">
+      <h3><span ng-bind="::$ctrl.post.title"></span></h3>
+      <span flex></span>
+      <md-button class="toolbar-button" aria-label="Cancel" ng-click="$ctrl.cancel()">
+        <i class="material-icons">highlight_off</i>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <tsfn-post-form post="$ctrl.post" on-submit="$ctrl.confirm(post)" on-cancel="$ctrl.cancel()"></tsfn-post-form>
+</div>

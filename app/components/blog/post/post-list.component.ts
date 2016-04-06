@@ -8,10 +8,15 @@ import PostClient from './post-client.service';
 const ngComponentName = 'tsfnPostList';
 
 @at.component(ngModuleName, ngComponentName, {
+  bindings: {
+    $router: '<'
+  },
   templateUrl: 'blog/post/post-list.component.html'
 })
 @at.inject('postClient', '$filter', '$log', '$mdDialog')
-export default class PostListComponent implements at.OnActivate {
+export default class PostListComponent implements angular.OnActivate {
+  public $router: angular.Router;
+
   public title: string;
   public posts: IPost[];
 
@@ -36,6 +41,10 @@ export default class PostListComponent implements at.OnActivate {
     let filter = this.searchText ? { q: this.searchText } : null;
     return this.postClient.search(filter)
       .then(data => this.posts = this.filterText(data, { title: this.searchText }));
+  }
+
+  public update($event: PointerEvent, post: IPost) {
+    return this.$router.navigate(['PostUpdate', { id: post.id }]);
   }
 
   public delete($event: PointerEvent, post: IPost) {
