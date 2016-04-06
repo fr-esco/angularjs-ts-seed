@@ -28,7 +28,7 @@ export default class PostUpdateComponent implements angular.OnActivate, angular.
     log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
   }
 
-  public $routerOnActivate(next: at.ComponentInstruction) {
+  public $routerOnActivate(next: angular.ComponentInstruction) {
     this.title = next.routeData.data['title'];
     return this.postClient.read(next.params['id'])
       .then(data => this.post = data);

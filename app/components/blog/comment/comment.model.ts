@@ -2,7 +2,7 @@
 
 export interface IComment {
   id: number;
-  createdAt: Date;
+  createdAt: string;
   postId: number;
   content: string;
 }

@@ -21,7 +21,7 @@ export default class BlogComponent implements angular.OnActivate {
     log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
   }
 
-  public $routerOnActivate(next: at.ComponentInstruction) {
+  public $routerOnActivate(next: angular.ComponentInstruction) {
     this.title = next.routeData.data['title'];
   }
 }

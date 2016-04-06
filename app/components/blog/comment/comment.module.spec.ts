@@ -24,7 +24,6 @@ describe('# Comment Module', () => {
     it('should have deps', () => {
       expect(mod.requires).toContain('ngComponentRouter');
       expect(mod.requires).toContain('app.components.material');
-      expect(mod.requires).toContain('app.components.markdown');
       expect(mod.requires).toContain('app.components.rest');
     });
   });

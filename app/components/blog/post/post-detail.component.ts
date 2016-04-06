@@ -22,7 +22,7 @@ export default class PostDetailComponent implements angular.OnActivate {
     this.markdown = filter('markdown');
   }
 
-  public $routerOnActivate(next: at.ComponentInstruction) {
+  public $routerOnActivate(next: angular.ComponentInstruction) {
     return this.postClient.read(next.params['id'])
       .then(data => (data.content = this.markdown(data.content)) && data)
       .then(data => this.post = data);
