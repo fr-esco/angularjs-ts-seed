@@ -24,10 +24,13 @@ function generator() {
     }).join('');
   };
   var argv = yargs.reset()
-    .usage('Usage: gulp gen:service -n [string] -p [string] -m [string]')
+    .usage('Usage: gulp gen:service -n [string] -p [string] -m [string] [-c]')
     .alias('n', 'name')
     .string('n')
     .describe('n', 'Service name')
+    .alias('c', 'client')
+    .boolean('c')
+    .describe('c', 'Service REST Client')
     .alias('m', 'module')
     .string('m')
     .describe('m', 'Module name')
@@ -64,9 +67,10 @@ function generator() {
     return mod;
   })();
 
-  var toComponents = parentPath.split('/').map(function() { return '..'; });
+  var toComponents = parentPath.split('/').map(function() { return '..'; }),
+    service = argv.client ? 'serviceClient' : 'service';
 
-  return gulp.src(PATH.src.blankTemplates.service)
+  return gulp.src(PATH.src.blankTemplates[service])
     .pipe(template({
       name: name,
       upCaseName: cap(camel(name)),

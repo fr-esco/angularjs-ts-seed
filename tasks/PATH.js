@@ -87,6 +87,7 @@ module.exports = {
       controller: [join(generator, 'temp.controller*.ts')],
       filter: [join(generator, 'temp.filter*.ts')],
       service: [join(generator, 'temp.service*.ts')],
+      serviceClient: [join(generator, 'temp-client.service*.ts')],
       provider: [join(generator, 'temp.provider*.ts')],
       directive: [join(generator, 'temp.directive*.{ts,html}')],
       component: [join(generator, 'temp.component*.{ts,html}')]
