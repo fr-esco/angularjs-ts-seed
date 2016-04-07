@@ -64,13 +64,26 @@ module.exports = {
         './node_modules/angular-typescript/lib/at-angular.js',
         './node_modules/angular-typescript/lib/at-angular-resource.js',
         './node_modules/angular-typescript/lib/at-angular.js.map',
-        './node_modules/angular-typescript/lib/at-angular-resource.js.map'
+        './node_modules/angular-typescript/lib/at-angular-resource.js.map',
+
+        './node_modules/angular-dynamic-locale/dist/tmhDynamicLocale.min.js',
+        './node_modules/angular-dynamic-locale/dist/tmhDynamicLocale.min.js.map',
+        './node_modules/angular-translate/dist/angular-translate.min.js',
+        './node_modules/angular-translate/dist/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js',
+        './node_modules/angular-translate/dist/angular-translate-storage-local/angular-translate-storage-local.min.js',
+        './node_modules/angular-translate/dist/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js',
+        './node_modules/angular-translate/dist/angular-translate-loader-partial/angular-translate-loader-partial.min.js',
+        './node_modules/angular-translate/dist/angular-translate-handler-log/angular-translate-handler-log.min.js'
       ],
       css: [
         './node_modules/angular-material/angular-material.css',
         './node_modules/nvd3/build/nv.d3.css',
         './node_modules/codemirror/lib/codemirror.css',
         './node_modules/codemirror/theme/material.css'
+      ],
+      locale: [
+        './node_modules/angular-i18n/angular-locale_it.js',
+        './node_modules/angular-i18n/angular-locale_en.js'
       ]
     },
     scss: ['./{app,components}/**/*.scss', '!' + './app/index.scss', '!' + './app/vendor.scss'],

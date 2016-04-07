@@ -8,6 +8,7 @@ import Message   from './message/message';
 import Profile   from './profile/profile';
 import Showcase  from './showcase/showcase';
 import Table     from './table/table';
+import Locale  from './locale/locale';
 
 let components = angular.module('app.components', [
   Common,
@@ -18,6 +19,7 @@ let components = angular.module('app.components', [
   Profile,
   Showcase,
   Table,
+  Locale,
 
   Example
 ]);
