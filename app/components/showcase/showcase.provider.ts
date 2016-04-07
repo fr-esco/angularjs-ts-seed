@@ -7,25 +7,25 @@ import ngModuleName from './showcase.module';
 const ngProviderName = 'showcase';
 
 interface IShowcaseProvider extends angular.IServiceProvider {
-  makeNoise(value: boolean): void;
+  delay(delay: number): void;
 }
 
 @at.provider(ngModuleName, ngProviderName)
 export class ShowcaseProvider implements IShowcaseProvider {
-  private notify = true;
+  private $delay: number;
 
   constructor() {
-    this.notify = true;
+    this.$delay = 100;
   }
 
-  public makeNoise(value: boolean): void {
-    this.notify = value;
+  public delay(delay: number): void {
+    this.$delay = delay;
   }
 
   // $get must be declared as method, not as function property (eg. `$get = () => new Service();`)
   @at.injectMethod('$log', '$http', '$q', '$timeout')
   public $get(log: angular.ILogService, http: angular.IHttpService, q: angular.IQService, timeout: angular.ITimeoutService) {
-    return new ShowcaseProviderService(log, http, q, timeout, this.notify);
+    return new ShowcaseProviderService(log, http, q, timeout, this.$delay);
   }
 }
 
@@ -34,12 +34,9 @@ export default class ShowcaseProviderService {
     private http: angular.IHttpService,
     private q: angular.IQService,
     private timeout: angular.ITimeoutService,
-    private notify: boolean) {
+    private delay: number) {
     let s = ['ngProvider', ngProviderName, 'has loaded an', 'ShowcaseProviderService'].join(' ');
-    if (notify)
-      log.info(s);
-    else
-      log.debug(s);
+    log.debug(s);
   }
 
   public load(files: string[]) {
@@ -49,10 +46,20 @@ export default class ShowcaseProviderService {
   }
 
   private loadFile(file: string) {
-    let deferred = this.q.defer();
-    this.timeout(() => deferred.resolve(this.http.get<string>(file)
-      .then(response => response.data)), Math.random() * 1000);
-    return deferred.promise;
+    if (this.delay > 0) {
+      this.log.debug('Delayed loading');
+      let deferred = this.q.defer();
+      this.timeout(() => deferred.resolve(this.loadFileInternal(file)),
+        Math.random() * this.delay);
+      return deferred.promise;
+    } else {
+      return this.loadFileInternal(file);
+    }
+  }
+
+  private loadFileInternal(file: string) {
+    return this.http.get<string>(file)
+      .then(response => response.data);
   }
 
 }

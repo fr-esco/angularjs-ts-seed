@@ -1,10 +1,9 @@
 {
-  "name": "angularjs-ts-seed",
-  "version": "1.6.5",
-  "description": "AngularJS TypeScript application seed",
+  "version": "0.2.0",
+  "description": "UE Platform Showcase",
   "repository": {
     "type": "git",
-    "url": "https://github.com/soulsoftware/angularjs-ts-seed.git"
+    "url": ""
   },
   "scripts": {
     "postinstall": "typings install && gulp -T",
@@ -18,15 +17,16 @@
     "seed",
     "application"
   ],
-  "author": "ludohenin <ludovic.henin@yahoo.com>",
+  "author": "TSFN - Factory Team",
   "contributors": [
     {
-      "name": "bsorrentino",
-      "email": "bartolomeo.sorrentino@gmail.com"
+      "name": "bartolomeo sorrentino"
     },
     {
-      "name": "fr-esco",
-      "email": "f.colamonici@gmail.com"
+      "name": "luca oliano"
+    },
+    {
+      "name": "francesco colamonici"
     }
   ],
   "license": "MIT",

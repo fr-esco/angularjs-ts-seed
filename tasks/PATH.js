@@ -89,7 +89,7 @@ module.exports = {
     scss: ['./{app,components}/**/*.scss', '!' + './app/index.scss', '!' + './app/vendor.scss'],
     blankTemplates: {
       all: join(generator, '**/*.**'),
-      mod: [join(generator, 'temp.ts'), join(generator, 'temp.module*.ts')],
+      mod: [join(generator, 'temp.{t,scs}s'), join(generator, 'temp.module*.ts')],
       controller: [join(generator, 'temp.controller*.ts')],
       filter: [join(generator, 'temp.filter*.ts')],
       service: [join(generator, 'temp.service*.ts')],

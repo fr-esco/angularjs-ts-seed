@@ -4,18 +4,11 @@ import NavigationService from '../common/navigation.service';
 
 'use strict';
 
-const ngComponentName = 'tsfnMain';
+const ngControllerName = 'MainController';
 
-@at.component(ngModuleName, ngComponentName, {
-  templateUrl: 'main/main.component.html',
-  $routeConfig: [
-    { path: '/dashboard', name: 'Dashboard', component: 'tsfnDashboard', data: { title: 'Dashboard' }, useAsDefault: true },
-    { path: '/profile', name: 'Profile', component: 'tsfnProfile', data: { title: 'Profile' } },
-    { path: '/table/...', name: 'Table', component: 'tsfnTable', data: { title: 'Table' } }
-  ]
-})
-@at.inject('navigationService', '$log', '$q', '$mdSidenav', '$mdBottomSheet', '$mdMenu', '$mdToast')
-export default class MainComponent implements at.OnInit {
+@at.controller(ngModuleName, ngControllerName)
+@at.inject('navigationService', '$log', '$q', '$state', '$mdSidenav', '$mdBottomSheet', '$mdToast')
+export default class MainController {
 
   public menuItems: Array<IMenuItem> = [];
   public title: string;
@@ -23,16 +16,14 @@ export default class MainComponent implements at.OnInit {
   constructor(private navigationService: NavigationService,
     private log: angular.ILogService,
     private q: angular.IQService,
+    private state: angular.ui.IStateService,
     private mdSidenav: angular.material.ISidenavService,
     private mdBottomSheet: angular.material.IBottomSheetService,
-    private mdMenu: angular.material.IMenuService,
     private mdToast: angular.material.IToastService) {
-    log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
-  }
+    log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
 
-  public $onInit() {
-    this.navigationService.loadAllItems()
-      .then(menuItems => this.menuItems = [].concat(menuItems));
+    this.title = state.current.data.title;
+    navigationService.loadAllItems().then(menuItems => this.menuItems = [].concat(menuItems));
   }
 
   public selectItem(item) {
@@ -69,15 +60,13 @@ export default class MainComponent implements at.OnInit {
   }
 
   public toggleRightSidebar() {
-    this.mdMenu.hide()
-      .then(this.mdSidenav('right').toggle)
-      .then(() => this.log.debug('Right sidenav toggled'));
+    this.mdSidenav('right').toggle().then(() => this.log.debug('Left sidenav toggled'));
   }
 
   private clearSidebars() {
     this.mdBottomSheet.hide();
     this.mdSidenav('left').close().then(() => this.log.debug('Left sidenav closed'));
-    this.mdSidenav('right').close().then(() => this.log.debug('Right sidenav closed'));
+    this.mdSidenav('right').close().then(() => this.log.debug('Left sidenav closed'));
   }
 }
 
