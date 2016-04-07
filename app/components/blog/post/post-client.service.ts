@@ -12,9 +12,7 @@ const ngServiceName = 'postClient';
 @at.inject('commentClient', '$log', '$q', 'Restangular')
 export default class PostClientService {
   public get baseUrl() { return 'posts'; }
-  public get baseList() { return this.restangular.all(this.baseUrl); }
-
-  public baseElement(id: number) { return this.restangular.one(this.baseUrl, id); }
+  private get baseList() { return this.restangular.all(this.baseUrl); }
 
   constructor(private commentClient: CommentClient,
     private log: angular.ILogService,
@@ -72,5 +70,7 @@ export default class PostClientService {
     let commentId = typeof comment === 'number' ? comment : comment.id;
     return this.baseElement(postId).one(this.commentClient.baseUrl, commentId).remove();
   }
+
+  private baseElement(id: number) { return this.restangular.one(this.baseUrl, id); }
 
 }

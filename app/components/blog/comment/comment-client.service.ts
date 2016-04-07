@@ -10,9 +10,7 @@ const ngServiceName = 'commentClient';
 @at.inject('$log', '$q', 'Restangular')
 export default class CommentClientService {
   public get baseUrl() { return 'comments'; }
-  public get baseList() { return this.restangular.all(this.baseUrl); }
-
-  public baseElement(id: number) { return this.restangular.one(this.baseUrl, id); }
+  private get baseList() { return this.restangular.all(this.baseUrl); }
 
   constructor(private log: angular.ILogService,
     private q: angular.IQService,
@@ -27,5 +25,7 @@ export default class CommentClientService {
   public read(id: number) {
     return this.baseList.get<IComment>(id);
   }
+
+  private baseElement(id: number) { return this.restangular.one(this.baseUrl, id); }
 
 }
