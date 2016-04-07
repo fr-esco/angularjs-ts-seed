@@ -1,0 +1,57 @@
+<!-- TODO: Add validations -->
+<md-content md-theme="dark" class="md-padding" layout="row" layout-sm="column">
+  <md-input-container>
+    <label for="title">Username</label>
+    <input id="title" ng-model="vm.user.title">
+  </md-input-container>
+  <md-input-container>
+    <label for="email">Email</label>
+    <input id="email" ng-model="vm.user.email" type="email">
+  </md-input-container>
+</md-content>
+<md-content class="md-padding">
+  <form name="userForm">
+    <div layout layout-sm="column">
+      <md-input-container flex="80">
+        <label for="company">Company (Disabled)</label>
+        <input id="company" ng-model="vm.user.company" disabled>
+      </md-input-container>
+      <md-input-container flex>
+        <label for="submission-date">Submission Date</label>
+        <input id="submission-date" type="date" ng-model="vm.user.submissionDate">
+      </md-input-container>
+    </div>
+    <div layout layout-sm="column">
+      <md-input-container flex>
+        <label for="first-name">First Name</label>
+        <input id="first-name" ng-model="vm.user.firstName" placeholder="Placeholder text">
+      </md-input-container>
+      <md-input-container flex>
+        <label for="last-name">Last Name</label>
+        <input id="last-name" ng-model="vm.user.lastName">
+      </md-input-container>
+    </div>
+    <md-input-container flex>
+      <label for="address">Address</label>
+      <input id="address" ng-model="vm.user.address">
+    </md-input-container>
+    <div layout layout-sm="column">
+      <md-input-container flex>
+        <label for="city">City</label>
+        <input id="city" ng-model="vm.user.city">
+      </md-input-container>
+      <md-input-container flex>
+        <label for="state">State</label>
+        <input id="state" ng-model="user.state">
+      </md-input-container>
+      <md-input-container flex>
+        <label for="postal-code">Postal Code</label>
+        <input id="postal-code" ng-model="vm.user.postalCode">
+      </md-input-container>
+    </div>
+    <md-input-container flex>
+      <label for="biography">About us</label>
+      <textarea id="biography" ng-model="vm.user.biography" columns="1" md-maxlength="150"></textarea>
+    </md-input-container>
+  </form>
+</md-content>

@@ -1,4 +1,6 @@
-# Introduction
+# UE Platform 0.5 - Showcase project
+
+## Introduction
 
 A seed project for AngularJS apps written in *TypeScript*.
 
@@ -7,7 +9,7 @@ _This project is heavily inspired by [angular2-seed](https://github.com/mgechev/
 # Features
 * AngularJS **1.5.x**
 * Angular Component Router
-* Angular Material **1.1.0-RC1** ([doc](https://material.angularjs.org/latest/))
+* Angular Material **1.1.0** ([doc](https://material.angularjs.org/latest/))
 * SystemJS
 * Livereload (install [Chrome Plugin](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en) to enable this feature)
 * SCSS for styling ([doc](http://sass-lang.com/documentation/file.SASS_REFERENCE.html))
@@ -74,56 +76,6 @@ gulp <task> -s
 gulp <task> --support
 ```
 
-### Accelerator
-
-You can generate a **scaffolded component** by using the following command:
-
-```bash
-gulp gen:scaffold --name <snakeCasedComponentName> [--parent <existingPathFromComponents>]
-```
-
-You can generate a new angular *module* by using the following command:
-
-```bash
-gulp gen:module --name <snakeCasedModuleName> --path <existingPathFromComponents>
-```
-
-You can generate a new angular *controller* by using the following command:
-
-```bash
-gulp gen:controller --name <snakeCasedControllerName> --path <existingPathFromComponents> [--module <moduleName>]
-```
-
-You can generate a new angular *filter* by using the following command:
-
-```bash
-gulp gen:filter --name <snakeCasedFilterName> --path <existingPathFromComponents> [--module <moduleName>]
-```
-
-You can generate a new angular *service* by using the following command:
-
-```bash
-gulp gen:service --name <snakeCasedServiceName> --path <existingPathFromComponents> [--module <moduleName>]
-```
-
-You can generate a new angular *provider* by using the following command:
-
-```bash
-gulp gen:provider --name <snakeCasedProviderName> --path <existingPathFromComponents> [--module <moduleName>]
-```
-
-You can generate a new angular *directive* by using the following command:
-
-```bash
-gulp gen:directive --name <snakeCasedDirectiveNameWithoutPrefix> --path <existingPathFromComponents> [--module <moduleName>]
-```
-
-You can generate a new angular *component* by using the following command:
-
-```bash
-gulp gen:component --name <snakeCasedDirectiveNameWithoutPrefix> --path <existingPathFromComponents> [--module <moduleName>]
-```
-
 ### Build, test and run
 
 If you are ready to test and run the application:
@@ -187,6 +139,56 @@ will create the following structure:
 
 (**) Remember to choose between the provider and the service, because they export the same service (and unit tests will fail!).
 
+### Accelerator
+
+You can generate a **scaffolded component** by using the following command:
+
+```bash
+gulp gen:scaffold --name <snakeCasedComponentName> [--parent <existingPathFromComponents>]
+```
+
+You can generate a new angular *module* by using the following command:
+
+```bash
+gulp gen:module --name <snakeCasedModuleName> --path <existingPathFromComponents>
+```
+
+You can generate a new angular *controller* by using the following command:
+
+```bash
+gulp gen:controller --name <snakeCasedControllerName> --path <existingPathFromComponents> [--module <moduleName>]
+```
+
+You can generate a new angular *filter* by using the following command:
+
+```bash
+gulp gen:filter --name <snakeCasedFilterName> --path <existingPathFromComponents> [--module <moduleName>]
+```
+
+You can generate a new angular *service* by using the following command:
+
+```bash
+gulp gen:service --name <snakeCasedServiceName> --path <existingPathFromComponents> [--module <moduleName>]
+```
+
+You can generate a new angular *provider* by using the following command:
+
+```bash
+gulp gen:provider --name <snakeCasedProviderName> --path <existingPathFromComponents> [--module <moduleName>]
+```
+
+You can generate a new angular *directive* by using the following command:
+
+```bash
+gulp gen:directive --name <snakeCasedDirectiveNameWithoutPrefix> --path <existingPathFromComponents> [--module <moduleName>]
+```
+
+You can generate a new angular *component* by using the following command:
+
+```bash
+gulp gen:component --name <snakeCasedDirectiveNameWithoutPrefix> --path <existingPathFromComponents> [--module <moduleName>]
+```
+
 ## Styles
 
 For styling components, every scaffold comes with a `.scss` file ready for use. Its first line is a *class-selector* that matches the component's name.
@@ -220,11 +222,3 @@ To enforce the adoption of best practices, every build begins with *lint* tasks.
 In addition, you are encouraged to format your code `[Shift+Alt+F]` before any commit.
 
 The use of **factories** is **deprecated**, because of the Object Oriented paradigm adopted.
-
-# Git Flow
-
-TBD
-
-# License
-
-MIT

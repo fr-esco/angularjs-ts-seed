@@ -22,7 +22,6 @@ describe('# Main Component', () => {
     mdMenu: angular.material.IMenuService,
     mdToast: angular.material.IToastService;
   let leftClose, rightClose;
-  let leftToggle, rightToggle;
 
   beforeEach(() => {
     $module(ngModuleName);
@@ -35,8 +34,7 @@ describe('# Main Component', () => {
         let cache = [];
         return direction => {
           return cache[direction] || (cache[direction] = {
-            close: () => $q.when(true),
-            toggle: () => $q.when(true)
+            close: () => $q.when(true)
           });
         };
       }]);
@@ -48,26 +46,16 @@ describe('# Main Component', () => {
     let controller, scope;
 
     beforeEach($inject(($log, $rootScope, $componentController,
-      $mdBottomSheet, $mdMenu, $mdSidenav, $mdToast) => {
+      $mdBottomSheet, $mdSidenav) => {
       log = $log;
       scope = $rootScope.$new();
 
       mdBottomSheet = $mdBottomSheet;
       spyOn(mdBottomSheet, 'hide').and.callThrough();
-      spyOn(mdBottomSheet, 'show').and.callThrough();
-
-      mdMenu = $mdMenu;
-      spyOn(mdMenu, 'hide').and.callThrough();
 
       mdSidenav = $mdSidenav;
       leftClose = spyOn($mdSidenav('left'), 'close').and.callThrough();
       rightClose = spyOn($mdSidenav('right'), 'close').and.callThrough();
-      leftToggle = spyOn($mdSidenav('left'), 'toggle').and.callThrough();
-      rightToggle = spyOn($mdSidenav('right'), 'toggle').and.callThrough();
-
-      mdToast = $mdToast;
-      spyOn(mdToast, 'simple').and.callThrough();
-      spyOn(mdToast, 'show').and.callThrough();
 
       controller = $componentController('tsfnMain', { $scope: scope, $mdSidenav: mdSidenav });
     }));
@@ -104,51 +92,13 @@ describe('# Main Component', () => {
 
       expect(controller.title).toBe(item.name);
       expect(mdBottomSheet.hide).toHaveBeenCalled();
-    });
-
-    it('should clear sidebars', () => {
-      controller.clearSidebars();
-      scope.$apply();
-
-      expect(mdBottomSheet.hide).toHaveBeenCalled();
 
       expect(leftClose).toHaveBeenCalled();
       expect(rightClose).toHaveBeenCalled();
       expect(log.debug.logs).toContain(['Left sidenav closed']);
       expect(log.debug.logs).toContain(['Right sidenav closed']);
-    });
 
-    it('should show toast', () => {
-      controller.selectItem(item);
-      scope.$apply();
-
-      expect(mdToast.simple).toHaveBeenCalled();
-      expect(mdToast.show).toHaveBeenCalled();
-    });
-
-    it('should toggle left sidebar', () => {
-      controller.toggleItemsList();
-      scope.$apply();
-
-      expect(mdBottomSheet.hide).toHaveBeenCalled();
-      expect(leftToggle).toHaveBeenCalled();
-      expect(log.debug.logs).toContain(['Left sidenav toggled']);
-    });
-
-    it('should toggle right sidebar', () => {
-      controller.toggleRightSidebar();
-      scope.$apply();
-
-      expect(mdMenu.hide).toHaveBeenCalled();
-      expect(rightToggle).toHaveBeenCalled();
-      expect(log.debug.logs).toContain(['Right sidenav toggled']);
-    });
-
-    it('should show actions', () => {
-      controller.showActions(new MouseEvent('click'));
-      scope.$apply();
-
-      expect(mdBottomSheet.show).toHaveBeenCalled();
+      // TODO showSimpleToast
     });
   });
 });

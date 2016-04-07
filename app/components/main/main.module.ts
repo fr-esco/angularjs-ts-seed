@@ -1,9 +1,8 @@
 import Material from '../material/material';
-import BottomSheet from '../bottom-sheet/bottom-sheet';
 
 'use strict';
 
 const ngModuleName = 'app.components.main';
 
-export default angular.module(ngModuleName, ['ngComponentRouter', Material, BottomSheet])
+export default angular.module(ngModuleName, ['ngComponentRouter', Material])
   .run(['$log', $log => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;

@@ -1,6 +1,6 @@
 import ngModuleName from './bottom-sheet.module';
 
 // import angular objects in alphabetical order
-import './bottom-sheet.controller';
+// import './main-left-sidenav.component';
 
 export default ngModuleName;
