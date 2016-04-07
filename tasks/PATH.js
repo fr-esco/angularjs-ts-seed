@@ -65,7 +65,8 @@ module.exports = {
         './node_modules/ng-showdown/dist/ng-showdown.min.js',
         './node_modules/ng-showdown/dist/ng-showdown.min.js.map',
 
-        './node_modules/restangular/node_modules/lodash/lodash.min.js',
+        // './node_modules/restangular/node_modules/lodash/lodash.min.js',
+        './node_modules/lodash/lodash.min.js',
         './node_modules/restangular/dist/restangular.js',
 
         './node_modules/angular-typescript/lib/at-angular.js',
