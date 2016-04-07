@@ -92,6 +92,9 @@ gulp
 # Dev run (default configuration)
 gulp serve
 
+# Dev mock REST server
+gulp rest [--gui] [--refresh]
+
 # Prod run
 gulp serve --prod
 # ... or
@@ -117,34 +120,24 @@ will create the following structure:
          |-- about.component.html      # component template
          |-- about.component.ts        # component definition
          |-- about.component.spec.ts   # component unit test specs
-         |-- about.controller.ts       # controller definition
-         |-- about.controller.spec.ts  # controller unit test specs
-         |-- about.directive.html      # directive template
-         |-- about.directive.ts        # directive definition
-         |-- about.directive.spec.ts   # directive unit test specs
          |-- about.filter.ts           # filter definition
          |-- about.filter.spec.ts      # filter unit test specs
          |-- about.module.ts           # module definition
          |-- about.module.spec.ts      # module unit test specs
-         |-- about.provider.ts         # provider definition (**)
-         |-- about.provider.spec.ts    # provider unit test specs
          |-- about.service.ts          # service definition (**)
          |-- about.service.spec.ts     # service unit test specs
-         |-- about.tpl.html            # generic template
 
          components.ts            # *update manually* to register the module
 ```
 
 (*) Remember to remove comments where necessary in `about.ts` for registration.
 
-(**) Remember to choose between the provider and the service, because they export the same service (and unit tests will fail!).
-
 ### Accelerator
 
 You can generate a **scaffolded component** by using the following command:
 
 ```bash
-gulp gen:scaffold --name <snakeCasedComponentName> [--parent <existingPathFromComponents>]
+gulp gen:scaffold --name <snakeCasedComponentName> [--folder <existingPathFromComponents>] [--directive] [--controller] [--provider]
 ```
 
 You can generate a new angular *module* by using the following command:
