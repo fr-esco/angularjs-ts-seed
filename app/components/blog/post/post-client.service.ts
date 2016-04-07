@@ -1,5 +1,7 @@
 import ngModuleName from './post.module';
 
+import {BaseRestClient} from '../../rest/rest.model';
+
 import {IPost} from './post.model';
 import {IComment} from '../comment/comment.model';
 import CommentClient from '../comment/comment-client.service';
@@ -10,38 +12,15 @@ const ngServiceName = 'postClient';
 
 @at.service(ngModuleName, ngServiceName)
 @at.inject('commentClient', '$log', '$q', 'Restangular')
-export default class PostClientService {
+export default class PostClientService extends BaseRestClient<IPost> {
   public get baseUrl() { return 'posts'; }
-  private get baseList() { return this.restangular.all(this.baseUrl); }
 
   constructor(private commentClient: CommentClient,
     private log: angular.ILogService,
     private q: angular.IQService,
-    private restangular: restangular.IService) {
+    protected restangular: restangular.IService) {
+    super(restangular);
     log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
-  }
-
-  public search(params?) {
-    return this.baseList.getList<IPost>(params);
-  }
-
-  public read(id: number) {
-    return this.baseList.get<IPost>(id);
-  }
-
-  public delete(post: IPost);
-  public delete(post: number);
-  public delete(post) {
-    let postId = typeof post === 'number' ? post : post.id;
-    return this.baseElement(postId).remove();
-  }
-
-  public create(post: IPost) {
-    return this.baseList.post<IPost>(post);
-  }
-
-  public update(post: IPost) {
-    return this.baseList.post<IPost>(post);
   }
 
   public comments(post: IPost, params?);
@@ -70,7 +49,5 @@ export default class PostClientService {
     let commentId = typeof comment === 'number' ? comment : comment.id;
     return this.baseElement(postId).one(this.commentClient.baseUrl, commentId).remove();
   }
-
-  private baseElement(id: number) { return this.restangular.one(this.baseUrl, id); }
 
 }

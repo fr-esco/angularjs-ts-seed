@@ -1,5 +1,7 @@
 import ngModuleName from './comment.module';
 
+import {BaseRestClient} from '../../rest/rest.model';
+
 import {IComment} from './comment.model';
 
 'use strict';
@@ -8,24 +10,13 @@ const ngServiceName = 'commentClient';
 
 @at.service(ngModuleName, ngServiceName)
 @at.inject('$log', '$q', 'Restangular')
-export default class CommentClientService {
+export default class CommentClientService extends BaseRestClient<IComment> {
   public get baseUrl() { return 'comments'; }
-  private get baseList() { return this.restangular.all(this.baseUrl); }
 
   constructor(private log: angular.ILogService,
     private q: angular.IQService,
-    private restangular: restangular.IService) {
+    protected restangular: restangular.IService) {
+    super(restangular);
     log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
   }
-
-  public search(params?) {
-    return this.baseList.getList<IComment>(params);
-  }
-
-  public read(id: number) {
-    return this.baseList.get<IComment>(id);
-  }
-
-  private baseElement(id: number) { return this.restangular.one(this.baseUrl, id); }
-
 }

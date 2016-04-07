@@ -53,7 +53,7 @@ export default class PostUpdateComponent implements angular.OnActivate, angular.
   public confirm(post: IPost) {
     return this.postClient.update(post)
       .then(post => this.post = post, this.log.error)
-      .then(this.log.debug)
+      // .then(this.log.debug)
       .then(() => this.complete = true, () => this.complete = false)
       .then(() => this.$router.navigate(['PostDetail', { id: this.post.id }]));
   }
