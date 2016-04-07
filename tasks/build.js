@@ -82,13 +82,23 @@ gulp.task('build.html.dev', ['lint.html', 'lint.dts'], function() {
     .pipe($.livereload());
 });
 
+gulp.task('build.copy.locale.dev', function() {
+  return gulp.src(PATH.src.lib.locale)
+    .pipe(gulp.dest(PATH.dest.dev.lib));
+});
+
+gulp.task('build.copy.locale.json.dev', function() {
+  return gulp.src(['./app/**/*.json'])
+    .pipe(gulp.dest(join(PATH.dest.dev.all, 'i18n')));
+});
+
 gulp.task('build.copy.assets.dev', function() {
   return gulp.src(['./app/assets/**/*'])
     .pipe(gulp.dest(join(PATH.dest.dev.all, 'assets')))
     .pipe($.livereload());
 });
 
-gulp.task('build.assets.dev', ['build.js.dev', 'build.html.dev', 'build.copy.assets.dev', 'build.styles.dev'], function() {
+gulp.task('build.assets.dev', ['build.js.dev', 'build.html.dev', 'build.copy.assets.dev', 'build.styles.dev', 'build.copy.locale.dev', 'build.copy.locale.json.dev'], function() {
   return gulp.src(['./app/**/!(*.directive|*.component|*.tpl).html', './app/**/*.css'])
     .pipe(gulp.dest(PATH.dest.dev.all))
     .pipe($.livereload());
@@ -187,6 +197,16 @@ gulp.task('build.copy.assets.prod', function() {
     .pipe(gulp.dest(join(PATH.dest.prod.all, 'assets')));
 });
 
+gulp.task('build.copy.locale.json.prod', function() {
+  return gulp.src(['./app/**/*.json'])
+    .pipe(gulp.dest(join(PATH.dest.prod.lib, 'i18n')));
+});
+
+gulp.task('build.copy.locale.prod', function() {
+  return gulp.src(PATH.src.lib.locale)
+    .pipe(gulp.dest(PATH.dest.dev.lib));
+});
+
 gulp.task('build.assets.prod', ['build.js.prod', 'build.styles.prod'], function() {
   var filterHTML = filter('*.html');
   var filterCSS = filter('*.css');
@@ -212,7 +232,7 @@ gulp.task('build.index.prod', function() {
 gulp.task('build.app.prod', function(done) {
   // build.init.prod does not work as sub tasks dependencies so placed it here.
   runSequence('clean.app.prod', 'build.init.prod', 'build.assets.prod',
-    'build.index.prod', 'build.copy.assets.prod', 'clean.tmp', done);
+    'build.index.prod', 'build.copy.assets.prod', 'build.copy.locale.prod', 'build.copy.locale.json.prod', 'clean.tmp', done);
 });
 
 gulp.task('build.prod', function(done) {
