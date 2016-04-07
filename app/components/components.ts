@@ -10,6 +10,7 @@ import Profile   from './profile/profile';
 import Rest      from './rest/rest';
 import Showcase  from './showcase/showcase';
 import Table     from './table/table';
+import Locale  from './locale/locale';
 
 let components = angular.module('app.components', [
   Common,
@@ -22,6 +23,7 @@ let components = angular.module('app.components', [
   Rest,
   Showcase,
   Table,
+  Locale,
 
   Example
 ]);

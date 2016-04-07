@@ -19,9 +19,9 @@
 
 <tsfn-showcase file-list="::$ctrl.files[2]" title="Widgets" lazy="true"></tsfn-showcase>
 <div layout-gt-md="row">
-  <tsfn-panel-widget flex title="Site visitors" template="dashboard/panel/widget/visitor.tpl.html" class="fixed-height-widget"></tsfn-panel-widget>
-  <tsfn-panel-widget flex title="Warnings" template="dashboard/panel/widget/warning.tpl.html" class="fixed-height-widget"></tsfn-panel-widget>
-  <tsfn-panel-widget flex title="Memory load" template="dashboard/panel/widget/memory.tpl.html" class="fixed-height-widget"></tsfn-panel-widget>
+  <tsfn-panel-widget flex title="{{ 'SITE_VISITORS' | translate }}" template="dashboard/panel/widget/visitor.tpl.html" class="fixed-height-widget"></tsfn-panel-widget>
+  <tsfn-panel-widget flex title="{{ 'WARNINGS' | translate }}" template="dashboard/panel/widget/warning.tpl.html" class="fixed-height-widget"></tsfn-panel-widget>
+  <tsfn-panel-widget flex title="{{ ::'MEMORY_LOAD' | translate }}" template="dashboard/panel/widget/memory.tpl.html" class="fixed-height-widget"></tsfn-panel-widget>
 </div>
 
 <tsfn-showcase file-list="::$ctrl.files[3]" title="Widgets" lazy="true"></tsfn-showcase>
