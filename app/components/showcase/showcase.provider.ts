@@ -59,7 +59,12 @@ export default class ShowcaseProviderService {
 
   private loadFileInternal(file: string) {
     return this.http.get<string>(file)
-      .then(response => response.data);
+      .then(response => {
+        if (typeof response.data === 'object') {
+          return JSON.stringify(response.data, null, 2);
+        } else {
+          return response.data;
+        }
+      });
   }
-
 }
