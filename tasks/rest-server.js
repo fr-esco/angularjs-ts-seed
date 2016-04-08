@@ -12,7 +12,7 @@ var openResource = require('open');
 var runSequence = require('run-sequence');
 var yargs = require('yargs');
 
-var db = join(PATH.dest.test.all, PATH.dest.test.rest.db);
+var db = join('tasks', PATH.dest.test.rest.db);
 var url = 'http://localhost:' + PATH.dest.test.rest.port;
 
 function server() {

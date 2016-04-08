@@ -9,7 +9,7 @@ var faker = require('faker');
 var fs = require('fs');
 var join = require('path').join;
 
-var db = join(PATH.dest.test.all, PATH.dest.test.rest.db);
+var db = join('tasks', PATH.dest.test.rest.db);
 
 gulp.task('rest.fake', function() {
 
