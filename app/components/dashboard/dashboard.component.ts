@@ -48,6 +48,13 @@ export default class DashboardComponent implements at.OnActivate {
       'components/dashboard/panel/widget/todo.model.ts',
       'components/dashboard/panel/widget/todo.service.ts',
       'components/dashboard/panel/widget/todo.tpl.html',
+    ], [
+      'components/locale/locale.config.ts',
+      'components/locale/locale.component.ts',
+      'components/locale/locale.provider.ts',
+      'components/dashboard/dashboard.component.html',
+      'components/dashboard/i18n/en.json',
+      'components/dashboard/i18n/it.json'
     ]
   ];
 

@@ -4,10 +4,6 @@ let config = (tmhDynamicLocaleProvider, $translateProvider, $translatePartialLoa
   $translateProvider.useLoader('$translatePartialLoader', {
     urlTemplate: '/i18n/components/{part}/i18n/{lang}.json'
   })
-    // .determinePreferredLanguage()
-    // .determinePreferredLanguage(function () {
-    // return document.documentElement.getAttribute('lang');
-    // })
     .useSanitizeValueStrategy('sanitize')
     .registerAvailableLanguageKeys(['en', 'it'], {
       'en-*': 'en',
