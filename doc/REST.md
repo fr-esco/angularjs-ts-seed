@@ -23,6 +23,7 @@ npm install
 ## Get Started
 
 In order to access any available Resource, you need to know its API endpoint.
+
 Then, you can configure the Base API URL of all services by the following:
 
 ```js
@@ -31,5 +32,27 @@ Then, you can configure the Base API URL of all services by the following:
 let config = (restangularProvider: restangular.IProvider) => {
   restangularProvider.setBaseUrl('<protocol>://<host>:<port>/');
 };
+```
+
+### Mock
+
+The command below starts a REST server that listens on `localhost:3000`:
+
+```bash
+gulp rest
+```
+
+Use either `--support` or `-s` for more detailed instructions.
+
+## Client Service
+
+Let's assume you would like to access a `Post` resource.
+
+```bash
+GET     /posts    # retrieve a list of posts
+GET     /posts/1  # retrieve the post with id == 1
+PUT     /posts/1  # update the post with id == 1
+POST    /posts    # create a new post according to the sent parameters
+DELETE  /posts/1  # update the post with id == 1
 ```
 
