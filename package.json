@@ -1,9 +1,9 @@
 {
-  "version": "0.2.0",
-  "description": "UE Platform Showcase",
+  "version": "1.7.0",
+  "description": "Angularjs 1.5 TypeScript Seed",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/fr-esco/angularjs-ts-seed"
   },
   "scripts": {
     "postinstall": "typings install && gulp -T",
@@ -17,16 +17,15 @@
     "seed",
     "application"
   ],
-  "author": "TSFN - Factory Team",
+  "author": "fr-esco <f.colamonici@gmail.com>",
   "contributors": [
     {
-      "name": "bartolomeo sorrentino"
+      "name": "bsorrentino",
+      "email": "bartolomeo.sorrentino@gmail.com"
     },
     {
-      "name": "luca oliano"
-    },
-    {
-      "name": "francesco colamonici"
+      "name": "fr-esco",
+      "email": "f.colamonici@gmail.com"
     }
   ],
   "license": "MIT",
