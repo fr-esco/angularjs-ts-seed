@@ -26,6 +26,7 @@ module.exports = {
   },
   src: {
     app: {
+      root: './app',
       all: ['./app/**/*.ts'],
       dev: ['./app/**/*.ts', '!./app/**/*.spec.ts'],
       test: ['./app/**/*.ts', '!./app/init.ts']
