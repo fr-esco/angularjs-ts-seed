@@ -12,7 +12,7 @@ var openResource = require('open');
 var runSequence = require('run-sequence');
 var yargs = require('yargs');
 
-var db = join(PATH.dest.test.all, PATH.dest.test.rest.db);
+var db = join('tasks', PATH.dest.test.rest.db);
 var url = 'http://localhost:' + PATH.dest.test.rest.port;
 
 function server() {
@@ -61,7 +61,7 @@ function rest(done) {
     .describe('g', 'Open your browser at ' + url)
     .alias('r', 'refresh')
     .boolean('r')
-    .describe('r', 'Refresh fake data')
+    .describe('r', 'Refresh or create fake data')
 
     .alias('s', 'support')
     .help('s')
@@ -77,7 +77,7 @@ rest.description = 'Start a light server that exposes REST APIs for ' + db;
 
 rest.flags = {
   '-g, --gui': 'Open your browser at ' + url,
-  '-r, --refresh': 'Refresh fake data',
+  '-r, --refresh': 'Refresh or create fake data',
   '-s, --support': 'Show help'
 };
 

@@ -1,4 +1,25 @@
-<h2 ng-bind="$ctrl.title"></h2>
+<!--<h2 ng-bind="$ctrl.title"></h2>-->
+
+<div class="showcase-wrapper" layout="column" ng-cloak>
+  <md-toolbar md-theme="grey">
+    <div class="md-toolbar-tools">
+      <h3><span>Showcase</span></h3>
+      <span flex></span>
+      <md-button class="toolbar-button" aria-label="View Source" ng-click="$ctrl.showSource = !$ctrl.showSource">
+        <i class="material-icons" ng-hide="$ctrl.showSource">keyboard_arrow_right</i>
+        <i class="material-icons" ng-show="$ctrl.showSource">keyboard_arrow_down</i>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-divider></md-divider>
+  <div ng-show="$ctrl.showSource">
+    <tsfn-showcase file-list="::$ctrl.files[0]" title="Blog"></tsfn-showcase>
+    <tsfn-showcase file-list="::$ctrl.files[1]" title="Post" lazy="true"></tsfn-showcase>
+    <tsfn-showcase file-list="::$ctrl.files[2]" title="Rest" lazy="true"></tsfn-showcase>
+  </div>
+</div>
+
+<!--<hr>-->
 
 <md-content layout="column">
   <ng-outlet></ng-outlet>
