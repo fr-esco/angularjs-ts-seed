@@ -61,7 +61,7 @@ function rest(done) {
     .describe('g', 'Open your browser at ' + url)
     .alias('r', 'refresh')
     .boolean('r')
-    .describe('r', 'Refresh fake data')
+    .describe('r', 'Refresh or create fake data')
 
     .alias('s', 'support')
     .help('s')
@@ -77,7 +77,7 @@ rest.description = 'Start a light server that exposes REST APIs for ' + db;
 
 rest.flags = {
   '-g, --gui': 'Open your browser at ' + url,
-  '-r, --refresh': 'Refresh fake data',
+  '-r, --refresh': 'Refresh or create fake data',
   '-s, --support': 'Show help'
 };
 
