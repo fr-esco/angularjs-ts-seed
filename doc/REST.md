@@ -42,6 +42,18 @@ The command below starts a REST server that listens on `localhost:3000`:
 gulp rest
 ```
 
+If you need to either refresh or create fake data:
+
+```bash
+gulp rest -r
+```
+
+You can view data and API in your browser by navigating to `localhost:3000` or using `--gui` flag:
+
+```bash
+gulp rest -g
+```
+
 Use either `--support` or `-s` for more detailed instructions.
 
 ## Client Service
