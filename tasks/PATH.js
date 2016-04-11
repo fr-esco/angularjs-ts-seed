@@ -10,7 +10,11 @@ module.exports = {
     },
     test: {
       all: 'test',
-      report: 'test/report'
+      report: 'test/report',
+      rest: {
+        port: 3000,
+        db: 'db.json'
+      }
     },
     prod: {
       all: 'dist/prod',
@@ -61,6 +65,10 @@ module.exports = {
         './node_modules/ng-showdown/dist/ng-showdown.min.js',
         './node_modules/ng-showdown/dist/ng-showdown.min.js.map',
 
+        // './node_modules/restangular/node_modules/lodash/lodash.min.js',
+        './node_modules/lodash/lodash.min.js',
+        './node_modules/restangular/dist/restangular.js',
+
         './node_modules/angular-typescript/lib/at-angular.js',
         './node_modules/angular-typescript/lib/at-angular-resource.js',
         './node_modules/angular-typescript/lib/at-angular.js.map',
@@ -80,6 +88,7 @@ module.exports = {
       controller: [join(generator, 'temp.controller*.ts')],
       filter: [join(generator, 'temp.filter*.ts')],
       service: [join(generator, 'temp.service*.ts')],
+      serviceClient: [join(generator, 'temp-client.service*.ts')],
       provider: [join(generator, 'temp.provider*.ts')],
       directive: [join(generator, 'temp.directive*.{ts,html}')],
       component: [join(generator, 'temp.component*.{ts,html}')]

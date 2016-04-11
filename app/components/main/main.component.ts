@@ -9,9 +9,10 @@ const ngComponentName = 'tsfnMain';
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'main/main.component.html',
   $routeConfig: [
-    { path: '/dashboard', name: 'Dashboard', component: 'tsfnDashboard', data: { title: 'Dashboard' }, useAsDefault: true },
+    { path: '/dashboard', name: 'Dashboard', component: 'tsfnDashboard', data: { title: 'Dashboard' } },
     { path: '/profile', name: 'Profile', component: 'tsfnProfile', data: { title: 'Profile' } },
-    { path: '/table/...', name: 'Table', component: 'tsfnTable', data: { title: 'Table' } }
+    { path: '/table/...', name: 'Table', component: 'tsfnTable', data: { title: 'Table' } },
+    { path: '/blog/...', name: 'Blog', component: 'tsfnBlog', data: { title: 'Blog' }, useAsDefault: true }
   ]
 })
 @at.inject('navigationService', '$log', '$q', '$mdSidenav', '$mdBottomSheet', '$mdMenu', '$mdToast')

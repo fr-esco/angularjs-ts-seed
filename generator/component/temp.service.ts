@@ -2,7 +2,7 @@ import ngModuleName from './<%= modName %>.module';
 
 'use strict';
 
-const ngServiceName = '<%= name %>';
+const ngServiceName = '<%= fullName %>';
 
 @at.service(ngModuleName, ngServiceName)
 @at.inject('$log', '$q')

@@ -1,7 +1,7 @@
 /// <reference path="<%= toComponents %>/../../typings/browser.d.ts" />
 
 import ngModuleName from './<%= modName %>';
-import <%= upCaseName %>Service from './<%= name %>.service';
+import <%= upCaseName %>ClientService from './<%= name %>-client.service';
 
 'use strict';
 
@@ -9,17 +9,17 @@ let $module = angular.mock.module;
 let $inject = angular.mock.inject;
 let $dump = (arg: any): void => console.log(angular.mock.dump(arg));
 
-describe('# <%= upCaseName %> Service', () => {
+describe('# <%= upCaseName %>Client Service', () => {
   let $log, $rootScope;
-  let service: <%= upCaseName %>Service;
+  let service: <%= upCaseName %>ClientService;
 
   beforeEach(() => {
     $module(ngModuleName);
 
-    $inject((_$log_, _$rootScope_, _<%= fullName %>_) => {
+    $inject((_$log_, _$rootScope_, _<%= fullName %>Client_) => {
       $log = _$log_;
       $rootScope = _$rootScope_;
-      service = _<%= fullName %>_;
+      service = _<%= fullName %>Client_;
     });
   });
 
@@ -29,27 +29,15 @@ describe('# <%= upCaseName %> Service', () => {
       expect(service).not.toBeNull();
     });
 
-    it('should be an instance of <%= upCaseName %>Service', () => {
-      expect(service).toEqual(jasmine.any(<%= upCaseName %>Service));
+    it('should be an instance of <%= upCaseName %>ClientService', () => {
+      expect(service).toEqual(jasmine.any(<%= upCaseName %>ClientService));
     });
   });
 
   describe('## Log enabled', () => {
     it('should log registration', () => {
-      let loaded = ['ngService', '<%= fullName %>', 'loaded'].join(' ');
+      let loaded = ['ngService', '<%= fullName %>Client', 'loaded'].join(' ');
       expect($log.debug.logs).toContain([loaded]);
-    });
-  });
-
-  describe('## Load Feature', () => {
-    it('should load a flag', () => {
-      let data;
-      service.load().then(flag => data = flag);
-
-      // to resolve the promises
-      $rootScope.$apply();
-
-      expect(data).toBeTrue();
     });
   });
 
