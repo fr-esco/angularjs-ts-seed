@@ -11,7 +11,7 @@ let $inject = angular.mock.inject;
 let $dump = (arg: any): void => console.log(angular.mock.dump(arg));
 
 describe('# <%= upCaseName %> Provider', () => {
-  const loaded = ['ngProvider', '<%= name %>', 'has loaded an', '<%= upCaseName %>ProviderService'].join(' ');
+  const loaded = ['ngProvider', '<%= fullName %>', 'has loaded an', '<%= upCaseName %>ProviderService'].join(' ');
 
   // $log.debug.logs[0] will contain the module initialization logs
   let $log;
@@ -21,13 +21,13 @@ describe('# <%= upCaseName %> Provider', () => {
   describe('## Existence of provider', () => {
 
     beforeEach(() => {
-      $module(ngModuleName, <%= name %>Provider => {
-        provider = <%= name %>Provider;
+      $module(ngModuleName, <%= fullName %>Provider => {
+        provider = <%= fullName %>Provider;
       });
 
       // without injecting the service, the provider is not instantiated
-      $inject(_<%= name %>_ => {
-        service = _<%= name %>_;
+      $inject(_<%= fullName %>_ => {
+        service = _<%= fullName %>_;
       });
     });
 
@@ -47,8 +47,8 @@ describe('# <%= upCaseName %> Provider', () => {
     beforeEach(() => {
       $module(ngModuleName);
 
-      $inject(_<%= name %>_ => {
-        service = _<%= name %>_;
+      $inject(_<%= fullName %>_ => {
+        service = _<%= fullName %>_;
       });
     });
 
@@ -65,14 +65,14 @@ describe('# <%= upCaseName %> Provider', () => {
   describe('## Notify configuration - default/true', () => {
 
     beforeEach(() => {
-      $module(ngModuleName, <%= name %>Provider => {
-        provider = <%= name %>Provider;
+      $module(ngModuleName, <%= fullName %>Provider => {
+        provider = <%= fullName %>Provider;
         provider.makeNoise(true);
       });
 
-      $inject((_$log_, _<%= name %>_) => {
+      $inject((_$log_, _<%= fullName %>_) => {
         $log = _$log_;
-        service = _<%= name %>_;
+        service = _<%= fullName %>_;
       });
     });
 
@@ -85,14 +85,14 @@ describe('# <%= upCaseName %> Provider', () => {
   describe('## Notify configuration - false', () => {
 
     beforeEach(() => {
-      $module(ngModuleName, <%= name %>Provider => {
-        provider = <%= name %>Provider;
+      $module(ngModuleName, <%= fullName %>Provider => {
+        provider = <%= fullName %>Provider;
         provider.makeNoise(false);
       });
 
-      $inject((_$log_, _<%= name %>_) => {
+      $inject((_$log_, _<%= fullName %>_) => {
         $log = _$log_;
-        service = _<%= name %>_;
+        service = _<%= fullName %>_;
       });
     });
 

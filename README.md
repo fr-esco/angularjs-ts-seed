@@ -9,7 +9,7 @@ _This project is heavily inspired by [angular2-seed](https://github.com/mgechev/
 # Features
 * AngularJS **1.5.x**
 * Angular Component Router
-* Angular Material **1.1.0** ([doc](https://material.angularjs.org/latest/))
+* Angular Material **1.1.0-RC2** ([doc](https://material.angularjs.org/latest/))
 * SystemJS
 * Livereload (install [Chrome Plugin](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en) to enable this feature)
 * SCSS for styling ([doc](http://sass-lang.com/documentation/file.SASS_REFERENCE.html))
@@ -156,6 +156,12 @@ You can generate a new angular *filter* by using the following command:
 
 ```bash
 gulp gen:filter --name <snakeCasedFilterName> --path <existingPathFromComponents> [--module <moduleName>]
+```
+
+You can generate a new angular *REST service client* by using the following command:
+
+```bash
+gulp gen:service --name <snakeCasedServiceName> --path <existingPathFromComponents> [--module <moduleName>] --client
 ```
 
 You can generate a new angular *service* by using the following command:
