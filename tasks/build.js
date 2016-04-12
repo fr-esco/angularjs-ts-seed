@@ -87,11 +87,6 @@ gulp.task('build.copy.locale.dev', function() {
     .pipe(gulp.dest(PATH.dest.dev.lib));
 });
 
-gulp.task('build.copy.locale.json.dev', function() {
-  return gulp.src(['./app/**/*.json'])
-    .pipe(gulp.dest(join(PATH.dest.dev.all, 'i18n')));
-});
-
 gulp.task('build.copy.assets.dev', function() {
   return gulp.src(['./app/assets/**/*'])
     .pipe(gulp.dest(join(PATH.dest.dev.all, 'assets')))
@@ -195,11 +190,6 @@ gulp.task('build.init.prod', function() {
 gulp.task('build.copy.assets.prod', function() {
   return gulp.src(['./app/assets/**/*'])
     .pipe(gulp.dest(join(PATH.dest.prod.all, 'assets')));
-});
-
-gulp.task('build.copy.locale.json.prod', function() {
-  return gulp.src(['./app/**/*.json'])
-    .pipe(gulp.dest(join(PATH.dest.prod.lib, 'i18n')));
 });
 
 gulp.task('build.copy.locale.prod', function() {

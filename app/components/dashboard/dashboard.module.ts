@@ -7,5 +7,4 @@ import Panel from './panel/panel';
 const ngModuleName = 'app.components.dashboard';
 
 export default angular.module(ngModuleName, ['ngComponentRouter', Material, Panel, Showcase])
-  .config(['$translatePartialLoaderProvider', $translatePartialLoaderProvider => $translatePartialLoaderProvider.addPart('dashboard')])
   .run(['$log', $log => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;
