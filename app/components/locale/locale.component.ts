@@ -35,7 +35,7 @@ export default class LocaleComponent implements at.OnInit {
       this.locale = data[0].value;
       this.localeService.set(this.locale);
       // On locale change, apply translation
-      this.$rootScope.$on('$localeChangeSuccess', (event: angular.IAngularEvent, locale: string) => {
+      this.$rootScope.$on('$localeChangeSuccess', (event: angular.IAngularEvent, locale: string, $locale: angular.ILocaleService) => {
         event.currentScope['$translate'].use(locale);
       });
     });

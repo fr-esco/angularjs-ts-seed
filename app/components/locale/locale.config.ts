@@ -1,8 +1,11 @@
 'use strict';
 
 let config = (tmhDynamicLocaleProvider, $translateProvider, $translatePartialLoaderProvider) => {
-  $translateProvider.useLoader('$translatePartialLoader', {
-    urlTemplate: '/i18n/components/{part}/i18n/{lang}.json'
+  $translateProvider.useStaticFilesLoader({
+    files: [{
+      prefix: '/i18n/locale-',
+      suffix: '.json'
+    }]
   })
     .useSanitizeValueStrategy('sanitize')
     .registerAvailableLanguageKeys(['en', 'it'], {
