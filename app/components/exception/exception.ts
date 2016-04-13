@@ -5,7 +5,7 @@ import ngModuleName from './exception.module';
 // import './exception.controller';
 // import './exception.directive';
 // import './exception.filter';
-// import './exception.provider';
+import './exception-handler.provider';
 // import './exception.service';
 
 export default ngModuleName;
