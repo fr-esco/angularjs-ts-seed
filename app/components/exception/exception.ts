@@ -1,6 +1,7 @@
 import ngModuleName from './exception.module';
 
 // import angular objects in alphabetical order
+import './exception.model';
 // import './exception.component';
 // import './exception.controller';
 // import './exception.directive';
