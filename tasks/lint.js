@@ -7,6 +7,8 @@ var htmllint = require('gulp-htmllint');
 var tslint = require('gulp-tslint');
 var gutil = require('gulp-util');
 
+var fs = require('fs');
+var join = require('path').join;
 var runSequence = require('run-sequence');
 var yargs = require('yargs');
 
@@ -34,6 +36,23 @@ lintHtml.description = 'Ensure HTML coding standards and best practices are appl
 lintHtml.flags = {};
 
 gulp.task('lint.html', lintHtml);
+
+function lintDts() {
+  var ko = checkFolders(PATH.src.app.root);
+  if (ko.length > 0) {
+    throw new gutil.PluginError({
+      plugin: 'lint.dts',
+      message: ['The following files and folders have non-compliant names:',
+        gutil.colors.red(ko.join(', '))].join('\n\t')
+    });
+  } else {
+    this.emit('end');
+  }
+}
+
+lintDts.description = 'Ensure Directory Tree Structure (DTS) standards are applied';
+
+gulp.task('lint.dts', lintDts);
 
 function lintTs() {
   var argv = yargs.reset()
@@ -68,4 +87,23 @@ function lint() { }
 
 lint.description = 'Ensure coding standards and best practices are applied using linters';
 
-gulp.task('lint', ['lint.html', 'lint.ts'], lint);
+gulp.task('lint', ['lint.html', 'lint.ts', 'lint.dts'], lint);
+
+function checkFolders(root) {
+  var ko = [];
+  checkFolder(root);
+  return ko.filter(function(file) {
+    return file[0] !== '_' && file.indexOf('MaterialIcons') < 0 && file.indexOf('i18n') < 0;
+  });
+
+  function checkFolder(dir) {
+    fs.readdirSync(dir).forEach(function(file) {
+      if (/[^\.a-z-]/.test(file)) {
+        ko.push(file);
+      }
+      if (fs.statSync(join(dir, file)).isDirectory()) {
+        checkFolder(join(dir, file));
+      }
+    });
+  }
+}

@@ -9,7 +9,7 @@ _This project is heavily inspired by [angular2-seed](https://github.com/mgechev/
 # Features
 * AngularJS **1.5.x**
 * Angular Component Router
-* Angular Material **1.1.0** ([doc](https://material.angularjs.org/latest/))
+* Angular Material **1.1.0-RC2** ([doc](https://material.angularjs.org/latest/))
 * SystemJS
 * Livereload (install [Chrome Plugin](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en) to enable this feature)
 * SCSS for styling ([doc](http://sass-lang.com/documentation/file.SASS_REFERENCE.html))
@@ -92,6 +92,9 @@ gulp
 # Dev run (default configuration)
 gulp serve
 
+# Dev mock REST server
+gulp rest [--gui] [--refresh]
+
 # Prod run
 gulp serve --prod
 # ... or
@@ -117,76 +120,72 @@ will create the following structure:
          |-- about.component.html      # component template
          |-- about.component.ts        # component definition
          |-- about.component.spec.ts   # component unit test specs
-         |-- about.controller.ts       # controller definition
-         |-- about.controller.spec.ts  # controller unit test specs
-         |-- about.directive.html      # directive template
-         |-- about.directive.ts        # directive definition
-         |-- about.directive.spec.ts   # directive unit test specs
          |-- about.filter.ts           # filter definition
          |-- about.filter.spec.ts      # filter unit test specs
          |-- about.module.ts           # module definition
          |-- about.module.spec.ts      # module unit test specs
-         |-- about.provider.ts         # provider definition (**)
-         |-- about.provider.spec.ts    # provider unit test specs
          |-- about.service.ts          # service definition (**)
          |-- about.service.spec.ts     # service unit test specs
-         |-- about.tpl.html            # generic template
 
          components.ts            # *update manually* to register the module
 ```
 
 (*) Remember to remove comments where necessary in `about.ts` for registration.
 
-(**) Remember to choose between the provider and the service, because they export the same service (and unit tests will fail!).
-
 ### Accelerator
 
 You can generate a **scaffolded component** by using the following command:
 
 ```bash
-gulp gen:scaffold --name <snakeCasedComponentName> [--parent <existingPathFromComponents>]
+gulp gen:scaffold --name <kebab-cased-component-name> [--folder <existingPathFromComponents>] [--directive] [--controller] [--provider]
 ```
 
 You can generate a new angular *module* by using the following command:
 
 ```bash
-gulp gen:module --name <snakeCasedModuleName> --path <existingPathFromComponents>
+gulp gen:module --name <kebab-cased-module-name> --path <existingPathFromComponents>
 ```
 
 You can generate a new angular *controller* by using the following command:
 
 ```bash
-gulp gen:controller --name <snakeCasedControllerName> --path <existingPathFromComponents> [--module <moduleName>]
+gulp gen:controller --name <kebab-cased-controller-name> --path <existingPathFromComponents> [--module <moduleName>]
 ```
 
 You can generate a new angular *filter* by using the following command:
 
 ```bash
-gulp gen:filter --name <snakeCasedFilterName> --path <existingPathFromComponents> [--module <moduleName>]
+gulp gen:filter --name <kebab-cased-filter-name> --path <existingPathFromComponents> [--module <moduleName>]
+```
+
+You can generate a new angular *REST service client* by using the following command:
+
+```bash
+gulp gen:service --name <kebab-cased-service-name> --path <existingPathFromComponents> [--module <moduleName>] --client
 ```
 
 You can generate a new angular *service* by using the following command:
 
 ```bash
-gulp gen:service --name <snakeCasedServiceName> --path <existingPathFromComponents> [--module <moduleName>]
+gulp gen:service --name <kebab-cased-service-name> --path <existingPathFromComponents> [--module <moduleName>]
 ```
 
 You can generate a new angular *provider* by using the following command:
 
 ```bash
-gulp gen:provider --name <snakeCasedProviderName> --path <existingPathFromComponents> [--module <moduleName>]
+gulp gen:provider --name <kebab-cased-provider-name> --path <existingPathFromComponents> [--module <moduleName>]
 ```
 
 You can generate a new angular *directive* by using the following command:
 
 ```bash
-gulp gen:directive --name <snakeCasedDirectiveNameWithoutPrefix> --path <existingPathFromComponents> [--module <moduleName>]
+gulp gen:directive --name <kebab-cased-directive-name-without-prefix> --path <existingPathFromComponents> [--module <moduleName>]
 ```
 
 You can generate a new angular *component* by using the following command:
 
 ```bash
-gulp gen:component --name <snakeCasedDirectiveNameWithoutPrefix> --path <existingPathFromComponents> [--module <moduleName>]
+gulp gen:component --name <kebab-cased-component-name-without-prefix> --path <existingPathFromComponents> [--module <moduleName>]
 ```
 
 ## Styles

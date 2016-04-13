@@ -16,10 +16,10 @@ describe('# <%= upCaseName %> Service', () => {
   beforeEach(() => {
     $module(ngModuleName);
 
-    $inject((_$log_, _$rootScope_, _<%= name %>_) => {
+    $inject((_$log_, _$rootScope_, _<%= fullName %>_) => {
       $log = _$log_;
       $rootScope = _$rootScope_;
-      service = _<%= name %>_;
+      service = _<%= fullName %>_;
     });
   });
 
@@ -36,7 +36,7 @@ describe('# <%= upCaseName %> Service', () => {
 
   describe('## Log enabled', () => {
     it('should log registration', () => {
-      let loaded = ['ngService', '<%= name %>', 'loaded'].join(' ');
+      let loaded = ['ngService', '<%= fullName %>', 'loaded'].join(' ');
       expect($log.debug.logs).toContain([loaded]);
     });
   });

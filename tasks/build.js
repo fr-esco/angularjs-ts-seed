@@ -51,7 +51,7 @@ gulp.task('build.lib.dev', function() {
     .pipe($.livereload());
 });
 
-gulp.task('build.js.dev', ['lint.ts'], function() {
+gulp.task('build.js.dev', ['lint.ts', 'lint.dts'], function() {
   var result = gulp.src(PATH.src.app.dev)
     .pipe(plumber())
     .pipe(sourcemaps.init())
@@ -64,7 +64,7 @@ gulp.task('build.js.dev', ['lint.ts'], function() {
     .pipe($.livereload());
 });
 
-gulp.task('build.html.dev', ['lint.html'], function() {
+gulp.task('build.html.dev', ['lint.html', 'lint.dts'], function() {
   return gulp.src(PATH.src.html.directive)
     .pipe(ngHtml2Js({
       moduleName: 'tpl' || function(file) {
