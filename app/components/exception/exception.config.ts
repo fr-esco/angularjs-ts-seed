@@ -1,11 +1,14 @@
 import ngModuleName from './exception.module';
 
+import MessageHandlerService from './message-handler.service';
+
 'use strict';
 
 class ExceptionModuleConfiguration {
   @at.injectMethod('$provide')
-  public static config($provide: angular.auto.IProvideService) {
+  public static config($provide: angular.auto.IProvideService, $httpProvider: angular.IHttpProvider) {
     $provide.decorator('$exceptionHandler', ExceptionModuleConfiguration.simpleHandlerDecorator);
+    $httpProvider.interceptors.push(ExceptionModuleConfiguration.httpInterceptor);
   }
 
   @at.injectMethod('$delegate', '$injector')
@@ -13,8 +16,27 @@ class ExceptionModuleConfiguration {
     return (exception: Error, cause?: string) => {
       let $log = $injector.get<angular.ILogService>('$log');
       $log.debug('Simple exception handler.');
+      let messageHandler = $injector.get<MessageHandlerService>('messageHandler');
+      messageHandler.addError(exception);
       // Route to server here!
       $delegate(exception, cause);
+    };
+  }
+
+  @at.injectMethod('$q', '$log', 'messageHandler')
+  private static httpInterceptor($q: angular.IQService,
+    $log: angular.ILogService,
+    messageHandler: MessageHandlerService): angular.IHttpInterceptor {
+    return {
+      responseError: response => {
+        let status = parseInt(response.status);
+        if (status >= 400 && status < 500) {
+
+        } else if (status >= 500) {
+
+        }
+        return $q.reject(response);
+      }
     };
   }
 }

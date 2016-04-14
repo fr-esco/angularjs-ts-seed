@@ -8,5 +8,6 @@ import './exception.model';
 // import './exception.filter';
 import './exception-handler.provider';
 // import './exception.service';
+import './message-handler.service';
 
 export default ngModuleName;
