@@ -13,7 +13,7 @@ const ngComponentName = 'tsfnPostList';
   },
   templateUrl: 'blog/post/post-list.component.html'
 })
-@at.inject('postClient', '$filter', '$log', '$mdDialog')
+@at.inject('postClient', '$filter', '$log', '$mdDialog', 'amMoment')
 export default class PostListComponent implements angular.OnActivate {
   public $router: angular.Router;
 
@@ -26,7 +26,8 @@ export default class PostListComponent implements angular.OnActivate {
   constructor(private postClient: PostClient,
     private filter: angular.IFilterService,
     private log: angular.ILogService,
-    private mdDialog: angular.material.IDialogService) {
+    private mdDialog: angular.material.IDialogService,
+    private amMoment: any) {
     log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
     this.filterText = filter('filter');
   }
@@ -34,7 +35,9 @@ export default class PostListComponent implements angular.OnActivate {
   public $routerOnActivate(next: angular.ComponentInstruction) {
     this.title = next.routeData.data['title'];
     return this.postClient.search()
-      .then(data => this.posts = data, () => false);
+      .then(data => {
+        this.posts = data;
+        });
   }
 
   public search() {
