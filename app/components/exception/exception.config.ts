@@ -1,11 +1,17 @@
 import ngModuleName from './exception.module';
 
+import {CodeError} from './exception.model';
 import MessageHandlerService from './message-handler.service';
 
 'use strict';
 
+function ensureCodeError(e: Error) {
+  if (!(e instanceof CodeError))
+    e = new CodeError(e);
+}
+
 class ExceptionModuleConfiguration {
-  @at.injectMethod('$provide')
+  @at.injectMethod('$provide', '$httpProvider')
   public static config($provide: angular.auto.IProvideService, $httpProvider: angular.IHttpProvider) {
     $provide.decorator('$exceptionHandler', ExceptionModuleConfiguration.simpleHandlerDecorator);
     $httpProvider.interceptors.push(ExceptionModuleConfiguration.httpInterceptor);
@@ -16,20 +22,29 @@ class ExceptionModuleConfiguration {
     return (exception: Error, cause?: string) => {
       let $log = $injector.get<angular.ILogService>('$log');
       $log.debug('Simple exception handler.');
+
+      ensureCodeError(exception);
+
       let messageHandler = $injector.get<MessageHandlerService>('messageHandler');
       messageHandler.addError(exception);
+
       // Route to server here!
+
       $delegate(exception, cause);
     };
   }
 
-  @at.injectMethod('$q', '$log', 'messageHandler')
-  private static httpInterceptor($q: angular.IQService,
-    $log: angular.ILogService,
-    messageHandler: MessageHandlerService): angular.IHttpInterceptor {
+  @at.injectMethod('$q', '$log', '$injector')
+  private static httpInterceptor($q: angular.IQService, $log: angular.ILogService, $injector: angular.auto.IInjectorService): angular.IHttpInterceptor {
+    let messageHandler = $injector.get<MessageHandlerService>('messageHandler');
     return {
       responseError: response => {
+        debugger;
+        messageHandler.addError({level: -1});
         let status = parseInt(response.status);
+        if (status < 0) {
+          return $q.reject(false);
+        }
         if (status >= 400 && status < 500) {
 
         } else if (status >= 500) {

@@ -110,7 +110,7 @@ export default class ExceptionHandlerProviderService {
   // Automatically record rejections of the provided [promise].
   public async(func, promise) {
     promise['catch'](err => {
-      this.funcError(func, err);
+      // this.funcError(func, err);
     });
     return promise;
   }

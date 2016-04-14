@@ -79,21 +79,22 @@ export default class MessageHandlerService {
 
   public flush(level?: number) {
     if (this.validateLevel(level)) {
-      let method: angular.ILogCall;
+      let spool: angular.ILogCall = this.log.debug;
       switch (level) {
         case this.ERROR:
-          method = this.log.error;
+          spool = this.log.error;
           break;
         case this.WARN:
-          method = this.log.warn;
+          spool = this.log.warn;
           break;
         case this.INFO:
-          method = this.log.info;
+          spool = this.log.info;
           break;
         default:
           throw new TypeError('Invalid Message Level: ' + level);
       }
-      this.messageList[level] = this.messageList[level].map(message => method(message));
+      this.messageList[level].forEach(message => spool(message));
+      this.messageList[level] = [];
     } else {
       this.flush(this.ERROR);
       this.flush(this.WARN);

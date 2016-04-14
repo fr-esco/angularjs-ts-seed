@@ -13,19 +13,44 @@ export interface IServerException {
 }
 
 export class ApplicationError extends Error {
+  constructor(e?: Error);
+  constructor(message?: string);
+  constructor(param?: any) {
+    let message: string, name = 'ApplicationError';
+    if (angular.isUndefined(param) || param === null) {
+      param = 'Generic Exception.';
+    }
+    if (angular.isString(param)) {
+      message = param;
+    } else if (param instanceof Error) {
+      message = (<Error>param).message;
+      name += '.' + (<Error>param).name;
+    } else {
+      debugger;
+      throw new TypeError('Invalid Application Error constructor parameter.');
+    }
+    super(message);
+    this.name = name;
+  }
 }
 
-@at.constantObj(ngModuleName, 'exceptionConstants')
-export class ExceptionConstants {
-  public static get INFO() { return 0; }
-  public static get WARN() { return 1; }
-  public static get ERROR() { return 2; }
-
-  public static get HTTP_ERRORS() {
-    return {
-      0: 'The server is unreachable.',
-      404: 'The requested data or service could not be found.',
-      500: 'Unknown errors occurred at the server.'
-    };
+export class CodeError extends ApplicationError {
+  constructor(e?: Error);
+  constructor(message?: string);
+  constructor(param?: any) {
+    super(param);
+    // this.name += '.CodeError';
   }
+}
+
+export class ExceptionConstants {
+  public static INFO = 0;
+  public static WARN = 1;
+  public static ERROR = 2;
+
+  public static HTTP_ERRORS = {
+    0: 'The server is unreachable.',
+    404: 'The requested data or service could not be found.',
+    500: 'Unknown errors occurred at the server.'
+  };
 }
