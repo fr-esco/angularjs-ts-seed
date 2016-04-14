@@ -14,6 +14,7 @@ let app = angular.module('app', [
   'nvd3',
   'tmh.dynamicLocale',
   'pascalprecht.translate',
+  'angularMoment',
   components.name,
 ]).config(routing)
   .value('$routerRootComponent', ngMainComponentName);

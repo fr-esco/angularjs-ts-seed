@@ -82,7 +82,12 @@ module.exports = {
         './node_modules/angular-translate/dist/angular-translate-storage-local/angular-translate-storage-local.min.js',
         './node_modules/angular-translate/dist/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js',
         './node_modules/angular-translate/dist/angular-translate-loader-partial/angular-translate-loader-partial.min.js',
-        './node_modules/angular-translate/dist/angular-translate-handler-log/angular-translate-handler-log.min.js'
+        './node_modules/angular-translate/dist/angular-translate-handler-log/angular-translate-handler-log.min.js',
+
+        './node_modules/moment/min/moment-with-locales.min.js',
+        './node_modules/moment-timezone/builds/moment-timezone-with-data.min.js',
+        './node_modules/angular-moment/angular-moment.min.js',
+        './node_modules/angular-moment/angular-moment.min.js.map'
       ],
       css: [
         './node_modules/angular-material/angular-material.css',
