@@ -12,19 +12,19 @@ const ngComponentName = 'tsfnTimezone';
   },
   templateUrl: 'timezone/timezone.component.html'
 })
-@at.inject('timezone', '$log', 'amMoment')
+@at.inject('timezone', 'moment', '$log')
 export default class TimezoneComponent implements at.OnInit {
-  public timezone: string;
+  public timezone;
   public timezones = [];
 
-  constructor(private timezoneService: TimezoneService, private log: angular.ILogService, amMoment: any) {
+  constructor(private timezoneService: TimezoneService, private moment: moment.MomentStatic, private log: angular.ILogService) {
     log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
   }
 
   public $onInit() {
     this.timezoneService.getTimezones().then(data => {
       this.timezones = data;
-      this.timezone = data[0];
+      this.timezone = this.moment.tz.guess();
     });
   }
 

@@ -12,7 +12,8 @@ const ngComponentName = 'tsfnMain';
     { path: '/dashboard', name: 'Dashboard', component: 'tsfnDashboard', data: { title: 'Dashboard' } },
     { path: '/profile', name: 'Profile', component: 'tsfnProfile', data: { title: 'Profile' } },
     { path: '/table/...', name: 'Table', component: 'tsfnTable', data: { title: 'Table' } },
-    { path: '/blog/...', name: 'Blog', component: 'tsfnBlog', data: { title: 'Blog' }, useAsDefault: true }
+    { path: '/blog/...', name: 'Blog', component: 'tsfnBlog', data: { title: 'Blog' }, useAsDefault: true },
+    { path: '/i18n', name: 'I18n', component: 'tsfnI18n', data: { title: 'i18n' } }
   ]
 })
 @at.inject('navigationService', '$log', '$q', '$mdSidenav', '$mdBottomSheet', '$mdMenu', '$mdToast')

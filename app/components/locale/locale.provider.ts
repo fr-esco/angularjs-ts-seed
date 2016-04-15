@@ -26,7 +26,10 @@ export class LocaleProvider implements ILocaleProvider {
 
   // $get must be declared as method, not as function property (eg. `$get = () => new Service();`)
   @at.injectMethod('$log', '$q', '$timeout', 'tmhDynamicLocale')
-  public $get(log: angular.ILogService, q: angular.IQService, timeout: angular.ITimeoutService, tmhDynamicLocale: any) {
+  public $get(log: angular.ILogService,
+    q: angular.IQService,
+    timeout: angular.ITimeoutService,
+    tmhDynamicLocale: angular.dynamicLocale.tmhDynamicLocaleService) {
     return new LocaleProviderService(log, q, timeout, tmhDynamicLocale, this.notify);
   }
 }
@@ -35,7 +38,7 @@ export default class LocaleProviderService {
   constructor(private log: angular.ILogService,
     private q: angular.IQService,
     private timeout: angular.ITimeoutService,
-    private tmhDynamicLocale: any,
+    private tmhDynamicLocale: angular.dynamicLocale.tmhDynamicLocaleService,
     private notify: boolean) {
     let s = ['ngProvider', ngProviderName, 'has loaded an', 'LocaleProviderService'].join(' ');
     if (notify)
@@ -50,7 +53,7 @@ export default class LocaleProviderService {
     return deferred.promise;
   }
 
-  public set(locale: string): any {
+  public set(locale: string): void {
     return this.tmhDynamicLocale.set(locale);
   }
 }
