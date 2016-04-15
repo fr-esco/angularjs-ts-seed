@@ -1,5 +1,4 @@
 import ngModuleName from './timezone.module';
-import {ITimezone} from './timezone.model';
 
 'use strict';
 
@@ -25,14 +24,14 @@ export class TimezoneProvider implements ITimezoneProvider {
 
   // $get must be declared as method, not as function property (eg. `$get = () => new Service();`)
   @at.injectMethod('$log', 'moment', '$q', '$timeout')
-  public $get(log: angular.ILogService, moment: any, q: angular.IQService, timeout: angular.ITimeoutService) {
+  public $get(log: angular.ILogService, moment: moment.MomentStatic, q: angular.IQService, timeout: angular.ITimeoutService) {
     return new TimezoneProviderService(log, moment, q, timeout, this.notify);
   }
 }
 
 export default class TimezoneProviderService {
   constructor(private log: angular.ILogService,
-    private moment: any,
+    private moment: moment.MomentStatic,
     private q: angular.IQService,
     private timeout: angular.ITimeoutService,
     private notify: boolean) {
