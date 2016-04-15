@@ -93,7 +93,7 @@ function checkFolders(root) {
   var ko = [];
   checkFolder(root);
   return ko.filter(function(file) {
-    return file[0] !== '_';
+    return file[0] !== '_' && file.indexOf('MaterialIcons') < 0;
   });
 
   function checkFolder(dir) {
