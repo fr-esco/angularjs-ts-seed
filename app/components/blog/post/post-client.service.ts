@@ -12,7 +12,7 @@ const ngServiceName = 'postClient';
 
 @at.service(ngModuleName, ngServiceName)
 @at.inject('commentClient', '$log', '$q', 'Restangular')
-@at.failSafe(ngModuleName, ngServiceName)
+// @at.failSafe(ngModuleName, ngServiceName)
 export default class PostClientService extends BaseRestClient<IPost> {
   public get baseUrl() { return 'posts'; }
 
@@ -26,11 +26,10 @@ export default class PostClientService extends BaseRestClient<IPost> {
 
   public comments(post: IPost, params?);
   public comments(post: number, params?);
-  @at.action('get the comment list')
+  // @at.action('get the comment list')
   public comments(post, params?) {
     let postId = typeof post === 'number' ? post : post.id;
-    throw new Error('ERRORE');
-    // return this.baseElement(postId).getList<IComment>(this.commentClient.baseUrl, params);
+    return this.baseElement(postId).getList<IComment>(this.commentClient.baseUrl, params);
   }
 
   public comment(post: IPost, comment: IComment);

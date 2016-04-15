@@ -19,7 +19,7 @@ class ExceptionModuleConfiguration {
   public static config($provide: angular.auto.IProvideService, $httpProvider: angular.IHttpProvider) {
     $provide.decorator('$exceptionHandler', ExceptionModuleConfiguration.simpleHandlerDecorator);
     $provide.decorator('$exceptionHandler', ExceptionModuleConfiguration.frontHandlerDecorator);
-    // $httpProvider.interceptors.push(ExceptionModuleConfiguration.httpInterceptor);
+    $httpProvider.interceptors.push(ExceptionModuleConfiguration.httpInterceptor);
   }
 
   @at.injectMethod('$delegate', '$injector')
@@ -63,13 +63,14 @@ class ExceptionModuleConfiguration {
         messageHandler.addError({ level: -1 });
         let status = parseInt(response.status);
         if (status < 0) {
-          return $q.reject(false);
+          // return $q.reject(false);
         }
         if (status >= 400 && status < 500) {
 
         } else if (status >= 500) {
 
         }
+        throw new Error(response);
         return $q.reject(response);
       }
     };
