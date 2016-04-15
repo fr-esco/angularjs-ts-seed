@@ -14,6 +14,7 @@ class ExceptionModuleConfiguration {
   @at.injectMethod('$provide', '$httpProvider')
   public static config($provide: angular.auto.IProvideService, $httpProvider: angular.IHttpProvider) {
     $provide.decorator('$exceptionHandler', ExceptionModuleConfiguration.simpleHandlerDecorator);
+    $provide.decorator('$exceptionHandler', ExceptionModuleConfiguration.simpleHandlerDecorator2);
     $httpProvider.interceptors.push(ExceptionModuleConfiguration.httpInterceptor);
   }
 
@@ -21,7 +22,7 @@ class ExceptionModuleConfiguration {
   private static simpleHandlerDecorator($delegate: angular.IExceptionHandlerService, $injector: angular.auto.IInjectorService) {
     return (exception: Error, cause?: string) => {
       let $log = $injector.get<angular.ILogService>('$log');
-      $log.debug('Simple exception handler.');
+      $log.info('Simple exception handler.');
 
       ensureCodeError(exception);
 
@@ -29,6 +30,15 @@ class ExceptionModuleConfiguration {
       messageHandler.addError(exception);
 
       // Route to server here!
+
+      $delegate(exception, cause);
+    };
+  }
+  @at.injectMethod('$delegate', '$injector')
+  private static simpleHandlerDecorator2($delegate: angular.IExceptionHandlerService, $injector: angular.auto.IInjectorService) {
+    return (exception: Error, cause?: string) => {
+      let $log = $injector.get<angular.ILogService>('$log');
+      $log.info('Simple exception handler 2.');
 
       $delegate(exception, cause);
     };
