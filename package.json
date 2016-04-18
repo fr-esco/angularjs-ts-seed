@@ -107,6 +107,7 @@
     "es6-module-loader": "0.15.0",
     "lodash": "^4.8.2",
     "ng-showdown": "^1.0.0",
+    "ngComponentRouter-patched": "^0.2.1",
     "nvd3": "^1.8.2",
     "restangular": "^1.5.2",
     "showdown": "^1.3.0",
