@@ -6,7 +6,9 @@ import './exception.model';
 // import './exception.controller';
 // import './exception.directive';
 // import './exception.filter';
-import './exception-handler.provider';
+import './core-exception-handler.provider';
+// import './exception-handler.provider';
+import './server-exception-handler.provider';
 // import './exception.service';
 import './message-handler.service';
 

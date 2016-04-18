@@ -48,14 +48,14 @@ export class ApplicationError extends Error {
   }
 }
 
-export class CodeError extends ApplicationError {
+export class CoreError extends ApplicationError {
   constructor(e?: Error);
   constructor(message?: string);
   constructor(param?: any) {
     if (angular.isUndefined(param) || param === null) {
       param = 'Generic Exception.';
     }
-    let name = 'CodeError';
+    let name = 'CoreError';
     if (!angular.isString(param)) {
       param.name = name + '.' + (<Error>param).name;
     }

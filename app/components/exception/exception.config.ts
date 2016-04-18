@@ -1,13 +1,13 @@
 import ngModuleName from './exception.module';
 
-import {CodeError, ServerError, isHttpException} from './exception.model';
+import {CoreError, ServerError, isHttpException} from './exception.model';
 import MessageHandlerService from './message-handler.service';
 
 'use strict';
 
-function ensureCodeError(e: Error) {
-  if (!(e instanceof CodeError))
-    return new CodeError(e);
+function ensureCoreError(e: Error) {
+  if (!(e instanceof CoreError))
+    return new CoreError(e);
   return e;
 }
 function ensureServerError(e: Error) {
@@ -25,10 +25,11 @@ class ExceptionModuleConfiguration {
   }
 
   @at.injectMethod('$delegate', '$injector')
-  private static simpleHandlerDecorator($delegate: angular.IExceptionHandlerService, $injector: angular.auto.IInjectorService) {
+  private static simpleHandlerDecorator($delegate: angular.IExceptionHandlerService, $injector: angular.auto.IInjectorService)
+    : angular.IExceptionHandlerService {
     return (exception: Error, cause?: string) => {
       let $log = $injector.get<angular.ILogService>('$log');
-      $log.debug('[$exceptionHandler:simpleHandlerDecorator]');
+      $log.debug('[platformExceptionHandler]');
 
       let messageHandler = $injector.get<MessageHandlerService>('messageHandler');
       messageHandler.addError(exception);
@@ -41,18 +42,25 @@ class ExceptionModuleConfiguration {
   }
 
   @at.injectMethod('$delegate', '$injector')
-  private static frontHandlerDecorator($delegate: angular.IExceptionHandlerService, $injector: angular.auto.IInjectorService) {
+  private static frontHandlerDecorator($delegate: angular.IExceptionHandlerService, $injector: angular.auto.IInjectorService)
+    : angular.IExceptionHandlerService {
     return (exception: Error, cause?: string) => {
       let $log = $injector.get<angular.ILogService>('$log');
       // debugger;
-      $log.debug(['[$exceptionHandler:frontHandlerDecorator]', 'Caught', exception.name].join(' '));
+      $log.debug(['[platformExceptionHandler]', 'Exception Caught:', exception.name].join(' '));
+
+      let handler: angular.IExceptionHandlerService;
       if (isHttpException(exception) || exception instanceof ServerError) {
-        $log.debug(['[$exceptionHandler:frontHandlerDecorator]', 'HTTP Exception'].join(' '));
+        $log.debug(['[platformExceptionHandler]', 'HTTP Exception'].join(' '));
         exception = ensureServerError(exception);
+        handler = $injector.get<angular.IExceptionHandlerService>('serverExceptionHandler');
       } else {
-        $log.debug(['[$exceptionHandler:frontHandlerDecorator]', 'Core Exception'].join(' '));
-        exception = ensureCodeError(exception);
+        $log.debug(['[platformExceptionHandler]', 'Core Exception'].join(' '));
+        exception = ensureCoreError(exception);
+        handler = $injector.get<angular.IExceptionHandlerService>('coreExceptionHandler');
       }
+
+      handler(exception, cause);
       $delegate(exception, cause);
     };
   }
