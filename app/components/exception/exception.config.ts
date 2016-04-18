@@ -34,6 +34,7 @@ class ExceptionModuleConfiguration {
       messageHandler.addError(exception);
 
       // Route to server here!
+      // messageHandler.flush();
 
       $delegate(exception, cause);
     };

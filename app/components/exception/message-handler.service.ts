@@ -15,6 +15,10 @@ export default class MessageHandlerService {
   private get WARN() { return 1; }
   private get INFO() { return 0; }
 
+  private get levelList() {
+    return ['INFO', 'WARN', 'ERROR'];
+  }
+
   private messageList = [[], [], []];
 
   constructor(private log: angular.ILogService, private q: angular.IQService) {
@@ -93,8 +97,11 @@ export default class MessageHandlerService {
         default:
           throw new TypeError('Invalid Message Level: ' + level);
       }
-      this.messageList[level].forEach(message => spool(message));
-      this.messageList[level] = [];
+      if (this.messageList[level].length > 0) {
+        this.messageList[level].forEach(message => spool(message));
+        this.messageList[level] = [];
+      } else
+        this.log.debug(`Empty List: ${this.levelList[level]}.`);
     } else {
       this.flush(this.ERROR);
       this.flush(this.WARN);
@@ -104,6 +111,6 @@ export default class MessageHandlerService {
 
   private validateLevel(level) {
     return angular.isNumber(level) && isFinite(level)
-      && level > 0 && level < this.messageList.length;
+      && level >= 0 && level < this.messageList.length;
   }
 }

@@ -8,6 +8,7 @@ export let isHttpException = (exception: Error): boolean =>
 
 let stringifyRequestConfig = (config: angular.IRequestConfig): string => {
   return [
+    [],
     [config.method, config.url].join(' '),
     ['Params:', JSON.stringify(config.params)].join(' '),
     ['Data:', JSON.stringify(config.data)].join(' '),
