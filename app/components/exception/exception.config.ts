@@ -7,7 +7,13 @@ import MessageHandlerService from './message-handler.service';
 
 function ensureCodeError(e: Error) {
   if (!(e instanceof CodeError))
-    e = new CodeError(e);
+    return new CodeError(e);
+  return e;
+}
+function ensureServerError(e: Error) {
+  if (!(e instanceof ServerError))
+    return new ServerError(e);
+  return e;
 }
 
 class ExceptionModuleConfiguration {
@@ -22,9 +28,7 @@ class ExceptionModuleConfiguration {
   private static simpleHandlerDecorator($delegate: angular.IExceptionHandlerService, $injector: angular.auto.IInjectorService) {
     return (exception: Error, cause?: string) => {
       let $log = $injector.get<angular.ILogService>('$log');
-      $log.info('Simple exception handler.');
-
-      // ensureCodeError(exception);
+      $log.debug('[$exceptionHandler:simpleHandlerDecorator]');
 
       let messageHandler = $injector.get<MessageHandlerService>('messageHandler');
       messageHandler.addError(exception);
@@ -40,13 +44,15 @@ class ExceptionModuleConfiguration {
     return (exception: Error, cause?: string) => {
       let $log = $injector.get<angular.ILogService>('$log');
       // debugger;
-      $log.debug(['[$exceptionHandler:frontHandlerDecorator]', exception.name].join(' '));
-      if (isHttpException(exception)) {
+      $log.debug(['[$exceptionHandler:frontHandlerDecorator]', 'Caught', exception.name].join(' '));
+      if (isHttpException(exception) || exception instanceof ServerError) {
         $log.debug(['[$exceptionHandler:frontHandlerDecorator]', 'HTTP Exception'].join(' '));
+        exception = ensureServerError(exception);
       } else {
         $log.debug(['[$exceptionHandler:frontHandlerDecorator]', 'Core Exception'].join(' '));
+        exception = ensureCodeError(exception);
       }
-      // $delegate(exception, cause);
+      $delegate(exception, cause);
     };
   }
 
@@ -56,10 +62,8 @@ class ExceptionModuleConfiguration {
     return {
       responseError: response => {
         // debugger;
-        messageHandler.addError({ level: -1 });
         let status = parseInt(response.status);
         if (status < 0) {
-          // return $q.reject(false);
           throw new ServerError(response);
         }
         if (status >= 400 && status < 500) {
