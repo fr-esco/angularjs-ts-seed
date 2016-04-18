@@ -1,6 +1,6 @@
 import ngModuleName from './exception.module';
 
-import {CodeError} from './exception.model';
+import {CodeError, ServerError, isHttpException} from './exception.model';
 import MessageHandlerService from './message-handler.service';
 
 'use strict';
@@ -9,10 +9,6 @@ function ensureCodeError(e: Error) {
   if (!(e instanceof CodeError))
     e = new CodeError(e);
 }
-
-let isHttpException = (exception: Error): boolean =>
-  Object.prototype.hasOwnProperty.call(exception, 'status') &&
-  Object.prototype.hasOwnProperty.call(exception, 'statusText');
 
 class ExceptionModuleConfiguration {
   @at.injectMethod('$provide', '$httpProvider')
@@ -64,13 +60,13 @@ class ExceptionModuleConfiguration {
         let status = parseInt(response.status);
         if (status < 0) {
           // return $q.reject(false);
+          throw new ServerError(response);
         }
         if (status >= 400 && status < 500) {
-
+          throw new ServerError(response);
         } else if (status >= 500) {
-
+          throw new ServerError(response);
         }
-        throw new Error(response);
         return $q.reject(response);
       }
     };

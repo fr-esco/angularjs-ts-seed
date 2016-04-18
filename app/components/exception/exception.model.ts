@@ -2,6 +2,11 @@ import ngModuleName from './exception.module';
 
 'use strict';
 
+export let isHttpException = (exception: Error): boolean =>
+  Object.prototype.hasOwnProperty.call(exception, 'status')
+  && Object.prototype.hasOwnProperty.call(exception, 'statusText')
+  || exception instanceof ServerError;
+
 export interface IServerException {
   code: string;
   level: number;
@@ -40,6 +45,19 @@ export class CodeError extends ApplicationError {
   constructor(param?: any) {
     super(param);
     // this.name += '.CodeError';
+  }
+}
+
+export class ServerError extends ApplicationError {
+  constructor(e?: Error);
+  constructor(e?: angular.IHttpPromiseCallbackArg<any>);
+  constructor(message?: string);
+  constructor(param?: any) {
+    if (isHttpException(param)) {
+
+    }
+    super(param);
+    // this.name += '.ServerError';
   }
 }
 
