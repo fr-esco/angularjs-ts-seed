@@ -20,6 +20,14 @@ export default class I18nComponent implements angular.OnActivate, at.OnInit, at.
   public gender = 'male';
   public name = 'John';
   public numOfguests = 1;
+  public files = [
+    [
+      'components/i18n/i18n.component.html',
+      'components/i18n/i18n.component.ts',
+      'components/i18n/i18n/en.json',
+      'components/i18n/i18n/it.json'
+    ]
+  ];
   private tickInterval = 1000; // ms
   private intervalPromise: angular.IPromise<number>;
 
