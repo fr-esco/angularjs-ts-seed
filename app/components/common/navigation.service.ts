@@ -35,7 +35,7 @@ export default class NavigationService {
     },
     {
       name: 'I18n',
-      icon: 'comment',
+      icon: 'translate',
       sref: '.i18n',
       link: ['I18n']
     }

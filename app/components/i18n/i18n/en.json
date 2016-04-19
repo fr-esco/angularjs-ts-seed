@@ -1,11 +1,11 @@
 {
   "HEADLINE": "Hello World",
-  "PLURAL": "{gender, select, female {{num_guests, plural, =0 {{host} does not give a party.} =1 {{host} invites one person to her party.} =2 {{host} invites two people to her party.} other {{host} invites # people to her party.}}} male {{num_guests, plural, =0 {{host} does not give a party.} =1 {{host} invites one person to his party.} =2 {{host} invites two people to his party.} other {{host} invites # people to his party.}}}}",
+  "PLURAL": "{gender, select, female {{num_guests, plural, =0 {{host} doesn't have nieces.} =1 {{host} has one niece.} =2 {{host} has two nieces.} other {{host} has # nieces.}}} male {{num_guests, plural, =0 {{host} doesn't have nephews.} =1 {{host} has one nephew.} =2 {{host} has two nephews.} other {{host} has # nephews.}}}}",
   "MALE": "Male",
   "FEMALE": "Female",
   "GENDER": "Gender",
   "NAME": "Name",
-  "NUMBER_OF_GUESTS": "Number of guests",
+  "NUMBER_OF_NEPHEWS": "Number of nephews",
   "CURRENT_LOCALE_ID": "Current locale id: ",
   "A_BIG_NUMBER": "A big number: ",
   "THE_EPOCH": "The Epoch was on: ",
