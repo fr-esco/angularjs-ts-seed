@@ -1,5 +1,6 @@
 import Common    from './common/common';
 import Example   from './example/example';
+import Exception from './exception/exception';
 import Material  from './material/material';
 import Markdown  from './markdown/markdown';
 import Main      from './main/main';
@@ -14,6 +15,7 @@ import Table     from './table/table';
 let components = angular.module('app.components', [
   Common,
   Material,
+  Exception,
   Main,
   Blog,
   Dashboard,
