@@ -1,4 +1,4 @@
-<div class="showcase-wrapper" layout="column" ng-cloak>
+<!-- <div class="showcase-wrapper" layout="column" ng-cloak>
   <md-toolbar md-theme="grey">
     <div class="md-toolbar-tools">
       <h3><span>Showcase</span></h3>
@@ -15,23 +15,24 @@
     <tsfn-showcase file-list="::$ctrl.files[0]" title="{{::$ctrl.title}}" lazy="true"></tsfn-showcase>
     <tsfn-showcase file-list="::$ctrl.files[1]" title="Panel Widgets" lazy="true"></tsfn-showcase>
   </div>
-</div>
+</div> -->
 
-<tsfn-showcase file-list="::$ctrl.files[2]" title="Widgets" lazy="true"></tsfn-showcase>
+<!-- <tsfn-showcase file-list="::$ctrl.files[2]" title="Widgets" lazy="true"></tsfn-showcase> -->
+<tsfn-showcase file-list="::$ctrl.files[5]" title="I18N" lazy="true"></tsfn-showcase>
 <div layout-gt-md="row">
-  <tsfn-panel-widget flex title="Site visitors" template="dashboard/panel/widget/visitor.tpl.html" class="fixed-height-widget"></tsfn-panel-widget>
-  <tsfn-panel-widget flex title="Warnings" template="dashboard/panel/widget/warning.tpl.html" class="fixed-height-widget"></tsfn-panel-widget>
-  <tsfn-panel-widget flex title="Memory load" template="dashboard/panel/widget/memory.tpl.html" class="fixed-height-widget"></tsfn-panel-widget>
+  <tsfn-panel-widget flex title="{{ 'SITE_VISITORS' | translate }}" template="dashboard/panel/widget/visitor.tpl.html" class="fixed-height-widget"></tsfn-panel-widget>
+  <tsfn-panel-widget flex title="{{ 'WARNINGS' | translate }}" template="dashboard/panel/widget/warning.tpl.html" class="fixed-height-widget"></tsfn-panel-widget>
+  <tsfn-panel-widget flex title="{{ ::'MEMORY_LOAD' | translate }}" template="dashboard/panel/widget/memory.tpl.html" class="fixed-height-widget"></tsfn-panel-widget>
 </div>
 
-<tsfn-showcase file-list="::$ctrl.files[3]" title="Widgets" lazy="true"></tsfn-showcase>
+<!-- <tsfn-showcase file-list="::$ctrl.files[3]" title="Widgets" lazy="true"></tsfn-showcase> -->
 <div layout-gt-md="row">
   <tsfn-panel-widget flex title="Server Control dashboard/panel" template="dashboard/panel/widget/control-panel.tpl.html" class="fixed-height-widget"></tsfn-panel-widget>
   <tsfn-panel-widget flex title="Usage Stats" template="dashboard/panel/widget/usage.tpl.html" class="fixed-height-widget"></tsfn-panel-widget>
   <tsfn-panel-widget flex title="Autocomplete" template="dashboard/panel/widget/autocomplete.tpl.html" options="true" class="fixed-height-widget"></tsfn-panel-widget>
 </div>
 
-<tsfn-showcase file-list="::$ctrl.files[4]" title="Widgets" lazy="true"></tsfn-showcase>
+<!-- <tsfn-showcase file-list="::$ctrl.files[4]" title="Widgets" lazy="true"></tsfn-showcase> -->
 <div layout-gt-md="row">
   <tsfn-panel-widget flex title="Performance" template="dashboard/panel/widget/performance.tpl.html" options="true"></tsfn-panel-widget>
   <tsfn-panel-widget flex title="TODO list" template="dashboard/panel/widget/todo.tpl.html"></tsfn-panel-widget>

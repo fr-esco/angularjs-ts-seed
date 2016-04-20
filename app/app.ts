@@ -12,6 +12,9 @@ let app = angular.module('app', [
   'ngSanitize',
   // 'ngTouch',
   'nvd3',
+  'tmh.dynamicLocale',
+  'pascalprecht.translate',
+  'angularMoment',
   components.name,
 ]).config(routing)
   .value('$routerRootComponent', ngMainComponentName);
