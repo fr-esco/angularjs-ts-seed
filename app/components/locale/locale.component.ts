@@ -25,9 +25,7 @@ export default class LocaleComponent implements at.OnInit {
     private timeout: angular.ITimeoutService,
     private $translate: angular.translate.ITranslateService,
     private $rootScope: angular.IRootScopeService) {
-      
     log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
-  
   }
 
   public $onInit() {
