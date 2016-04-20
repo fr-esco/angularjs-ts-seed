@@ -135,55 +135,55 @@ will create the following structure:
 You can generate a **scaffolded component** by using the following command:
 
 ```bash
-gulp gen:scaffold --name <snakeCasedComponentName> [--folder <existingPathFromComponents>] [--directive] [--controller] [--provider]
+gulp gen:scaffold --name <kebab-cased-component-name> [--folder <existingPathFromComponents>] [--directive] [--controller] [--provider]
 ```
 
 You can generate a new angular *module* by using the following command:
 
 ```bash
-gulp gen:module --name <snakeCasedModuleName> --path <existingPathFromComponents>
+gulp gen:module --name <kebab-cased-module-name> --path <existingPathFromComponents>
 ```
 
 You can generate a new angular *controller* by using the following command:
 
 ```bash
-gulp gen:controller --name <snakeCasedControllerName> --path <existingPathFromComponents> [--module <moduleName>]
+gulp gen:controller --name <kebab-cased-controller-name> --path <existingPathFromComponents> [--module <moduleName>]
 ```
 
 You can generate a new angular *filter* by using the following command:
 
 ```bash
-gulp gen:filter --name <snakeCasedFilterName> --path <existingPathFromComponents> [--module <moduleName>]
+gulp gen:filter --name <kebab-cased-filter-name> --path <existingPathFromComponents> [--module <moduleName>]
 ```
 
 You can generate a new angular *REST service client* by using the following command:
 
 ```bash
-gulp gen:service --name <snakeCasedServiceName> --path <existingPathFromComponents> [--module <moduleName>] --client
+gulp gen:service --name <kebab-cased-service-name> --path <existingPathFromComponents> [--module <moduleName>] --client
 ```
 
 You can generate a new angular *service* by using the following command:
 
 ```bash
-gulp gen:service --name <snakeCasedServiceName> --path <existingPathFromComponents> [--module <moduleName>]
+gulp gen:service --name <kebab-cased-service-name> --path <existingPathFromComponents> [--module <moduleName>]
 ```
 
 You can generate a new angular *provider* by using the following command:
 
 ```bash
-gulp gen:provider --name <snakeCasedProviderName> --path <existingPathFromComponents> [--module <moduleName>]
+gulp gen:provider --name <kebab-cased-provider-name> --path <existingPathFromComponents> [--module <moduleName>]
 ```
 
 You can generate a new angular *directive* by using the following command:
 
 ```bash
-gulp gen:directive --name <snakeCasedDirectiveNameWithoutPrefix> --path <existingPathFromComponents> [--module <moduleName>]
+gulp gen:directive --name <kebab-cased-directive-name-without-prefix> --path <existingPathFromComponents> [--module <moduleName>]
 ```
 
 You can generate a new angular *component* by using the following command:
 
 ```bash
-gulp gen:component --name <snakeCasedDirectiveNameWithoutPrefix> --path <existingPathFromComponents> [--module <moduleName>]
+gulp gen:component --name <kebab-cased-component-name-without-prefix> --path <existingPathFromComponents> [--module <moduleName>]
 ```
 
 ## Styles

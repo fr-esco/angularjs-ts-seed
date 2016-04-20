@@ -26,6 +26,7 @@ module.exports = {
   },
   src: {
     app: {
+      root: './app',
       all: ['./app/**/*.ts'],
       dev: ['./app/**/*.ts', '!./app/**/*.spec.ts'],
       test: ['./app/**/*.ts', '!./app/init.ts']
@@ -37,7 +38,8 @@ module.exports = {
         './node_modules/es6-module-loader/dist/es6-module-loader-sans-promises.js.map',
         './node_modules/systemjs/dist/system.src.js',
         './node_modules/angular/angular.js',
-        './node_modules/@angular/router/angular1/angular_1_router.js',
+        //'./node_modules/@angular/router/angular1/angular_1_router.js',
+        './node_modules/ngComponentRouter-patched/angular_1_router.js',
         './node_modules/angular-aria/angular-aria.js',
         './node_modules/angular-animate/angular-animate.js',
         './node_modules/angular-messages/angular-messages.js',
