@@ -35,9 +35,7 @@ export default class PostListComponent implements angular.OnActivate {
   public $routerOnActivate(next: angular.ComponentInstruction) {
     this.title = next.routeData.data['title'];
     return this.postClient.search()
-      .then(data => {
-        this.posts = data;
-        });
+      .then(data => this.posts = data, () => false);
   }
 
   public search() {
