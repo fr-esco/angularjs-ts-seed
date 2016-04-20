@@ -13,6 +13,7 @@ import Showcase  from './showcase/showcase';
 import Table     from './table/table';
 import Locale    from './locale/locale';
 import Timezone  from './timezone/timezone';
+import I18n      from './i18n/i18n';
 
 let components = angular.module('app.components', [
   Common,
@@ -28,6 +29,7 @@ let components = angular.module('app.components', [
   Table,
   Locale,
   Timezone,
+  I18n,
   Example
 ]);
 

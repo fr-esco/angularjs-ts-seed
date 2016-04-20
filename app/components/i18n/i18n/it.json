@@ -1,0 +1,16 @@
+{
+  "HEADLINE": "Ciao Mondo",
+  "PLURAL": "{gender, select, female {{num_guests, plural, =0 {{host} non ha nipoti.} =1 {{host} ha una nipote.} =2 {{host} ha due nipoti.} other {{host} ha # nipoti.}}} male {{num_guests, plural, =0 {{host} non ha nipoti.} =1 {{host} ha un nipote.} =2 {{host} ha due nipoti.} other {{host} ha # nipoti.}}}}",
+  "MALE": "Uomo",
+  "FEMALE": "Donna",
+  "GENDER": "Genere",
+  "NAME": "Nome",
+  "NUMBER_OF_NEPHEWS": "Numero di nipoti",
+  "CURRENT_LOCALE_ID": "Id del locale corrente: ",
+  "A_BIG_NUMBER": "Un numero grande: ",
+  "THE_EPOCH": "L'epoch era: ",
+  "ONE_MILION_CURRENCY": "Un milione della valuta locale: ",
+  "TIMEZONE": "Usa la select nell'angolo in alto a destra per modificare il timezone corrente",
+  "LOCALE": "Usa la select nell'angolo in alto a destra per modificare il locale corrente"
+
+}
