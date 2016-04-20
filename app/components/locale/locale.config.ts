@@ -1,11 +1,11 @@
 'use strict';
 
-let config = (tmhDynamicLocaleProvider, $translateProvider, $translatePartialLoaderProvider) => {
-  $translateProvider.useStaticFilesLoader({
-    files: [{
-      prefix: '/i18n/locale-',
-      suffix: '.json'
-    }]
+let config = (tmhDynamicLocaleProvider: angular.dynamicLocale.tmhDynamicLocaleProvider, $translateProvider: angular.translate.ITranslateProvider) => {
+  $translateProvider
+  .addInterpolation('$translateMessageFormatInterpolation')
+  .useStaticFilesLoader({
+    prefix: '/i18n/locale-',
+    suffix: '.json'
   })
     .useSanitizeValueStrategy('sanitize')
     .registerAvailableLanguageKeys(['en', 'it'], {
@@ -20,6 +20,6 @@ let config = (tmhDynamicLocaleProvider, $translateProvider, $translatePartialLoa
   tmhDynamicLocaleProvider.localeLocationPattern('/lib/angular-locale_{{locale}}.js');
 };
 
-config.$inject = ['tmhDynamicLocaleProvider', '$translateProvider', '$translatePartialLoaderProvider'];
+config.$inject = ['tmhDynamicLocaleProvider', '$translateProvider'];
 
 export default config;
