@@ -33,7 +33,7 @@
             <td>
               <a ng-link="['PostDetail', {id: post.id}]" ng-bind="::post.title"></a>
             </td>
-            <td ng-bind="::post.createdAt | date"></td>
+            <td ng-bind="post.createdAt | amDateFormat:'LLLL'"></td>
             <td>
               <md-button class="md-icon-button md-raised" aria-label="Update" ng-click="$ctrl.update($event, post)">
                 <i class="material-icons">create</i>

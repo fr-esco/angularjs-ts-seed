@@ -1,5 +1,6 @@
 import Common    from './common/common';
 import Example   from './example/example';
+import Exception from './exception/exception';
 import Material  from './material/material';
 import Markdown  from './markdown/markdown';
 import Main      from './main/main';
@@ -10,10 +11,13 @@ import Profile   from './profile/profile';
 import Rest      from './rest/rest';
 import Showcase  from './showcase/showcase';
 import Table     from './table/table';
+import Locale    from './locale/locale';
+import Timezone  from './timezone/timezone';
 
 let components = angular.module('app.components', [
   Common,
   Material,
+  Exception,
   Main,
   Blog,
   Dashboard,
@@ -22,7 +26,8 @@ let components = angular.module('app.components', [
   Rest,
   Showcase,
   Table,
-
+  Locale,
+  Timezone,
   Example
 ]);
 
