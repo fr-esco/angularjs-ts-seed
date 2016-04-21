@@ -3,6 +3,7 @@ const electron = require('electron');
 const BrowserWindow = require('browser-window');
 // const app = electron.app;
 const app = require('app');
+const client = require('electron-connect').client;
 
 // adds debug features like hotkeys for triggering dev tools and reload
 // require('electron-debug')();
@@ -28,6 +29,8 @@ function createMainWindow() {
 
   //win.loadURL(`file://${__dirname}/index.html`);
   win.loadURL('http://localhost:5555/');
+
+  client.create(win);
 
   win.on('closed', onClosed);
 

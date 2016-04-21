@@ -9,6 +9,7 @@ var watch = require('gulp-watch');
 var join = require('path').join;
 var yargs = require('yargs');
 
+var electron = require('electron-connect').server.create();
 var http = require('http');
 var connect = require('connect');
 var serveStatic = require('serve-static');
@@ -18,7 +19,7 @@ var openResource = require('open');
 var port = 5555;
 
 function injectableDevAssetsRef() {
-  var src = PATH.src.lib.js.concat(PATH.src.lib.css).map(function(path) {
+  var src = PATH.src.lib.js.concat(PATH.src.lib.css).map(function (path) {
     return join(PATH.dest.dev.lib, path.split('/').pop());
   });
   src.push(join(PATH.dest.dev.all, '**/*.css'));
@@ -28,33 +29,39 @@ function injectableDevAssetsRef() {
 // --------------
 // Serve dev.
 
-gulp.task('serve.dev', ['build.dev'], function() {
+gulp.task('serve.dev', ['build.dev'], function () {
   var app = express();
 
   $.livereload.listen();
-  watch(PATH.src.lib.js.concat(PATH.src.lib.css), function() {
+  watch(PATH.src.lib.js.concat(PATH.src.lib.css), function () {
     gulp.start('build.lib.dev');
+    electron.reload();
   });
-  watch(PATH.src.app.dev, function() {
+  watch(PATH.src.app.dev, function () {
     gulp.start('build.js.dev');
+    electron.reload();
   });
-  watch(PATH.src.html.directive, function() {
+  watch(PATH.src.html.directive, function () {
     gulp.start('build.html.dev');
+    electron.reload();
   });
-  watch(['./app/**/!(*.directive|*.component|*.tpl).html', './app/**/*.css'], function() {
+  watch(['./app/**/!(*.directive|*.component|*.tpl).html', './app/**/*.css'], function () {
     gulp.start('build.assets.dev');
+    electron.reload();
   });
-  watch(injectableDevAssetsRef(), function() {
+  watch(injectableDevAssetsRef(), function () {
     gulp.start('build.index.dev');
+    electron.reload();
   });
-  watch(PATH.src.scss, function() {
+  watch(PATH.src.scss, function () {
     gulp.start('build.styles.dev');
+    electron.reload();
   });
 
   app.use('*/components', express.static(join(__dirname, '..', 'app', 'components')));
   app.use('*/lib', express.static(join(__dirname, '..', PATH.dest.dev.lib)));
   app.use(express.static(join(__dirname, '..', PATH.dest.dev.all)));
-  app.get('/*', function(req, res) {
+  app.get('/*', function (req, res) {
     // console.log(req.url);
     var resource = (/([.a-z-]+\.(css|js))/.exec(req.url) || [])[0];
     if (resource) {
@@ -68,18 +75,19 @@ gulp.task('serve.dev', ['build.dev'], function() {
       res.sendFile(join(__dirname, '..', PATH.dest.dev.all, 'index.html'));
   });
 
-  app.listen(port, function() {
-    openResource('http://localhost:' + port);
+  app.listen(port, function () {
+    // openResource('http://localhost:' + port);
+    electron.start();
   });
 });
 
 // --------------
 // Serve prod.
 
-gulp.task('serve.prod', ['build.prod'], function() {
+gulp.task('serve.prod', ['build.prod'], function () {
   var app = express();
 
-  watch('./app/**', function() {
+  watch('./app/**', function () {
     gulp.start('build.app.prod');
   });
 
@@ -93,11 +101,11 @@ gulp.task('serve.prod', ['build.prod'], function() {
 
   app.use('/components', express.static(join(__dirname, '..', 'app', 'components')));
   app.use(express.static(join(__dirname, '..', PATH.dest.prod.all)));
-  app.get('/*', function(req, res) {
+  app.get('/*', function (req, res) {
     res.sendFile(join(__dirname, '..', PATH.dest.prod.all, 'index.html'));
   });
 
-  app.listen(port, function() {
+  app.listen(port, function () {
     openResource('http://localhost:' + port);
   });
 });

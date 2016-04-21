@@ -35,6 +35,7 @@
     "connect": "^3.3.5",
     "del": "^1.1.1",
     "electron": "^0.4.1",
+    "electron-connect": "^0.3.7",
     "electron-debug": "^0.6.0",
     "electron-prebuilt": "^0.37.6",
     "express": "^4.13.4",
