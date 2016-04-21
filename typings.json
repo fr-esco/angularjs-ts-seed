@@ -1,6 +1,7 @@
 {
   "ambientDependencies": {
     "angular": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular.d.ts#1c4a34873c9e70cce86edd0e61c559e43dfa5f75",
+    "angular-animate": "registry:dt/angular-animate#1.5.0+20160407085121",
     "angular-component-router": "registry:dt/angular-component-router#1.5.0+20160328094519",
     "angular-cookies": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular-cookies.d.ts#4de74cb527395c13ba20b438c3a7a419ad931f1c",
     "angular-dynamic-locale": "registry:dt/angular-dynamic-locale#0.1.27+20160317120654",
