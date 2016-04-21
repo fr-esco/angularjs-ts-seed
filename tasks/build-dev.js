@@ -20,12 +20,7 @@ var fs = require('fs');
 var path = require('path');
 var join = path.join;
 var runSequence = require('run-sequence');
-var Builder = require('systemjs-builder');
 var yargs = require('yargs');
-
-var appProdBuilder = new Builder({
-  baseURL: 'file:./tmp',
-});
 
 var HTMLMinifierOpts = {
   collapseBooleanAttributes: true,
@@ -45,13 +40,13 @@ var tsProject = tsc.createProject('tsconfig.json', {
 // --------------
 // Build dev.
 
-gulp.task('build.lib.dev', function() {
+gulp.task('build.lib.dev', function () {
   return gulp.src(PATH.src.lib.js.concat(PATH.src.lib.css))
     .pipe(gulp.dest(PATH.dest.dev.lib))
     .pipe($.livereload());
 });
 
-gulp.task('build.js.dev', ['lint.ts', 'lint.dts'], function() {
+gulp.task('build.js.dev', ['lint.ts', 'lint.dts'], function () {
   var result = gulp.src(PATH.src.app.dev)
     .pipe(plumber())
     .pipe(sourcemaps.init())
@@ -64,14 +59,14 @@ gulp.task('build.js.dev', ['lint.ts', 'lint.dts'], function() {
     .pipe($.livereload());
 });
 
-gulp.task('build.html.dev', ['lint.html', 'lint.dts'], function() {
+gulp.task('build.html.dev', ['lint.html', 'lint.dts'], function () {
   return gulp.src(PATH.src.html.directive)
     .pipe(ngHtml2Js({
-      moduleName: 'tpl' || function(file) {
+      moduleName: 'tpl' || function (file) {
         var pathParts = file.path.split(path.sep),
           root = pathParts.indexOf('components');
-        return 'app.' + pathParts.slice(root, -1).map(function(folder) {
-          return folder.replace(/-[a-z]/g, function(match) {
+        return 'app.' + pathParts.slice(root, -1).map(function (folder) {
+          return folder.replace(/-[a-z]/g, function (match) {
             return match.substr(1).toUpperCase();
           });
         }).join('.');
@@ -82,24 +77,24 @@ gulp.task('build.html.dev', ['lint.html', 'lint.dts'], function() {
     .pipe($.livereload());
 });
 
-gulp.task('build.copy.locale.dev', function() {
+gulp.task('build.copy.locale.dev', function () {
   return gulp.src(PATH.src.lib.locale)
     .pipe(gulp.dest(PATH.dest.dev.lib));
 });
 
-gulp.task('build.copy.assets.dev', function() {
+gulp.task('build.copy.assets.dev', function () {
   return gulp.src(['./app/assets/**/*'])
     .pipe(gulp.dest(join(PATH.dest.dev.all, 'assets')))
     .pipe($.livereload());
 });
 
-gulp.task('build.assets.dev', ['build.js.dev', 'build.html.dev', 'build.copy.assets.dev', 'build.styles.dev', 'build.copy.locale.dev', 'build.copy.locale.json.dev'], function() {
+gulp.task('build.assets.dev', ['build.js.dev', 'build.html.dev', 'build.copy.assets.dev', 'build.styles.dev', 'build.copy.locale.dev', 'build.copy.locale.json.dev'], function () {
   return gulp.src(['./app/**/!(*.directive|*.component|*.tpl).html', './app/**/*.css'])
     .pipe(gulp.dest(PATH.dest.dev.all))
     .pipe($.livereload());
 });
 
-gulp.task('build.index.dev', function() {
+gulp.task('build.index.dev', function () {
   var target = gulp.src(injectableDevAssetsRef(), { read: false });
   return gulp.src('./app/index.html')
     .pipe(inject(target, { transform: transformPath('dev') }))
@@ -108,11 +103,11 @@ gulp.task('build.index.dev', function() {
     .pipe($.livereload());
 });
 
-gulp.task('build.app.dev', function(done) {
+gulp.task('build.app.dev', function (done) {
   runSequence('clean.app.dev', 'build.assets.dev', 'build.index.dev', done);
 });
 
-gulp.task('build.dev', function(done) {
+gulp.task('build.dev', function (done) {
   runSequence('clean.dev', 'build.lib.dev', 'build.app.dev', done);
 });
 
@@ -123,14 +118,14 @@ function getVersion() {
 
 function transformPath(env) {
   var v = '?v=' + getVersion();
-  return function(filepath) {
+  return function (filepath) {
     arguments[0] = filepath.replace('/' + PATH.dest[env].all, '.') + v;
     return inject.transform.apply(inject.transform, arguments);
   };
 }
 
 function injectableDevAssetsRef() {
-  var src = PATH.src.lib.js.concat(PATH.src.lib.css).map(function(path) {
+  var src = PATH.src.lib.js.concat(PATH.src.lib.css).map(function (path) {
     return join(PATH.dest.dev.lib, path.split('/').pop());
   });
   src.push(join(PATH.dest.dev.all, '**/*.css'));
