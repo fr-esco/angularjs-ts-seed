@@ -1,3 +1,5 @@
+var gulp = require('gulp');
+
 function build() {
   var argv = require('yargs').reset()
     .usage('Usage: gulp build -p')
@@ -23,4 +25,4 @@ build.flags = {
 };
 
 
-require('gulp').task('build', build);
+gulp.task('build', build);

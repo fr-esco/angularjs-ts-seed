@@ -33,7 +33,8 @@ module.exports = {
       root: './app',
       all: ['./app/**/*.ts'],
       dev: ['./app/**/*.ts', '!./app/**/*.spec.ts'],
-      test: ['./app/**/*.ts', '!./app/init.ts']
+      test: ['./app/**/*.ts', '!./app/init.ts'],
+      prod: ['./app/**/*.ts', '!./app/init.ts', '!./app/**/*.spec.ts']
     },
     // Order is quite important here for the HTML tag injection.
     lib: {

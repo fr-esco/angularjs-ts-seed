@@ -131,18 +131,21 @@ gulp.task('serve.prod', ['build.prod'], function () {
     argv.electron && electron.reload();
   });
 
-  // app.use('/', express.static(join(__dirname, '..', PATH.dest.prod.all)));
-  // app.use('/components', express.static(join(__dirname, '..', 'app', 'components')));
-  // app.use('/lib', express.static(join(__dirname, '..', PATH.dest.prod.lib)));
-  // app.all('/*', function(req, res, next) {
-  //   // Just send the index.html for other files to support HTML5Mode
-  //   res.sendFile('index.html', { root: join(__dirname, '..', PATH.dest.prod.all) });
-  // });
-
-  app.use('/components', express.static(join(__dirname, '..', 'app', 'components')));
+  app.use('*/components', express.static(join(__dirname, '..', 'app', 'components')));
+  app.use('*/lib', express.static(join(__dirname, '..', PATH.dest.prod.lib)));
   app.use(express.static(join(__dirname, '..', PATH.dest.prod.all)));
   app.get('/*', function (req, res) {
-    res.sendFile(join(__dirname, '..', PATH.dest.prod.all, 'index.html'));
+    // console.log(req.url);
+    var resource = (/([.a-z-]+\.(css|js))/.exec(req.url) || [])[0];
+    if (resource) {
+      var index = req.url.indexOf('components');
+      if (index > -1) {
+        resource = req.url.substring(index, req.url.indexOf('?'));
+      }
+      // console.log(req.url, resource);
+      res.sendFile(join(__dirname, '..', PATH.dest.prod.all, resource));
+    } else
+      res.sendFile(join(__dirname, '..', PATH.dest.prod.all, 'index.html'));
   });
 
   app.listen(port, function () {

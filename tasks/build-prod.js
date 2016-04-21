@@ -65,7 +65,7 @@ gulp.task('build.lib.prod', function () {
     .pipe(gulp.dest(PATH.dest.prod.lib));
 });
 
-gulp.task('build.html.tmp', function () {
+gulp.task('build.html.tmp', ['lint.html', 'lint.dts'], function () {
   return gulp.src(PATH.src.html.directive)
     .pipe(minifyHTML(HTMLMinifierOpts))
     .pipe(ngHtml2Js({
@@ -84,9 +84,8 @@ gulp.task('build.html.tmp', function () {
     .pipe(gulp.dest('tmp'));
 });
 
-gulp.task('build.js.tmp', ['build.html.tmp'], function () {
-  var result = gulp.src(['./app/**/*.ts', '!./app/init.ts',
-    '!./app/**/*.spec.ts'])
+gulp.task('build.js.tmp', ['lint.ts', 'lint.dts', 'build.html.tmp'], function () {
+  var result = gulp.src(PATH.src.app.prod)
     .pipe(plumber())
     .pipe(tsc(tsProject));
 
@@ -109,7 +108,8 @@ gulp.task('build.init.prod', function () {
     .pipe(tsc(tsProject));
 
   return result.js
-    .pipe(uglify())
+    .pipe($.ignore.exclude(['**/*.map']))
+    .pipe(uglify().on('error', $.util.log))
     .pipe(template({ VERSION: getVersion() }))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(PATH.dest.prod.all));
@@ -122,7 +122,7 @@ gulp.task('build.copy.assets.prod', function () {
 
 gulp.task('build.copy.locale.prod', function () {
   return gulp.src(PATH.src.lib.locale)
-    .pipe(gulp.dest(PATH.dest.dev.lib));
+    .pipe(gulp.dest(PATH.dest.prod.lib));
 });
 
 gulp.task('build.assets.prod', ['build.js.prod', 'build.styles.prod'], function () {
