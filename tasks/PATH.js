@@ -22,6 +22,10 @@ module.exports = {
     },
     pkg: {
       prod: 'dist/pkg/prod'
+    },
+    server: {
+      host: 'http://localhost',
+      port: 5555
     }
   },
   src: {

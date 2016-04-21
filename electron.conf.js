@@ -1,4 +1,8 @@
 'use strict';
+
+const PATH = require('./tasks/PATH');
+const url = [PATH.dest.server.host, PATH.dest.server.port].join(':');
+
 const electron = require('electron');
 const BrowserWindow = require('browser-window');
 // const app = electron.app;
@@ -28,7 +32,7 @@ function createMainWindow() {
   });
 
   //win.loadURL(`file://${__dirname}/index.html`);
-  win.loadURL('http://localhost:5555/');
+  win.loadURL(url);
 
   client.create(win);
 

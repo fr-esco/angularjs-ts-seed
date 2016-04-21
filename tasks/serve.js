@@ -16,7 +16,8 @@ var serveStatic = require('serve-static');
 var express = require('express');
 var openResource = require('open');
 
-var port = 5555;
+var url = [PATH.dest.server.host, PATH.dest.server.port].join(':');
+var port = PATH.dest.server.port;
 
 function injectableDevAssetsRef() {
   var src = PATH.src.lib.js.concat(PATH.src.lib.css).map(function (path) {
@@ -26,36 +27,59 @@ function injectableDevAssetsRef() {
   return src;
 }
 
+gulp.task('open.browser', function () {
+  openResource(url);
+});
+
+gulp.task('open.electron', function () {
+  electron.start();
+});
+
 // --------------
 // Serve dev.
 
 gulp.task('serve.dev', ['build.dev'], function () {
+  var argv = yargs.reset()
+    .usage('Usage: gulp serve.dev [-e] [-b]')
+    .alias('b', 'browser')
+    .boolean('b')
+    .default('b', false)
+    .describe('b', 'Start in browser')
+    .alias('e', 'electron')
+    .boolean('e')
+    .default('e', false)
+    .describe('e', 'Start in electron')
+
+    .alias('s', 'support')
+    .help('s')
+    .argv;
+
   var app = express();
 
   $.livereload.listen();
   watch(PATH.src.lib.js.concat(PATH.src.lib.css), function () {
     gulp.start('build.lib.dev');
-    electron.reload();
+    argv.electron && electron.reload();
   });
   watch(PATH.src.app.dev, function () {
     gulp.start('build.js.dev');
-    electron.reload();
+    argv.electron && electron.reload();
   });
   watch(PATH.src.html.directive, function () {
     gulp.start('build.html.dev');
-    electron.reload();
+    argv.electron && electron.reload();
   });
   watch(['./app/**/!(*.directive|*.component|*.tpl).html', './app/**/*.css'], function () {
     gulp.start('build.assets.dev');
-    electron.reload();
+    argv.electron && electron.reload();
   });
   watch(injectableDevAssetsRef(), function () {
     gulp.start('build.index.dev');
-    electron.reload();
+    argv.electron && electron.reload();
   });
   watch(PATH.src.scss, function () {
     gulp.start('build.styles.dev');
-    electron.reload();
+    argv.electron && electron.reload();
   });
 
   app.use('*/components', express.static(join(__dirname, '..', 'app', 'components')));
@@ -76,8 +100,8 @@ gulp.task('serve.dev', ['build.dev'], function () {
   });
 
   app.listen(port, function () {
-    // openResource('http://localhost:' + port);
-    electron.start();
+    argv.browser && openResource(url);
+    argv.electron && electron.start();
   });
 });
 
@@ -85,10 +109,26 @@ gulp.task('serve.dev', ['build.dev'], function () {
 // Serve prod.
 
 gulp.task('serve.prod', ['build.prod'], function () {
+  var argv = yargs.reset()
+    .usage('Usage: gulp serve.prod [-e] [-b]')
+    .alias('b', 'browser')
+    .boolean('b')
+    .default('b', false)
+    .describe('b', 'Start in browser')
+    .alias('e', 'electron')
+    .boolean('e')
+    .default('e', false)
+    .describe('e', 'Start in electron')
+
+    .alias('s', 'support')
+    .help('s')
+    .argv;
+
   var app = express();
 
   watch('./app/**', function () {
     gulp.start('build.app.prod');
+    argv.electron && electron.reload();
   });
 
   // app.use('/', express.static(join(__dirname, '..', PATH.dest.prod.all)));
@@ -106,16 +146,25 @@ gulp.task('serve.prod', ['build.prod'], function () {
   });
 
   app.listen(port, function () {
-    openResource('http://localhost:' + port);
+    argv.browser && openResource(url);
+    argv.electron && electron.start();
   });
 });
 
 function serve() {
   var argv = yargs.reset()
-    .usage('Usage: gulp serve -p')
+    .usage('Usage: gulp serve -p [-e] [-b]')
     .alias('p', 'prod')
     .boolean('p')
     .describe('p', 'Build for Production Environment and serve')
+    .alias('b', 'browser')
+    .boolean('b')
+    .default('b', false)
+    .describe('b', 'Start in browser')
+    .alias('e', 'electron')
+    .boolean('e')
+    .default('e', false)
+    .describe('e', 'Start in electron')
 
     .alias('s', 'support')
     .help('s')
@@ -131,8 +180,9 @@ serve.description = 'Build for either Development or the requested environment a
 
 serve.flags = {
   '-p, --prod': 'Build for Production Environment',
+  '-b, --browser': 'Start in browser',
+  '-e, --electron': 'Start in electron',
   '-s, --support': 'Show help'
 };
-
 
 gulp.task('serve', serve);
