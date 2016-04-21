@@ -90,16 +90,34 @@ gulp test [-d] [-c]
 gulp
 
 # Dev run (default configuration)
-gulp serve
+gulp serve [--browser] [--electron]
 
 # Dev mock REST server
 gulp rest [--gui] [--refresh]
 
 # Prod run
-gulp serve --prod
+gulp serve --prod [--browser] [--electron]
 # ... or
-gulp serve -p
+gulp serve -p [-b] [-e]
+# ... or
+gulp serve -p[b][e]
 ```
+
+The command `gulp serve` starts a Node.js Express server.
+
+Its option `--browser` starts a browser for the served web application. You can also open it by executing:
+
+```bash
+gulp open.browser
+```
+
+The other flag `--electron` open the served application in an Electron container. Similarly, you can launch:
+
+```bash
+gulp open.electron
+```
+
+Both browser page (via [Chrome Plugin](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en)) and Electron app are reloaded on any source file change. 
 
 ## Scaffolding
 
