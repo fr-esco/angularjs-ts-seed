@@ -9,16 +9,19 @@ _This project is heavily inspired by [angular2-seed](https://github.com/mgechev/
 # Features
 * AngularJS **1.5.x**
 * Angular Component Router
-* Angular Material **1.1.0-RC2** ([doc](https://material.angularjs.org/latest/))
+* Angular Material **1.1.0-RC4** ([doc](https://material.angularjs.org/latest/))
 * SystemJS
 * Livereload (install [Chrome Plugin](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en) to enable this feature)
 * SCSS for styling ([doc](http://sass-lang.com/documentation/file.SASS_REFERENCE.html))
 
-# Unit tests
+## Containers
+* Electron ([website](http://electron.atom.io/)) with *livereload* for non-packaged apps
+
+## Unit tests
 * [jasmine](http://jasmine.github.io/2.4/introduction.html)
 * [jasmine-matchers](https://github.com/JamieMason/Jasmine-Matchers) for handful extra matchers
 
-## Recipes
+### Recipes
 You can find some useful recipes (eg. how to test $timeout and $interval) here:
 
 ```bash
@@ -90,15 +93,46 @@ gulp test [-d] [-c]
 gulp
 
 # Dev run (default configuration)
-gulp serve
+gulp serve [--browser] [--electron]
 
 # Dev mock REST server
 gulp rest [--gui] [--refresh]
 
 # Prod run
-gulp serve --prod
+gulp serve --prod [--browser] [--electron]
 # ... or
-gulp serve -p
+gulp serve -p [-b] [-e]
+# ... or
+gulp serve -p[b][e]
+```
+
+The command `gulp serve` starts a Node.js Express server.
+
+Its option `--browser` starts a browser for the served web application. You can also open it by executing:
+
+```bash
+gulp open.browser
+```
+
+The other flag `--electron` open the served application in an Electron container. Similarly, you can launch:
+
+```bash
+gulp open.electron
+```
+
+Both browser page (via [Chrome Plugin](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en)) and Electron app are reloaded on any source file change.
+
+#### Package with Electron
+
+You can package your application for any supported platform by executing:
+
+```bash
+gulp electron --name <appname> --platform <platform> [--environment <environment>]
+# ... or
+gulp electron -n <appname> -p <platform> [-e <environment>]
+
+# Full support and further information
+gulp electron -s
 ```
 
 ## Scaffolding
