@@ -4,7 +4,7 @@ let config = (tmhDynamicLocaleProvider: angular.dynamicLocale.tmhDynamicLocalePr
   $translateProvider
   .addInterpolation('$translateMessageFormatInterpolation')
   .useStaticFilesLoader({
-    prefix: '/i18n/locale-',
+    prefix: 'i18n/locale-',
     suffix: '.json'
   })
     .useSanitizeValueStrategy('sanitize')
@@ -17,7 +17,7 @@ let config = (tmhDynamicLocaleProvider: angular.dynamicLocale.tmhDynamicLocalePr
     .fallbackLanguage('en')
     .preferredLanguage('en');
 
-  tmhDynamicLocaleProvider.localeLocationPattern('/lib/angular-locale_{{locale}}.js');
+  tmhDynamicLocaleProvider.localeLocationPattern('lib/angular-locale_{{locale}}.js');
 };
 
 config.$inject = ['tmhDynamicLocaleProvider', '$translateProvider'];
