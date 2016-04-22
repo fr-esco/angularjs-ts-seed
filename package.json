@@ -8,7 +8,9 @@
   "main": "electron.conf.js",
   "scripts": {
     "postinstall": "typings install && gulp -T",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package-win32": "electron-packager . showcase --out=dist/packages --platform=win32 --arch=ia32 --prune --overwrite --version=0.37.6 --ignore=\"(ts|packages)\"",
+    "package-win64": "electron-packager ./dist/prod showcase --out=dist/packages --platform=win32 --arch=x64 --prune --overwrite --version=0.37.6 --ignore=\"(ts|packages)\""
   },
   "keywords": [
     "angularjs",
@@ -37,6 +39,7 @@
     "electron": "^0.4.1",
     "electron-connect": "^0.3.7",
     "electron-debug": "^0.6.0",
+    "electron-packager": "^7.0.1",
     "electron-prebuilt": "^0.37.6",
     "express": "^4.13.4",
     "faker": "^3.1.0",
@@ -45,6 +48,7 @@
     "gulp-bump": "^0.3.1",
     "gulp-cli": "^1.2.1",
     "gulp-concat": "^2.5.2",
+    "gulp-electron-packager": "^1.0.2",
     "gulp-filter": "^2.0.2",
     "gulp-folders": "^1.1.0",
     "gulp-htmllint": "0.0.7",
