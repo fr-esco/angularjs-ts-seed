@@ -8,9 +8,7 @@
   "main": "electron.conf.js",
   "scripts": {
     "postinstall": "typings install && gulp -T",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "package-win32": "electron-packager . showcase --out=dist/packages --platform=win32 --arch=ia32 --prune --overwrite --version=0.37.6 --ignore=\"(ts|packages)\"",
-    "package-win64": "electron-packager ./dist/prod showcase --out=dist/packages --platform=win32 --arch=x64 --prune --overwrite --version=0.37.6 --ignore=\"(ts|packages)\""
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "angularjs",
