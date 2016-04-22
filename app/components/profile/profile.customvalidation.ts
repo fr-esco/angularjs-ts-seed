@@ -19,6 +19,7 @@ const ngDirectiveName = 'dateInThePastValidation';
     };
   }
 })
+
 @at.inject('$log')
 export default class ExamplesCustomValidation {
   constructor(private log: angular.ILogService) {

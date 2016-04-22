@@ -5,5 +5,5 @@ import Showcase from '../showcase/showcase';
 
 const ngModuleName = 'app.components.profile';
 
-export default angular.module(ngModuleName, ['ngComponentRouter', Material, Showcase])
+export default angular.module(ngModuleName, ['ngComponentRouter', 'ngMessages', Material, Showcase])
   .run(['$log', $log => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;
