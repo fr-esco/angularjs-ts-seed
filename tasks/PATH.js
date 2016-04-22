@@ -21,6 +21,7 @@ module.exports = {
       lib: 'dist/prod/lib'
     },
     pkg: {
+      dev: 'dist/pkg/dev',
       prod: 'dist/pkg/prod'
     },
     server: {
