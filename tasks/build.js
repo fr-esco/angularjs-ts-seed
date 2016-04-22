@@ -24,5 +24,4 @@ build.flags = {
   '-s, --support': 'Show help'
 };
 
-
 gulp.task('build', build);
