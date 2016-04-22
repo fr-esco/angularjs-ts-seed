@@ -30,7 +30,6 @@ let components = angular.module('app.components', [
   Locale,
   Timezone,
   I18n,
-
   Example
 ]);
 
