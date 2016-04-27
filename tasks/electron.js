@@ -111,7 +111,7 @@ function electronTask() {
     .default('n', 'showcase')
     .describe('n', 'Application Name')
 
-    .alias('e', 'environment')
+    .alias('e', 'env')
     .choices('e', ['dev', 'prod'])
     .default('e', 'dev')
     .describe('e', 'Target environment')
@@ -124,14 +124,14 @@ function electronTask() {
     .help('s')
     .argv;
 
-  gulp.start(['package', 'electron', argv.environment, argv.platform].join('.'));
+  gulp.start(['package', 'electron', argv.env, argv.platform].join('.'));
 }
 
 electronTask.description = 'Package Electron application for the specified environment/platform';
 
 electronTask.flags = {
   '-n, --name': 'Application Name',
-  '-e, --environment': 'Target environment',
+  '-e, --env': 'Target environment',
   '-p, --platform': 'Target platform',
   '-s, --support': 'Show help'
 };

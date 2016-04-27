@@ -46,7 +46,7 @@ gulp.task('build.lib.dev', function () {
     .pipe($.livereload());
 });
 
-gulp.task('build.js.dev', ['lint.ts', 'lint.dts', 'environment'], function () {
+gulp.task('build.js.dev', ['lint.ts', 'lint.dts', 'environment.dev'], function () {
   var result = gulp.src(PATH.src.app.dev)
     .pipe(plumber())
     .pipe(sourcemaps.init())
