@@ -63,7 +63,7 @@
     <div>
       <md-input-container flex>
         <label for="input">Age</label>
-        <input type="number" name="input" id="input" ng-model="$ctrl.user.numberOf" min="18" max="99">
+        <input type="number" name="input" id="input" ng-model="$ctrl.user.age" min="18" max="99">
         <div ng-messages="userForm.input.$error" ng-show="userForm.input.$dirty">
           <div div ng-message-exp="['max','min']">Not valid age! Age must be greater than 18 less than 99</div>
         </div>

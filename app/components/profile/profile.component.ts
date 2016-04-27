@@ -26,7 +26,7 @@ export default class ProfileComponent implements at.OnActivate, at.CanDeactivate
     postalCode: '220007',
     birthdate: '',
     gender: '',
-    numberOf: null
+    age: null
   };
 
   public files = [
@@ -56,6 +56,7 @@ export default class ProfileComponent implements at.OnActivate, at.CanDeactivate
 
   }
   public $routerCanDeactivate() {
+
     var confirm = this.q.defer();
     if (this.userForm.$dirty) {
       this.dialog.show(
@@ -63,9 +64,10 @@ export default class ProfileComponent implements at.OnActivate, at.CanDeactivate
           .textContent('You have unsaved changes. Do you want to leave the page?')
           .ok('YES')
           .cancel('NO')
-      ).then(() => { confirm.resolve(true); }, () => { confirm.reject(false); });
+      ).then(() => { confirm.resolve(true); }, () => { confirm.resolve(false); });
       return confirm.promise;
     }
 
   }
+
 }
