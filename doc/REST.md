@@ -1,18 +1,33 @@
 # REST (REpresentational State Transfer)
 
-Guide for integrating REST (Level 2) services into your SPA (Single Page Application).
+Guide for integrating REST (**Level 2**) services into your SPA (Single Page Application).
 
-## Technology Stack
+## Richardson Maturity Model
+
+The Richardson Maturity Model is a way to grade an API according to the constraints of REST.
+It knows 4 levels (0-3), where level 3 designates a truly RESTful API.
+These steps introduce resources, HTTP verbs, and hypermedia controls.
+
+* Level 0: The Swamp of POX (HTTP as a tunneling mechanism for your own remote interaction mechanism);
+* Level 1: Resources (rather than making all our requests to a singular service endpoint, you start talking to individual resources);
+* Level 2: HTTP Verbs (using the HTTP verbs as closely as possible to how they are used in HTTP itself);
+* Level 3: Hypermedia Controls or *HATEOAS* (Hypertext As The Engine Of Application State).
+
+More info and examples [here](http://martinfowler.com/articles/richardsonMaturityModel.html).
+
+# Technology Stack
 
 * AngularJS **1.5.x**
 * Angular Component Router ([doc](https://docs.angularjs.org/guide/component-router))
 * Restangular ([doc](https://github.com/mgonto/restangular))
 
-### Mock
+## Mock
 
 * Backend REST API Mock
   * json-mock ([doc](https://github.com/therebelbeta/json-mock))
   * faker ([doc](https://github.com/marak/Faker.js))
+
+# Get Started
 
 ## Installation
 
@@ -20,7 +35,7 @@ Guide for integrating REST (Level 2) services into your SPA (Single Page Applica
 npm install
 ```
 
-## Get Started
+## Configuration
 
 In order to access any available Resource, you need to know its API endpoint.
 
@@ -34,7 +49,7 @@ let config = (restangularProvider: restangular.IProvider) => {
 };
 ```
 
-### Mock
+## Mock
 
 The command below starts a REST server that listens on `localhost:3000`:
 
@@ -56,6 +71,17 @@ gulp rest -g
 
 Use either `--support` or `-s` for more detailed instructions.
 
+### Customization
+
+You can find the Gulp task definition in `tasks/rest-server.js`, and can modify the default
+behaviour by passing other options to [json-mock](https://github.com/therebelbeta/json-mock),
+following the guidelines provided by its official documentation.
+
+If you need different data in your local database to be exposed by `json-mock`,
+you can find the Gulp `rest.fake` task definition in `tasks/rest-fake.js`. It is enough to
+edit the `data` variable. Please, note that you can generate random but *credible* data
+by using [faker](https://github.com/marak/Faker.js).
+
 ## Client Service
 
 Let's assume you would like to access a `Post` resource.
@@ -75,7 +101,7 @@ So, you can use the service generator with the new option `--client`.
 gulp gen:service --name post --path blog/post --client
 ```
 
-The command provides you a `blog/post/post-client.service` ready to interact with the 
+This command provides you a `blog/post/post-client.service` ready to interact with the 
 resource `Post` (ideally mapped by an `IPost` interface exported by `blog/post/post.model`)
 via the inherited (default) methods (respectively):
 
@@ -93,7 +119,7 @@ The resource URL is configured via its read-only property `baseUrl`.
 
 ### Customization
 
-You can change the default behavior for all Client Services by editing `app/components/rest/rest.model.ts`, which uses **Restangular** under the hood.
+You can change the default behaviour for all Client Services by editing `app/components/rest/rest.model.ts`, which uses **Restangular** under the hood.
 
 ## Components
 
@@ -101,7 +127,7 @@ You can change the default behavior for all Client Services by editing `app/comp
 
 In order to use a Service Client, as it is an Angular Service, you only need to inject it.
 
-And, if you want Typescript features on it, remember the `import` statement.
+And, if you want TypeScript features on it (such as Intellisense support), remember the `import` statement.
 
 ```js
 // app/components/blog/post/post-list.component.ts
@@ -127,7 +153,7 @@ export default class PostListComponent {
 
 The best way to retrieve the data you need as soon as you navigate to your routed Component
 is to exploit the [Angular Component Router Lifecycle](https://docs.angularjs.org/guide/component-router#router-lifecycle-hooks),
-in particular the `$routerOnActivate` hook (made available to Typescript by the `angular.OnActivate` interface).
+in particular the `$routerOnActivate` hook (made available to Typescript by the `angular.OnActivate` Interface).
 
 ```js
 // app/components/blog/post/post-list.component.ts
