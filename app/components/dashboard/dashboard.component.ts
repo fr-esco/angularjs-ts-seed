@@ -7,7 +7,7 @@ const ngComponentName = 'tsfnDashboard';
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'dashboard/dashboard.component.html',
 })
-@at.inject('$log', '$translatePartialLoader', '$translate', '$locale', '$scope')
+@at.inject('$log', '$translatePartialLoader', '$translate', '$locale', '$scope', 'version')
 export default class DashboardComponent implements at.OnActivate {
   public title: string;
 
@@ -62,8 +62,10 @@ export default class DashboardComponent implements at.OnActivate {
   private $translatePartialLoader: any,
   private $translate: any,
   private $locale: angular.ILocaleService,
-  private $scope) {
+  private $scope,
+  private version: string) {
     log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+    log.debug(['VERSION:', version].join(' '));
   }
 
   public $routerOnActivate(next: at.ComponentInstruction) {
