@@ -11,16 +11,17 @@ var yargs = require('yargs');
 
 var version = require('../package.json').version;
 
-gulp.task('config.generate', function () {
+gulp.task('environment.generate', function () {
   var argv = yargs.reset()
-    .usage('Usage: gulp config -p')
+    .usage('Usage: gulp environment -p')
     .alias('p', 'prod')
     .boolean('p')
-    .describe('p', 'Build for Production Environment')
+    .describe('p', 'Setup for Production Environment')
 
     .alias('s', 'support')
     .help('s')
     .argv;
+
 
   var jsonName = getJsonName(argv.prod ? 'prod' : 'dev');
   var configPath = join(PATH.src.app.root, 'components', 'environment'),
@@ -38,16 +39,17 @@ gulp.task('config.generate', function () {
     .pipe(gulp.dest(configPath));
 });
 
-gulp.task('config.cleanup', ['config.generate'], function () {
+gulp.task('environment.cleanup', ['environment.generate'], function () {
   var argv = yargs.reset()
-    .usage('Usage: gulp config -p')
+    .usage('Usage: gulp environment -p')
     .alias('p', 'prod')
     .boolean('p')
-    .describe('p', 'Build for Production Environment')
+    .describe('p', 'Setup for Production Environment')
 
     .alias('s', 'support')
     .help('s')
     .argv;
+
 
   var jsonName = getJsonName(argv.prod ? 'prod' : 'dev');
   var configPath = join(PATH.src.app.root, 'components', 'environment'),
@@ -58,12 +60,16 @@ gulp.task('config.cleanup', ['config.generate'], function () {
     .pipe(gulp.dest(configPath));
 });
 
-gulp.task('config', ['config.cleanup'], function () {
+function getJsonName(env) {
+  return ['config-', env || 'dev', '.json'].join('');
+}
+
+function environment() {
   var argv = yargs.reset()
-    .usage('Usage: gulp config -p')
+    .usage('Usage: gulp environment -p')
     .alias('p', 'prod')
     .boolean('p')
-    .describe('p', 'Build for Production Environment')
+    .describe('p', 'Setup for Production Environment')
 
     .alias('s', 'support')
     .help('s')
@@ -73,8 +79,13 @@ gulp.task('config', ['config.cleanup'], function () {
   var configPath = join(PATH.src.app.root, 'components', 'environment'),
     configFile = join(configPath, jsonName.split('.')[0] + '.js');
   return del([configFile]);
-});
-
-function getJsonName(env) {
-  return ['config-', env || 'dev', '.json'].join('');
 }
+
+environment.description = 'Setup configuration for either Development or the requested environment';
+
+environment.flags = {
+  '-p, --prod': 'Setup for Production Environment',
+  '-s, --support': 'Show help'
+};
+
+gulp.task('environment', ['environment.cleanup'], environment);
