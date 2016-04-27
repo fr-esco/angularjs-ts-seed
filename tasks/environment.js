@@ -29,7 +29,7 @@ function verifyConfig(configFile) {
   var constants = require(join('..', configFile));
   if (!compare(expected, constants) || !compare(constants, expected)) {
     throw new gutil.PluginError({
-      plugin: 'environment.generate.dev',
+      plugin: 'environment.generate.verifyConfig',
       message: 'Bad configuration: ' + configFile
     });
   }
