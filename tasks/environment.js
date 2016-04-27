@@ -109,4 +109,4 @@ environment.flags = {
   '-s, --support': 'Show help'
 };
 
-gulp.task('environment', ['environment.cleanup'], environment);
+gulp.task('environment', environment);
