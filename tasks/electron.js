@@ -100,6 +100,40 @@ function registerElectronEnvPkgTasks() {
           .pipe(electron(options, console.error.bind(console)));
       });
 
+    taskName = ['package', 'electron', env, 'macosx'].join('.');
+    gulp.task(taskName,
+      [['build', 'electron', env].join('.')],
+      function () {
+        var argv = yargs.reset()
+          .usage('Usage: gulp ' + taskName + ' -n <appname>')
+          .alias('n', 'name')
+          .string('n')
+          .default('n', 'showcase')
+          .describe('n', 'Application Name')
+
+          .alias('s', 'support')
+          .help('s')
+          .argv;
+
+        var options = {
+          name: argv.name,
+          appname: argv.name,
+          appVersion: pkg.version,
+
+          dir: PATH.dest[env].all,
+          out: PATH.dest.pkg[env],
+          platform: 'darwin',
+          arch: 'x64',
+          prune: true,
+          overwrite: true,
+          version: pkg.devDependencies['electron-prebuilt'].substr(1)
+        };
+
+        return gulp.src('')
+          .pipe(electron(options, console.error.bind(console)));
+      });
+
+
   });
 }
 
@@ -117,7 +151,7 @@ function electronTask() {
     .describe('e', 'Target environment')
 
     .alias('p', 'platform')
-    .choices('p', ['win32', 'win64'])
+    .choices('p', ['win32', 'win64','macosx'])
     .describe('p', 'Target platform')
 
     .alias('s', 'support')
