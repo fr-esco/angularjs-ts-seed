@@ -1,3 +1,5 @@
+'use strict';
+
 export default angular.module('app.components.environment', [])
 
 .constant('endpoint', {

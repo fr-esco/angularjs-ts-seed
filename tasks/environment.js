@@ -4,17 +4,42 @@ var gulp = require('gulp');
 var ngConstant = require('gulp-ng-constant');
 var rename = require('gulp-rename');
 var replace = require('gulp-replace');
+var gutil = require('gulp-util');
 
 var del = require('del');
+var _ = require('lodash');
 var join = require('path').join;
 var yargs = require('yargs');
 
 var version = require('../package.json').version;
 
+var expected = {
+  'endpoint': {
+    'apiBase': ''
+  }
+};
+function compare(a, b) {
+  return _.reduce(a, function (result, value, key) {
+    if (_.isObject(value))
+      return result && compare(value, b[key]);
+    return result && typeof value === typeof b[key];
+  }, true);
+}
+function verifyConfig(configFile) {
+  var constants = require(join('..', configFile));
+  if (!compare(expected, constants) || !compare(constants, expected)) {
+    throw new gutil.PluginError({
+      plugin: 'environment.generate.verifyConfig',
+      message: 'Bad configuration: ' + configFile
+    });
+  }
+}
+
 gulp.task('environment.generate.dev', function () {
   var jsonName = getJsonName('dev');
   var configPath = join(PATH.src.app.root, 'components', 'environment'),
     configFile = join(configPath, jsonName);
+  verifyConfig(configFile);
   return gulp.src(configFile)
     .pipe(ngConstant({
       name: 'app.components.environment',
@@ -32,6 +57,7 @@ gulp.task('environment.generate.prod', function () {
   var jsonName = getJsonName('prod');
   var configPath = join(PATH.src.app.root, 'components', 'environment'),
     configFile = join(configPath, jsonName);
+  verifyConfig(configFile);
   return gulp.src(configFile)
     .pipe(ngConstant({
       name: 'app.components.environment',
