@@ -13,24 +13,21 @@ const ngDirectiveName = 'usernameAsynchroValidation';
   link: (scope, elm, attrs, ctrl) => {
     elm.on('blur', () => {
       var usernames = ['JohnJohn_88', 'Peter_77', 'usernameEx'];
-      ctrl['$asyncValidators'].asynchroValidator = (modelValue, viewValue) => {
 
-        if (ctrl['$isEmpty'](modelValue)) {
-          // consider empty model valid
-          return scope['vm'].q.when();
-        }
+      if (ctrl['$isEmpty'](ctrl['$modelValue'])) {
+        // consider empty model valid
+        return scope['vm'].q.when();
+      }
 
-        var def = scope['vm'].q.defer();
-        scope['vm'].timeout(() => {
-          // Mock a delayed response
-          if (usernames.indexOf(modelValue) === -1) {
-            def.resolve();
-          } else
-            def.reject();
-        }, 2000);
+      var def = scope['vm'].q.defer();
+      scope['vm'].timeout(() => {
+        // Mock a delayed response
+        if (usernames.indexOf(ctrl['$modelValue']) === -1) {
+          def.resolve(ctrl['$setValidity']('asynchroValidator', true));
+        } else
+          def.reject(def.resolve(ctrl['$setValidity']('asynchroValidator', false)));
+      }, 2000);
 
-        return def.promise;
-      };
     });
   }
 })

@@ -82,7 +82,7 @@
         <label for="state">State</label>
         <input ng-model-options="{ updateOn: 'blur' }" placeholder="e.g. IT" name="state" id="state" ng-model="$ctrl.user.state"
           ng-pattern="/^[A-Za-z]*$/" ng-minlength="2" mimaxlength="2">
-        <div ng-messages="userForm.state.$error" ng-show="userForm.state.$dirty">
+        <div ng-messages="userForm.state.$error" multiple ng-show="userForm.state.$dirty">
           <div ng-message="pattern">Only character allowed</div>
 
           <div ng-message="minlength">That's too short!</div>
