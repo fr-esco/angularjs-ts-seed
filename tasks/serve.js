@@ -61,7 +61,7 @@ gulp.task('serve.dev', ['build.dev'], function () {
     gulp.start('build.lib.dev');
     argv.electron && electron.reload();
   });
-  watch(PATH.src.app.dev, function () {
+  watch(PATH.src.app.dev.concat('!./app/components/environment/*.ts'), function () {
     gulp.start('build.js.dev');
     argv.electron && electron.reload();
   });

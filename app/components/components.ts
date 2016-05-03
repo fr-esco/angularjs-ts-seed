@@ -1,4 +1,5 @@
 import Common    from './common/common';
+import Env       from './environment/config';
 import Example   from './example/example';
 import Exception from './exception/exception';
 import Material  from './material/material';
@@ -17,6 +18,7 @@ import I18n      from './i18n/i18n';
 
 let components = angular.module('app.components', [
   Common,
+  Env,
   Material,
   Exception,
   Main,
@@ -30,7 +32,7 @@ let components = angular.module('app.components', [
   Locale,
   Timezone,
   I18n,
-  Example
+  Example,
 ]);
 
 export {components}

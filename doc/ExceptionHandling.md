@@ -10,7 +10,7 @@ The default implementation simply delegates to `$log.error`, which logs it into 
 ## Platform strategy
 
 UE Platform provides the `platformExceptionHandler`, a *decoration* of the built-in handler, which delegates
-both "HTTP exceptions" to a `serverExceptionHandler` and "core exceptions" to 
+both "HTTP exceptions" to a `serverExceptionHandler` and "core exceptions" to a
 `coreExceptionHandler`. After that, it adds any caught error to the `messageHandler` queue, then the default behaviour is triggered.
 
 ### DTS
