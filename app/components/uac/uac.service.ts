@@ -19,8 +19,8 @@ export default class UacService {
 
   public load(key: string): angular.IPromise<IAccessControl> {
     return this.q.when({
-      enable: this.coinFlip() && false,
-      visible: this.coinFlip() || true
+      enable: this.coinFlip(),
+      visible: this.coinFlip()
     });
   }
 

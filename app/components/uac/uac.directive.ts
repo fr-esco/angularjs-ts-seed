@@ -5,78 +5,84 @@ import UacService from './uac.service';
 'use strict';
 
 const ngDirectiveName = 'tsfnUac';
+const ngDirectiveNameKey = 'tsfnUacKey';
 
-@at.directive(ngModuleName, ngDirectiveName, {
-  restrict: 'A', // default: EA
-  // template: '<fieldset ng-transclude style="margin:0;padding:0;border:1px solid red"></fieldset>',
-  // transclude: true,
-  // replace: true,
-  priority: -1,
+@at.directive(ngModuleName, ngDirectiveNameKey, {
+  restrict: 'A',
   link: (scope, element, attrs, ctrl) => {
     let log: angular.ILogService = ctrl['log'],
-      compile: angular.ICompileService = ctrl['compile'],
       uac: UacService = ctrl['uac'];
 
-    let enable = flag => {
-      // let children = element.find('input,select,button,md-autocomplete,md-checkbox');
-      let children = element.find('input,select,button,md-checkbox,md-radio-button,md-autocomplete');
-      debugger;
-      if (flag) {
-        children.removeAttr('disabled');
-        element.removeAttr('disabled');
-      } else {
-        children.each((i, elem) => {
-          debugger;
-          let ngDisabled = $(elem).attr('ng-disabled');
-          if (angular.isDefined(ngDisabled) && ngDisabled != 'false') {
-            $(elem).attr('tsfn-ng-disabled', ngDisabled);
-          } else {
-            $(elem).attr('ng-disabled', 'true');
-          }
-        });
-        // children.attr('disabled', 'disabled');
-        element.attr('disabled', 'disabled');
-      }
-      compile(element.contents())(scope);
-    };
-
-    let show = flag => {
-      if (flag) {
-        attrs.$removeClass('ng-hide');
-      } else {
-        attrs.$addClass('ng-hide');
-      }
-    };
+    let key = attrs[ngDirectiveNameKey];
+    log.debug('$uacObj.' + key, 'Default', scope['$uacObj'][key]);
 
     let processAccess = access => {
-      log.debug('Access: ' + angular.toJson(access, false));
-      if (access.enable) {
-        enable(true);
-      }
-      if (access.visible) {
-        show(true);
-      }
+      log.debug('$uacObj.' + key, 'Access', access);
+      angular.extend(scope['$uacObj'][key], access);
     };
 
     let requestAccess = key => {
-      log.debug('Requesting access for ' + key);
-
-      enable(false);
-      show(false);
+      log.debug('$uacObj.' + key, 'Request access');
 
       return uac.load(key).then(processAccess);
     };
 
-    attrs.$observe(ngDirectiveName, function (value) {
-      requestAccess(value);
-    });
+    requestAccess(key);
   }
 })
-@at.inject('$log', '$compile', 'tsfnUac')
+@at.inject('$log', 'tsfnUac')
+class UacDirectiveKey {
+  constructor(private log: angular.ILogService,
+    private uac: UacService) {
+    log.debug(['ngDirective', ngDirectiveName, 'loaded'].join(' '));
+  }
+}
+
+@at.directive(ngModuleName, ngDirectiveName, {
+  restrict: 'A',
+  priority: 1001,
+  terminal: true,
+  compile: (tElement, tAttrs) => {
+    let tVal = tAttrs[ngDirectiveName];
+    tAttrs.$set(ngDirectiveNameKey, tVal);
+
+    let myDisabled = tAttrs['ngDisabled'],
+      ngDisabled = ['!$uacObj', tVal, 'enable'].join('.');
+    if (angular.isDefined(myDisabled)) {
+      ngDisabled += ' || ' + myDisabled;
+    }
+    tAttrs.$set('ngDisabled', ngDisabled);
+
+    let myShow = tAttrs['ngShow'],
+      myHide = tAttrs['ngHide'],
+      ngShowHide = ['$uacObj', tVal, 'visible'].join('.'),
+      attr = 'ngShow';
+    if (angular.isDefined(myShow)) {
+      ngShowHide += ' || ' + myShow;
+    } else if (angular.isDefined(myHide)) {
+      ngShowHide = '!' + ngShowHide;
+      ngShowHide += ' || ' + myHide;
+      attr = 'ngHide';
+    }
+    tAttrs.$set(attr, ngShowHide);
+
+    tElement.removeAttr('tsfn-uac');
+    return (scope, iElement, iAttrs, ctrl) => {
+      if (!scope['$uacObj'])
+        scope['$uacObj'] = {};
+
+      scope['$uacObj'][tVal] = {
+        enable: false,
+        visible: false
+      };
+      ctrl['compile'](tElement)(scope);
+    };
+  }
+})
+@at.inject('$log', '$compile')
 export default class UacDirective {
   constructor(private log: angular.ILogService,
-    private compile: angular.ICompileService,
-    private uac: UacService) {
+    private compile: angular.ICompileService) {
     log.debug(['ngDirective', ngDirectiveName, 'loaded'].join(' '));
   }
 }
