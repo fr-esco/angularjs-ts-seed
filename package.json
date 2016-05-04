@@ -123,6 +123,7 @@
     "codemirror": "^5.13.2",
     "d3": "^3.5.16",
     "es6-module-loader": "0.15.0",
+    "jquery": "^2.2.3",
     "lodash": "^4.8.2",
     "messageformat": "^0.2.2",
     "moment": "^2.12.0",

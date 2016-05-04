@@ -8,30 +8,36 @@ const ngDirectiveName = 'tsfnUac';
 
 @at.directive(ngModuleName, ngDirectiveName, {
   restrict: 'A', // default: EA
-  priority: 10,
+  // template: '<fieldset ng-transclude style="margin:0;padding:0;border:1px solid red"></fieldset>',
+  // transclude: true,
+  // replace: true,
+  priority: -1,
   link: (scope, element, attrs, ctrl) => {
     let log: angular.ILogService = ctrl['log'],
       compile: angular.ICompileService = ctrl['compile'],
       uac: UacService = ctrl['uac'];
 
     let enable = flag => {
-      let children = element.find('input,select,button');
+      // let children = element.find('input,select,button,md-autocomplete,md-checkbox');
+      let children = element.find('input,select,button,md-checkbox,md-radio-button,md-autocomplete');
       debugger;
       if (flag) {
         children.removeAttr('disabled');
         element.removeAttr('disabled');
       } else {
-        angular.forEach(children, (elem: angular.IAugmentedJQuery) => {
+        children.each((i, elem) => {
           debugger;
-          let ngDisabled = elem.attr('ng-disabled');
+          let ngDisabled = $(elem).attr('ng-disabled');
           if (angular.isDefined(ngDisabled) && ngDisabled != 'false') {
-            elem.attr('tsfn-ng-disabled', ngDisabled).removeAttr('ng-disabled');
+            $(elem).attr('tsfn-ng-disabled', ngDisabled);
+          } else {
+            $(elem).attr('ng-disabled', 'true');
           }
         });
-        children.attr('disabled', 'disabled');
+        // children.attr('disabled', 'disabled');
         element.attr('disabled', 'disabled');
       }
-      // compile(element.contents())(scope);
+      compile(element.contents())(scope);
     };
 
     let show = flag => {
