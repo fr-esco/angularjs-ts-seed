@@ -24,6 +24,13 @@ export default class UacService {
     });
   }
 
+  public loadConfigPoint(name: string, implication: string): angular.IPromise<boolean> {
+    this.log.debug('loadConfigPoint', name, implication);
+    // return this.q.when(true);
+    // return this.q.when(false);
+    return this.q.when(this.coinFlip());
+  }
+
   private coinFlip(): boolean {
     return Math.random() < 0.5;
   }
