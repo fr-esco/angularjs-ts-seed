@@ -79,10 +79,10 @@ module.exports = {
         './node_modules/lodash/lodash.min.js',
         './node_modules/restangular/dist/restangular.js',
 
-        './node_modules/angular-typescript/lib/at-angular.js',
-        './node_modules/angular-typescript/lib/at-angular-resource.js',
-        './node_modules/angular-typescript/lib/at-angular.js.map',
-        './node_modules/angular-typescript/lib/at-angular-resource.js.map',
+        './node_modules/angular15-typescript/lib/at-angular.js',
+        './node_modules/angular15-typescript/lib/at-angular-resource.js',
+        './node_modules/angular15-typescript/lib/at-angular.js.map',
+        './node_modules/angular15-typescript/lib/at-angular-resource.js.map',
 
         './node_modules/angular-dynamic-locale/dist/tmhDynamicLocale.min.js',
         './node_modules/angular-dynamic-locale/dist/tmhDynamicLocale.min.js.map',
