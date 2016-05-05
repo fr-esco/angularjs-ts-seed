@@ -1,6 +1,7 @@
 {
   "endpoint": {
     "apiBase": "http://localhost/dev",
-    "configPoint": "http://localhost:5555/configPoint"
+    "configPoint": "http://localhost:5555/configPoint",
+    "permission": "http://localhost:5555/permission"
   }
 }

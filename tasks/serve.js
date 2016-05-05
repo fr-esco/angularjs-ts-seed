@@ -23,7 +23,11 @@ const mockUac = {
   'PATIENT.NAME:visible': true,
   'PATIENT.NAME:!visible': true,
   'PATIENT.NAME:editable': true,
-  'PATIENT.NAME:!editable': true
+  'PATIENT.NAME:!editable': true,
+  'PATIENT:CREATE:visible': true,
+  'PATIENT:CREATE:!visible': true,
+  'PATIENT:CREATE:editable': true,
+  'PATIENT:CREATE:!editable': true
 };
 
 function injectableDevAssetsRef() {
@@ -95,6 +99,10 @@ gulp.task('serve.dev', ['build.dev'], function () {
   app.get('/configPoint', function (req, res) {
     console.log(req.query);
     res.send({ result: mockUac[[req.query.name, req.query.implication].join(':')]});
+  });
+  app.get('/permission', function (req, res) {
+    console.log(req.query);
+    res.send({ result: mockUac[[req.query.object, req.query.operation, req.query.implication].join(':')]});
   });
   app.get('/*', function (req, res) {
     // console.log(req.url);
