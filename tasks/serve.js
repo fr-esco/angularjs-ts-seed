@@ -19,6 +19,13 @@ var openResource = require('open');
 var url = [PATH.dest.server.host, PATH.dest.server.port].join(':');
 var port = PATH.dest.server.port;
 
+const mockUac = {
+  'PATIENT.NAME:visible': true,
+  'PATIENT.NAME:!visible': true,
+  'PATIENT.NAME:editable': true,
+  'PATIENT.NAME:!editable': true
+};
+
 function injectableDevAssetsRef() {
   var src = PATH.src.lib.js.concat(PATH.src.lib.css).map(function (path) {
     return join(PATH.dest.dev.lib, path.split('/').pop());
@@ -85,6 +92,10 @@ gulp.task('serve.dev', ['build.dev'], function () {
   app.use('*/components', express.static(join(__dirname, '..', 'app', 'components')));
   app.use('*/lib', express.static(join(__dirname, '..', PATH.dest.dev.lib)));
   app.use(express.static(join(__dirname, '..', PATH.dest.dev.all)));
+  app.get('/configPoint', function (req, res) {
+    console.log(req.query);
+    res.send({ result: mockUac[[req.query.name, req.query.implication].join(':')]});
+  });
   app.get('/*', function (req, res) {
     // console.log(req.url);
     var resource = (/([.a-z-]+\.(css|js))/.exec(req.url) || [])[0];

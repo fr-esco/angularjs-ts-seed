@@ -4,8 +4,9 @@ import UacService from './uac.service';
 
 'use strict';
 
-const ngDirectiveName = 'tsfnUacConfigPoint';
-const ngDirectiveNameReady = 'tsfnUacConfigPointReady';
+const ngDirectiveName = 'tsfnUacCp';
+const ngDirectiveNameReady = 'tsfnUacCpReady';
+const ngUacObject = '$uacObj';
 
 const prefix = 'tsfn',
   implication = 'UacImplication',
@@ -13,11 +14,9 @@ const prefix = 'tsfn',
   implicationList = ['visible', '!visible', 'editable', '!editable'];
 
 function genKey(tAttrs: angular.IAttributes) {
-  let myImplication: string = tAttrs[prefix + implication],
-    visible = myImplication.indexOf('visible'),
-    editable = myImplication.indexOf('editable');
+  let myImplication: string = tAttrs[prefix + implication];
   let myName: string = tAttrs[prefix + name];
-  return [myName, visible ? 'visible' : editable ? 'editable' : null].join(':');
+  return [myName, myImplication].join(':');
 }
 
 function validateAttributes(tAttrs: angular.IAttributes) {
@@ -38,7 +37,7 @@ function visibleScenario(tAttrs: angular.IAttributes) {
     // we are in visible scenario
     let myShow = tAttrs['ngShow'],
       myHide = tAttrs['ngHide'],
-      ngShowHide = ['$uacObj["', genKey(tAttrs), '"]'].join(''),
+      ngShowHide = [ngUacObject, '["', genKey(tAttrs), '"]'].join(''),
       attr = 'ngShow';
     if (visible === 1) {
       // negative case
@@ -63,7 +62,7 @@ function editableScenario(tAttrs: angular.IAttributes) {
   if (editable > -1) {
     // we are in editable scenario
     let myDisabled = tAttrs['ngDisabled'],
-      ngDisabled = ['!$uacObj["', genKey(tAttrs), '"]'].join('');
+      ngDisabled = ['!', ngUacObject, '["', genKey(tAttrs), '"]'].join('');
     if (editable === 1) {
       // negative case
       ngDisabled = '!' + ngDisabled;
@@ -74,25 +73,27 @@ function editableScenario(tAttrs: angular.IAttributes) {
     tAttrs.$set('ngDisabled', ngDisabled);
   }
 }
-
+/*
 @at.directive(ngModuleName, ngDirectiveName, {
   restrict: 'A',
+  controllerAs: '',
   priority: 1001,
   terminal: true,
   compile: (tElement, tAttrs) => {
-    tAttrs.$set(ngDirectiveNameReady, true);
+    let tVal = tAttrs[ngDirectiveName];
+    tAttrs.$set(ngDirectiveNameReady, tVal);
 
     validateAttributes(tAttrs);
     visibleScenario(tAttrs);
     editableScenario(tAttrs);
 
-    tElement.removeAttr('tsfn-uac-config-point');
+    tElement.removeAttr('tsfn-uac-cp');
 
     return (scope, iElement, iAttrs, ctrl) => {
-      if (!scope['$uacObj'])
-        scope['$uacObj'] = {};
+      if (!scope[ngUacObject])
+        scope[ngUacObject] = {};
 
-      scope['$uacObj'][genKey(tAttrs)] = undefined;
+      scope[ngUacObject][genKey(tAttrs)] = null;
       ctrl['compile'](tElement)(scope);
     };
   }
@@ -107,6 +108,7 @@ export default class UacDirective {
 
 @at.directive(ngModuleName, ngDirectiveNameReady, {
   restrict: 'A',
+  controllerAs: '',
   link: (scope, element, attrs, ctrl) => {
     validateAttributes(attrs);
 
@@ -114,15 +116,15 @@ export default class UacDirective {
       uac: UacService = ctrl['uac'];
 
     let key = genKey(attrs);
-    log.debug(['$uacObj["', key, '"]'].join(''), 'Default', scope['$uacObj'][key]);
+    log.debug([ngUacObject, '["', key, '"]'].join(''), 'Default', scope['$uacObj'][key]);
 
     let processAccess = access => {
-      log.debug(['$uacObj["', key, '"]'].join(''), 'Access', access);
-      angular.extend(scope['$uacObj'][key], access);
+      log.debug([ngUacObject, '["', key, '"]'].join(''), 'Access', access);
+      scope['$uacObj'][key] = access;
     };
 
     let requestAccess = () => {
-      log.debug(['$uacObj["', key, '"]'].join(''), 'Request access');
+      log.debug([ngUacObject, '["', key, '"]'].join(''), 'Request access');
 
       let myImplication: string = attrs[prefix + implication];
       let myName: string = attrs[prefix + name];
@@ -133,9 +135,71 @@ export default class UacDirective {
   }
 })
 @at.inject('$log', 'tsfnUac')
-class UacDirectiveKey {
+class UacDirectiveReady {
   constructor(private log: angular.ILogService,
     private uac: UacService) {
     log.debug(['ngDirective', ngDirectiveName, 'loaded'].join(' '));
   }
 }
+*/
+
+function uacDirective(log: angular.ILogService, compile: angular.ICompileService) {
+  return {
+    restrict: 'A',
+    priority: 1001,
+    terminal: true,
+    compile: (tElement, tAttrs) => {
+      let tVal = tAttrs[ngDirectiveName];
+      tAttrs.$set(ngDirectiveNameReady, tVal);
+
+      validateAttributes(tAttrs);
+      visibleScenario(tAttrs);
+      editableScenario(tAttrs);
+
+      tElement.removeAttr('tsfn-uac-cp');
+
+      return (scope) => {
+        if (!scope[ngUacObject])
+          scope[ngUacObject] = {};
+
+        scope[ngUacObject][genKey(tAttrs)] = null;
+        compile(tElement)(scope);
+      };
+    }
+  };
+}
+
+uacDirective.$inject = ['$log', '$compile'];
+
+function uacDirectiveReady(log: angular.ILogService, uac: UacService) {
+  return {
+    restrict: 'A',
+    link: (scope, element, attrs, ctrl) => {
+      validateAttributes(attrs);
+
+      let key = genKey(attrs);
+      log.debug([ngUacObject, '["', key, '"]'].join(''), 'Default', scope['$uacObj'][key]);
+
+      let processAccess = access => {
+        log.debug([ngUacObject, '["', key, '"]'].join(''), 'Access', access);
+        scope['$uacObj'][key] = access;
+      };
+
+      let requestAccess = () => {
+        log.debug([ngUacObject, '["', key, '"]'].join(''), 'Request access');
+
+        let myImplication: string = attrs[prefix + implication];
+        let myName: string = attrs[prefix + name];
+        return uac.loadConfigPoint(myName, myImplication).then(processAccess);
+      };
+
+      requestAccess();
+    }
+  };
+}
+
+uacDirectiveReady.$inject = ['$log', 'tsfnUac'];
+
+angular.module(ngModuleName)
+  .directive(ngDirectiveName, uacDirective)
+  .directive(ngDirectiveNameReady, uacDirectiveReady);
