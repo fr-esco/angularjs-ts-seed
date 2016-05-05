@@ -42,11 +42,20 @@ export default class UacService {
     }).then(response => response.data['result']);
   }
 
-  private coinFlip(): boolean {
-    return Math.random() < 0.5;
+  public loadPermission(object: string, operation: string, implication: string): angular.IPromise<boolean> {
+    this.log.debug('loadPermission', object, operation, implication);
+    return this.http({
+      method: 'GET',
+      url: this.endpoint.permission,
+      params: {
+        object: object,
+        operation: operation,
+        implication: implication
+      }
+    }).then(response => response.data['result']);
   }
 
-  private registerMock() {
-
+  private coinFlip(): boolean {
+    return Math.random() < 0.5;
   }
 }

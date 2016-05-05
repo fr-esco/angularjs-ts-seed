@@ -4,19 +4,22 @@ import UacService from './uac.service';
 
 'use strict';
 
-const ngDirectiveName = 'tsfnUacCp';
-const ngDirectiveNameReady = 'tsfnUacCpReady';
+const ngDirectiveName = 'tsfnUacPerm';
+const ngDirectiveNameReady = 'tsfnUacPermReady';
 const ngUacObject = '$uacObj';
 
 const prefix = 'tsfn',
   implication = 'UacImplication',
-  name = 'UacName',
-  implicationList = ['visible', '!visible', 'editable', '!editable'];
+  object = 'UacObject',
+  operation = 'UacOperation',
+  implicationList = ['visible', '!visible', 'editable', '!editable'],
+  operationList = ['all', 'delete', 'update', 'create', 'execute', 'read'];
 
 function genKey(tAttrs: angular.IAttributes) {
   let myImplication: string = tAttrs[prefix + implication];
-  let myName: string = tAttrs[prefix + name];
-  return [myName, myImplication].join(':');
+  let myObject: string = tAttrs[prefix + object];
+  let myOperation: string = tAttrs[prefix + operation];
+  return [myObject, myOperation, myImplication].join(':');
 }
 
 function validateAttributes(tAttrs: angular.IAttributes) {
@@ -24,9 +27,13 @@ function validateAttributes(tAttrs: angular.IAttributes) {
   if (!myImplication || implicationList.indexOf(myImplication.toLowerCase()) < 0)
     throw new TypeError('Invalid UAC Implication: ' + myImplication);
 
-  let myName: string = tAttrs[prefix + name];
-  if (!myName)
-    throw new TypeError('Invalid UAC Name: ' + myName);
+  let myObject: string = tAttrs[prefix + object];
+  if (!myObject)
+    throw new TypeError('Invalid UAC Object: ' + myObject);
+
+  let myOperation: string = tAttrs[prefix + operation];
+  if (!myOperation || operationList.indexOf(myOperation.toLowerCase()) < 0)
+    throw new TypeError('Invalid UAC Operation: ' + myOperation);
 }
 
 function visibleScenario(tAttrs: angular.IAttributes) {
@@ -91,15 +98,17 @@ function uacDirective(log: angular.ILogService,
         tVal = rootScope.$eval(tVal) || {};
         if (isSet(tVal.implication))
           tAttrs.$set(prefix + implication, tVal.implication);
-        if (isSet(tVal.name))
-          tAttrs.$set(prefix + name, tVal.name);
+        if (isSet(tVal.object))
+          tAttrs.$set(prefix + object, tVal.object);
+        if (isSet(tVal.operation))
+          tAttrs.$set(prefix + operation, tVal.operation);
       }
 
       validateAttributes(tAttrs);
       visibleScenario(tAttrs);
       editableScenario(tAttrs);
 
-      tElement.removeAttr('tsfn-uac-cp');
+      tElement.removeAttr('tsfn-uac-perm');
 
       return (scope) => {
         if (!scope[ngUacObject])
@@ -132,8 +141,9 @@ function uacDirectiveReady(log: angular.ILogService, uac: UacService) {
         log.debug([ngUacObject, '["', key, '"]'].join(''), 'Request access');
 
         let myImplication: string = attrs[prefix + implication];
-        let myName: string = attrs[prefix + name];
-        return uac.loadConfigPoint(myName, myImplication).then(processAccess);
+        let myObject: string = attrs[prefix + object];
+        let myOperation: string = attrs[prefix + operation];
+        return uac.loadPermission(myObject, myOperation, myImplication).then(processAccess);
       };
 
       requestAccess();
