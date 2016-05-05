@@ -9,7 +9,7 @@ let $module = angular.mock.module;
 let $inject = angular.mock.inject;
 let $dump = (arg: any): void => console.log(angular.mock.dump(arg));
 
-describe('# Uac Service', () => {
+xdescribe('# Uac Service', () => {
   let $log, $rootScope;
   let service: UacService;
 
@@ -38,18 +38,6 @@ describe('# Uac Service', () => {
     it('should log registration', () => {
       let loaded = ['ngService', 'tsfnUac', 'loaded'].join(' ');
       expect($log.debug.logs).toContain([loaded]);
-    });
-  });
-
-  describe('## Load Feature', () => {
-    it('should load a flag', () => {
-      let data;
-      service.load().then(flag => data = flag);
-
-      // to resolve the promises
-      $rootScope.$apply();
-
-      expect(data).toBeTrue();
     });
   });
 
