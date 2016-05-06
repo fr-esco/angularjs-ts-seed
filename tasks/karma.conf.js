@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on Wed Jun 24 2015 12:13:39 GMT+0200 (CEST)
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -16,6 +16,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      '../node_modules/jquery/dist/jquery.min.js',
       '../node_modules/angular/angular.js',
       '../node_modules/angular-mocks/angular-mocks.js',
       '../node_modules/@angular/router/angular1/angular_1_router.js',
@@ -51,8 +52,8 @@ module.exports = function(config) {
       '../node_modules/lodash/lodash.min.js',
       '../node_modules/restangular/dist/restangular.js',
 
-      '../node_modules/angular-typescript/lib/at-angular.js',
-      '../node_modules/angular-typescript/lib/at-angular-resource.js',
+      '../node_modules/angular15-typescript/lib/at-angular.js',
+      '../node_modules/angular15-typescript/lib/at-angular-resource.js',
 
       '../test/**/*.js',
       '../test/**/*.spec.js'

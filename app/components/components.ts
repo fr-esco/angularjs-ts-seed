@@ -15,6 +15,7 @@ import Table     from './table/table';
 import Locale    from './locale/locale';
 import Timezone  from './timezone/timezone';
 import I18n      from './i18n/i18n';
+import Uac      from './uac/uac';
 
 let components = angular.module('app.components', [
   Common,
@@ -32,6 +33,7 @@ let components = angular.module('app.components', [
   Locale,
   Timezone,
   I18n,
+  Uac,
   Example,
 ]);
 

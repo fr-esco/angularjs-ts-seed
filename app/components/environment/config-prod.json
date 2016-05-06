@@ -1,5 +1,7 @@
 {
   "endpoint": {
-    "apiBase": "https://localhost/prod"
+    "apiBase": "https://localhost/prod",
+    "configPoint": "http://localhost:5555/configPoint",
+    "permission": "http://localhost:5555/permission"
   }
 }

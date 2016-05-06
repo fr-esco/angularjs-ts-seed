@@ -1,6 +1,6 @@
 /// <reference path="../../../typings/browser.d.ts" />
 
-import I18n from './i18n';
+import Uac from './uac';
 
 'use strict';
 
@@ -8,13 +8,13 @@ let $module = angular.mock.module;
 let $inject = angular.mock.inject;
 let $dump = (arg: any): void => console.log(angular.mock.dump(arg));
 
-describe('# I18n Module', () => {
-  beforeEach($module(I18n));
+describe('# Uac Module', () => {
+  beforeEach($module(Uac));
 
   describe('## Existence', () => {
     let mod;
 
-    beforeEach(() => mod = angular.module(I18n));
+    beforeEach(() => mod = angular.module(Uac));
 
     it('should exist', () => {
       expect(mod).not.toBeUndefined();
@@ -37,7 +37,7 @@ describe('# I18n Module', () => {
     });
 
     it('should log registration', () => {
-      let loaded = ['ngModule', I18n, 'loaded'].join(' ');
+      let loaded = ['ngModule', Uac, 'loaded'].join(' ');
       expect($log.debug.logs).toContain([loaded]);
     });
   });

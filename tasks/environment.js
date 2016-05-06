@@ -15,7 +15,9 @@ var version = require('../package.json').version;
 
 var expected = {
   'endpoint': {
-    'apiBase': ''
+    'apiBase': '',
+    'configPoint': '',
+    'permission': ''
   }
 };
 function compare(a, b) {

@@ -43,6 +43,8 @@ module.exports = {
         './node_modules/es6-module-loader/dist/es6-module-loader-sans-promises.js',
         './node_modules/es6-module-loader/dist/es6-module-loader-sans-promises.js.map',
         './node_modules/systemjs/dist/system.src.js',
+        './node_modules/jquery/dist/jquery.min.js',
+        './node_modules/jquery/dist/jquery.min.map',
         './node_modules/angular/angular.js',
         //'./node_modules/@angular/router/angular1/angular_1_router.js',
         './node_modules/ngComponentRouter-patched/dist/angular_1_router.js',
@@ -77,10 +79,10 @@ module.exports = {
         './node_modules/lodash/lodash.min.js',
         './node_modules/restangular/dist/restangular.js',
 
-        './node_modules/angular-typescript/lib/at-angular.js',
-        './node_modules/angular-typescript/lib/at-angular-resource.js',
-        './node_modules/angular-typescript/lib/at-angular.js.map',
-        './node_modules/angular-typescript/lib/at-angular-resource.js.map',
+        './node_modules/angular15-typescript/lib/at-angular.js',
+        './node_modules/angular15-typescript/lib/at-angular-resource.js',
+        './node_modules/angular15-typescript/lib/at-angular.js.map',
+        './node_modules/angular15-typescript/lib/at-angular-resource.js.map',
 
         './node_modules/angular-dynamic-locale/dist/tmhDynamicLocale.min.js',
         './node_modules/angular-dynamic-locale/dist/tmhDynamicLocale.min.js.map',
