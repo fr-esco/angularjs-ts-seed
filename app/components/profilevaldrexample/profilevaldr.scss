@@ -1,0 +1,10 @@
+.valdr-message {
+    display: none;
+}
+
+    .valdr-message.ng-invalid.ng-touched, .ng-submitted .valdr-message.ng-invalid {
+        display: block;
+        color: #a94442;
+        font-size: 12px;
+    }
+

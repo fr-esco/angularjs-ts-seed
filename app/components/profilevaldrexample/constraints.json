@@ -1,0 +1,32 @@
+{
+  "Person" : {
+    "firstName" : {
+      "size" : {
+        "min" : 5,
+        "message" : "message.size",
+        "max" : 10
+      },
+      "required" : {
+        "message" : "\\foo"
+      }
+    },
+    "lastName" : {
+      "size" : {
+        "min" : 4,
+        "message" : "message.size",
+        "max" : 31
+      }
+    },
+    "phone" : {
+      "com.github.valdr.demo.model.Phone" : {
+        "message" : "{Error Phone format}"
+      }
+    },
+    "age" : {
+      "min" : {
+        "message" : "min age 18",
+        "value" : 18
+      }
+    }
+  }
+}

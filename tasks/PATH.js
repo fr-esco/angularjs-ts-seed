@@ -102,8 +102,11 @@ module.exports = {
         './node_modules/moment/min/moment-with-locales.min.js',
         './node_modules/moment-timezone/builds/moment-timezone-with-data.min.js',
         './node_modules/angular-moment/angular-moment.min.js',
-        './node_modules/angular-moment/angular-moment.min.js.map'
-      ],
+        './node_modules/angular-moment/angular-moment.min.js.map',
+        './node_modules/valdr/valdr.js',
+        './node_modules/valdr/valdr-message.js'
+
+],
       css: [
         './node_modules/angular-material/angular-material.css',
         './node_modules/nvd3/build/nv.d3.css',

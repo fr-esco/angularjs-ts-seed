@@ -1,6 +1,5 @@
 import Material from '../material/material';
 import Showcase from '../showcase/showcase';
-
 'use strict';
 
 const ngModuleName = 'app.components.profile';
