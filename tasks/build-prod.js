@@ -22,6 +22,7 @@ var join = path.join;
 var runSequence = require('run-sequence');
 var Builder = require('systemjs-builder');
 var yargs = require('yargs');
+var platform = require('ue-platform');
 
 var appProdBuilder = new Builder({
   baseURL: 'file:./tmp',
@@ -49,7 +50,7 @@ gulp.task('build.lib.prod', function () {
   var jsOnly = filter('**/*.js'),
     cssOnly = filter('**/*.css');
 
-  return gulp.src(PATH.src.lib.js.concat(PATH.src.lib.css))
+  return gulp.src(platform.deps().concat(PATH.src.lib.js.concat(PATH.src.lib.css)))
     .pipe(jsOnly)
     .pipe(sourcemaps.init())
     .pipe(concat('lib.js'))
@@ -172,7 +173,7 @@ function transformPath(env) {
 }
 
 function injectableDevAssetsRef() {
-  var src = PATH.src.lib.js.concat(PATH.src.lib.css).map(function (path) {
+  var src = platform.deps().concat(PATH.src.lib.js.concat(PATH.src.lib.css)).map(function (path) {
     return join(PATH.dest.dev.lib, path.split('/').pop());
   });
   src.push(join(PATH.dest.dev.all, '**/*.css'));

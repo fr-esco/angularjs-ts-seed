@@ -21,6 +21,7 @@
     "moment-timezone": "registry:dt/moment-timezone#0.2.5+20160329220348",
     "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#20e1eb9616922d382d918cc5a21870a9dbe255f5",
     "nvd3": "registry:dt/nvd3#1.8.1+20160317120654",
-    "restangular": "registry:dt/restangular#1.4.0+20160317120654"
+    "restangular": "registry:dt/restangular#1.4.0+20160317120654",
+    "ue-platform": "file:node_modules/ue-platform/lib/platform.d.ts"
   }
 }
