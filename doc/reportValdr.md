@@ -259,7 +259,7 @@ Steps:
 <dependency>
   <groupId>com.github.valdr</groupId>
   <artifactId>valdr-bean-validation</artifactId>
-  <version>see-latest-version-at-the-top-of-this-page</version>
+  <version>version</version>
 </dependency>
 ```
 * configure web.xml.    
@@ -316,7 +316,7 @@ The related Json generated is:
     "firstName" : {
       "size" : {
         "min" : 5,
-        "message" : "{Size.message}",
+        "message" : "Size.message",
         "max" : 10
       },
       "required" : {
@@ -326,28 +326,28 @@ The related Json generated is:
     "lastName" : {
       "size" : {
         "min" : 4,
-        "message" : "{Size.message}",
+        "message" : "Size.message",
         "max" : 31
       }
     },
     "addSlashPrefixSuffix" : {
       "pattern" : {
         "flags" : [ ],
-        "message" : "{Pattern.message}",
+        "message" : "Pattern.message",
         "value" : "/abc/"
       }
     },
     "withMoreBackslashes" : {
       "pattern" : {
         "flags" : [ ],
-        "message" : "{Pattern.message}",
+        "message" : "Pattern.message",
         "value" : "/\\\\abc\\./"
       }
     },
     "withBackslashes" : {
       "pattern" : {
         "flags" : [ ],
-        "message" : "{Pattern.message}",
+        "message" : "Pattern.message",
         "value" : "/\\abc\\./"
       }
     },

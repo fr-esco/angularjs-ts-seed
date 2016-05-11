@@ -1,15 +1,15 @@
 {
   "Person" : {
     "firstName" : {
+       "required" : {
+        "message" : "\\foo"
+      },
       "size" : {
         "min" : 5,
         "message" : "message.size",
         "max" : 10
-      },
-      "required" : {
-        "message" : "\\foo"
       }
-    },
+     },
     "lastName" : {
       "size" : {
         "min" : 4,
