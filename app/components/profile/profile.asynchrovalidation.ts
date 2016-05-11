@@ -27,7 +27,6 @@ const ngDirectiveName = 'usernameAsynchroValidation';
         } else
           def.reject(def.resolve(ctrl['$setValidity']('asynchroValidator', false)));
       }, 2000);
-
     });
   }
 })

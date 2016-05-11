@@ -22,6 +22,12 @@ export default class NavigationService {
       link: ['Profile']
     },
     {
+      name: 'ValdrExample',
+      icon: 'person',
+      sref: '.profile',
+      link: ['ValdrExample']
+    },
+    {
       name: 'Table',
       icon: 'view_module',
       sref: '.table',

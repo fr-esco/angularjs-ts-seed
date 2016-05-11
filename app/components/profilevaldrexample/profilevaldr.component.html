@@ -1,27 +1,20 @@
 <tsfn-showcase file-list="::$ctrl.files" title="{{::$ctrl.title}}"></tsfn-showcase>
 
 <!-- TODO: Add validations -->
-<form name="userForm" novalidate>
+<form name="userForm" novalidate valdr-type="Person">
   <div ng-init="$ctrl.setForm(userForm)"></div>
   <md-content md-theme="dark" class="md-padding" layout="row" layout-sm="column">
-    <md-input-container>
+    <md-input-container valdr-form-group>
       <label for="title">Username</label>
-      <input name="title" id="title" username-asynchro-validation ng-model="$ctrl.user.title" ng-minlength="8" required>
-      <div ng-messages="userForm.title.$error" ng-show="userForm.title.$dirty">
-        <div ng-message="minlength">That's too short!</div>
-        <div ng-message="required">Username required!</div>
-        <div ng-message="asynchroValidator">Username already exists!</div>
-
-      </div>
+      <input name="title" id="title" ng-model="$ctrl.user.title">
     </md-input-container>
-    <md-input-container>
+    <md-input-container valdr-form-group>
       <label for="email">Email</label>
-      <input name="email" id="email" ng-model="$ctrl.user.email" type="email" ng-pattern="/^[a-zA-Z0-9._%+-]+@flatlogic.com$/"
-        required>
-      <div ng-messages="userForm.email.$error" ng-show="userForm.email.$dirty">
-        <div ng-message="required">Email required!</div>
-        <div ng-message="pattern">bad domain</div>
-      </div>
+      <input name="email" id="email" ng-model="$ctrl.user.email" type="email">
+    </md-input-container>
+    <md-input-container valdr-form-group>
+      <label for="phone">phone</label>
+      <input name="phone" id="phone" ng-model="$ctrl.user.phone">
     </md-input-container>
   </md-content>
   <md-content class="md-padding">
@@ -31,25 +24,19 @@
         <label for="company">Company (Disabled)</label>
         <input id="company" ng-model="$ctrl.user.company" disabled>
       </md-input-container>
-      <md-input-container flex>
+      <md-input-container flex valdr-form-group>
         <label for="submission-date">Submission Date</label>
         <input name="submissiondate" id="submission-date" type="date" date-in-the-past-validation ng-model="$ctrl.user.submissionDate">
-        <div ng-messages="userForm.submissiondate.$error" ng-show="userForm.submissiondate.$dirty">
-          <div ng-message="validate">Invalid Date</div>
-        </div>
       </md-input-container>
     </div>
     <div layout layout-sm="column">
-      <md-input-container flex>
-        <label for="first-name">First Name</label>
-        <input id="first-name" ng-model="$ctrl.user.firstName">
+      <md-input-container flex valdr-form-group>
+        <label for="firstName">First Name</label>
+        <input name="firstName" id="firstName" ng-model="$ctrl.user.firstName">
       </md-input-container>
-      <md-input-container flex>
+      <md-input-container flex valdr-form-group>
         <label for="last-name">Last Name</label>
-        <input id="last-name" name="lastname" ng-model="$ctrl.user.lastName" ng-minlength="2">
-        <div ng-messages="userForm.lastname.$error" ng-show="userForm.lastname.$dirty">
-          <div div ng-message-exp="minlength">lastname less than 2</div>
-        </div>
+        <input name="lastname" id="lastname" ng-model="$ctrl.user.lastName">
       </md-input-container>
     </div>
     <div flex layout layout-sm="column">
@@ -64,12 +51,9 @@
       </md-input-container>
     </div>
     <div>
-      <md-input-container flex>
+      <md-input-container flex valdr-form-group>
         <label for="input">Age</label>
-        <input type="number" name="input" id="input" ng-model="$ctrl.user.age" min="18" max="99">
-        <div ng-messages="userForm.input.$error" ng-show="userForm.input.$dirty">
-          <div div ng-message-exp="['max','min']">Not valid age! Age must be greater than 18 less than 99</div>
-        </div>
+        <input type="number" name="age" id="age" ng-model="$ctrl.user.age">
       </md-input-container>
     </div>
     <md-input-container flex>
@@ -81,15 +65,9 @@
         <label for="city">City</label>
         <input id="city" ng-model="$ctrl.user.city">
       </md-input-container>
-      <md-input-container flex>
+      <md-input-container flex valdr-form-group>
         <label for="state">State</label>
-        <input ng-model-options="{ updateOn: 'blur' }" placeholder="e.g. IT" name="state" id="state" ng-model="$ctrl.user.state"
-          ng-pattern="/^[A-Za-z]*$/" ng-minlength="2" maxlength="2">
-        <div ng-messages="userForm.state.$error" multiple ng-show="userForm.state.$dirty">
-          <div ng-message="pattern">Only character allowed</div>
-
-          <div ng-message="minlength">That's too short!</div>
-        </div>
+        <input ng-model-options="{ updateOn: 'blur' }" maxlength="2" placeholder="e.g. IT" name="state" id="state" ng-model="$ctrl.user.state">
       </md-input-container>
       <md-input-container flex>
         <label for="postal-code">Postal Code</label>
@@ -106,3 +84,5 @@
     </div>
   </md-content>
 </form>
+<!-- MinLength constraint makes the field required
+valdr doesn't support async validaton -->
