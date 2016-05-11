@@ -44,8 +44,8 @@ You can find some useful recipes (eg. how to test $timeout and $interval) here:
 # How to start
 
 ```bash
-git clone https://github.com/soulsoftware/angularjs-ts-seed
-cd angularjs-ts-seed
+git clone http://factory-docker.au-sdc.com:7990/scm/ue/ue-showcase.git
+cd ue-showcase
 npm install
 ```
 

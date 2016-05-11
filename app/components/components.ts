@@ -9,6 +9,7 @@ import Blog      from './blog/blog';
 import Dashboard from './dashboard/dashboard';
 import Message   from './message/message';
 import Profile   from './profile/profile';
+import ProfileValdr   from './profilevaldrexample/profilevaldr';
 import Rest      from './rest/rest';
 import Showcase  from './showcase/showcase';
 import Table     from './table/table';
@@ -27,6 +28,7 @@ let components = angular.module('app.components', [
   Dashboard,
   Message,
   Profile,
+  ProfileValdr,
   Rest,
   Showcase,
   Table,

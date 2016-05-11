@@ -43,6 +43,7 @@ module.exports = {
 
       ],
       css: [
+
       ],
       locale: [
         './node_modules/angular-i18n/angular-locale_it.js',
