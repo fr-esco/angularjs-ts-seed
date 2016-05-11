@@ -96,6 +96,6 @@
     "yargs": "^4.2.0"
   },
   "dependencies": {
-    "ue-platform": "^0.0.1"
+    "ue-platform": "^0.0.2"
   }
 }
