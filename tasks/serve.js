@@ -15,6 +15,7 @@ var connect = require('connect');
 var serveStatic = require('serve-static');
 var express = require('express');
 var openResource = require('open');
+var platform = require('ue-platform');
 
 var url = [PATH.dest.server.host, PATH.dest.server.port].join(':');
 var port = PATH.dest.server.port;
@@ -31,7 +32,7 @@ const mockUac = {
 };
 
 function injectableDevAssetsRef() {
-  var src = PATH.src.lib.js.concat(PATH.src.lib.css).map(function (path) {
+  var src = platform.deps().concat(PATH.src.lib.js.concat(PATH.src.lib.css)).map(function (path) {
     return join(PATH.dest.dev.lib, path.split('/').pop());
   });
   src.push(join(PATH.dest.dev.all, '**/*.css'));
@@ -68,7 +69,7 @@ gulp.task('serve.dev', ['build.dev'], function () {
   var app = express();
 
   $.livereload.listen();
-  watch(PATH.src.lib.js.concat(PATH.src.lib.css), function () {
+  watch(platform.deps().concat(PATH.src.lib.js.concat(PATH.src.lib.css)), function () {
     gulp.start('build.lib.dev');
     argv.electron && electron.reload();
   });

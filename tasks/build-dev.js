@@ -21,6 +21,7 @@ var path = require('path');
 var join = path.join;
 var runSequence = require('run-sequence');
 var yargs = require('yargs');
+var platform = require('ue-platform');
 
 var HTMLMinifierOpts = {
   collapseBooleanAttributes: true,
@@ -41,7 +42,7 @@ var tsProject = tsc.createProject('tsconfig.json', {
 // Build dev.
 
 gulp.task('build.lib.dev', function () {
-  return gulp.src(PATH.src.lib.js.concat(PATH.src.lib.css))
+  return gulp.src(platform.deps().concat(PATH.src.lib.js.concat(PATH.src.lib.css)))
     .pipe(gulp.dest(PATH.dest.dev.lib))
     .pipe($.livereload());
 });
@@ -125,7 +126,7 @@ function transformPath(env) {
 }
 
 function injectableDevAssetsRef() {
-  var src = PATH.src.lib.js.concat(PATH.src.lib.css).map(function (path) {
+  var src = platform.deps().concat(PATH.src.lib.js.concat(PATH.src.lib.css)).map(function (path) {
     return join(PATH.dest.dev.lib, path.split('/').pop());
   });
   src.push(join(PATH.dest.dev.all, '**/*.css'));
