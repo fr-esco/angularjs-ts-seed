@@ -1,0 +1,4 @@
+{
+  "message.size": "{{fieldName}} must be between {{min}} and {{max}} characters.",
+  "Person.firstName": "firstName"
+}

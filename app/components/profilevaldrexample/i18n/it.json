@@ -1,0 +1,4 @@
+{
+  "message.size": "{{fieldName}} deve essere compreso tra {{min}} e {{max}}.",
+  "Person.firstName": "Nome"
+}
