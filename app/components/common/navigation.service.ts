@@ -28,6 +28,12 @@ export default class NavigationService {
       link: ['ValdrExample']
     },
     {
+      name: 'HotKeys',
+      icon: 'keyboard',
+      sref: '.hotkeys',
+      link: ['HotKeys']
+    },
+    {
       name: 'Table',
       icon: 'view_module',
       sref: '.table',

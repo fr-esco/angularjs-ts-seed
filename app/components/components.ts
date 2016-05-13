@@ -17,6 +17,7 @@ import Locale       from './locale/locale';
 import Timezone     from './timezone/timezone';
 import I18n         from './i18n/i18n';
 import UacExample   from './uacExample/uacExample';
+import HotKeys   from './hotkeys/hotkeys';
 
 let components = angular.module('app.components', [
   Common,
@@ -36,7 +37,8 @@ let components = angular.module('app.components', [
   Timezone,
   I18n,
   Example,
-  UacExample
+  UacExample,
+  HotKeys
 ]);
 
 export {components}
