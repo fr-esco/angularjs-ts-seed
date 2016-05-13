@@ -12,12 +12,13 @@ const ngComponentName = 'tsfnMain';
     { path: '/dashboard', name: 'Dashboard', component: 'tsfnDashboard', data: { title: 'Dashboard' }, useAsDefault: true },
     { path: '/profile', name: 'Profile', component: 'tsfnProfile', data: { title: 'Profile' } },
     { path: '/valdrExample', name: 'ValdrExample', component: 'tsfnProfileValdr', data: { title: 'ValdrExample' } },
+    { path: '/hotkeys', name: 'HotKeys', component: 'tsfnHotkeys', data: { title: 'HotKeys Example' } },
     { path: '/table/...', name: 'Table', component: 'tsfnTable', data: { title: 'Table' } },
     { path: '/blog/...', name: 'Blog', component: 'tsfnBlog', data: { title: 'Blog' } },
     { path: '/i18n', name: 'I18n', component: 'tsfnI18n', data: { title: 'i18n' } }
   ]
 })
-@at.inject('navigationService', '$log', '$q', '$mdSidenav', '$mdBottomSheet', '$mdMenu', '$mdToast')
+@at.inject('navigationService', '$log', '$q', '$mdSidenav', '$mdBottomSheet', '$mdMenu', '$mdToast', 'hotkeys', '$scope', '$rootRouter')
 export default class MainComponent implements at.OnInit {
 
   public menuItems: Array<IMenuItem> = [];
@@ -29,15 +30,30 @@ export default class MainComponent implements at.OnInit {
     private mdSidenav: angular.material.ISidenavService,
     private mdBottomSheet: angular.material.IBottomSheetService,
     private mdMenu: angular.material.IMenuService,
-    private mdToast: angular.material.IToastService) {
+    private mdToast: angular.material.IToastService,
+    private hotkeys,
+    private scope: angular.IScope,
+    private rootRouter) {
     log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+    var vm = this;
+
+    this.hotkeys.add({
+      combo: 'ctrl+z+x',
+      description: 'Go to HotKeys',
+      callback: function (eve, ht) {
+        vm.rootRouter.navigate(['Main', 'HotKeys']);
+      }
+    });
   }
 
   public $onInit() {
     this.navigationService.loadAllItems()
       .then(menuItems => this.menuItems = [].concat(menuItems));
-  }
 
+  }
+  public actionH() {
+    console.log('piippo');
+  }
   public selectItem(item) {
     this.title = item.name;
     this.clearSidebars();

@@ -11,16 +11,31 @@ System.import('./app').then(System.import('./partials')).then(() => {
   angular.element(document)
     .ready(() => {
       // load constraints from a local file
-     /* $.get('./components/profilevaldrexample/constraints.json', function (configData) {
+      /* $.get('./components/profilevaldrexample/constraints.json', function (configData) {
 
-        angular.module('app').config(['valdrProvider', function (valdrProvider) {
-          console.log(JSON.stringify(configData));
-          valdrProvider.addConstraints(configData);
-          valdrProvider.addValidator('customValidator');
-        }]);*/
-
-        angular.bootstrap(document.body, ['app']);
-  //    });
+         angular.module('app').config(['valdrProvider', function (valdrProvider) {
+           console.log(JSON.stringify(configData));
+           valdrProvider.addConstraints(configData);
+           valdrProvider.addValidator('customValidator');
+         }]);*/
+      angular.module('app').config(['hotkeysProvider', function (cfphotkeys) {
+        cfphotkeys.template = '' +
+        ' <div class="hotkeys-div fade" ng-class="{in: helpVisible}" style="display: none;">' +
+          '<div class="cfp-hotkeys">' +
+          '<fieldset><legend>{{ title }}</legend>' +
+          '<div class="hotkeys-close" ng-click="toggleCheatSheet()">&#215;</div>' +
+          '<table><tbody>' +
+          '<tr ng-repeat="hotkey in hotkeys | filter:{ description: \'!$$undefined$$\' }">' +
+          '<td class="cfp-hotkeys-keys">' +
+          '<span ng-repeat="key in hotkey.format() track by $index" class="cfp-hotkeys-key">{{ key }}</span>' +
+          '</td>' +
+          '<td class="cfp-hotkeys-text">{{ hotkey.description }}</td>' +
+          '</tr>' +
+          '</tbody></table>' +
+          '</fieldset></div></div>';
+      }]);
+      angular.bootstrap(document.body, ['app']);
+      //    });
     });
 })
   .catch(console.error.bind(console));

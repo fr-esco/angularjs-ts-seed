@@ -15,6 +15,7 @@ let app = angular.module('app', [
   'tmh.dynamicLocale',
   'pascalprecht.translate',
   'angularMoment',
+  'cfp.hotkeys',
   components.name,
 ]).config(routing)
   .value('$routerRootComponent', ngMainComponentName);
