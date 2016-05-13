@@ -44,6 +44,12 @@ export default class NavigationService {
       icon: 'translate',
       sref: '.i18n',
       link: ['I18n']
+    },
+	{
+	  name: 'Notification',
+	  icon: 'notification',
+	  sref: '.notification',
+	  link: ['Notification']
     }
   ];
 

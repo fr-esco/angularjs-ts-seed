@@ -1,0 +1,58 @@
+/* Warning toast */
+.toast-warning > .md-toast-content{
+  background-color: #FF9800;
+  color: #FFF;
+}
+.toast-warning #toast-icon:before{
+  content: 'warning';
+}
+
+/* Success toast */
+.toast-success > .md-toast-content{
+  background-color: #43A047;
+  color: #FFF;
+}
+.toast-success #toast-icon:before{
+  content: 'check_circle';
+}
+
+/* Info toast */
+.toast-info > .md-toast-content{
+  background-color: #2196F3;
+  color: #fff;
+}
+.toast-info #toast-icon:before{
+  content: 'info';
+}
+
+/* Error toast*/
+.toast-error > .md-toast-content{
+  background-color: #F44336;
+  color: #fff;
+}
+.toast-error #toast-icon:before{
+  content: 'error';
+}
+
+/* Toast position classes */
+.toast-bottom-right{
+  right: 0;
+  bottom: 0;
+}
+.toast-bottom-left{
+  left: 0;
+  bottom: 0;
+}
+.toast-top-right{
+  right: 0;
+  top: 0;
+}
+.toast-top-right{
+  right: 0;
+  top: 0;
+}
+
+#toast-icon{
+  margin-right: 10px;
+}
+

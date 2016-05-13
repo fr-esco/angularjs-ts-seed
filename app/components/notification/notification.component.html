@@ -1,0 +1,52 @@
+<div class="md-padding" layout="row" layout-xs="column">
+  <md-input-container flex>
+    <label>Select message type</label>
+    <md-select ng-model="$ctrl.selected">
+      <md-option ng-selected="{{$index==0}}" ng-repeat="type in $ctrl.messageTypes track by $index" ng-click="$ctrl.changeToastType($index)">
+        {{type}}
+      </md-option>
+    </md-select>
+  </md-input-container>
+  <md-input-container flex>
+    <label>Delay (ms)</label>
+    <input type="number" max="10000" min="0" step="200" ng-model="$ctrl.delay">
+  </md-input-container>
+  <md-input-container flex>
+    <label>Width (relative to window size)</label>
+    <md-select ng-model="$ctrl.toastWidth">
+      <!--<md-option value="10"> 10% </md-option>
+      <md-option value="20"> 20% </md-option>
+      <md-option value="30"> 30% </md-option>
+      <md-option value="40"> 40% </md-option>-->
+      <md-option value="50"> 50% </md-option>
+      <md-option value="60"> 60% </md-option>
+      <md-option value="70"> 70% </md-option>
+      <md-option value="80"> 80% </md-option>
+      <md-option value="90"> 90% </md-option>
+      <md-option value="100" selected> 100% </md-option>
+    </md-select>
+  </md-input-container>
+</div>
+<div class="md-padding" layout="row">
+  <div flex>
+    <p>Selected Position: <strong>{{ $ctrl.toastVerticalPosition }} - {{ $ctrl.toastHorizontalPosition }}</strong> </p>
+    <md-radio-group ng-model="$ctrl.toastVerticalPosition">
+      <md-radio-button value="top"> Top</md-radio-button>
+      <md-radio-button value="bottom"> Bottom</md-radio-button>
+    </md-radio-group>
+
+    <md-radio-group ng-model="$ctrl.toastHorizontalPosition">
+      <md-radio-button value="right"> Right</md-radio-button>
+      <md-radio-button value="left"> Left</md-radio-button>
+    </md-radio-group>
+  </div>
+  <div flex>
+    <p>Message: </p>
+    <md-radio-group ng-model="$ctrl.toastMessageIndex">
+      <md-radio-button value="{{$index}}" ng-repeat="message in $ctrl.toastMessages track by $index"> {{message}}</md-radio-button>
+    </md-radio-group>
+  </div>
+</div>
+<md-button class="md-raised md-primary" ng-click="$ctrl.showToast()">
+  Show message
+</md-buttoon>
