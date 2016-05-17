@@ -1,7 +1,8 @@
 /// <reference path="../typings/browser.d.ts" />
 
-import routing from './app.route';
+import routing      from './app.route';
 import {components} from './components/components';
+import platform     from 'platform';
 
 const ngMainComponentName = 'tsfnApp';
 
@@ -15,6 +16,7 @@ let app = angular.module('app', [
   'tmh.dynamicLocale',
   'pascalprecht.translate',
   'angularMoment',
+  platform,
   components.name,
 ]).config(routing)
   .value('$routerRootComponent', ngMainComponentName);

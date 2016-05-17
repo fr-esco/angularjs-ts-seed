@@ -1,0 +1,65 @@
+<tsfn-showcase file-list="::$ctrl.files[0]" title="Uac" lazy="true"></tsfn-showcase>
+<div layout-gt-md="row">
+  <div flex-gt-md="50">
+    <md-card>
+      <md-card-content>
+        <h2>CP Visible</h2>
+        <label for="visvis">CP = Visible, Implication = 'visible'</label><br/>
+        <input id="visvis" type="text" tsfn-uac-cp="{name: 'cpVisibleEditable', implication: 'visible'}"/><br/><br/>
+        <label for="visnotvis">CP = Visible, Implication = '!visible'</label><br/>
+        <input id="visnotvis" type="text" tsfn-uac-cp="{name: 'cpVisibleEditable', implication: '!visible'}"/><br/><br/>
+        <label for="notvisvis">CP = NotVisible, Implication = 'visible'</label><br/>
+        <input id="notvisvis" type="text" tsfn-uac-cp="{name: 'cpNotVisibleEditable', implication: 'visible'}"/><br/><br/>
+        <label for="notvisnotvis">CP = NotVisible, Implication = '!visible'</label><br/>
+        <input id="notvisnotvis" type="text" tsfn-uac-cp="{name: 'cpNotVisibleEditable', implication: '!visible'}"/><br/><br/>
+      </md-card-content>
+    </md-card>
+  </div>
+  <div flex-gt-md="50">
+    <md-card>
+      <md-card-content>
+        <h2>CP Editable</h2>
+        <label for="eded">CP = Editable, Implication = 'editable'</label><br/>
+        <input id="eded" type="text" tsfn-uac-cp="{name: 'cpVisibleEditable', implication: 'editable'}"/><br/><br/>
+        <label for="ednoted">CP = Editable, Implication = '!editable'</label><br/>
+        <input id="ednoted" type="text" tsfn-uac-cp="{name: 'cpVisibleEditable', implication: '!editable'}"/><br/><br/>
+        <label for="noteded">CP = NotEditable, Implication = 'editable'</label><br/>
+        <input id="noteded" type="text" tsfn-uac-cp="{name: 'cpVisibleNotEditable', implication: 'editable'}"/><br/><br/>
+        <label for="notnoteded">CP = NotEditable, Implication = '!editable'</label><br/>
+        <input id="notnoteded" type="text" tsfn-uac-cp="{name: 'cpVisibleNotEditable', implication: '!editable'}"/><br/><br/>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>
+<div layout-gt-md="row">
+  <div flex-gt-md="50">
+    <md-card>
+      <md-card-content>
+        <h2>PERM Visble</h2>
+        <label for="perm-visvis">Perm = Visible, Implication = 'visible'</label><br/>
+        <input id="perm-visvis" type="text" tsfn-uac-perm="{object: 'permVisibleEditable', operation: 'read', implication: 'visible'}"/><br/><br/>
+        <label for="perm-visnotvis">Perm = Visible, Implication = '!visible'</label><br/>
+        <input id="perm-visnotvis" type="text" tsfn-uac-perm="{object: 'permVisibleEditable', operation: 'read', implication: '!visible'}"/><br/><br/>
+        <label for="perm-notvisvis">Perm = NotVisible, Implication = 'visible'</label><br/>
+        <input id="perm-notvisvis" type="text" tsfn-uac-perm="{object: 'permNotVisibleEditable', operation: 'read', implication: 'visible'}"/><br/><br/>
+        <label for="notvisnotvis">Perm = NotVisible, Implication = '!visible'</label><br/>
+        <input id="perm-notvisnotvis" type="text" tsfn-uac-perm="{object: 'permNotVisibleEditable', operation: 'read', implication: '!visible'}"/><br/><br/>
+      </md-card-content>
+    </md-card>
+  </div>
+  <div flex-gt-md="50">
+    <md-card>
+      <md-card-content>
+        <h2>PERM Editable</h2>
+        <label for="perm-eded">Perm = Editable, Implication = 'editable'</label><br/>
+        <input id="perm-eded" type="text" tsfn-uac-perm="{object: 'permVisibleEditable', operation: 'read', implication: 'editable'}"/><br/><br/>
+        <label for="perm-ednoted">Perm = Editable, Implication = '!editable'</label><br/>
+        <input id="perm-ednoted" type="text" tsfn-uac-perm="{object: 'permVisibleEditable', operation: 'read', implication: '!editable'}"/><br/><br/>
+        <label for="perm-noteded">Perm = NotEditable, Implication = 'editable'</label><br/>
+        <input id="perm-noteded" type="text" tsfn-uac-perm="{object: 'permVisibleNotEditable', operation: 'read', implication: 'editable'}"/><br/><br/>
+        <label for="perm-notnoteded">Perm = NotEditable, Implication = '!editable'</label><br/>
+        <input id="perm-notnoteded" type="text" tsfn-uac-perm="{object: 'permVisibleNotEditable', operation: 'read', implication: '!editable'}"/><br/><br/>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>

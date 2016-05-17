@@ -44,6 +44,12 @@ export default class NavigationService {
       icon: 'translate',
       sref: '.i18n',
       link: ['I18n']
+    },
+    {
+      name: 'Uac',
+      icon: 'verified_user',
+      sref: '.uac',
+      link: ['Uac']
     }
   ];
 

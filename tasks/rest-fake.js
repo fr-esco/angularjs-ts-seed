@@ -18,7 +18,27 @@ gulp.task('rest.fake', function() {
     people: times(10).map(aPerson),
     posts: times(10).map(aPost),
     tags: times(10).map(aTag),
-    comments: []
+    comments: [],
+    configPoint: [
+      { id: 1, name: 'cpNotVisibleNotEditable', implication: 'visible', visible: false, enable: false },
+      { id: 2, name: 'cpNotVisibleEditable', implication: 'visible', visible: false, enable: true },
+      { id: 3, name: 'cpVisibleNotEditable', implication: 'visible', visible: true, enable: false },
+      { id: 4, name: 'cpVisibleEditable', implication: 'visible', visible: true, enable: true },
+      { id: 5, name: 'cpNotVisibleNotEditable', implication: 'editable', visible: false, enable: false },
+      { id: 6, name: 'cpNotVisibleEditable', implication: 'editable', visible: false, enable: true },
+      { id: 7, name: 'cpVisibleNotEditable', implication: 'editable', visible: true, enable: false },
+      { id: 8, name: 'cpVisibleEditable', implication: 'editable', visible: true, enable: true }
+    ],
+    permission: [
+      { id: 1, object: 'permNotVisibleNotEditable', operation: 'read', implication: 'visible', visible: false, enable: false },
+      { id: 2, object: 'permNotVisibleEditable',  operation: 'read', implication: 'visible', visible: false, enable: true },
+      { id: 3, object: 'permVisibleNotEditable',  operation: 'read', implication: 'visible', visible: true, enable: false },
+      { id: 4, object: 'permVisibleEditable',  operation: 'read', implication: 'visible', visible: true, enable: true },
+      { id: 5, object: 'permNotVisibleNotEditable',  operation: 'read', implication: 'editable', visible: false, enable: false },
+      { id: 6, object: 'permNotVisibleEditable',  operation: 'read', implication: 'editable', visible: false, enable: true },
+      { id: 7, object: 'permVisibleNotEditable',  operation: 'read', implication: 'editable', visible: true, enable: false },
+      { id: 8, object: 'permVisibleEditable',  operation: 'read', implication: 'editable', visible: true, enable: true }
+    ]
   };
   data.posts.forEach(function(post) {
     data.comments = data.comments.concat(times(5).map(aComment(post)));

@@ -1,13 +1,13 @@
 {
   "Person" : {
     "firstName" : {
+       "required" : {
+        "message" : "message.required"
+      },
       "size" : {
         "min" : 5,
         "message" : "message.size",
         "max" : 10
-      },
-      "required" : {
-        "message" : "\\foo"
       }
     },
     "lastName" : {
@@ -19,12 +19,12 @@
     },
     "phone" : {
       "com.github.valdr.demo.model.Phone" : {
-        "message" : "{Error Phone format}"
+        "message" : "Error Phone format"
       }
     },
     "age" : {
       "min" : {
-        "message" : "min age 18",
+        "message" : "message.major.age",
         "value" : 18
       }
     }
