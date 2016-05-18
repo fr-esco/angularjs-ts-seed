@@ -51,11 +51,11 @@ export default class NavigationService {
       sref: '.uac',
       link: ['Uac']
     },
-	{
-	  name: 'Notification',
-	  icon: 'notifications',
-	  sref: '.notification',
-	  link: ['Notification']
+    {
+      name: 'Notification',
+      icon: 'notifications',
+      sref: '.notification',
+      link: ['Notification']
     }
   ];
 
