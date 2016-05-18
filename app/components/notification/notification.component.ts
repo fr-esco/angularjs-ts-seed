@@ -1,4 +1,7 @@
 import ngModuleName from './notification.module';
+import NotificationService from './notification.provider';
+import { INotificationConfig } from './notification.provider';
+import { INotificationAction } from './notification.provider';
 
 'use strict';
 
@@ -7,63 +10,85 @@ const ngComponentName = 'tsfnNotification';
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'notification/notification.component.html'
 })
-@at.inject('$log', '$mdToast')
+@at.inject('$log', '$mdMedia', '$scope', 'notification')
 export default class NotificationComponent {
-  public promiseAction = true; // Action used when toast is closed
-  public messageTypes = ['Success', 'Warning', 'Error', 'Info'];
-  public delay = 0;
-  public toastHorizontalPosition = 'right';
-  public toastVerticalPosition = 'top';
-  public toastWidth = 100;
-  public toastType = 'success';
-  public toastMessageIndex = 0;
-  public toastMessages = [
+
+  public messageTypes: string[] = ['Success', 'Warning', 'Error', 'Info'];
+  public toastMessages: string[] = [
     'Your data has been saved successfully.',
     'A problem has been occurred while submitting your data.',
     'There is a problem with your network connection',
     'Please read the documentation carefully.',
-    'Lorem ipsum dolor sit amet, ius id impetus nominavi, at amet mutat usu, hinc accusam eu pro. Lorem ipsum dolor sit amet, ius id impetus nominavi'];
+    'Lorem ipsum dolor sit amet, ius id impetus nominavi, at amet mutat usu, hinc accusam eu pro. Lorem ipsum dolor sit amet, ius id impetus nominavi.'
+  ];
+  public toastDelay: number = 0;
+  public toastHorizontalPosition: string = 'right';
+  public toastVerticalPosition: string = 'top';
+  public toastWidth: number = 100;
+  public toastType: string = 'success';
+  public toastMessageIndex: number = 0;
+  public disableTopPosition: boolean = false;
+  public showActionButtons: boolean = false;
 
   constructor(private log: angular.ILogService,
-    private mdToast: angular.material.IToastService) {
+    private mdMedia: angular.material.IMedia,
+    private scope: angular.IScope,
+    private notification: NotificationService) {
     log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
   }
 
-  public changeToastType(index: number) {
+  public $onInit(): void {
+    // Watcher used for position overriding for small and medium size devices
+    this.scope.$watch(
+      () => { return (this.mdMedia('xs') || this.mdMedia('sm')); },
+      (override) => {
+        if (override) {
+          this.toastVerticalPosition = 'bottom';
+          this.disableTopPosition = true;
+        } else {
+          this.disableTopPosition = false;
+        }
+      }
+    );
+  }
+
+  public changeToastType(index: number): void {
     this.toastType = this.messageTypes[index].toLowerCase();
   }
 
-  public showToast() {
-    let toast = this.mdToast;
-    return toast.show({
-      template: `
-        <md-toast class='toast-{{ctrl.type}} toast-{{ctrl.verticalPos}}-{{ctrl.horizontalPos}}' flex-sm="100" flex-xs="100" flex-gt-sm="{{ctrl.width}}">
-          <i class="material-icons" id="toast-icon" flex="auto"></i>
-          <span class="md-toast-text" flex="auto">{{ctrl.message}}</span>
-          <md-button flex="nogrow" class="md-flat md-primary md-action" aria-label="Close message" ng-click='ctrl.close()'>
-            <i class="material-icons">close</i>
-          </md-button>
-        </md-toast>
-      `,
-      bindToController: true,
-      controller: function ($log) {
-        this.close = function () {
-          toast.hide();
-          $log.info(this.promiseAction);
-        };
-      },
-      controllerAs: 'ctrl',
-      locals: {
-        type: this.toastType,
-        message: this.toastMessages[this.toastMessageIndex],
-        promiseAction: this.promiseAction,
-        verticalPos: this.toastVerticalPosition,
-        horizontalPos: this.toastHorizontalPosition,
-        width: this.toastWidth
-      },
-      hideDelay: this.delay,
-      parent: 'md-content',
-      position: this.toastVerticalPosition + ' ' + this.toastHorizontalPosition
-    });
+  public showToast(): void {
+    let config: INotificationConfig = {
+      verticalPos: this.toastVerticalPosition,
+      horizontalPos: this.toastHorizontalPosition,
+      delay: this.toastDelay,
+      width: this.toastWidth
+    };
+    let actions: INotificationAction[] = [];
+    if (this.showActionButtons) {
+      actions = [
+        {
+          value: 'action1',
+          label: 'string',
+          icon: 'done'
+        },
+        {
+          value: () => { alert('test2'); },
+          label: 'function',
+        }
+      ];
+    }
+    switch (this.toastType) {
+      case 'success': this.notification.success(this.toastMessages[this.toastMessageIndex], config, actions)
+        .then(function (actionValue) {
+          if (actionValue) console.log(actionValue);
+        });
+        break;
+      case 'warning': this.notification.warning(this.toastMessages[this.toastMessageIndex], config, actions);
+        break;
+      case 'error': this.notification.error(this.toastMessages[this.toastMessageIndex], config, actions);
+        break;
+      case 'info': this.notification.info(this.toastMessages[this.toastMessageIndex], config, actions);
+        break;
+    }
   }
 }

@@ -9,7 +9,7 @@
   </md-input-container>
   <md-input-container flex>
     <label>Delay (ms)</label>
-    <input type="number" max="10000" min="0" step="200" ng-model="$ctrl.delay">
+    <input type="number" max="10000" min="0" step="200" ng-model="$ctrl.toastDelay">
   </md-input-container>
   <md-input-container flex>
     <label>Width (relative to window size)</label>
@@ -31,7 +31,7 @@
   <div flex>
     <p>Selected Position: <strong>{{ $ctrl.toastVerticalPosition }} - {{ $ctrl.toastHorizontalPosition }}</strong> </p>
     <md-radio-group ng-model="$ctrl.toastVerticalPosition">
-      <md-radio-button value="top"> Top</md-radio-button>
+      <md-radio-button value="top" ng-disabled="$ctrl.disableTopPosition"> Top</md-radio-button>
       <md-radio-button value="bottom"> Bottom</md-radio-button>
     </md-radio-group>
 
@@ -46,7 +46,8 @@
       <md-radio-button value="{{$index}}" ng-repeat="message in $ctrl.toastMessages track by $index"> {{message}}</md-radio-button>
     </md-radio-group>
   </div>
+  <div flex>
+    <md-checkbox ng-model="$ctrl.showActionButtons">Show custom action buttons</md-checkbox>
+  </div>
 </div>
-<md-button class="md-raised md-primary" ng-click="$ctrl.showToast()">
-  Show message
-</md-buttoon>
+<md-button class="md-raised md-primary" ng-click="$ctrl.showToast()">Show message</md-button>
