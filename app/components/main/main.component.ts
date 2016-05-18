@@ -50,7 +50,6 @@ export default class MainComponent implements at.OnInit {
   public $onInit() {
     this.navigationService.loadAllItems()
       .then(menuItems => this.menuItems = [].concat(menuItems));
-
   }
   public actionH() {
     console.log('piippo');

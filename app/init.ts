@@ -10,14 +10,6 @@ System.import('./app').then(System.import('./partials')).then(() => {
 
   angular.element(document)
     .ready(() => {
-      // load constraints from a local file
-      /* $.get('./components/profilevaldrexample/constraints.json', function (configData) {
-
-         angular.module('app').config(['valdrProvider', function (valdrProvider) {
-           console.log(JSON.stringify(configData));
-           valdrProvider.addConstraints(configData);
-           valdrProvider.addValidator('customValidator');
-         }]);*/
       angular.module('app').config(['hotkeysProvider', function (cfphotkeys) {
         cfphotkeys.template = '' +
         ' <div class="hotkeys-div fade" ng-class="{in: helpVisible}" style="display: none;">' +
@@ -35,7 +27,6 @@ System.import('./app').then(System.import('./partials')).then(() => {
           '</fieldset></div></div>';
       }]);
       angular.bootstrap(document.body, ['app']);
-      //    });
     });
 })
   .catch(console.error.bind(console));

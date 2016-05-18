@@ -12,7 +12,7 @@ const ngComponentName = 'tsfnHotkeys';
   templateUrl: 'hotkeys/hotkeys.component.html',
 })
 @at.inject('$log', 'hotkeys', '$scope')
-export default class HotkeysComponent implements at.OnActivate {
+export default class HotkeysComponent implements at.OnActivate, at.OnDeactivate {
   public title = '';
   public newProduct = { name: '', price: null };
   public loadItem = [
@@ -48,10 +48,13 @@ export default class HotkeysComponent implements at.OnActivate {
   public $routerOnActivate(next: at.ComponentInstruction) {
     this.title = next.routeData.data['title'];
   }
+   public $routerOnDeactivate(next: at.ComponentInstruction) {
+     // close the cheatsheef if it is opened
+     this.hotkeys.toggleCheatSheet();
+  }
   public $onInit() {
     var vm = this;
     this.hotkeys.bindTo(this.scope)
-
       .add({
         combo: 'ctrl+v',
         description: 'Confirm',
@@ -61,6 +64,9 @@ export default class HotkeysComponent implements at.OnActivate {
           vm.addNewProduct();
         }
       });
+    // show the cheatsheet when load this route
+    this.hotkeys.toggleCheatSheet();
+
   }
   public addNewProduct() {
 
