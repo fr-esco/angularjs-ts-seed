@@ -12,7 +12,7 @@ const ngComponentName = 'tsfnHotkeys';
   templateUrl: 'hotkeys/hotkeys.component.html',
 })
 @at.inject('$log', 'hotkeys', '$scope')
-export default class HotkeysComponent implements at.OnActivate, at.OnDeactivate {
+export default class HotkeysComponent implements at.OnActivate {
   public title = '';
   public newProduct = { name: '', price: null };
   public loadItem = [
@@ -35,9 +35,8 @@ export default class HotkeysComponent implements at.OnActivate, at.OnDeactivate 
   ];
   public files = [
     'components/hotkeys/hotkeys.component.html',
-    'components/hotkeys/hotkeys.component.ts',
-    'components/hotkeys/hotkeys.module.ts'
-  ];
+    'components/hotkeys/hotkeys.component.ts'
+      ];
   constructor(private log: angular.ILogService,
     private hotkeys,
     private scope: angular.IScope
@@ -47,10 +46,6 @@ export default class HotkeysComponent implements at.OnActivate, at.OnDeactivate 
 
   public $routerOnActivate(next: at.ComponentInstruction) {
     this.title = next.routeData.data['title'];
-  }
-   public $routerOnDeactivate(next: at.ComponentInstruction) {
-     // close the cheatsheef if it is opened
-     this.hotkeys.toggleCheatSheet();
   }
   public $onInit() {
     var vm = this;
@@ -65,6 +60,7 @@ export default class HotkeysComponent implements at.OnActivate, at.OnDeactivate 
         }
       });
     // show the cheatsheet when load this route
+    console.log(this.scope);
     this.hotkeys.toggleCheatSheet();
 
   }
