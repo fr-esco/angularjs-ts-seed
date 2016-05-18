@@ -2,7 +2,7 @@
 
 let decorator = ($sanitize: angular.sanitize.ISanitizeService, $delegate) => {
   let makeHtml = $delegate.makeHtml;
-  $delegate.makeHtml = (markdown: string) => $sanitize(makeHtml(markdown));
+  $delegate.makeHtml = (markdown: string) => makeHtml(markdown);
   return $delegate;
 };
 

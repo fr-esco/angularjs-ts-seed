@@ -38,7 +38,7 @@ export class NotificationProvider implements INotificationProvider {
 
   private config: INotificationConfig;
   /**
-   * Default constructor: define default fallback configuration 
+   * Default constructor: define default fallback configuration
    * if it is not specified during angular.module.config()
    */
   constructor() {
@@ -108,7 +108,7 @@ export default class NotificationProviderService {
     console.log('service: update DOM');
   }*/
   /**
-   * 
+   *
    */
   public success(message: string, config?: INotificationConfig, actions?: INotificationAction[]): angular.IPromise<angular.material.IToastService> {
     return this.show('success', message, config, actions);
@@ -131,6 +131,7 @@ export default class NotificationProviderService {
     let domParent = (cfg && cfg.domParent) ? cfg.domParent : this.config.domParent;
 
     let toast = this.mdToast;
+    debugger;
     return toast.show({
       template: `
         <md-toast class='toast-{{toast.type}} {{toast.verticalPos}} {{toast.horizontalPos}}' flex-sm="100" flex-xs="100" flex-gt-sm="{{toast.width}}">

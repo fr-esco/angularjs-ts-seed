@@ -1,5 +1,6 @@
 import Material from '../material/material';
 import cfg from './notification.config';
+
 'use strict';
 
 const ngModuleName = 'app.components.notification';

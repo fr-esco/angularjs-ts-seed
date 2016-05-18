@@ -13,6 +13,6 @@ export default class MarkdownFilter implements at.IFilter {
   }
 
   public transform = (input: string): string =>
-    !input ? '' : this.showdown.makeHtml(input);
+    !angular.isString(input) ? '' : this.showdown.makeHtml(input);
 
 }
