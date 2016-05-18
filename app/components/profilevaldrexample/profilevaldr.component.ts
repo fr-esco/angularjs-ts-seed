@@ -31,9 +31,13 @@ export default class ProfileComponent implements at.OnActivate, at.CanDeactivate
   };
 
   public files = [
+    'components/profilevaldrexample/profilevaldr.config.ts',
     'components/profilevaldrexample/profilevaldr.component.html',
     'components/profilevaldrexample/profilevaldr.component.ts',
-    'components/profilevaldrexample/profilevaldr.module.ts'
+    'components/profilevaldrexample/profilevaldr.module.ts',
+    'components/profilevaldrexample/constraints.json',
+    'components/profilevaldrexample/i18n/it.json',
+    'components/profilevaldrexample/i18n/en.json'
   ];
 
   constructor(private log: angular.ILogService,

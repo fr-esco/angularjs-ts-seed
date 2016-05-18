@@ -1,4 +1,8 @@
 {
+  "message.required": "{{fieldName}} è obbligatorio",
   "message.size": "{{fieldName}} deve essere compreso tra {{min}} e {{max}}.",
-  "Person.firstName": "Nome"
+  "message.major.age": "{{fieldName}} deve essere maggiore o uguale di 18",
+  "Person.firstName": "Il nome",
+  "Person.age": "L'età",
+  "Person.lastName": "Il cognome"
 }

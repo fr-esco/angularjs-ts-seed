@@ -45,9 +45,15 @@ export default class NavigationService {
       sref: '.i18n',
       link: ['I18n']
     },
+    {
+      name: 'Uac',
+      icon: 'verified_user',
+      sref: '.uac',
+      link: ['Uac']
+    },
 	{
 	  name: 'Notification',
-	  icon: 'notification',
+	  icon: 'notifications',
 	  sref: '.notification',
 	  link: ['Notification']
     }

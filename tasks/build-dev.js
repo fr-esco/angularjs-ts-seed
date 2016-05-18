@@ -42,6 +42,34 @@ var tsProject = tsc.createProject('tsconfig.json', {
 // Build dev.
 
 gulp.task('build.lib.dev', function () {
+  /*
+  console.log(platform.deps({
+    excludes: ['angular'],
+    replaces: [
+      {
+        'jquery': {
+          js: [
+            './node_modules/jquery/dist/jquery---.min.js',
+            './node_modules/jquery/dist/jquery---.min.map'
+          ]
+        }
+      }
+    ],
+    additions: [
+      {
+        'my-library': {
+          js: [
+            './node_modules/my-library/lib/lib.js'
+          ],
+          css: [
+            './node_modules/my-library/lib/lib.css'
+          ],
+          'after': 'ue-platform'
+        }
+      }
+    ]
+  }));
+  */
   return gulp.src(platform.deps().concat(PATH.src.lib.js.concat(PATH.src.lib.css)))
     .pipe(gulp.dest(PATH.dest.dev.lib))
     .pipe($.livereload());

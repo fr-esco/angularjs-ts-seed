@@ -259,7 +259,7 @@ Steps:
 <dependency>
   <groupId>com.github.valdr</groupId>
   <artifactId>valdr-bean-validation</artifactId>
-  <version>see-latest-version-at-the-top-of-this-page</version>
+  <version>1.1.2</version>
 </dependency>
 ```
 * configure web.xml.    
