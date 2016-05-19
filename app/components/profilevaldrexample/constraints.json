@@ -9,7 +9,7 @@
         "message" : "message.size",
         "max" : 10
       }
-    },
+     },
     "lastName" : {
       "size" : {
         "min" : 4,

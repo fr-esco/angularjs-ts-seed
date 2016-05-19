@@ -59,11 +59,11 @@ export default class DashboardComponent implements at.OnActivate {
   ];
 
   constructor(private log: angular.ILogService,
-  private $translatePartialLoader: any,
-  private $translate: any,
-  private $locale: angular.ILocaleService,
-  private $scope,
-  private version: string) {
+    private $translatePartialLoader: any,
+    private $translate: any,
+    private $locale: angular.ILocaleService,
+    private $scope,
+    private version: string) {
     log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
     log.debug(['VERSION:', version].join(' '));
   }

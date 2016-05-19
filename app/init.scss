@@ -1,0 +1,28 @@
+.hotkeys-div {
+  display: table !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: #333;
+  font-size: 1em;
+  background-color: rgba(255,255,255,0.9);
+}
+
+.hotkeys-div.fade {
+  z-index: -1024;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity 0.15s linear;
+  -moz-transition: opacity 0.15s linear;
+  -o-transition: opacity 0.15s linear;
+  transition: opacity 0.15s linear;
+}
+.hotkeys-div.fade.in {
+  z-index: 10002;
+  visibility: visible;
+  opacity: 1;
+}
+.hotkeys-close:hover {
+  background-color: #fff;
+  cursor: pointer;
+}

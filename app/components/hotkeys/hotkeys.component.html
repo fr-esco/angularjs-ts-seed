@@ -1,0 +1,45 @@
+<div>
+  <tsfn-showcase file-list="::$ctrl.files" title="{{::$ctrl.title}}"></tsfn-showcase>
+</div>
+
+<div layout-margin>
+
+  <fieldset class="standard">
+    <legend> Add New Product </legend>
+
+    <div class="md-body-2">
+    </div>
+    <md-input-container flex>
+      <label for="productname">Product Name</label>
+      <input name="productname" id="productname" ng-model="$ctrl.newProduct.name">
+    </md-input-container>
+    <md-input-container flex>
+      <label for="price">Price</label>
+      <input name="price" id="price" ng-model="$ctrl.newProduct.price">
+    </md-input-container>
+    <md-button class="toolbar-button" aria-label="Create" ng-click="$ctrl.addNewProduct()" ng-disabled=" $ctrl.loadItem.length==10">
+      <i class="material-icons">done</i> </md-button>
+    <div class="maxnumber" ng-hide="$ctrl.loadItem.length!=10"> Max number of loaded Item reached </div>
+  </fieldset>
+
+</div>
+<div class="table-responsive-vertical md-whiteframe-z1">
+  <table id="table" class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th>
+          Product
+        </th>
+        <th>
+          Price
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in $ctrl.loadItem">
+        <td> {{item.name }}</td>
+        <td> {{item.price}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
