@@ -10,7 +10,7 @@ let $module = angular.mock.module;
 let $inject = angular.mock.inject;
 let $dump = (arg: any): void => console.log(angular.mock.dump(arg));
 
-describe('# Notification Provider', () => {
+xdescribe('# Notification Provider', () => {
   const loaded = ['ngProvider', 'notification', 'has loaded an', 'NotificationProviderService'].join(' ');
 
   // $log.debug.logs[0] will contain the module initialization logs

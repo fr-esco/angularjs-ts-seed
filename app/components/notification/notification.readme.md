@@ -5,7 +5,7 @@ The goal of this readme is to show how to configure and use the notification com
 
 # Notification provider
 
-The notification module is defined in `notification.provider.ts` file in `/components/notification` folder.
+The notification module is defined in `notification.provider.ts` file in `app/components/notification` folder.
 
 Notification provider exposes 4 different methods for 4 notification types: 
 * `success`
@@ -24,9 +24,10 @@ public info(message: string, config?: INotificationConfig, actions?: INotificati
 ```
 Every method takes as input a notification message, an optional configuration and an optional array of custom buttons for custom actions. Every method returns a promise resolving the same action value of the custom button that has been clicked.
 
-#Custom buttons with actions
+# Custom buttons with actions
 
 **Custom actions**
+
 ```typescript
 interface INotificationAction {
   value: string | Function;
@@ -34,12 +35,14 @@ interface INotificationAction {
   icon?: string;
 }
 ```
+
 It is possible to show custom buttons on the notification component py passing as argument an object of `INotificationAction` type:
 * `value:` It is a value that is returned from notification method as promise;
 * `label:` It is a string that will appear on notification as label of the custom button;
 * `icon:` It is an optional icon that will appear near che label of the custom button.
  
-Developer can handle custom actions like this example: 
+Developer can handle custom actions like this example:
+
 ```javascript
 let actions: INotificationAction[] = [
         {
@@ -61,8 +64,9 @@ notificationService.success('message', config, actions)
 
 # Configuration and customization
 
-##Configuration
-**Default configuration**
+## Configuration
+
+### Default configuration
 
 The Notification provider is configurable by changing values in `notification.config.ts` file.
 Notification provider accepts the following configurations:
@@ -72,7 +76,7 @@ Notification provider accepts the following configurations:
 * `width`
 * `DOM parent element`
 
-**Angular default module configuration**
+### Angular default module configuration
 ```typescript
 [...]
 let config = (notificationProvider: NotificationProvider) => {
@@ -84,19 +88,22 @@ let config = (notificationProvider: NotificationProvider) => {
 };
 [...]
 ```
-**Configuration override**
+
+### Configuration override
 
 ```javascript
 let config: INotificationConfig = {
-      verticalPos: 'bottom',
-      horizontalPos: 'left',
-      delay: 5000,
-      width: 70
-    };
+    verticalPos: 'bottom',
+    horizontalPos: 'left',
+    delay: 5000,
+    width: 70
+  };
     
 notificationService.info('message', config);
 ```
+
 ##Customization
+
 It is possible to customize `icons` and notification `position` classes by editing the following arrays in `notification.config.ts`: 
 
 **Icons**: maps notification type selectors to angular-material (or custom) icons values.
@@ -111,6 +118,7 @@ const icons = {
 };
 [...]
 ```
+
 **Positions**: maps notification position selectors to angular-material (or custom) position layouts.
  
 ```typescript

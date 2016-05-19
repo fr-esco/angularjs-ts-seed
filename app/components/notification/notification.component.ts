@@ -40,7 +40,7 @@ export default class NotificationComponent {
   public $onInit(): void {
     // Watcher used for position overriding for small and medium size devices
     this.scope.$watch(
-      () => { return (this.mdMedia('xs') || this.mdMedia('sm')); },
+      () => this.mdMedia('xs') || this.mdMedia('sm'),
       (override) => {
         if (override) {
           this.toastVerticalPosition = 'bottom';
@@ -57,7 +57,7 @@ export default class NotificationComponent {
   }
 
   public showToast(): void {
-    let config: INotificationConfig = {
+    const config: INotificationConfig = {
       verticalPos: this.toastVerticalPosition,
       horizontalPos: this.toastHorizontalPosition,
       delay: this.toastDelay,
@@ -72,23 +72,29 @@ export default class NotificationComponent {
           icon: 'done'
         },
         {
-          value: () => { alert('test2'); },
+          value: () => alert('test2'),
           label: 'function',
         }
       ];
     }
+    let message = this.toastMessages[this.toastMessageIndex];
+    let toast: angular.IPromise<angular.material.IToastService>;
     switch (this.toastType) {
-      case 'success': this.notification.success(this.toastMessages[this.toastMessageIndex], config, actions)
-        .then(function (actionValue) {
-          if (actionValue) console.log(actionValue);
-        });
+      case 'success':
+        toast = this.notification.success(message, config, actions);
         break;
-      case 'warning': this.notification.warning(this.toastMessages[this.toastMessageIndex], config, actions);
+      case 'warning':
+        toast = this.notification.warning(message, config, actions);
         break;
-      case 'error': this.notification.error(this.toastMessages[this.toastMessageIndex], config, actions);
+      case 'error':
+        toast = this.notification.error(message, config, actions);
         break;
-      case 'info': this.notification.info(this.toastMessages[this.toastMessageIndex], config, actions);
+      case 'info':
+        toast = this.notification.info(message, config, actions);
         break;
+      default:
+        throw new TypeError('Invalid Toas Type: ' + this.toastType);
     }
+    toast.then(actionValue => this.log.debug(actionValue));
   }
 }

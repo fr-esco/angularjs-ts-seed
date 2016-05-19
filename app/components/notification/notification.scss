@@ -1,4 +1,4 @@
-/* Colors*/
+// Colors
 $success-toast-color: #43A047;
 $warning-toast-color: #FF9800;
 $error-toast-color:   #F44336;
@@ -9,32 +9,28 @@ $content-toast-color: #FFFFFF;
   &-success {
     .md-toast-content {
       background-color: $success-toast-color;
-      color: $content-toast-color;
     }
   }
   &-warning {
     .md-toast-content {
       background-color: $warning-toast-color;
-      color: $content-toast-color;
     }
   }
   &-error {
     .md-toast-content {
       background-color: $error-toast-color;
-      color: $content-toast-color;
     }
   }
   &-info {
     .md-toast-content {
       background-color: $info-toast-color;
-      color: $content-toast-color;
     }
   }
   &-icon {
     color: $content-toast-color !important;
   }
 
-  // Positions classes
+  // Position classes
   &-top {
     top: 0;
   }
@@ -47,8 +43,13 @@ $content-toast-color: #FFFFFF;
   &-left {
     left: 0;
   }
-}
 
-.md-toast-text {
-  margin-left: $baseline-grid;
+  .md-toast {
+    &-content {
+      color: $content-toast-color;
+    }
+    &-text {
+      margin-left: $baseline-grid;
+    }
+  }
 }

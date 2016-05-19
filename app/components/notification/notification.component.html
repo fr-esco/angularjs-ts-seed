@@ -30,7 +30,7 @@
   </div>
   <div class="md-padding" layout="row">
     <div flex>
-      <p>Selected Position: <strong>{{ $ctrl.toastVerticalPosition }} - {{ $ctrl.toastHorizontalPosition }}</strong> </p>
+      <p>Selected Position: <strong>{{ $ctrl.toastVerticalPosition }} - {{ $ctrl.toastHorizontalPosition }}</strong></p>
       <md-radio-group ng-model="$ctrl.toastVerticalPosition">
         <md-radio-button value="top" ng-disabled="$ctrl.disableTopPosition"> Top</md-radio-button>
         <md-radio-button value="bottom"> Bottom</md-radio-button>
@@ -42,7 +42,7 @@
       </md-radio-group>
     </div>
     <div flex>
-      <p>Message: </p>
+      <p>Message:</p>
       <md-radio-group ng-model="$ctrl.toastMessageIndex">
         <md-radio-button value="{{$index}}" ng-repeat="message in $ctrl.toastMessages track by $index"> {{message}}</md-radio-button>
       </md-radio-group>
@@ -52,4 +52,4 @@
     </div>
   </div>
   <md-button class="md-raised md-primary" ng-click="$ctrl.showToast()">Show message</md-button>
-  </div>
+</div>

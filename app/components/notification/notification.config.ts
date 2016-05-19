@@ -7,21 +7,22 @@ const icons = {
   'error': 'error',
   'info': 'info'
 };
+
 const positions = {
   'top': 'toast-top',
   'right': 'toast-right',
   'left': 'toast-left',
   'bottom': 'toast-bottom'
 };
-export {icons};
-export {positions};
+
+export {icons, positions};
 
 let config = (notificationProvider: NotificationProvider) => {
-  notificationProvider.delay(0);
-  notificationProvider.domParent('#notification-component-content');
-  notificationProvider.horizontalPosition('right');
-  notificationProvider.verticalPosition('top');
-  notificationProvider.width(100);
+  notificationProvider.delay(0)
+    .domParent('#notification-component-content')
+    .horizontalPosition('right')
+    .verticalPosition('top')
+    .width(100);
 };
 
 config.$inject = ['notificationProvider'];

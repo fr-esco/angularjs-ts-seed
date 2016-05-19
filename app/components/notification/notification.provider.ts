@@ -22,21 +22,21 @@ interface INotificationAction {
   icon?: string;
 }
 
-export {INotificationConfig};
-export {INotificationAction};
+export {INotificationConfig, INotificationAction};
 
 interface INotificationProvider extends angular.IServiceProvider {
-  delay(delay: number): void;
-  width(width: number): void;
-  verticalPosition(vPos: string): void;
-  horizontalPosition(hPos: string): void;
-  domParent(parent: string): void;
+  delay(delay: number);
+  width(width: number);
+  verticalPosition(vPos: string);
+  horizontalPosition(hPos: string);
+  domParent(parent: string);
 }
 
 @at.provider(ngModuleName, ngProviderName)
 export class NotificationProvider implements INotificationProvider {
 
   private config: INotificationConfig;
+
   /**
    * Default constructor: define default fallback configuration
    * if it is not specified during angular.module.config()
@@ -50,20 +50,30 @@ export class NotificationProvider implements INotificationProvider {
       domParent: 'md-content'
     };
   }
-  public delay(delay: number): void {
+
+  public delay(delay: number) {
     this.config.delay = delay;
+    return this;
   }
-  public width(width: number): void {
+
+  public width(width: number) {
     this.config.width = width;
+    return this;
   }
-  public verticalPosition(vPos: string): void {
+
+  public verticalPosition(vPos: string) {
     this.config.verticalPos = vPos;
+    return this;
   }
-  public horizontalPosition(hPos: string): void {
+
+  public horizontalPosition(hPos: string) {
     this.config.horizontalPos = hPos;
+    return this;
   }
-  public domParent(par: string): void {
+
+  public domParent(par: string) {
     this.config.domParent = par;
+    return this;
   }
 
   // $get must be declared as method, not as function property (eg. `$get = () => new Service();`)
@@ -84,44 +94,23 @@ export default class NotificationProviderService {
     let s = ['ngProvider', ngProviderName, 'has loaded an', 'NotificationProviderService'].join(' ');
     log.debug(s);
   }
-  /**
-   * CONFIGURATION METHODS
-   */
-  /*public delay(delay: number): void {
-    this.config.delay = delay;
-    console.log('service: update delay');
-  }
-  public width(width: number): void {
-    this.config.width = width;
-    console.log('service: update width');
-  }
-  public verticalPosition(vPos: string): void {
-    this.config.verticalPos = positions[vPos];
-    console.log('service: update vpos');
-  }
-  public horizontalPosition(hPos: string): void {
-    this.config.horizontalPos = positions[hPos];
-    console.log('service: update hpos');
-  }
-  public domParent(par: string): void {
-    this.config.domParent = par;
-    console.log('service: update DOM');
-  }*/
-  /**
-   *
-   */
+
   public success(message: string, config?: INotificationConfig, actions?: INotificationAction[]): angular.IPromise<angular.material.IToastService> {
     return this.show('success', message, config, actions);
   }
+
   public warning(message: string, config?: INotificationConfig, actions?: INotificationAction[]): angular.IPromise<angular.material.IToastService> {
     return this.show('warning', message, config, actions);
   }
+
   public error(message: string, config?: INotificationConfig, actions?: INotificationAction[]): angular.IPromise<angular.material.IToastService> {
     return this.show('error', message, config, actions);
   }
+
   public info(message: string, config?: INotificationConfig, actions?: INotificationAction[]): angular.IPromise<angular.material.IToastService> {
     return this.show('info', message, config, actions);
   }
+
   private show(type: string, message: string, cfg?: INotificationConfig, actions?: INotificationAction[]): angular.IPromise<angular.material.IToastService> {
 
     let delay = (cfg && (cfg.delay >= 0)) ? cfg.delay : this.config.delay;
@@ -153,21 +142,10 @@ export default class NotificationProviderService {
           </md-button>
         </md-toast>
       `,
-      /*<md-toast class='toast-{{toast.type}} {{toast.verticalPos}} {{toast.horizontalPos}}' flex-sm="100" flex-xs="100" flex-gt-sm="{{toast.width}}">
-          <md-icon class="toast-icon">{{toast.icon}}</md-icon>
-          <p class="md-toast-text" flex="auto">{{toast.message}}</p>
-          <md-button ng-repeat="a in toast.actions" class="md-flat" aria-label="Close message" ng-click='toast.action(a.value)'>
-            <md-icon ng-if="a.icon" class="toast-icon">{{a.icon}}</md-icon>
-            {{a.label}}
-          </md-button>
-          <md-button class="md-icon-button" aria-label="Close message" ng-click="toast.action('close')">
-            <md-icon class="toast-icon">close</md-icon>
-          </md-button>
-        </md-toast>*/
       bindToController: true,
       controller: function () {
         this.action = (action) => {
-          if (typeof (action) == 'function') {
+          if (typeof action === 'function') {
             this.hide(action());
           } else {
             this.hide(action);
@@ -187,7 +165,7 @@ export default class NotificationProviderService {
       },
       hideDelay: delay,
       parent: domParent,
-      position: verticalPos + ' ' + horizontalPos
+      position: [verticalPos, horizontalPos].join(' ')
     });
   }
 }
