@@ -18,6 +18,7 @@ import Timezone     from './timezone/timezone';
 import I18n         from './i18n/i18n';
 import UacExample   from './uacExample/uacExample';
 import HotKeys   from './hotkeys/hotkeys';
+import Notification from './notification/notification';
 
 let components = angular.module('app.components', [
   Common,
@@ -38,7 +39,8 @@ let components = angular.module('app.components', [
   I18n,
   Example,
   UacExample,
-  HotKeys
+  HotKeys,
+  Notification
 ]);
 
 export {components}
