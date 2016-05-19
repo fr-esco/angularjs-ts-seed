@@ -130,12 +130,13 @@ export default class NotificationProviderService {
     let toast = this.mdToast;
     return toast.show({
       template: `
-        <md-toast class="toast-{{toast.type}} {{toast.verticalPos}} {{toast.horizontalPos}} flex-{{toast.width}}" layout="row">
-          <md-icon class="toast-icon" flex="noshrink">{{toast.icon}}</md-icon>
-          <p class="md-toast-text" flex="grow">{{toast.message}}</p>
-          <md-button flex="noshrink" ng-repeat="a in toast.actions" class="md-flat" aria-label="Close message" ng-click='toast.action(a.value)'>
-            <md-icon ng-if="a.icon" class="toast-icon">{{a.icon}}</md-icon>
-            {{a.label}}
+        <md-toast id="main-notification-toast" layout="row"
+          class="toast-{{::toast.type}} {{::toast.verticalPos}} {{::toast.horizontalPos}} flex-{{::toast.width}}">
+          <md-icon class="toast-icon" flex="noshrink">{{::toast.icon}}</md-icon>
+          <p class="md-toast-text" flex="grow">{{::toast.message}}</p>
+          <md-button flex="noshrink" ng-repeat="a in ::toast.actions" class="md-flat" aria-label="Close message" ng-click="toast.action(a.value)">
+            <md-icon ng-if="::a.icon" class="toast-icon">{{::a.icon}}</md-icon>
+            {{::a.label}}
           </md-button>
           <md-button class="md-icon-button" flex="noshrink" aria-label="Close message" ng-click="toast.action('close')">
             <md-icon class="toast-icon">close</md-icon>
