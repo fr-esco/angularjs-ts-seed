@@ -16,7 +16,7 @@ import Table        from './table/table';
 import Locale       from './locale/locale';
 import Timezone     from './timezone/timezone';
 import I18n         from './i18n/i18n';
-import UacExample   from './uacExample/uacExample';
+import UacExample   from './uacexample/uacexample';
 import Notification from './notification/notification';
 
 let components = angular.module('app.components', [

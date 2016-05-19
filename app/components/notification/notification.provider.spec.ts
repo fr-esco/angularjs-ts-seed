@@ -67,7 +67,6 @@ xdescribe('# Notification Provider', () => {
     beforeEach(() => {
       $module(ngModuleName, notificationProvider => {
         provider = notificationProvider;
-        provider.makeNoise(true);
       });
 
       $inject((_$log_, _notification_) => {
@@ -87,7 +86,6 @@ xdescribe('# Notification Provider', () => {
     beforeEach(() => {
       $module(ngModuleName, notificationProvider => {
         provider = notificationProvider;
-        provider.makeNoise(false);
       });
 
       $inject((_$log_, _notification_) => {
