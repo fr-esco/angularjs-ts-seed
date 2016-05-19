@@ -77,7 +77,6 @@ export default class NotificationComponent {
         }
       ];
     }
-    debugger;
     switch (this.toastType) {
       case 'success': this.notification.success(this.toastMessages[this.toastMessageIndex], config, actions)
         .then(function (actionValue) {

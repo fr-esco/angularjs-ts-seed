@@ -8,17 +8,17 @@ const icons = {
   'info': 'info'
 };
 const positions = {
-  'top': 'md-top',
-  'right': 'md-right',
-  'left': 'md-left',
-  'bottom': 'md-bottom'
+  'top': 'toast-top',
+  'right': 'toast-right',
+  'left': 'toast-left',
+  'bottom': 'toast-bottom'
 };
 export {icons};
 export {positions};
 
 let config = (notificationProvider: NotificationProvider) => {
   notificationProvider.delay(0);
-  notificationProvider.domParent('md-content');
+  notificationProvider.domParent('#notification_component_content');
   notificationProvider.horizontalPosition('right');
   notificationProvider.verticalPosition('top');
   notificationProvider.width(100);

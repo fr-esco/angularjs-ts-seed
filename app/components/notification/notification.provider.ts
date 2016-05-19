@@ -124,17 +124,36 @@ export default class NotificationProviderService {
   }
   private show(type: string, message: string, cfg?: INotificationConfig, actions?: INotificationAction[]): angular.IPromise<angular.material.IToastService> {
 
-    let width = (cfg && cfg.width) ? cfg.width : this.config.width;
-    let verticalPos = (cfg && cfg.verticalPos) ? cfg.verticalPos : this.config.verticalPos;
-    let horizontalPos = (cfg && cfg.horizontalPos) ? cfg.horizontalPos : this.config.horizontalPos;
     let delay = (cfg && (cfg.delay >= 0)) ? cfg.delay : this.config.delay;
     let domParent = (cfg && cfg.domParent) ? cfg.domParent : this.config.domParent;
+    let horizontalPos = (cfg && cfg.horizontalPos) ? cfg.horizontalPos : this.config.horizontalPos;
+    let verticalPos, width;
+
+    // Override vertical position to 'bottom' and width to 'flex-100' for xs and sm devices
+    if (this.mdMedia('xs') || this.mdMedia('sm')) {
+      width = 100;
+      verticalPos = 'bottom';
+    } else {
+      width = (cfg && cfg.width) ? cfg.width : this.config.width;
+      verticalPos = (cfg && cfg.verticalPos) ? cfg.verticalPos : this.config.verticalPos;
+    }
 
     let toast = this.mdToast;
-    debugger;
     return toast.show({
       template: `
-        <md-toast class='toast-{{toast.type}} {{toast.verticalPos}} {{toast.horizontalPos}}' flex-sm="100" flex-xs="100" flex-gt-sm="{{toast.width}}">
+        <md-toast class="toast-{{toast.type}} {{toast.verticalPos}} {{toast.horizontalPos}} flex-{{toast.width}}" layout="row">
+          <md-icon class="toast-icon" flex="noshrink">{{toast.icon}}</md-icon>
+          <p class="md-toast-text" flex="grow">{{toast.message}}</p>
+          <md-button flex="noshrink" ng-repeat="a in toast.actions" class="md-flat" aria-label="Close message" ng-click='toast.action(a.value)'>
+            <md-icon ng-if="a.icon" class="toast-icon">{{a.icon}}</md-icon>
+            {{a.label}}
+          </md-button>
+          <md-button class="md-icon-button" flex="noshrink" aria-label="Close message" ng-click="toast.action('close')">
+            <md-icon class="toast-icon">close</md-icon>
+          </md-button>
+        </md-toast>
+      `,
+      /*<md-toast class='toast-{{toast.type}} {{toast.verticalPos}} {{toast.horizontalPos}}' flex-sm="100" flex-xs="100" flex-gt-sm="{{toast.width}}">
           <md-icon class="toast-icon">{{toast.icon}}</md-icon>
           <p class="md-toast-text" flex="auto">{{toast.message}}</p>
           <md-button ng-repeat="a in toast.actions" class="md-flat" aria-label="Close message" ng-click='toast.action(a.value)'>
@@ -144,14 +163,13 @@ export default class NotificationProviderService {
           <md-button class="md-icon-button" aria-label="Close message" ng-click="toast.action('close')">
             <md-icon class="toast-icon">close</md-icon>
           </md-button>
-        </md-toast>
-      `,
+        </md-toast>*/
       bindToController: true,
       controller: function () {
         this.action = (action) => {
-          if (typeof(action) == 'function'){
+          if (typeof (action) == 'function') {
             this.hide(action());
-          }else{
+          } else {
             this.hide(action);
           }
         };
@@ -168,8 +186,8 @@ export default class NotificationProviderService {
         actions: actions || []
       },
       hideDelay: delay,
-      parent: domParent
-      // position: positions[verticalPos] + ' ' + positions[horizontalPos]
+      parent: domParent,
+      position: verticalPos + ' ' + horizontalPos
     });
   }
 }
