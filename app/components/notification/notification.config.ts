@@ -18,7 +18,7 @@ export {positions};
 
 let config = (notificationProvider: NotificationProvider) => {
   notificationProvider.delay(0);
-  notificationProvider.domParent('#notification_component_content');
+  notificationProvider.domParent('#notification-component-content');
   notificationProvider.horizontalPosition('right');
   notificationProvider.verticalPosition('top');
   notificationProvider.width(100);

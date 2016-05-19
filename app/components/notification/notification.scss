@@ -5,51 +5,50 @@ $error-toast-color:   #F44336;
 $info-toast-color:    #2196F3;
 $content-toast-color: #FFFFFF;
 
-/* Success toast */
-.toast-success {
-  .md-toast-content{
-    background-color: $success-toast-color;
-    color: $content-toast-color;
+.toast {
+  &-success {
+    .md-toast-content {
+      background-color: $success-toast-color;
+      color: $content-toast-color;
+    }
   }
-}
-/* Warning toast */
-.toast-warning {
-  .md-toast-content{
-    background-color: $warning-toast-color;
-    color: $content-toast-color;
+  &-warning {
+    .md-toast-content {
+      background-color: $warning-toast-color;
+      color: $content-toast-color;
+    }
   }
-}
-/* Error toast*/
-.toast-error {
-  .md-toast-content{
-    background-color: $error-toast-color;
-    color: $content-toast-color;
+  &-error {
+    .md-toast-content {
+      background-color: $error-toast-color;
+      color: $content-toast-color;
+    }
   }
-}
-/* Info toast */
-.toast-info {
-  .md-toast-content{
-    background-color: $info-toast-color;
-    color: $content-toast-color;
+  &-info {
+    .md-toast-content {
+      background-color: $info-toast-color;
+      color: $content-toast-color;
+    }
   }
-} 
-.md-toast-text{
-  margin-left:10px; 
-}
-.toast-icon{
-  color: $content-toast-color !important;
-}
-// Positions classes
-.toast-top{
-  top: 0;
-}
-.toast-bottom{
-  bottom: 0;
-}
-.toast-right{
-  right: 0;
-}
-.toast-left{
-  left: 0;
+  &-icon {
+    color: $content-toast-color !important;
+  }
+
+  // Positions classes
+  &-top {
+    top: 0;
+  }
+  &-bottom {
+    bottom: 0;
+  }
+  &-right {
+    right: 0;
+  }
+  &-left {
+    left: 0;
+  }
 }
 
+.md-toast-text {
+  margin-left: $baseline-grid;
+}
