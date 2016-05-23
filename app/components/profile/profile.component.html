@@ -1,6 +1,13 @@
 <tsfn-showcase file-list="::$ctrl.files" title="{{::$ctrl.title}}"></tsfn-showcase>
 
 <!-- TODO: Add validations -->
+<div id="errors">
+  <div id="validation-error-message" ng-animate ng-show="$ctrl.invalidElements.length > 0" >
+    <md-content layout="row" layout-padding>
+      <p>Please check the following inputs: <strong>{{$ctrl.invalidElements}}</strong></p>
+    </md-content>
+  </div>
+</div>
 <form name="userForm" novalidate>
   <div ng-init="$ctrl.setForm(userForm)"></div>
   <md-content md-theme="dark" class="md-padding" layout="row" layout-sm="column">
@@ -102,7 +109,8 @@
       <textarea id="biography" ng-model="$ctrl.user.biography" columns="1" md-maxlength="150"></textarea>
     </md-input-container>
     <div flex>
-      <md-button ng-click="$ctrl.submitUser()" ng-disabled="userForm.$invalid" class="md-primary"> Submit </md-button>
+      <!--<md-button ng-click="$ctrl.submitUser()" ng-disabled="userForm.$invalid" class="md-primary"> Submit </md-button>-->
+      <md-button ng-click="$ctrl.submitUser()" class="md-primary"> Submit </md-button> 
     </div>
   </md-content>
 </form>

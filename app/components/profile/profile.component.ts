@@ -28,7 +28,7 @@ export default class ProfileComponent implements at.OnActivate, at.CanDeactivate
     gender: '',
     age: null
   };
-
+  public invalidElements: string;
   public files = [
     'components/profile/profile.component.html',
     'components/profile/profile.component.ts',
@@ -45,11 +45,13 @@ export default class ProfileComponent implements at.OnActivate, at.CanDeactivate
     this.title = next.routeData.data['title'];
   }
   public submitUser() {
-    this.dialog.show(
-      this.dialog.alert()
-        .textContent(this.user.title + ' submitted!')
-        .ok('Ok!')
-    );
+    if (this.isUserFormValid()) {
+      this.dialog.show(
+        this.dialog.alert()
+          .textContent(this.user.title + ' submitted!')
+          .ok('Ok!')
+      );
+    }
   }
   public setForm(form) {
     this.userForm = form;
@@ -69,5 +71,32 @@ export default class ProfileComponent implements at.OnActivate, at.CanDeactivate
     }
 
   }
+  private isUserFormValid(): boolean {
+    this.invalidElements = '';
+    let form = this.userForm;
+    if (form.$valid) {
+      return true;
+    } else {
+      // Scroll to top
+      angular.element(document.getElementById('main')).animate({ scrollTop: 0 }, 'slow');
 
+      // Show error messages
+      let elements: string[] = [];
+      if (!form.title.$valid) elements.push('Username');
+      if (!form.email.$valid) elements.push('Email');
+      // if (!form.firstName.$valid) elements.push('First name');
+      if (!form.lastname.$valid) elements.push('Last name');
+      // if (!form.company.$valid) elements.push('Company');
+      // if (!form.address.$valid) elements.push('Address');
+      // if (!form.city.$valid) elements.push('City');
+      if (!form.state.$valid) elements.push('State');
+      // if (!form.biography.$valid) elements.push('Biography');
+      // if (!form.postalCode.$valid) elements.push('Postal Code');
+      if (!form.submissiondate.$valid) elements.push('Submission date');
+      // if (!form.gender.$valid) elements.push('Gender');
+      // this.anchorScroll('validation-error-message');
+      this.invalidElements = elements.join(', ');
+      return false;
+    }
+  }
 }

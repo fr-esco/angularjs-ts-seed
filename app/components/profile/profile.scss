@@ -1,0 +1,33 @@
+
+$validation-error-height: 80px;
+
+#validation-error-message{
+    border-bottom: 1px solid rgb(231,87,83);
+    &.ng-hide{
+        height:0px;
+    }
+    &.ng-hide-remove{
+        animation: show-validation-error 2s;
+        animation-fill-mode: forwards;
+        
+    }
+    &.ng-hide-add{
+        animation: hide-validation-error 1s;
+        animation-fill-mode: forwards;
+    }
+    md-content{
+        background-color: #CECECE; 
+        p{
+            color: rgb(231,87,83);
+        }
+    }
+}
+
+@keyframes show-validation-error{
+    from{ height:0px}
+    to{ height: $validation-error-height}
+}
+@keyframes hide-validation-error{
+    from{ height: $validation-error-height}
+    to{ height: 0px}
+}
