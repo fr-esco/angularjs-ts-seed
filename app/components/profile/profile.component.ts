@@ -9,7 +9,7 @@ const ngComponentName = 'tsfnProfile';
   templateUrl: 'profile/profile.component.html'
 })
 @at.inject('$log', '$mdDialog', '$q')
-export default class ProfileComponent implements at.OnActivate, at.CanDeactivate {
+export default class ProfileComponent implements angular.OnActivate, angular.CanDeactivate {
   public title: string;
   public userForm;
   public user = {
@@ -28,7 +28,7 @@ export default class ProfileComponent implements at.OnActivate, at.CanDeactivate
     gender: '',
     age: null
   };
-  public invalidElements: string;
+  public invalidElements = '';
   public files = [
     'components/profile/profile.component.html',
     'components/profile/profile.component.ts',
@@ -44,23 +44,24 @@ export default class ProfileComponent implements at.OnActivate, at.CanDeactivate
   public $routerOnActivate(next: at.ComponentInstruction) {
     this.title = next.routeData.data['title'];
   }
+
   public submitUser() {
     if (this.isUserFormValid()) {
       this.dialog.show(
         this.dialog.alert()
           .textContent(this.user.title + ' submitted!')
-          .ok('Ok!')
+          .ok('Ok')
       );
     }
   }
+
   public setForm(form) {
     this.userForm = form;
-
   }
-  public $routerCanDeactivate() {
 
-    var confirm = this.q.defer();
+  public $routerCanDeactivate() {
     if (this.userForm.$dirty) {
+      let confirm = this.q.defer();
       this.dialog.show(
         this.dialog.confirm()
           .textContent('You have unsaved changes. Do you want to leave the page?')
@@ -69,23 +70,23 @@ export default class ProfileComponent implements at.OnActivate, at.CanDeactivate
       ).then(() => { confirm.resolve(true); }, () => { confirm.resolve(false); });
       return confirm.promise;
     }
-
+    return this.q.when(true);
   }
+
   private isUserFormValid(): boolean {
     this.invalidElements = '';
+
     let form = this.userForm;
     if (form.$valid) {
       return true;
     } else {
-      // Scroll to top
-      angular.element(document.getElementById('main')).animate({ scrollTop: 0 }, 'slow');
 
       // Show error messages
       let elements: string[] = [];
       if (!form.title.$valid) elements.push('Username');
       if (!form.email.$valid) elements.push('Email');
       // if (!form.firstName.$valid) elements.push('First name');
-      if (!form.lastname.$valid) elements.push('Last name');
+      if (!form.lastName.$valid) elements.push('Last name');
       // if (!form.company.$valid) elements.push('Company');
       // if (!form.address.$valid) elements.push('Address');
       // if (!form.city.$valid) elements.push('City');
@@ -94,8 +95,11 @@ export default class ProfileComponent implements at.OnActivate, at.CanDeactivate
       // if (!form.postalCode.$valid) elements.push('Postal Code');
       if (!form.submissiondate.$valid) elements.push('Submission date');
       // if (!form.gender.$valid) elements.push('Gender');
-      // this.anchorScroll('validation-error-message');
       this.invalidElements = elements.join(', ');
+
+      // Scroll to top
+      angular.element(document.getElementById('main')).animate({ scrollTop: 0 }, 'slow');
+
       return false;
     }
   }

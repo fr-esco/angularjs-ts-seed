@@ -1,12 +1,11 @@
 <tsfn-showcase file-list="::$ctrl.files" title="{{::$ctrl.title}}"></tsfn-showcase>
 
 <!-- TODO: Add validations -->
-<div id="errors">
-  <div id="validation-error-message" ng-animate ng-show="$ctrl.invalidElements.length > 0" >
-    <md-content layout="row" layout-padding>
-      <p>Please check the following inputs: <strong>{{$ctrl.invalidElements}}</strong></p>
-    </md-content>
-  </div>
+<div id="validation-error-message" ng-animate ng-show="$ctrl.invalidElements.length > 0" >
+  <md-content layout="row" layout-padding>
+    <p>Please check the following inputs: <strong>{{$ctrl.invalidElements}}</strong></p>
+  </md-content>
+  <md-divider></md-divider>
 </div>
 <form name="userForm" novalidate>
   <div ng-init="$ctrl.setForm(userForm)"></div>
@@ -49,13 +48,13 @@
     <div layout layout-sm="column">
       <md-input-container flex>
         <label for="first-name">First Name</label>
-        <input id="first-name" ng-model="$ctrl.user.firstName">
+        <input id="first-name" name="firstName" ng-model="$ctrl.user.firstName">
       </md-input-container>
       <md-input-container flex>
         <label for="last-name">Last Name</label>
-        <input id="last-name" name="lastname" ng-model="$ctrl.user.lastName" ng-minlength="2">
-        <div ng-messages="userForm.lastname.$error" ng-show="userForm.lastname.$dirty">
-          <div div ng-message-exp="minlength">lastname less than 2</div>
+        <input id="last-name" name="lastName" ng-model="$ctrl.user.lastName" ng-minlength="2">
+        <div ng-messages="userForm.lastName.$error" ng-show="userForm.lastName.$dirty">
+          <div div ng-message-exp="minlength">lastName less than 2</div>
         </div>
       </md-input-container>
     </div>
@@ -110,7 +109,7 @@
     </md-input-container>
     <div flex>
       <!--<md-button ng-click="$ctrl.submitUser()" ng-disabled="userForm.$invalid" class="md-primary"> Submit </md-button>-->
-      <md-button ng-click="$ctrl.submitUser()" class="md-primary"> Submit </md-button> 
+      <md-button ng-click="$ctrl.submitUser()" class="md-primary"> Submit </md-button>
     </div>
   </md-content>
 </form>
