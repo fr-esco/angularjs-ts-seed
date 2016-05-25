@@ -1,0 +1,21 @@
+#my-form{
+  md-input-container{
+      > label._md-container-ignore {
+          // Workaround for select
+          font-size: smaller;
+          // font-weight: bold;
+      }
+    &.md-input-has-value{
+      label, label._md-container-ignore{
+        color: #009688 !important;
+      }
+    }
+  }
+  fieldset{
+      color: #757575;
+      border: 1px dotted #757575;
+      margin: 10px;
+      // border-radius: 10px;
+      background-color: #FAFAFA;
+  }
+}
