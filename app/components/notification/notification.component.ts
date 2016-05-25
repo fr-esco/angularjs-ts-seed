@@ -10,7 +10,7 @@ const ngComponentName = 'tsfnNotification';
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'notification/notification.component.html'
 })
-@at.inject('$log', '$mdMedia', '$scope', 'notification')
+@at.inject('$log', '$mdMedia', '$scope', 'notification', 'hotkeys')
 export default class NotificationComponent {
 
   public messageTypes: string[] = ['Success', 'Warning', 'Error', 'Info'];
@@ -33,7 +33,8 @@ export default class NotificationComponent {
   constructor(private log: angular.ILogService,
     private mdMedia: angular.material.IMedia,
     private scope: angular.IScope,
-    private notification: NotificationService) {
+    private notification: NotificationService,
+    private hotkeys) {
     log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
   }
 
@@ -50,6 +51,15 @@ export default class NotificationComponent {
         }
       }
     );
+
+    this.hotkeys.add({
+      combo: 'alt+c',
+      description: 'Close notification',
+      callback: (event, hotkey) => {
+        event.preventDefault();
+        this.notification.close();
+      }
+    });
   }
 
   public changeToastType(index: number): void {
