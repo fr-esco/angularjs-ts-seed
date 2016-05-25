@@ -111,6 +111,10 @@ export default class NotificationProviderService {
     return this.show('info', message, config, actions);
   }
 
+  public close(action = 'close') {
+    this.mdToast.hide(action);
+  }
+
   private show(type: string, message: string, cfg?: INotificationConfig, actions?: INotificationAction[]): angular.IPromise<angular.material.IToastService> {
 
     let delay = (cfg && (cfg.delay >= 0)) ? cfg.delay : this.config.delay;
