@@ -2,32 +2,32 @@ $group-background-color:  #FAFAFA;
 $group-border-color:      #757575;
 $group-title-color:       #757575;
 $input-filled-color:      #009688;
+$select-header-color:     rgba(0,0,0,0.38);
 
 #my-form{
   md-input-container {
-    > label {
-        &._md-container-ignore {
-          // Workaround for select
-          font-size: smaller;
-          // font-weight: bold;
-        }
+    > md-select-header {
+      color: $select-header-color;
+      transform: translate3d(0, -15px,0) scale(0.75);
+      // display: inline-block;
+      position: absolute;
+      transform-origin: top left;
     }
     // Filled input rule
     &.md-input-has-value { 
       > label {
-        color: $input-filled-color !important;
-        &._md-container-ignore{
-          // Workaround for select
-          color: $input-filled-color !important;
-        }
+        color: $input-filled-color;
+      }
+      > md-select-header {
+        color: $input-filled-color;
       }
     }
   }
   .group {
-      color: $group-title-color;
-      border: 1px dotted $group-border-color;
-      margin: 10px;
-      // border-radius: 10px;
-      background-color: $group-background-color;
+    color: $group-title-color;
+    border: 1px dotted $group-border-color;
+    margin: 10px;
+    // border-radius: 10px;
+    background-color: $group-background-color;
   }
 }

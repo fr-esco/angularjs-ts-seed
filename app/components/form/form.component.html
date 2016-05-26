@@ -11,7 +11,7 @@
                     <input type="text" name="prev-action" placeholder="">
                 </md-input-container>
                 <md-input-container class="md-block" md-no-float flex>
-                    <label>Point of contact:</label>
+                    <md-select-header>Point of contact:</md-select-header>
                     <md-select ng-model="form.patient" ng-disabled="true" placeholder="Patient">
                         <md-option value="patient" selected>Patient</md-option>
                     </md-select>
@@ -42,7 +42,7 @@
         <div layout="column" flex>
             <div layout="row" flex>
                 <md-input-container class="md-block" md-no-float flex>
-                    <label>Reject category:</label>
+                    <md-select-header>Reject category:</md-select-header>
                     <md-select ng-model="form.rejectCategory" ng-disabled="true" placeholder="Patient">
                         <md-option value="Patient" selected>Speciality TRP reject category</md-option>
                     </md-select>
@@ -89,7 +89,7 @@
                     <!--First row-->
                     <div layout="row">
                         <md-input-container class="md-block" flex>
-                            <label class="_md-container-ignore"><strong>Type:</strong></label>
+                            <md-select-header><strong>Type:</strong></md-select-header>
                             <md-select ng-model="form.priorauthorizationtype">
                                 <md-option value="type1">Type 1</md-option>
                             </md-select>
@@ -98,7 +98,7 @@
                     <!--Second row-->
                     <div layout="row">
                         <md-input-container md-no-float class="md-block" flex>
-                            <label><strong>Number</strong></label>
+                            <md-select-header><strong>Number</strong></md-select-header>
                             <input type="text" placeholder="">
                         </md-input-container>
                     </div>
@@ -108,7 +108,7 @@
                     <!--First row-->
                     <div layout="row">
                         <md-input-container class="md-block" flex>
-                            <label class="_md-container-ignore"><strong>Code 1:</strong></label>
+                            <md-select-header><strong>Code 1:</strong></md-select-header>
                             <md-select ng-model="form.code">
                                 <md-option value="code1">Code 1</md-option>
                             </md-select>
@@ -123,7 +123,7 @@
                     <!--First row-->
                     <div layout="row">
                         <md-input-container class="md-block" flex>
-                            <label class="_md-container-ignore"><strong>Type:</strong></label>
+                            <md-select-header><strong>Type:</strong></md-select-header>
                             <md-select ng-model="form.type">
                                 <md-option value="type">Type 1</md-option>
                             </md-select>
@@ -132,7 +132,7 @@
                     <!--Second row-->
                     <div layout="row">
                         <md-input-container class="md-block" flex>
-                            <label class="_md-container-ignore"><strong>ID:</strong></label>
+                            <md-select-header><strong>ID:</strong></md-select-header>
                             <md-select ng-model="form.id">
                                 <md-option value="id">ID 1</md-option>
                             </md-select>
@@ -150,7 +150,7 @@
                     <!--First row-->
                     <div layout="row">
                         <md-input-container class="md-block" md-no-float flex>
-                            <label class="_md-container-ignore"><strong>Type:</strong></label>
+                            <md-select-header><strong>Type:</strong></md-select-header>
                             <md-select ng-model="form.diagnosyscode">
                                 <md-option value="type1">Type1</md-option>
                             </md-select>
@@ -207,7 +207,7 @@
                     </div>
                     <div layout="row">
                         <md-input-container class="md-block" flex>
-                            <label class="_md-container-ignore"><strong>Eligibility override:</strong></label>
+                            <md-select-header><strong>Eligibility override:</strong></md-select-header>
                             <md-select ng-model="form.eligibilityoverride">
                                 <md-option value="eligibility1">Eligibility 1</md-option>
                                 <md-option value="eligibility2">Eligibility 2</md-option>
@@ -219,7 +219,7 @@
                     </div>
                     <div layout="row">
                         <md-input-container class="md-block" flex>
-                            <label class="_md-container-ignore"><strong>Level of service:</strong></label>
+                            <md-select-header><strong>Level of service:</strong></md-select-header>
                             <md-select ng-model="form.levelofservice">
                                 <md-option value="level1">level 1</md-option>
                                 <md-option value="level2">level 2</md-option>
@@ -231,7 +231,7 @@
                     </div>
                     <div layout="row">
                         <md-input-container class="md-block" flex>
-                            <label class="_md-container-ignore"><strong>Delay reason code:</strong></label>
+                            <md-select-header><strong>Delay reason code:</strong></md-select-header>
                             <md-select ng-model="form.delayreasoncode">
                                 <md-option value="code1">Code 1</md-option>
                                 <md-option value="code2">Code 2</md-option>
@@ -243,7 +243,7 @@
                     </div>
                     <div layout="row">
                         <md-input-container class="md-block" flex>
-                            <label class="_md-container-ignore"><strong>Rx origin code:</strong></label>
+                            <md-select-header><strong>Rx origin code:</strong></md-select-header>
                             <md-select ng-model="form.rxorigincode">
                                 <md-option value="code1">Code 1</md-option>
                                 <md-option value="code2">Code 2</md-option>
@@ -255,7 +255,7 @@
                     </div>
                     <div layout="row">
                         <md-input-container class="md-block" flex>
-                            <label class="_md-container-ignore"><strong>Place of service:</strong></label>
+                            <md-select-header><strong>Place of service:</strong></md-select-header>
                             <md-select ng-model="form.placeofservice" placeholder="Placeholder">
                                 <md-option value="place1">Place 1</md-option>
                                 <md-option value="place2">Place 2</md-option>
