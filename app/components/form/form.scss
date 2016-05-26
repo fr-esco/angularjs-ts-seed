@@ -6,10 +6,9 @@ $select-header-color:     rgba(0,0,0,0.38);
 
 #my-form{
   md-input-container {
-    > md-select-header {
+    > .select-label {
       color: $select-header-color;
       transform: translate3d(0, -15px,0) scale(0.75);
-      // display: inline-block;
       position: absolute;
       transform-origin: top left;
     }
@@ -18,7 +17,7 @@ $select-header-color:     rgba(0,0,0,0.38);
       > label {
         color: $input-filled-color;
       }
-      > md-select-header {
+      > .select-label {
         color: $input-filled-color;
       }
     }

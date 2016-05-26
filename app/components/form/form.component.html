@@ -1,8 +1,13 @@
 <md-content id="my-form" class="md-padding">
     <!--First page block-->
-    <div style="background-color: #ECECEC;border-radius: 10px; margin-bottom:20px;" layout="row" layout-sm="column" layout-xs="column"
-        flex class="md-padding">
-        <!--<h4>TPR details</h4>-->
+    <div style="background-color: #ECECEC;border-radius: 10px; margin-bottom:20px;" layout="row" layout-sm="column" layout-xs="column" flex class="md-padding">
+    <!--<md-card style="background-color: #ECECEC; margin-bottom:20px;" >
+        <md-card-header>
+            <md-card-header-text>
+                <span>TPR details</span>
+            </md-card-header-text>
+        </md-card-header>
+        <md-card-content layout="row" layout-sm="column" layout-xs="column">-->
         <!--First two columns-->
         <div layout="column" flex-50>
             <div layout="row" flex>
@@ -11,7 +16,7 @@
                     <input type="text" name="prev-action" placeholder="">
                 </md-input-container>
                 <md-input-container class="md-block" md-no-float flex>
-                    <md-select-header>Point of contact:</md-select-header>
+                    <span class="select-label">Point of contact:</span>
                     <md-select ng-model="form.patient" ng-disabled="true" placeholder="Patient">
                         <md-option value="patient" selected>Patient</md-option>
                     </md-select>
@@ -42,7 +47,7 @@
         <div layout="column" flex>
             <div layout="row" flex>
                 <md-input-container class="md-block" md-no-float flex>
-                    <md-select-header>Reject category:</md-select-header>
+                    <span class="select-label">Reject category:</span>
                     <md-select ng-model="form.rejectCategory" ng-disabled="true" placeholder="Patient">
                         <md-option value="Patient" selected>Speciality TRP reject category</md-option>
                     </md-select>
@@ -59,7 +64,7 @@
         </div>
         <!--Fourth column-->
         <div layout="column" flex>
-            <div layout="column" flex>
+            <div layout="row" flex>
                 <md-input-container md-no-float flex class="md-block">
                     <label>Additional message</label>
                     <textarea md-no-autogrow placeholder="" ng-model="form.additionalMessage" rows="7"></textarea>
@@ -68,7 +73,7 @@
         </div>
         <!--Fifth column-->
         <div layout="column" flex>
-            <div layout="column" flex>
+            <div layout="row" flex>
                 <md-input-container md-no-float flex class="md-block">
                     <label>Processor message</label>
                     <textarea md-no-autogrow placeholder="" ng-model="form.processorMessage" rows="7" md-select-on-focus></textarea>
@@ -78,37 +83,48 @@
                 <md-button class="md-primary md-raised">+ Add TPR comment</md-button>
             </div>
         </div>
+        <!--</md-card-content>
+    </md-card>-->
     </div>
     <!--Second page block-->
-    <div layout="row" layout-sm="column" layout-xs="column" flex>
+    <div layout="row" layout-sm="column" layout-xs="column" flex >
         <!--First column-->
         <div layout="column" flex>
             <div flex>
-                <fieldset class="group md-padding" layout="row">
-                    <legend>Prior authorization</legend>
+                <md-card>
+                <!--<fieldset class="group md-padding" layout="row">
+                    <legend>Prior authorization</legend>-->
                     <!--First row-->
-                    <div layout="row">
-                        <md-input-container class="md-block" flex>
-                            <md-select-header><strong>Type:</strong></md-select-header>
-                            <md-select ng-model="form.priorauthorizationtype">
-                                <md-option value="type1">Type 1</md-option>
-                            </md-select>
-                        </md-input-container>
-                    </div>
-                    <!--Second row-->
-                    <div layout="row">
-                        <md-input-container md-no-float class="md-block" flex>
-                            <md-select-header><strong>Number</strong></md-select-header>
-                            <input type="text" placeholder="">
-                        </md-input-container>
-                    </div>
-                </fieldset>
-                <fieldset class="group md-padding" layout="row">
+                    <md-card-header>
+                        <md-card-header-text>
+                            <span>Prior authorization</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <md-card-content layout="column">
+                        <div layout="row">
+                            <md-input-container class="md-block" flex>
+                                <span class="select-label"><strong>Type:</strong></span>
+                                <md-select ng-model="form.priorauthorizationtype">
+                                    <md-option value="type1">Type 1</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <!--Second row-->
+                        <div layout="row">
+                            <md-input-container md-no-float class="md-block" flex>
+                                <label><strong>Number</strong></label>
+                                <input type="text" placeholder="">
+                            </md-input-container>
+                        </div>
+                    </md-card-content>
+                </md-card>
+                <!--</fieldset>-->
+                <fieldset class="group md-padding" layout="column">
                     <legend>Submission Clarification (Rx Denial)</legend>
                     <!--First row-->
                     <div layout="row">
                         <md-input-container class="md-block" flex>
-                            <md-select-header><strong>Code 1:</strong></md-select-header>
+                            <span class="select-label"><strong>Code 1:</strong></span>
                             <md-select ng-model="form.code">
                                 <md-option value="code1">Code 1</md-option>
                             </md-select>
@@ -118,12 +134,12 @@
                     <div layout="row">
                     </div>
                 </fieldset>
-                <fieldset class="group md-padding" layout="row">
+                <fieldset class="group md-padding" layout="column">
                     <legend>Alternate prescriber ID</legend>
                     <!--First row-->
                     <div layout="row">
                         <md-input-container class="md-block" flex>
-                            <md-select-header><strong>Type:</strong></md-select-header>
+                            <span class="select-label"><strong>Type:</strong></span>
                             <md-select ng-model="form.type">
                                 <md-option value="type">Type 1</md-option>
                             </md-select>
@@ -132,7 +148,7 @@
                     <!--Second row-->
                     <div layout="row">
                         <md-input-container class="md-block" flex>
-                            <md-select-header><strong>ID:</strong></md-select-header>
+                            <span class="select-label"><strong>ID:</strong></span>
                             <md-select ng-model="form.id">
                                 <md-option value="id">ID 1</md-option>
                             </md-select>
@@ -150,7 +166,7 @@
                     <!--First row-->
                     <div layout="row">
                         <md-input-container class="md-block" md-no-float flex>
-                            <md-select-header><strong>Type:</strong></md-select-header>
+                            <span class="select-label"><strong>Type:</strong></span>
                             <md-select ng-model="form.diagnosyscode">
                                 <md-option value="type1">Type1</md-option>
                             </md-select>
@@ -207,7 +223,7 @@
                     </div>
                     <div layout="row">
                         <md-input-container class="md-block" flex>
-                            <md-select-header><strong>Eligibility override:</strong></md-select-header>
+                            <span class="select-label"><strong>Eligibility override:</strong></span>
                             <md-select ng-model="form.eligibilityoverride">
                                 <md-option value="eligibility1">Eligibility 1</md-option>
                                 <md-option value="eligibility2">Eligibility 2</md-option>
@@ -219,7 +235,7 @@
                     </div>
                     <div layout="row">
                         <md-input-container class="md-block" flex>
-                            <md-select-header><strong>Level of service:</strong></md-select-header>
+                            <span class="select-label"><strong>Level of service:</strong></span>
                             <md-select ng-model="form.levelofservice">
                                 <md-option value="level1">level 1</md-option>
                                 <md-option value="level2">level 2</md-option>
@@ -231,7 +247,7 @@
                     </div>
                     <div layout="row">
                         <md-input-container class="md-block" flex>
-                            <md-select-header><strong>Delay reason code:</strong></md-select-header>
+                            <span class="select-label"><strong>Delay reason code:</strong></span>
                             <md-select ng-model="form.delayreasoncode">
                                 <md-option value="code1">Code 1</md-option>
                                 <md-option value="code2">Code 2</md-option>
@@ -243,7 +259,7 @@
                     </div>
                     <div layout="row">
                         <md-input-container class="md-block" flex>
-                            <md-select-header><strong>Rx origin code:</strong></md-select-header>
+                            <span class="select-label"><strong>Rx origin code:</strong></span>
                             <md-select ng-model="form.rxorigincode">
                                 <md-option value="code1">Code 1</md-option>
                                 <md-option value="code2">Code 2</md-option>
@@ -255,7 +271,7 @@
                     </div>
                     <div layout="row">
                         <md-input-container class="md-block" flex>
-                            <md-select-header><strong>Place of service:</strong></md-select-header>
+                            <span class="select-label"><strong>Place of service:</strong></span>
                             <md-select ng-model="form.placeofservice" placeholder="Placeholder">
                                 <md-option value="place1">Place 1</md-option>
                                 <md-option value="place2">Place 2</md-option>
