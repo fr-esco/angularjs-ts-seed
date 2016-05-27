@@ -15,18 +15,18 @@ $select-header-color:     rgba(0,0,0,0.38);
     // Filled input rule
     &.md-input-has-value { 
       > label {
-        color: $input-filled-color;
+        color: $input-filled-color !important;
       }
       > .select-label {
-        color: $input-filled-color;
+        color: $input-filled-color !important;
       }
     }
   }
-  .group {
-    color: $group-title-color;
-    border: 1px dotted $group-border-color;
-    margin: 10px;
-    // border-radius: 10px;
-    background-color: $group-background-color;
-  }
+  // .group {
+  //   color: $group-title-color;
+  //   border: 1px dotted $group-border-color;
+  //   margin: 10px;
+  //   // border-radius: 10px;
+  //   background-color: $group-background-color;
+  // }
 }
