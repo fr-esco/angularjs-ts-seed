@@ -1,10 +1,9 @@
-import ngModuleName from './locale.module';
+import ngModuleName from './localeexample.module';
 
 // import angular objects in alphabetical order
-import './locale.component';
+import './localeexample.component';
 // import './locale.controller';
 // import './locale.directive';
 // import './locale.filter';
-import './locale.provider';
 
 export default ngModuleName;

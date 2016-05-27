@@ -1,5 +1,5 @@
 import Material from '../material/material';
-import Showcase from '../showcase/showcase';
+import Showcase from 'components/showcase/showcase';
 'use strict';
 
 const ngModuleName = 'app.components.hotkeys';

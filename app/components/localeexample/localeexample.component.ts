@@ -1,17 +1,17 @@
-import ngModuleName from './locale.module';
+import ngModuleName from './localeexample.module';
 
-import LocaleService from './locale.provider';
-import {ILocale} from './locale.model';
+import LocaleService from 'components/locale/locale.provider';
+import {ILocale} from 'components/locale/locale.model';
 
 'use strict';
 
-const ngComponentName = 'tsfnLocale';
+const ngComponentName = 'tsfnLocaleExample';
 
 @at.component(ngModuleName, ngComponentName, {
   bindings: {
     locale: '@'
   },
-  templateUrl: 'locale/locale.component.html'
+  templateUrl: 'localeexample/localeexample.component.html'
 })
 @at.inject('locale', '$filter', '$log', '$q', '$timeout', '$translate', '$rootScope')
 export default class LocaleComponent implements at.OnInit {

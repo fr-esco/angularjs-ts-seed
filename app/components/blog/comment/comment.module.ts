@@ -1,5 +1,5 @@
 import Material from '../../material/material';
-import Rest from '../../rest/rest';
+import Rest from 'components/rest/rest';
 
 'use strict';
 

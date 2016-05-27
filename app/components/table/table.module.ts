@@ -1,5 +1,5 @@
 import Material from '../material/material';
-import Showcase from '../showcase/showcase';
+import Showcase from 'components/showcase/showcase';
 import Row from './row/row';
 
 'use strict';

@@ -1,6 +1,6 @@
 import ngModuleName from './comment.module';
 
-import {BaseRestClient} from '../../rest/rest.model';
+import {BaseRestClient} from 'components/rest/rest.model';
 
 import {IComment} from './comment.model';
 

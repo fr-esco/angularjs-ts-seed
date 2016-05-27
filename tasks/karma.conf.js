@@ -7,19 +7,21 @@ module.exports = function (config) {
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
+    commonjsPreprocessor: {
+      modulesRoot: 'node_modules'
+    },
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     // frameworks: ['mocha', 'sinon-chai', 'commonjs'],
     frameworks: ['jasmine', 'jasmine-matchers', 'commonjs'],
 
-
     // list of files / patterns to load in the browser
     files: [
       '../node_modules/jquery/dist/jquery.min.js',
       '../node_modules/angular/angular.js',
       '../node_modules/angular-mocks/angular-mocks.js',
-      '../node_modules/@angular/router/angular1/angular_1_router.js',
+      '../node_modules/ngComponentRouter-patched/angular_1_router.js',
       '../node_modules/angular-aria/angular-aria.js',
       '../node_modules/angular-animate/angular-animate.js',
       '../node_modules/angular-messages/angular-messages.js',
@@ -55,6 +57,10 @@ module.exports = function (config) {
       '../node_modules/angular15-typescript/lib/at-angular.js',
       '../node_modules/angular15-typescript/lib/at-angular-resource.js',
 
+      '../node_modules/ue-platform/index.js',
+
+      '../node_modules/ue-platform/lib/test-bundle.js',
+
       '../test/**/*.js',
       '../test/**/*.spec.js'
     ],
@@ -68,6 +74,8 @@ module.exports = function (config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      '../node_modules/ue-platform/index.js': ['commonjs'],
+      '../node_modules/ue-platform/lib/test-bundle.js': ['commonjs'],
       '../test/**/!(at-)*.js': ['commonjs'],
       '../test/components/**/!(*.spec)+(.js)': ['coverage'],
     },

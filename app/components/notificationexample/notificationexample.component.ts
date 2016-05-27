@@ -1,14 +1,14 @@
-import ngModuleName from './notification.module';
-import NotificationService from './notification.provider';
-import { INotificationConfig } from './notification.provider';
-import { INotificationAction } from './notification.provider';
+import ngModuleName from './notificationexample.module';
+import NotificationService from 'components/notification/notification.provider';
+import { INotificationConfig } from 'components/notification/notification.provider';
+import { INotificationAction } from 'components/notification/notification.provider';
 
 'use strict';
 
-const ngComponentName = 'tsfnNotification';
+const ngComponentName = 'tsfnNotificationExample';
 
 @at.component(ngModuleName, ngComponentName, {
-  templateUrl: 'notification/notification.component.html'
+  templateUrl: 'notificationexample/notificationexample.component.html'
 })
 @at.inject('$log', '$mdMedia', '$scope', 'notification', 'hotkeys')
 export default class NotificationComponent {

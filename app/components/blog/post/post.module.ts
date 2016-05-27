@@ -1,6 +1,6 @@
 import Material from '../../material/material';
-import Markdown from '../../markdown/markdown';
-import Rest from '../../rest/rest';
+import Markdown from 'components/markdown/markdown';
+import Rest from 'components/rest/rest';
 
 import Comment from '../comment/comment';
 

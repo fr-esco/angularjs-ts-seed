@@ -18,18 +18,31 @@ var join = path.join;
 var remapIstanbul = require('remap-istanbul/lib/gulpRemapIstanbul');
 var yargs = require('yargs');
 
+var merge = require('gulp-merge-json');
+var runSequence = require('run-sequence');
+
+var locales = ['it', 'en'];
+
 var tsProject = tsc.createProject('tsconfig.json', {
   typescript: require('typescript')
+});
+
+gulp.task('build.copy.locale.json.test', function() {
+  return locales.forEach(function(locale) {
+    gulp.src('./app/**/' + locale + '.json')
+      .pipe(merge('locale-' + locale + '.json'))
+      .pipe(gulp.dest(join(PATH.dest.test.all, 'i18n')));
+  });
 });
 
 gulp.task('build.html.test', ['clean.test'], function() {
   return gulp.src(PATH.src.html.directive)
     .pipe(ngHtml2Js({
-      moduleName: function(file) {
+      moduleName: 'tpl' || function (file) {
         var pathParts = file.path.split(path.sep),
           root = pathParts.indexOf('components');
-        return 'app.' + pathParts.slice(root, -1).map(function(folder) {
-          return folder.replace(/-[a-z]/g, function(match) {
+        return 'app.' + pathParts.slice(root, -1).map(function (folder) {
+          return folder.replace(/-[a-z]/g, function (match) {
             return match.substr(1).toUpperCase();
           });
         }).join('.');
@@ -39,21 +52,22 @@ gulp.task('build.html.test', ['clean.test'], function() {
     .pipe(gulp.dest(PATH.dest.test.all));
 });
 
-gulp.task('build.test', ['build.html.test'], function(done) {
+gulp.task('build.test', function(done) {
+  runSequence('build.html.test', 'build.copy.locale.json.test');
   var result = gulp.src(PATH.src.app.test)
     .pipe(plumber())
-    .pipe(sourcemaps.init({ debug: true }))
+    //.pipe(sourcemaps.init({ debug: true }))
     .pipe(tsc(tsProject));
 
   return result.js
-    .pipe(sourcemaps.write({
+    /*.pipe(sourcemaps.write({
       includeContent: false,
       sourceRoot: function(file) {
         var pathParts = file.path.split(path.sep),
           root = pathParts.indexOf('app');
         return pathParts.slice(root, -1).map(function() { return '..'; }).concat('app').join('/');
       }
-    }))
+    }))*/
     .pipe(gulp.dest(PATH.dest.test.all));
 });
 
@@ -62,7 +76,7 @@ gulp.task('run.karma', ['build.test'], function(done) {
 
   karma.start({
     configFile: join(__dirname, 'karma.conf.js'),
-    singleRun: !argv.debug
+    // singleRun: !argv.debug
   }, karmaDone);
 
   function karmaDone(exitCode) {

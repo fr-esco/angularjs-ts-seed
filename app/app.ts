@@ -2,20 +2,11 @@
 
 import routing      from './app.route';
 import {components} from './components/components';
-import platform     from 'platform';
+import platform     from 'ue-platform';
 
 const ngMainComponentName = 'tsfnApp';
 
 let app = angular.module('app', [
-  'ngComponentRouter',
-  'ngAnimate',
-  'ngCookies',
-  'ngSanitize',
-  // 'ngTouch',
-  'nvd3',
-  'tmh.dynamicLocale',
-  'pascalprecht.translate',
-  'angularMoment',
   platform,
   components.name,
 ]).config(routing)

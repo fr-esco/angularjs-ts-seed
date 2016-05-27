@@ -1,7 +1,7 @@
 /// <reference path="../../../typings/browser.d.ts" />
 
-import ngModuleName from './notification';
-import NotificationComponent from './notification.component';
+import ngModuleName from './notificationexample';
+import NotificationComponent from './notificationexample.component';
 
 'use strict';
 
@@ -19,7 +19,7 @@ xdescribe('# Notification Component', () => {
 
     beforeEach($inject(($rootScope, $componentController) => {
       scope = $rootScope.$new();
-      controller = $componentController('tsfnNotification', { $scope: scope }, {
+      controller = $componentController('tsfnNotificationExample', { $scope: scope }, {
         myAttribute: 'example',
         myOneWayBinding: '1.5'
       });

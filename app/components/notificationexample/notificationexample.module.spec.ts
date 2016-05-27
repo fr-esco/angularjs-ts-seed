@@ -1,6 +1,6 @@
 /// <reference path="../../../typings/browser.d.ts" />
 
-import Showcase from './showcase';
+import Notification from './notificationexample';
 
 'use strict';
 
@@ -8,13 +8,13 @@ let $module = angular.mock.module;
 let $inject = angular.mock.inject;
 let $dump = (arg: any): void => console.log(angular.mock.dump(arg));
 
-describe('# Showcase Module', () => {
-  beforeEach($module(Showcase));
+describe('# Notification Module', () => {
+  beforeEach($module(Notification));
 
   describe('## Existence', () => {
     let mod;
 
-    beforeEach(() => mod = angular.module(Showcase));
+    beforeEach(() => mod = angular.module(Notification));
 
     it('should exist', () => {
       expect(mod).not.toBeUndefined();
@@ -24,8 +24,6 @@ describe('# Showcase Module', () => {
     it('should have deps', () => {
       expect(mod.requires).toContain('ngComponentRouter');
       expect(mod.requires).toContain('app.components.material');
-      expect(mod.requires).toContain('ui.codemirror');
-      expect(mod.requires).toContain('app.components.markdown');
     });
   });
 
@@ -39,7 +37,7 @@ describe('# Showcase Module', () => {
     });
 
     it('should log registration', () => {
-      let loaded = ['ngModule', Showcase, 'loaded'].join(' ');
+      let loaded = ['ngModule', Notification, 'loaded'].join(' ');
       expect($log.debug.logs).toContain([loaded]);
     });
   });
