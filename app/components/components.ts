@@ -15,6 +15,7 @@ import I18n                 from './i18n/i18n';
 import UacExample           from './uacexample/uacexample';
 import HotKeys              from './hotkeys/hotkeys';
 import NotificationExample  from './notificationexample/notificationexample';
+import Form        from './form/form';
 
 let components = angular.module('app.components', [
   Common,
@@ -33,7 +34,8 @@ let components = angular.module('app.components', [
   Example,
   UacExample,
   HotKeys,
-  NotificationExample
+  NotificationExample,
+  Form
 ]);
 
 export {components}

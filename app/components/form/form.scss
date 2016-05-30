@@ -1,0 +1,36 @@
+$group-background-color:  #FAFAFA;
+$group-border-color:      #757575;
+$group-title-color:       #757575;
+$input-filled-color:      #009688;
+$select-header-color:     rgba(0,0,0,0.38);
+
+#my-form{
+  md-input-container {
+    > .select-label {
+      color: $select-header-color;
+      transform: translate3d(0, -15px,0) scale(0.75);
+      position: absolute;
+      transform-origin: top left;
+    }
+    // Filled input rule
+    &.md-input-has-value { 
+      > label {
+        color: $input-filled-color !important;
+      }
+      > .select-label {
+        color: $input-filled-color !important;
+      }
+    }
+    // Vertical input spacing fix
+    .md-errors-spacer {
+      min-height: 0;
+    }
+  }
+  // .group {
+  //   color: $group-title-color;
+  //   border: 1px dotted $group-border-color;
+  //   margin: 10px;
+  //   // border-radius: 10px;
+  //   background-color: $group-background-color;
+  // }
+}

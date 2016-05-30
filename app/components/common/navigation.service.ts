@@ -62,6 +62,12 @@ export default class NavigationService {
       icon: 'notifications',
       sref: '.notification',
       link: ['Notification']
+    },
+    {
+      name: 'Form',
+      icon: 'format_list_bulleted',
+      sref: '.form',
+      link: ['Form']
     }
   ];
 

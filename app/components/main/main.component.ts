@@ -17,7 +17,8 @@ const ngComponentName = 'tsfnMain';
     { path: '/blog/...', name: 'Blog', component: 'tsfnBlog', data: { title: 'Blog' } },
     { path: '/i18n', name: 'I18n', component: 'tsfnI18n', data: { title: 'i18n' } },
     { path: '/uac', name: 'Uac', component: 'tsfnUacExample', data: { title: 'Uac' } },
-    { path: '/notification', name: 'Notification', component: 'tsfnNotificationExample', data: { title: 'Notification' } }
+    { path: '/notification', name: 'Notification', component: 'tsfnNotificationExample', data: { title: 'Notification' } },
+    { path: '/form', name: 'Form', component: 'tsfnForm', data: { title: 'Form' } }
   ]
 })
 @at.inject('navigationService', '$log', '$q', '$mdSidenav', '$mdBottomSheet', '$mdMenu', '$mdToast', 'hotkeys', '$scope', '$rootRouter')
