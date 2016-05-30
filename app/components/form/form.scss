@@ -21,6 +21,10 @@ $select-header-color:     rgba(0,0,0,0.38);
         color: $input-filled-color !important;
       }
     }
+    // Vertical input spacing fix
+    .md-errors-spacer {
+      min-height: 0;
+    }
   }
   // .group {
   //   color: $group-title-color;

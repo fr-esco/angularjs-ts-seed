@@ -42,9 +42,13 @@ let config = ($mdThemingProvider: angular.material.IThemingProvider,
   //  To apply a color from this palette to an element different than 
   //  'md-button, md-checkbox, md-progress-circular, md-progress-linear, 
   //  md-radio-button, md-slider, md-switch, md-tabs, md-text-float, md-toolbar'
-  //  elements use: 
+  //  elements use the following directive:
+  //  
+  //  * for text color:
+  //  md-colors="{color: 'greyFormPalette-500'}" 
   // 
-  //  md-colors="{color: 'greyFormPalette-500'}" directive
+  //  * for background color:
+  //  md-colors="{backgroundColor: 'greyFormPalette-A100'}" for background color
   // 
   $mdThemingProvider.definePalette('grey-form-palette', {
     '50': '#E0E0E0',

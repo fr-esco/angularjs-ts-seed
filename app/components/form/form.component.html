@@ -1,21 +1,44 @@
-<md-content id="my-form" class="md-padding">
-    <!--First page block-->
-    <!--<div style="background-color: #ECECEC;border-radius: 10px; margin-bottom:20px;" layout="row" layout-sm="column" layout-xs="column"-->
-    <!--flex class="md-padding">-->
+<md-content id="my-form">
     <md-card md-theme="grey-form">
-        <!--<md-card-header>
-            <md-card-header-text>
-                <span>TPR details</span>
-            </md-card-header-text>
-        </md-card-header>-->
-        <md-card-content layout="row" layout-sm="column" layout-xs="column">
-            <!--First two columns-->
-            <div layout="column" flex-50>
+        <md-card-content layout="row" layout-sm="column" layout-xs="column" layout-margin>
+            <!--First column-->
+            <div layout="column" flex>
                 <div layout="row" flex>
                     <md-input-container md-no-float class="md-block" flex>
                         <label for="prev-action"><strong>Previous action</strong></label>
                         <input type="text" name="prev-action" placeholder="">
                     </md-input-container>
+                    <!--<md-input-container class="md-block" md-no-float flex>
+                        <span class="select-label"><strong>Point of contact:</strong></span>
+                        <md-select ng-model="form.patient" ng-disabled="true" placeholder="Patient">
+                            <md-option value="patient" selected>Patient</md-option>
+                        </md-select>
+                    </md-input-container>-->
+                </div>
+                <div layout="row" flex>
+                    <md-input-container md-no-float class="md-block" flex>
+                        <label for="store-time"><strong>Store time</strong></label>
+                        <input name="store-time" ng-disabled="true" id="store-time" type="store-time" placeholder="">
+                    </md-input-container>
+                    <!--<md-input-container md-no-float class="md-block" flex>
+                        <label for="fill-type"><strong>Fill type</strong></label>
+                        <input type="text" name="fill-type" id="fill-type" placeholder="">
+                    </md-input-container>-->
+                </div>
+                <div layout="row" flex>
+                    <md-input-container md-no-float class="md-block" flex>
+                        <label for="promise-time"><strong>Promise time</strong></label>
+                        <input name="promise-time" id="promise-time" type="promise-time" placeholder="">
+                    </md-input-container>
+                    <!--<md-input-container md-no-float class="md-block" flex>
+                        <label for="plan-billed"><strong>Plan billed</strong></label>
+                        <input type="text" name="plan-billed" id="plan-billed" placeholder="placeholder">
+                    </md-input-container>-->
+                </div>
+            </div>
+            <!--Second column-->
+            <div layout="column" flex>
+                <div layout="row" flex>
                     <md-input-container class="md-block" md-no-float flex>
                         <span class="select-label"><strong>Point of contact:</strong></span>
                         <md-select ng-model="form.patient" ng-disabled="true" placeholder="Patient">
@@ -25,19 +48,11 @@
                 </div>
                 <div layout="row" flex>
                     <md-input-container md-no-float class="md-block" flex>
-                        <label for="store-time"><strong>Store time</strong></label>
-                        <input name="store-time" ng-disabled="true" id="store-time" type="store-time" placeholder="">
-                    </md-input-container>
-                    <md-input-container md-no-float class="md-block" flex>
                         <label for="fill-type"><strong>Fill type</strong></label>
                         <input type="text" name="fill-type" id="fill-type" placeholder="">
                     </md-input-container>
                 </div>
                 <div layout="row" flex>
-                    <md-input-container md-no-float class="md-block" flex>
-                        <label for="promise-time"><strong>Promise time</strong></label>
-                        <input name="promise-time" id="promise-time" type="promise-time" placeholder="">
-                    </md-input-container>
                     <md-input-container md-no-float class="md-block" flex>
                         <label for="plan-billed"><strong>Plan billed</strong></label>
                         <input type="text" name="plan-billed" id="plan-billed" placeholder="placeholder">
@@ -55,9 +70,9 @@
                     </md-input-container>
                 </div>
                 <div layout="row" flex>
-                    <md-input-container md-no-float flex class="md-block" style="/* margin: 0; */top: -3px;">
+                    <md-input-container md-no-float flex class="md-block" style="/* margin: 0; */top: -6px;">
                         <label><strong>Reject reason</strong></label>
-                        <textarea placeholder="" md-no-autogrow ng-model="form.rejectReason" rows="6" md-select-on-focus></textarea>
+                        <textarea placeholder="" md-no-autogrow ng-model="form.rejectReason" rows="5" md-select-on-focus></textarea>
                     </md-input-container>
                 </div>
             </div>
@@ -84,9 +99,8 @@
             </div>
         </md-card-content>
     </md-card>
-    <!--</div>-->
     <!--Second page block-->
-    <div layout="row" layout-sm="column" layout-xs="column" flex>
+    <div layout="row" layout-sm="column" layout-xs="column" layout-margin flex>
         <!--First column-->
         <div layout="column" flex>
             <md-card>
@@ -99,7 +113,7 @@
                 <md-card-content layout="column">
                     <div layout="row">
                         <md-input-container class="md-block" flex>
-                            <span  class="select-label"><strong>Type:</strong></span>
+                            <span class="select-label"><strong>Type:</strong></span>
                             <md-select ng-model="form.priorauthorizationtype">
                                 <md-option value="type1">Type 1</md-option>
                             </md-select>
