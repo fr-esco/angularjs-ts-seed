@@ -4,5 +4,5 @@ import Material from '../material/material';
 
 const ngModuleName = 'app.components.main';
 
-export default angular.module(ngModuleName, ['ngComponentRouter', Material])
+export default angular.module(ngModuleName, ['ngComponentRouter', Material, 'cfp.hotkeys'])
   .run(['$log', $log => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;

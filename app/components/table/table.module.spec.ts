@@ -24,7 +24,7 @@ describe('# Table Module', () => {
     it('should have deps', () => {
       expect(mod.requires).toContain('ngComponentRouter');
       expect(mod.requires).toContain('app.components.material');
-      expect(mod.requires).toContain('app.components.showcase');
+      expect(mod.requires).toContain('ue.platform.components.showcase');
       expect(mod.requires).toContain('app.components.table.row');
     });
   });

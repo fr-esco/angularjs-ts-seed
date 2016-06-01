@@ -15,12 +15,13 @@ describe('# Profile Component', () => {
   beforeEach($module(ngModuleName));
 
   describe('## With $componentController', () => {
-    let controller, scope;
+    let controller, scope, httpBackend;
 
-    beforeEach($inject(($log, $rootScope, $componentController) => {
+    beforeEach($inject(($log, $rootScope, $componentController, $httpBackend) => {
       log = $log;
       scope = $rootScope.$new();
-      controller = $componentController('tsfnProfile', { $scope: scope });
+      httpBackend = $httpBackend;
+      controller = $componentController('tsfnProfileValdr', { $scope: scope });
     }));
 
     it('should be attached to the scope', () => {
@@ -28,22 +29,16 @@ describe('# Profile Component', () => {
     });
 
     it('should log registration', () => {
-      let loaded = ['ngComponent', 'tsfnProfile', 'loaded'].join(' ');
+      let loaded = ['ngModule', 'app.components.profilevaldrexample', 'loaded'].join(' ');
       expect(log.debug.logs).toContain([loaded]);
     });
 
     it('should have title', () => {
       let title = 'Profile';
+      httpBackend.expectGET('./components/profilevaldrexample/constraints.json').respond(200, {});
       controller.$routerOnActivate({ routeData: { data: { title: title } } });
       scope.$apply();
       expect(controller.title).toBe(title);
-    });
-
-    it('should have file configuration', () => {
-      expect(controller.files).toBeArrayOfSize(3);
-      controller.files.forEach(x => {
-        expect(x).toStartWith('components/');
-      });
     });
 
     it('should have user', () => {

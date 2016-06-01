@@ -8,7 +8,16 @@ module.exports = function (config) {
     basePath: '',
 
     commonjsPreprocessor: {
-      modulesRoot: 'node_modules'
+      modulesRoot: 'node_modules',
+      alias: {
+        'components/rest/rest': '../node_modules/ue-platform/lib/test/components/rest/rest.js',
+        'components/rest/rest.model': '../node_modules/ue-platform/lib/test/components/rest/rest.model.js',
+        'components/markdown/markdown': '../node_modules/ue-platform/lib/test/components/markdown/markdown.js',
+        'components/showcase/showcase': '../node_modules/ue-platform/lib/test/components/showcase/showcase.js',
+        'components/locale/locale.provider': '../node_modules/ue-platform/lib/test/components/locale/locale.provider.js',
+        'components/locale/locale.model': '../node_modules/ue-platform/lib/test/components/locale/locale.model.js',
+        'components/notification/notification.provider': '../node_modules/ue-platform/lib/test/components/notification/notification.provider.js'
+      }
     },
 
     // frameworks to use
@@ -57,9 +66,16 @@ module.exports = function (config) {
       '../node_modules/angular15-typescript/lib/at-angular.js',
       '../node_modules/angular15-typescript/lib/at-angular-resource.js',
 
+      '../node_modules/valdr/valdr.js',
+      '../node_modules/valdr/valdr-message.js',
+
+      '../node_modules/angular-hotkeys/build/hotkeys.js',
+
       '../node_modules/ue-platform/index.js',
 
       '../node_modules/ue-platform/lib/test-bundle.js',
+
+      '../node_modules/ue-platform/lib/test/**/*.js',
 
       '../test/**/*.js',
       '../test/**/*.spec.js'
@@ -76,8 +92,9 @@ module.exports = function (config) {
     preprocessors: {
       '../node_modules/ue-platform/index.js': ['commonjs'],
       '../node_modules/ue-platform/lib/test-bundle.js': ['commonjs'],
+      '../node_modules/ue-platform/lib/test/**/*.js': ['commonjs'],
       '../test/**/!(at-)*.js': ['commonjs'],
-      '../test/components/**/!(*.spec)+(.js)': ['coverage'],
+      '../test/components/**/!(*.spec)+(.js)': ['coverage']
     },
 
     // Generate json used for remap-istanbul
@@ -123,6 +140,6 @@ module.exports = function (config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
+    singleRun: true
   });
 };

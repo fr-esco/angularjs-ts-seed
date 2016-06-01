@@ -24,7 +24,8 @@ var runSequence = require('run-sequence');
 var locales = ['it', 'en'];
 
 var tsProject = tsc.createProject('tsconfig.json', {
-  typescript: require('typescript')
+  typescript: require('typescript'),
+  sourceMap: true
 });
 
 gulp.task('build.copy.locale.json.test', function() {
@@ -56,10 +57,11 @@ gulp.task('build.test', function(done) {
   runSequence('build.html.test', 'build.copy.locale.json.test');
   var result = gulp.src(PATH.src.app.test)
     .pipe(plumber())
-    //.pipe(sourcemaps.init({ debug: true }))
+    .pipe(sourcemaps.init())
     .pipe(tsc(tsProject));
 
   return result.js
+  .pipe(sourcemaps.write('.'))
     /*.pipe(sourcemaps.write({
       includeContent: false,
       sourceRoot: function(file) {

@@ -24,8 +24,8 @@ describe('# Post Module', () => {
     it('should have deps', () => {
       expect(mod.requires).toContain('ngComponentRouter');
       expect(mod.requires).toContain('app.components.material');
-      expect(mod.requires).toContain('app.components.markdown');
-      expect(mod.requires).toContain('app.components.rest');
+      expect(mod.requires).toContain('ue.platform.components.markdown');
+      expect(mod.requires).toContain('ue.platform.components.rest');
     });
   });
 

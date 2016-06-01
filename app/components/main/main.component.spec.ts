@@ -65,7 +65,7 @@ describe('# Main Component', () => {
     });
 
     it('should log registration', () => {
-      let loaded = ['ngComponent', 'tsfnMain', 'loaded'].join(' ');
+      let loaded = ['ngModule', 'app.components.main', 'loaded'].join(' ');
       expect(log.debug.logs).toContain([loaded]);
     });
 
