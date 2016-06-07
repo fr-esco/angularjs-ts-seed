@@ -73,8 +73,6 @@ module.exports = function (config) {
 
       '../node_modules/ue-platform/index.js',
 
-      '../node_modules/ue-platform/lib/test-bundle.js',
-
       '../node_modules/ue-platform/lib/test/**/*.js',
 
       '../test/**/*.js',
@@ -91,7 +89,6 @@ module.exports = function (config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       '../node_modules/ue-platform/index.js': ['commonjs'],
-      '../node_modules/ue-platform/lib/test-bundle.js': ['commonjs'],
       '../node_modules/ue-platform/lib/test/**/*.js': ['commonjs'],
       '../test/**/!(at-)*.js': ['commonjs'],
       '../test/components/**/!(*.spec)+(.js)': ['coverage']
@@ -140,6 +137,6 @@ module.exports = function (config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true
+    singleRun: false
   });
 };

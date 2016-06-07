@@ -50,7 +50,7 @@ describe('# Navigation Service', () => {
       $rootScope.$apply();
 
       expect(data).toBeArrayOfObjects();
-      expect(data).toBeArrayOfSize(9);
+      expect(data).toBeArrayOfSize(10);
       data.forEach(x => {
         expect(x).toHaveString('name');
         expect(x).toHaveString('icon');
