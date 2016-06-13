@@ -4,8 +4,8 @@ const {shell} = require('electron');
 const open = shell.openExternal;
 const url = require('url');
 
-const publicDomains = [];
-const authDomains = [];
+const publicDomains = ['flatlogic.github.io'];
+const authDomains = ['flatlogic.github.io'];
 
 // https://nodejs.org/api/url.html
 const sso = {
@@ -13,7 +13,7 @@ const sso = {
   hostname: 'www.googlex.com',
   port: '8080',
   pathname: 'endpoint',
-  query: { foo: bar },
+  query: { foo: 'bar' },
   hash: ''
 };
 
@@ -29,16 +29,17 @@ function handleRedirect(e, toUrl) {
   let domain = extractDomain(toUrl);
   if (isPublic(domain)) {
     // Eventual Manipulation...
-    toUrl = domain;
   } else if (isAuth(domain)) {
     // Eventual Manipulation...
-    sso.query.returnUrl = domain;
+    sso.query.returnDomain = domain;
+    sso.query.returnUrl = '' + toUrl;
     toUrl = url.format(sso);
   } else {
     console.warn('Invalid Domain: ' + domain);
     // throw RangeError('Invalid Domain: ' + domain);
   }
 
+  console.log('Navigate', toUrl);
   open(toUrl);
 }
 

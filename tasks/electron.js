@@ -17,7 +17,12 @@ function registerElectronEnvPkgTasks() {
   ['dev', 'prod'].forEach(function (env) {
 
     gulp.task(['build', 'electron', env, 'package'].join('.'), function () {
-      return gulp.src('package.json')
+      return gulp.src(['package.json'])
+        .pipe(gulp.dest(PATH.dest[env].all));
+    });
+
+    gulp.task(['build', 'electron', env, 'extra'].join('.'), function () {
+      return gulp.src('electron.extra.*.js')
         .pipe(gulp.dest(PATH.dest[env].all));
     });
 
@@ -30,6 +35,7 @@ function registerElectronEnvPkgTasks() {
     gulp.task(['build', 'electron', env].join('.'), [['build', env].join('.')], function () {
       return runSequence(
         ['build', 'electron', env, 'config'].join('.'),
+        ['build', 'electron', env, 'extra'].join('.'),
         ['build', 'electron', env, 'package'].join('.')
       );
     });
