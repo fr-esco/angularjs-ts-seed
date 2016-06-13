@@ -3,9 +3,9 @@
 export default angular.module('app.components.environment', [])
 
 .constant('endpoint', {
-  'apiBase': 'https://localhost/prod',
-  'configPoint': 'http://localhost:5555/configPoint',
-  'permission': 'http://localhost:5555/permission'
+  'apiBase': 'http://localhost/dev',
+  'configPoint': 'http://localhost:3000/configPoint',
+  'permission': 'http://localhost:3000/permission'
 })
 
 .constant('version', '0.4.0')

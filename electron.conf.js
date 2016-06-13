@@ -9,6 +9,8 @@ const BrowserWindow = require('browser-window');
 const app = require('app');
 const client = require('electron-connect').client;
 
+const open = electron.shell.openExternal;
+
 // adds debug features like hotkeys for triggering dev tools and reload
 // require('electron-debug')();
 
@@ -19,6 +21,16 @@ function onClosed() {
   // dereference the window
   // for multiple windows store them in an array
   mainWindow = null;
+}
+
+function handleRedirect(e, url) {
+  console.log('I am', mainWindow.getURL());
+  console.log('I go to', url);
+  console.log('OPEN', open);
+  if (url != mainWindow.getURL()) {
+    e.preventDefault();
+    open(url);
+  }
 }
 
 function createMainWindow() {
@@ -37,6 +49,9 @@ function createMainWindow() {
   client.create(win);
 
   win.on('closed', onClosed);
+
+  win.webContents.on('will-navigate', handleRedirect);
+  win.webContents.on('new-window', handleRedirect);
 
   return win;
 }
