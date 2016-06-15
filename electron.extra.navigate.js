@@ -1,11 +1,11 @@
 'use strict';
 
-const {shell} = require('electron');
+const {dialog, shell} = require('electron');
 const open = shell.openExternal;
 const url = require('url');
 
-const publicDomains = ['flatlogic.github.io'];
-const authDomains = ['flatlogic.github.io'];
+const publicDomains = ['w1a23g9.cogent-works.com'];
+const authDomains = ['flatlogic.github.ios'];
 
 // https://nodejs.org/api/url.html
 const sso = {
@@ -37,6 +37,15 @@ function handleRedirect(e, toUrl) {
   } else {
     console.warn('Invalid Domain: ' + domain);
     // throw RangeError('Invalid Domain: ' + domain);
+    // https://github.com/electron/electron/blob/master/docs/api/dialog.md
+    return dialog.showMessageBox({
+      type: 'error',
+      buttons: [],
+      // defaultId: 0,
+      title: 'Invalid Domain',
+      message: `You are not allowed to navigate to: ${domain}`,
+      detail: ['The domain of the following address is not whitelisted:', toUrl].join('\n')
+    }/*, (response) => console.log(response)*/);
   }
 
   console.log('Navigate', toUrl);
