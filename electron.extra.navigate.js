@@ -1,7 +1,10 @@
 'use strict';
 
+const noop = console.log.bind(console);
+
 const {dialog, shell} = require('electron');
-const open = shell.openExternal;
+const open = shell ? shell.openExternal : noop;
+const showMessage = dialog ? dialog.showMessageBox : noop;
 const url = require('url');
 
 const publicDomains = ['w1a23g9.cogent-works.com'];
@@ -38,14 +41,15 @@ function handleRedirect(e, toUrl) {
     console.warn('Invalid Domain: ' + domain);
     // throw RangeError('Invalid Domain: ' + domain);
     // https://github.com/electron/electron/blob/master/docs/api/dialog.md
-    return dialog.showMessageBox({
+    const message = {
       type: 'error',
       buttons: [],
       // defaultId: 0,
       title: 'Invalid Domain',
       message: `You are not allowed to navigate to: ${domain}`,
       detail: ['The domain of the following address is not whitelisted:', toUrl].join('\n')
-    }/*, (response) => console.log(response)*/);
+    };
+    return showMessage(message/*, (response) => console.log(response)*/);
   }
 
   console.log('Navigate', toUrl);
