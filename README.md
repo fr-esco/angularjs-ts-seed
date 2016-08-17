@@ -7,7 +7,7 @@ _This project is heavily inspired by [angular2-seed](https://github.com/mgechev/
 # Features
 * AngularJS **1.5.x**
 * Angular Component Router
-* Angular Material **1.1.0-RC4** ([doc](https://material.angularjs.org/latest/))
+* Angular Material **1.1.0-RC5** ([doc](https://material.angularjs.org/latest/))
 * SystemJS
 * Livereload (install [Chrome Plugin](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en) to enable this feature)
 * SCSS for styling ([doc](http://sass-lang.com/documentation/file.SASS_REFERENCE.html))
@@ -131,6 +131,34 @@ gulp electron -n <appname> -p <platform> [-e <environment>]
 
 # Full support and further information
 gulp electron -s
+```
+
+#### Package with Cordova
+
+##### Init Cordova project
+
+To initialize the Cordova project for Android, run the following:
+
+```bash
+npm i -g cordova
+npm install
+
+cd cordova && cordova platform add android
+```
+
+##### Using Cordova
+
+You can package your application for any supported platform by executing:
+
+```bash
+# Build and run on plugged device
+gulp cordova
+
+# Just build the .apk
+gulp cordova -t build
+
+# Full support and further information
+gulp cordova -s
 ```
 
 ## Scaffolding
