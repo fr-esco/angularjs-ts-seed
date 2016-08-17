@@ -58,28 +58,22 @@ gulp.task('serve.dev', ['build.dev'], function () {
 
   $.livereload.listen();
   watch(PATH.src.lib.js.concat(PATH.src.lib.css), function () {
-    gulp.start('build.lib.dev');
-    argv.electron && electron.reload();
+    gulp.start('build.lib.dev', () => argv.electron && electron.reload());
   });
   watch(PATH.src.app.dev.concat('!./app/components/environment/*.ts'), function () {
-    gulp.start('build.js.dev');
-    argv.electron && electron.reload();
+    gulp.start('build.js.dev', () => argv.electron && electron.reload());
   });
   watch(PATH.src.html.directive, function () {
-    gulp.start('build.html.dev');
-    argv.electron && electron.reload();
+    gulp.start('build.html.dev', () => argv.electron && electron.reload());
   });
   watch(['./app/**/!(*.directive|*.component|*.tpl).html', './app/**/*.css'], function () {
-    gulp.start('build.assets.dev');
-    argv.electron && electron.reload();
+    gulp.start('build.assets.dev', () => argv.electron && electron.reload());
   });
   watch(injectableDevAssetsRef(), function () {
-    gulp.start('build.index.dev');
-    argv.electron && electron.reload();
+    gulp.start('build.index.dev', () => argv.electron && electron.reload());
   });
   watch(PATH.src.scss, function () {
-    gulp.start('build.styles.dev');
-    argv.electron && electron.reload();
+    gulp.start('build.styles.dev', () => argv.electron && electron.reload());
   });
 
   app.use('*/components', express.static(join(__dirname, '..', 'app', 'components')));
@@ -127,8 +121,7 @@ gulp.task('serve.prod', ['build.prod'], function () {
   var app = express();
 
   watch('./app/**', function () {
-    gulp.start('build.app.prod');
-    argv.electron && electron.reload();
+    gulp.start('build.app.prod', () => argv.electron && electron.reload());
   });
 
   app.use('*/components', express.static(join(__dirname, '..', 'app', 'components')));

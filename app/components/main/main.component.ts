@@ -48,9 +48,7 @@ export default class MainComponent implements at.OnInit {
       parent: angular.element(document.getElementById('content')),
       templateUrl: 'bottom-sheet/bottom-sheet.tpl.html',
       controller: BottomSheetController,
-      controllerAs: 'vm',
-      bindToController: true,
-      targetEvent: $event
+      controllerAs: 'vm'
     }).then(clickedItem => {
       clickedItem && this.log.debug(clickedItem.name + ' clicked!');
     });
