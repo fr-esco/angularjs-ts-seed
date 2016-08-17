@@ -1,18 +1,31 @@
 <tsfn-showcase file-list="::$ctrl.files" title="{{::$ctrl.title}}"></tsfn-showcase>
 
 <!-- TODO: Add validations -->
-<md-content md-theme="dark" class="md-padding" layout="row" layout-sm="column">
-  <md-input-container>
-    <label for="title">Username</label>
-    <input id="title" ng-model="$ctrl.user.title">
-  </md-input-container>
-  <md-input-container>
-    <label for="email">Email</label>
-    <input id="email" ng-model="$ctrl.user.email" type="email">
-  </md-input-container>
-</md-content>
-<md-content class="md-padding">
-  <form name="userForm">
+<form name="userForm" novalidate>
+  <div ng-init="$ctrl.setForm(userForm)"></div>
+  <md-content md-theme="dark" class="md-padding" layout="row" layout-sm="column">
+    <md-input-container>
+      <label for="title">Username</label>
+      <input name="title" id="title" username-asynchro-validation ng-model="$ctrl.user.title" ng-minlength="8" required>
+      <div ng-messages="userForm.title.$error" ng-show="userForm.title.$dirty">
+        <div ng-message="minlength">That's too short!</div>
+        <div ng-message="required">Username required!</div>
+        <div ng-message="asynchroValidator">Username already exists!</div>
+
+      </div>
+    </md-input-container>
+    <md-input-container>
+      <label for="email">Email</label>
+      <input name="email" id="email" ng-model="$ctrl.user.email" type="email" ng-pattern="/^[a-zA-Z0-9._%+-]+@flatlogic.com$/"
+        required>
+      <div ng-messages="userForm.email.$error" ng-show="userForm.email.$dirty">
+        <div ng-message="required">Email required!</div>
+        <div ng-message="pattern">bad domain</div>
+      </div>
+    </md-input-container>
+  </md-content>
+  <md-content class="md-padding">
+
     <div layout layout-sm="column">
       <md-input-container flex="80">
         <label for="company">Company (Disabled)</label>
@@ -20,17 +33,40 @@
       </md-input-container>
       <md-input-container flex>
         <label for="submission-date">Submission Date</label>
-        <input id="submission-date" type="date" ng-model="$ctrl.user.submissionDate">
+        <input name="submissiondate" id="submission-date" type="date" date-in-the-past-validation ng-model="$ctrl.user.submissionDate">
+        <div ng-messages="userForm.submissiondate.$error" ng-show="userForm.submissiondate.$dirty">
+          <div ng-message="validate">Invalid Date</div>
+        </div>
       </md-input-container>
     </div>
     <div layout layout-sm="column">
       <md-input-container flex>
         <label for="first-name">First Name</label>
-        <input id="first-name" ng-model="$ctrl.user.firstName" placeholder="Placeholder text">
+        <input id="first-name" ng-model="$ctrl.user.firstName">
       </md-input-container>
       <md-input-container flex>
         <label for="last-name">Last Name</label>
         <input id="last-name" ng-model="$ctrl.user.lastName">
+      </md-input-container>
+    </div>
+    <div flex layout layout-sm="column">
+      <md-input-container>
+        <label>Gender</label>
+        <div flex-offset="70">
+          <md-radio-group layout="row" ng-model="$ctrl.user.gender">
+            <md-radio-button value="F">F</md-radio-button>
+            <md-radio-button value="M">M</md-radio-button>
+          </md-radio-group>
+        </div>
+      </md-input-container>
+    </div>
+    <div>
+      <md-input-container flex>
+        <label for="input">Age</label>
+        <input type="number" name="input" id="input" ng-model="$ctrl.user.age" min="18" max="99">
+        <div ng-messages="userForm.input.$error" ng-show="userForm.input.$dirty">
+          <div div ng-message-exp="['max','min']">Not valid age! Age must be greater than 18 less than 99</div>
+        </div>
       </md-input-container>
     </div>
     <md-input-container flex>
@@ -44,16 +80,26 @@
       </md-input-container>
       <md-input-container flex>
         <label for="state">State</label>
-        <input id="state" ng-model="user.state">
+        <input ng-model-options="{ updateOn: 'blur' }" placeholder="e.g. IT" name="state" id="state" ng-model="$ctrl.user.state"
+          ng-pattern="/^[A-Za-z]*$/" ng-minlength="2" mimaxlength="2">
+        <div ng-messages="userForm.state.$error" multiple ng-show="userForm.state.$dirty">
+          <div ng-message="pattern">Only character allowed</div>
+
+          <div ng-message="minlength">That's too short!</div>
+        </div>
       </md-input-container>
       <md-input-container flex>
         <label for="postal-code">Postal Code</label>
         <input id="postal-code" ng-model="$ctrl.user.postalCode">
       </md-input-container>
     </div>
+
     <md-input-container flex>
       <label for="biography">About us</label>
       <textarea id="biography" ng-model="$ctrl.user.biography" columns="1" md-maxlength="150"></textarea>
     </md-input-container>
-  </form>
-</md-content>
+    <div flex>
+      <md-button ng-click="$ctrl.submitUser()" ng-disabled="userForm.$invalid" class="md-primary"> Submit </md-button>
+    </div>
+  </md-content>
+</form>

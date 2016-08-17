@@ -14,13 +14,13 @@ const ngComponentName = 'tsfnShowcase';
 
 @at.component(ngModuleName, ngComponentName, {
   bindings: {
-    fileList: '<',
-    lazy: '<',
+    fileList: '<?',
+    lazy: '<?',
     title: '@'
   },
   templateUrl: 'showcase/showcase.component.html'
 })
-@at.inject('showcase', '$log', '$q', '$timeout')
+@at.inject('showcase', '$filter', '$log', '$q', '$timeout')
 export default class ShowcaseComponent implements at.OnInit {
   public fileList: string[];
   public lazy: boolean;
@@ -40,20 +40,41 @@ export default class ShowcaseComponent implements at.OnInit {
     ts: { name: 'javascript', typescript: true }
   };
 
+  private markdownFilter;
+
   constructor(private showcase: ShowcaseService,
+    private filter: angular.IFilterService,
     private log: angular.ILogService,
     private q: angular.IQService,
-    private timeout: angular.ITimeoutService) {
+    private timeout: angular.ITimeoutService,
+    private showdown) {
     log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+
+    this.markdownFilter = filter('markdown');
   }
 
   public $onInit() {
+    if (!this.fileList)
+      this.fileList = [
+        'components/showcase/showcase.scss',
+        'components/showcase/showcase.readme.md'
+      ];
     if (!this.lazy)
       this.load();
   }
 
   public toggleSource() {
     this.load().then(loaded => loaded ? this.toggleSourceInternal() : this.q.reject());
+  }
+
+  public markdown(tab: ITab, convert = false) {
+    if (tab.options.mode === 'md') {
+      if (convert)
+        tab.content = this.markdownFilter(tab.content);
+      return true;
+    }
+
+    return false;
   }
 
   private toggleSourceInternal() {

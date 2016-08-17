@@ -8,6 +8,10 @@ const ngComponentName = 'tsfnTable';
 
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'table/table.component.html',
+  $routeConfig: [
+    { path: '/', name: 'Table Default', component: 'tsfnTableDefault', data: { title: 'Table Default' }, useAsDefault: true },
+    { path: '/row', name: 'Row', component: 'tsfnRow', data: { title: 'Row' } },
+  ]
 })
 @at.inject('tableService', '$log')
 export default class TableComponent implements at.OnInit, at.OnActivate {

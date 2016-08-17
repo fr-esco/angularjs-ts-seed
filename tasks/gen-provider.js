@@ -44,7 +44,7 @@ function generator() {
         return false;
       }
       if (!exists.sync(join(resolveToComponents(), args.path))) {
-        gutil.log(gutil.colors.red('Invalid parent path: it does not exists.'));
+        gutil.log(gutil.colors.red('Invalid parent path: it does not exist.'));
         return false;
       }
       return true;
@@ -70,6 +70,7 @@ function generator() {
     .pipe(template({
       name: name,
       upCaseName: cap(camel(name)),
+      fullName: camel(name),
       modName: modName,
       toComponents: toComponents.join('/')
     }))

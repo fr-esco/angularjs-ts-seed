@@ -2,7 +2,6 @@
 
 import routing from './app.route';
 import {components} from './components/components';
-import {Service}   from './services/names-list';
 
 const ngMainComponentName = 'tsfnApp';
 
@@ -13,8 +12,10 @@ let app = angular.module('app', [
   'ngSanitize',
   // 'ngTouch',
   'nvd3',
+  'tmh.dynamicLocale',
+  'pascalprecht.translate',
+  'angularMoment',
   components.name,
-  Service.NamesList.moduleName,
 ]).config(routing)
   .value('$routerRootComponent', ngMainComponentName);
 

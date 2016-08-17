@@ -39,7 +39,7 @@ describe('# Example Controller', () => {
   describe('## Log enabled', () => {
     it('should log registration', () => {
       let loaded = ['ngController', 'ExampleController', 'loaded'].join(' ');
-      expect($log.debug.logs[1]).toContain(loaded);
+      expect($log.debug.logs).toContain([loaded]);
     });
   });
 

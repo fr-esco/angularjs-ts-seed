@@ -25,6 +25,7 @@ describe('# Showcase Module', () => {
       expect(mod.requires).toContain('ngComponentRouter');
       expect(mod.requires).toContain('app.components.material');
       expect(mod.requires).toContain('ui.codemirror');
+      expect(mod.requires).toContain('app.components.markdown');
     });
   });
 

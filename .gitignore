@@ -29,9 +29,21 @@ typings
 # Users Environment Variables
 .lock-wscript
 
+cordova/**/www/*
+!cordova/**/www/.gitkeep
+cordova/**/build
+cordova/platforms/*
+!cordova/platforms/*.json
+.cordova
+
 dist
 dev
 lib
 test
+config.ts
+db.json
 
+.history
+.orig
+.typingsrc
 .vscode

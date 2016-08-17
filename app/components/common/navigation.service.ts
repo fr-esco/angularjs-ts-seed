@@ -26,6 +26,18 @@ export default class NavigationService {
       icon: 'view_module',
       sref: '.table',
       link: ['Table']
+    },
+    {
+      name: 'Blog',
+      icon: 'comment',
+      sref: '.blog',
+      link: ['Blog']
+    },
+    {
+      name: 'I18n',
+      icon: 'translate',
+      sref: '.i18n',
+      link: ['I18n']
     }
   ];
 

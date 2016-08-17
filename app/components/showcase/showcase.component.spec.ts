@@ -9,78 +9,20 @@ let $module = angular.mock.module;
 let $inject = angular.mock.inject;
 let $dump = (arg: any): void => console.log(angular.mock.dump(arg));
 
-xdescribe('# Showcase Component', () => {
+describe('# Showcase Component', () => {
   let log;
 
   beforeEach($module(ngModuleName));
 
-  describe('## With $compile', () => {
-    let element, scope;
-
-    beforeEach($inject(($log, $compile, $rootScope) => {
-      log = $log;
-      scope = $rootScope.$new();
-      element = angular.element('<tsfn-showcase my-attribute="{{attr}}" my-one-way-binding="outside"></tsfn-showcase>');
-      element = $compile(element)(scope);
-      scope.attr = 'example';
-      scope.outside = '1.5';
-      scope.$apply();
-    }));
-
-    it('should log registration', () => {
-      let loaded = ['ngComponent', 'tsfnShowcase', 'loaded'].join(' ');
-      expect(log.debug.logs).toContain([loaded]);
-    });
-
-    it('should render the text', () => {
-      var h1 = element.find('h1');
-      expect(h1.text()).toBe('Unit Testing AngularJS 1.5');
-      var h2 = element.find('h2');
-      expect(h2.text()).toBe('example');
-      var p = element.find('p');
-      expect(p.text()).toBe('true');
-    });
-
-    it('should update the rendered text when the parent scope changes', () => {
-      scope.attr = 'test';
-      scope.outside = '2.0';
-      scope.$apply();
-      var h1 = element.find('h1');
-      expect(h1.text()).toBe('Unit Testing AngularJS 2.0');
-      var h2 = element.find('h2');
-      expect(h2.text()).toBe('test');
-    });
-
-    describe('### Controller', () => {
-      let controller;
-
-      beforeEach(() => {
-        controller = element.controller('tsfnShowcase');
-      });
-
-      it('should expose test', () => {
-        expect(controller.test).toBeDefined();
-        expect(controller.test).toBe(true);
-      });
-
-      it('should have bindings bound', () => {
-        expect(controller.myAttribute).toBeDefined();
-        expect(controller.myAttribute).toBe('example');
-        expect(controller.myOneWayBinding).toBeDefined();
-        expect(controller.myOneWayBinding).toBe('1.5');
-      });
-    });
-
-  });
-
   describe('## With $componentController', () => {
-    let controller, scope;
+    let controller, scope, service;
 
-    beforeEach($inject(($rootScope, $componentController) => {
+    beforeEach($inject(($rootScope, $componentController, showcase) => {
       scope = $rootScope.$new();
-      controller = $componentController('tsfnShowcase', { $scope: scope }, {
-        myAttribute: 'example',
-        myOneWayBinding: '1.5'
+      service = showcase;
+      controller = $componentController('tsfnShowcase', { $scope: scope, showcase: service }, {
+        fileList: ['example.html', 'example.ts', 'example.css'],
+        title: 'Showcase'
       });
     }));
 
@@ -88,16 +30,143 @@ xdescribe('# Showcase Component', () => {
       expect(scope.$ctrl).toBe(controller);
     });
 
-    it('should expose test', () => {
-      expect(controller.test).toBeDefined();
-      expect(controller.test).toBe(true);
+    it('should expose properties', () => {
+      expect(controller.showSource).toBe(false);
+      expect(controller.selected).toBe(0);
+      expect(controller.tabs).toBeEmptyArray();
+
+      expect(controller.loaded).toBe(false);
+      expect(controller.loading).toBe(false);
     });
 
     it('should have bindings bound', () => {
-      expect(controller.myAttribute).toBeDefined();
-      expect(controller.myAttribute).toBe('example');
-      expect(controller.myOneWayBinding).toBeDefined();
-      expect(controller.myOneWayBinding).toBe('1.5');
+      expect(controller.fileList).toBeArrayOfStrings();
+      expect(controller.fileList).toBeArrayOfSize(3);
+      expect(controller.lazy).toBeUndefined();
+      expect(controller.title).toBeNonEmptyString();
+    });
+
+    describe('### Lazy Feature', () => {
+      beforeEach(() => {
+        spyOn(controller, 'load');
+      });
+
+      it('should initialize file list', () => {
+        controller.fileList = undefined;
+        controller.$onInit();
+        expect(controller.fileList).toBeArrayOfStrings();
+        expect(controller.fileList).toBeArrayOfSize(2);
+      });
+
+      it('should load sources', () => {
+        controller.$onInit();
+        expect(controller.load).toHaveBeenCalled();
+      });
+
+      it('should not load sources', () => {
+        controller.lazy = true;
+        controller.$onInit();
+        expect(controller.load).not.toHaveBeenCalled();
+      });
+    });
+
+    it('should toggle source', () => {
+      spyOn(controller, 'toggleSourceInternal').and.callThrough();
+
+      controller.loaded = true;
+      controller.toggleSource();
+      scope.$apply();
+
+      expect(controller.toggleSourceInternal).toHaveBeenCalled();
+      expect(controller.showSource).toBe(true);
+    });
+
+    it('should not toggle source', $inject($q => {
+      spyOn(controller, 'load').and.callFake(() => $q.when(false));
+      spyOn(controller, 'toggleSourceInternal').and.callThrough();
+
+      controller.loaded = true;
+      controller.toggleSource();
+      scope.$apply();
+
+      expect(controller.toggleSourceInternal).not.toHaveBeenCalled();
+      expect(controller.showSource).toBe(false);
+    }));
+
+    it('should not convert markdown', () => {
+      let tab = {
+        name: 'showcase.readme.md',
+        options: { mode: 'md' },
+        content: 'abc'
+      };
+      expect(controller.markdown(tab)).toBe(true);
+      expect(tab.content).toBe('abc');
+    });
+
+    it('should convert markdown', () => {
+      let tab = {
+        name: 'showcase.readme.md',
+        options: { mode: 'md' },
+        content: 'abc'
+      };
+      expect(controller.markdown(tab, true)).toBe(true);
+      expect(tab.content).toBe('<p>abc</p>');
+    });
+
+    it('should not convert anything', () => {
+      let tab = {
+        name: 'showcase.scss',
+        options: { mode: 'sass' },
+        content: '.example {color: red; }'
+      };
+      expect(controller.markdown(tab)).toBe(false);
+      expect(controller.markdown(tab, true)).toBe(false);
+      expect(tab.content).toBe('.example {color: red; }');
+    });
+
+    describe('### Load Feature', () => {
+      beforeEach($inject($q => {
+        spyOn(controller, 'load').and.callThrough();
+        spyOn(service, 'load').and.callFake(() => $q.when(controller.fileList.reduce((obj, file) => (obj[file] = file) && obj, {})));
+      }));
+
+      it('should load sources', $inject($timeout => {
+        expect(controller.loaded).toBe(false);
+        expect(controller.loading).toBe(false);
+
+        controller.$onInit();
+        expect(controller.load).toHaveBeenCalled();
+
+        scope.$apply();
+
+        expect(controller.loading).toBe(true);
+        expect(service.load).toHaveBeenCalledWith(controller.fileList);
+        expect(controller.tabs).toBeNonEmptyArray();
+        controller.tabs.forEach(tab => {
+          expect(tab).toHaveNonEmptyString('title');
+          expect(tab).toHaveNonEmptyObject('options');
+          expect(tab.options).toHaveMember('mode');
+          expect(tab.options).toHaveNonEmptyString('theme');
+          expect(tab.options.theme).toBe('material');
+          expect(tab.options).toHaveBoolean('lineNumbers');
+          expect(tab.options.lineNumbers).toBe(true);
+          expect(tab.options).toHaveBoolean('readOnly');
+          expect(tab.options.readOnly).toBe(true);
+          expect(tab.options).toHaveBoolean('autoRefresh');
+          expect(tab.options.autoRefresh).toBe(true);
+          expect(tab).toHaveNonEmptyString('content');
+        });
+        expect(controller.loaded).toBe(true);
+
+        $timeout.flush(200);
+        expect($timeout.verifyNoPendingTasks).toThrow();
+        $timeout.flush(45);
+        expect($timeout.verifyNoPendingTasks).not.toThrow();
+
+        scope.$apply();
+        expect(controller.loading).toBe(false);
+      }));
+
     });
   });
 });

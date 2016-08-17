@@ -1,9 +1,11 @@
 'use strict';
 
-let routing = ($locationProvider: angular.ILocationProvider) => {
-  $locationProvider.html5Mode(true).hashPrefix('!');
+let routing = ($httpProvider: angular.IHttpProvider,
+  $locationProvider: angular.ILocationProvider) => {
+  $httpProvider.useApplyAsync(true);
+  // $locationProvider.html5Mode(true).hashPrefix('!');
 };
 
-routing.$inject = ['$locationProvider'];
+routing.$inject = ['$httpProvider', '$locationProvider'];
 
 export default routing;

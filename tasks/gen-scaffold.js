@@ -23,15 +23,28 @@ function generator() {
     }).join('');
   };
   var argv = yargs.reset()
-    .usage('Usage: gulp gen:scaffold -n [string] -p [string]')
+    .usage('Usage: gulp gen:scaffold -n [string] -f [string]')
     .alias('n', 'name')
     .demand('n')
     .string('n')
     .describe('n', 'Component name')
-    .alias('p', 'parent')
-    .string('p')
-    .default('p', '')
-    .describe('p', 'Parent path from Components folder')
+    .alias('f', 'folder')
+    .string('f')
+    .default('f', '')
+    .describe('f', 'Parent folder from Components')
+
+    .alias('c', 'controller')
+    .boolean('c')
+    .default('c', false)
+    .describe('c', 'Prefer Controller to Component')
+    .alias('d', 'directive')
+    .boolean('d')
+    .default('d', false)
+    .describe('d', 'Prefer Directive to Component')
+    .alias('p', 'provider')
+    .boolean('p')
+    .default('p', false)
+    .describe('p', 'Prefer Provider to Service')
 
     .alias('s', 'support')
     .help('s')
@@ -40,15 +53,15 @@ function generator() {
         gutil.log(gutil.colors.red('Invalid name: only lowercase letters are allowed.'));
         return false;
       }
-      if (!exists.sync(join(resolveToComponents(), args.parent))) {
-        gutil.log(gutil.colors.red('Invalid parent path: it does not exists.'));
+      if (!exists.sync(join(resolveToComponents(), args.folder))) {
+        gutil.log(gutil.colors.red('Invalid folder path: it does not exist.'));
         return false;
       }
       return true;
     })
     .argv;
   var name = argv.name;
-  var parentPath = argv.parent;
+  var parentPath = argv.folder;
   var destPath = join(resolveToComponents(), parentPath, name);
 
   var modName = (function() {
@@ -66,7 +79,7 @@ function generator() {
   var toComponents = parentPath.split('/').map(function() { return '..'; });
   var prefix = 'tsfn';
 
-  return gulp.src(PATH.src.blankTemplates.all)
+  return gulp.src(useTemplates(argv))
     .pipe(template({
       name: name,
       fullNameSnake: [prefix, name].join('-'),
@@ -99,7 +112,10 @@ generator.description = 'Generate Scaffold template';
 
 generator.flags = {
   '-n, --name': 'Scaffolded Component name',
-  '-p, --parent': 'Parent path from Components folder',
+  '-f, --folder': 'Parent path from Components folder',
+  '-c, --controller': 'Prefer Controller to Component',
+  '-d, --directive': 'Prefer Directive to Component (and to Controller)',
+  '-p, --provider': 'Prefer Provider to Service',
   '-s, --support': 'Show help'
 };
 
@@ -107,4 +123,16 @@ gulp.task('gen:scaffold', generator);
 
 function resolveToComponents(glob) {
   return join(__dirname, '..', 'app/components', glob || '');
+}
+
+function useTemplates(argv) {
+  var service = argv.provider ? 'provider' : 'service',
+    component = argv.directive ? 'directive' : (argv.controller ? 'controller' : 'component'),
+    templates = PATH.src.blankTemplates, output = [];
+  output = output.concat(templates.mod);
+  output = output.concat(templates.filter);
+  output = output.concat(templates[service]);
+  output = output.concat(templates[component]);
+  // console.log('Sources:', output);
+  return output;
 }
