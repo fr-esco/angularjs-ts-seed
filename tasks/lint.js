@@ -65,7 +65,7 @@ function lintTs() {
     .help('s')
     .argv;
 
-  return gulp.src(PATH.src.app.all)
+  return gulp.src(PATH.src.app.all.concat('!./app/components/environment/*'))
     .pipe(tslint())
     .pipe(tslint.report(argv.report), {
       emitError: false,
@@ -98,7 +98,7 @@ function checkFolders(root) {
 
   function checkFolder(dir) {
     fs.readdirSync(dir).forEach(function(file) {
-      if (/[^\.a-z-]/.test(file)) {
+      if (/[^\.a-z0-9-]/.test(file)) {
         ko.push(file);
       }
       if (fs.statSync(join(dir, file)).isDirectory()) {

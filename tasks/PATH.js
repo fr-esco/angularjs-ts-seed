@@ -24,6 +24,9 @@ module.exports = {
       dev: 'dist/pkg/dev',
       prod: 'dist/pkg/prod'
     },
+    cordova: {
+      www: 'cordova/www'
+    },
     server: {
       host: 'http://localhost',
       port: 5555
@@ -44,6 +47,8 @@ module.exports = {
         './node_modules/es6-module-loader/dist/es6-module-loader-sans-promises.js.map',
         './node_modules/systemjs/dist/system.src.js',
         './node_modules/angular/angular.js',
+        './node_modules/es6-shim/es6-shim.min.js',
+        './node_modules/es6-shim/es6-shim.map',
         //'./node_modules/@angular/router/angular1/angular_1_router.js',
         './node_modules/ngComponentRouter-patched/dist/angular_1_router.js',
         './node_modules/angular-aria/angular-aria.js',
@@ -77,10 +82,10 @@ module.exports = {
         './node_modules/lodash/lodash.min.js',
         './node_modules/restangular/dist/restangular.js',
 
-        './node_modules/angular-typescript/lib/at-angular.js',
-        './node_modules/angular-typescript/lib/at-angular-resource.js',
-        './node_modules/angular-typescript/lib/at-angular.js.map',
-        './node_modules/angular-typescript/lib/at-angular-resource.js.map',
+        './node_modules/angular15-typescript/lib/at-angular.js',
+        './node_modules/angular15-typescript/lib/at-angular-resource.js',
+        './node_modules/angular15-typescript/lib/at-angular.js.map',
+        './node_modules/angular15-typescript/lib/at-angular-resource.js.map',
 
         './node_modules/angular-dynamic-locale/dist/tmhDynamicLocale.min.js',
         './node_modules/angular-dynamic-locale/dist/tmhDynamicLocale.min.js.map',
@@ -100,7 +105,8 @@ module.exports = {
         './node_modules/moment/min/moment-with-locales.min.js',
         './node_modules/moment-timezone/builds/moment-timezone-with-data.min.js',
         './node_modules/angular-moment/angular-moment.min.js',
-        './node_modules/angular-moment/angular-moment.min.js.map'
+        './node_modules/angular-moment/angular-moment.min.js.map',
+        './node_modules/angular-hotkeys/build/hotkeys.js'
       ],
       css: [
         './node_modules/angular-material/angular-material.css',

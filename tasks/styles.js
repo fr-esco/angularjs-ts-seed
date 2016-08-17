@@ -3,6 +3,7 @@
 var PATH = require('./PATH');
 
 var gulp = require('gulp');
+var sourcemaps = require('gulp-sourcemaps');
 
 var paths = gulp.paths;
 
@@ -26,6 +27,7 @@ gulp.task('build.styles.dev', function() {
   var indexFilter = $.filter('index.scss');
 
   return gulp.src('./app/index.scss')
+    .pipe(sourcemaps.init())
     // .pipe(indexFilter)
     .pipe($.inject(injectFiles, injectOptions))
     // .pipe(indexFilter.restore())
@@ -36,6 +38,7 @@ gulp.task('build.styles.dev', function() {
       console.error(err.toString());
       this.emit('end');
     })
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(PATH.dest.dev.all))
     .pipe($.livereload());
 });

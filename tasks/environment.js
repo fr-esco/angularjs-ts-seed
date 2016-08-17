@@ -4,6 +4,7 @@ var gulp = require('gulp');
 var ngConstant = require('gulp-ng-constant');
 var rename = require('gulp-rename');
 var replace = require('gulp-replace');
+var strip = require('gulp-strip-comments');
 var gutil = require('gulp-util');
 
 var del = require('del');
@@ -18,6 +19,7 @@ var expected = {
     'apiBase': ''
   }
 };
+
 function compare(a, b) {
   return _.reduce(a, function (result, value, key) {
     if (_.isObject(value))
@@ -25,6 +27,7 @@ function compare(a, b) {
     return result && typeof value === typeof b[key];
   }, true);
 }
+
 function verifyConfig(configFile) {
   var constants = require(join('..', configFile));
   if (!compare(expected, constants) || !compare(constants, expected)) {
@@ -39,8 +42,9 @@ gulp.task('environment.generate.dev', function () {
   var jsonName = getJsonName('dev');
   var configPath = join(PATH.src.app.root, 'components', 'environment'),
     configFile = join(configPath, jsonName);
-  verifyConfig(configFile);
+  // verifyConfig(configFile);
   return gulp.src(configFile)
+    .pipe(strip())
     .pipe(ngConstant({
       name: 'app.components.environment',
       deps: [], // false to add the constants to an existing module
@@ -57,8 +61,9 @@ gulp.task('environment.generate.prod', function () {
   var jsonName = getJsonName('prod');
   var configPath = join(PATH.src.app.root, 'components', 'environment'),
     configFile = join(configPath, jsonName);
-  verifyConfig(configFile);
+  // verifyConfig(configFile);
   return gulp.src(configFile)
+    .pipe(strip())
     .pipe(ngConstant({
       name: 'app.components.environment',
       deps: [], // false to add the constants to an existing module

@@ -41,3 +41,8 @@ gulp.task('clean.tmp', function(done) {
 gulp.task('clean.test', function(done) {
   del('test', done);
 });
+
+gulp.task('clean.cordova.www', function(done) {
+  // TODO: rework this part.
+  del(join(PATH.dest.cordova.www, '**/*'), done);
+});

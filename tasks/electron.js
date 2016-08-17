@@ -21,6 +21,11 @@ function registerElectronEnvPkgTasks() {
         .pipe(gulp.dest(PATH.dest[env].all));
     });
 
+    gulp.task(['build', 'electron', env, 'extra'].join('.'), function () {
+      return gulp.src(['electron.extra.*.js', 'electron.preload.js'])
+        .pipe(gulp.dest(PATH.dest[env].all));
+    });
+
     gulp.task(['build', 'electron', env, 'config'].join('.'), function () {
       return gulp.src('electron.conf.package.js')
         .pipe(rename(pkg.main))
@@ -30,6 +35,7 @@ function registerElectronEnvPkgTasks() {
     gulp.task(['build', 'electron', env].join('.'), [['build', env].join('.')], function () {
       return runSequence(
         ['build', 'electron', env, 'config'].join('.'),
+        ['build', 'electron', env, 'extra'].join('.'),
         ['build', 'electron', env, 'package'].join('.')
       );
     });
@@ -57,6 +63,7 @@ function registerElectronEnvPkgTasks() {
           dir: PATH.dest[env].all,
           out: PATH.dest.pkg[env],
           platform: 'win32',
+          icon: 'app/assets/logo/ng-256x256.ico',
           arch: 'ia32',
           prune: true,
           overwrite: true,
@@ -90,6 +97,7 @@ function registerElectronEnvPkgTasks() {
           dir: PATH.dest[env].all,
           out: PATH.dest.pkg[env],
           platform: 'win32',
+          icon: 'app/assets/logo/ng-256x256.ico',
           arch: 'x64',
           prune: true,
           overwrite: true,
@@ -123,6 +131,7 @@ function registerElectronEnvPkgTasks() {
           dir: PATH.dest[env].all,
           out: PATH.dest.pkg[env],
           platform: 'darwin',
+          icon: 'app/assets/logo/ng-256x256.ico',
           arch: 'x64',
           prune: true,
           overwrite: true,
