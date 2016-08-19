@@ -70,7 +70,7 @@ export default class ShowcaseComponent implements at.OnInit {
   public markdown(tab: ITab, convert = false) {
     if (tab.options.mode === 'md') {
       if (convert)
-        tab.content = this.markdownFilter(tab.content);
+        this.timeout(() => tab.content = this.markdownFilter(tab.content), 0, false);
       return true;
     }
 
