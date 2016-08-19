@@ -7,6 +7,10 @@
   },
   "main": "electron.conf.js",
   "scripts": {
+    "git.merge": "git fetch upstream && git merge upstream/master",
+    "git.merge.preview": "git fetch upstream && git merge --no-commit upstream/master",
+    "git.prepare": "git add . && git add -f tools/install.js && git commit -m'setup'",
+    "git.setup": "git init && git remote add upstream https://github.com/fr-esco/angularjs-ts-seed.git",
     "ng:update": "npm i -S angular angular-animate angular-aria angular-cookies angular-i18n angular-message-format angular-messages angular-mocks angular-sanitize angular-touch",
     "postinstall": "typings install && gulp -T",
     "test": "echo \"Error: no test specified\" && exit 1"

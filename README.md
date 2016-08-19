@@ -1,11 +1,18 @@
+[![Angular Style Guide](https://img.shields.io/badge/Angular%20Style%20Guide-1.x%20ES2015-orange.svg?style=flat)](https://github.com/toddmotto/angular-styleguide)
+[![GitHub tag](https://img.shields.io/github/tag/fr-esco/angularjs-ts-seed.svg?maxAge=2592000)]()
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](http://opensource.org/licenses/MIT)
+[![Dependency Status](https://david-dm.org/fr-esco/angularjs-ts-seed.svg)](https://david-dm.org/fr-esco/angularjs-ts-seed)
+[![devDependency Status](https://david-dm.org/fr-esco/angularjs-ts-seed/dev-status.svg)](https://david-dm.org/fr-esco/angularjs-ts-seed#info=devDependencies)
+[![StackShare](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](http://stackshare.io/fr-esco/angularjs-ts-seed)
+
 # Introduction
 
 A seed project for AngularJS apps written in *TypeScript*.
 
-_This project is heavily inspired by [angular2-seed](https://github.com/mgechev/angular2-seed)_
+_This project is inspired by [angular2-seed](https://github.com/mgechev/angular2-seed)_
 
 # Features
-* AngularJS **1.5.x**
+* AngularJS **1.5.8**
 * Angular Component Router
 * Angular Material **1.1.0-RC5** ([doc](https://material.angularjs.org/latest/))
 * SystemJS
@@ -41,9 +48,33 @@ You can find some useful recipes (eg. how to test $timeout and $interval) here:
 
 # How to start
 
+## Git Setup
+
+*NOTE*: This should be done first before you start making any changes and building out your project. Not doing so will likely result in dificulty when trying to merge in upstream changes later.
+
+1. Download a zip of the seed. (**Do not fork**)
+2. `npm run git.setup` - This will initialize `git` as well as setup `upstream` properly.
+3. `git remote add origin ...your private repo...`
+4. `npm run git.prepare` - This will prepare git to handle the merge
+5. `npm run git.merge` - This will fetch upstream and run the first merge (*Important)
+  * IMPORTANT: You will see a wall of Conflicts after doing above (a Conflict for every single file). This is normal. There actually will not be any problematic conflicts as it's just reporting every single file which both sides (`upstream` and your first commit) added.
+6. `git add .; git commit -m'ready'`. **Yes**, you will be committing all those conflicts, which actually are not a problem in this 1 time case.
+7. Now you have `git` setup and ready to develop your application as well as merge in upstream changes in the future.
+
+### Merging latest upstream changes
+
+1. `npm run git.merge.preview` - This will fetch `upstream` and show you how the merge would look
+2. `npm run git.merge` - This will actually do the merge
+3. Handle any conflicts to get latest upstream into your application.
+4. Continue building your app.
+
+You can read more about [syncing a fork here](https://help.github.com/articles/syncing-a-fork/).
+
+If you have any suggestions to this workflow, please post [here](https://github.com/fr-esco/angularjs-ts-seed/issues).
+
+## Installation
+
 ```bash
-git clone https://github.com/soulsoftware/angularjs-ts-seed
-cd angularjs-ts-seed
 npm install
 ```
 
