@@ -20,7 +20,7 @@ describe('# Dashboard Component', () => {
     beforeEach($inject(($log, $rootScope, $componentController) => {
       log = $log;
       scope = $rootScope.$new();
-      controller = $componentController('tsfnDashboard', { $scope: scope });
+      controller = $componentController('tsfnDashboard', { $scope: scope, version: 'TEST' });
     }));
 
     it('should be attached to the scope', () => {
@@ -40,7 +40,7 @@ describe('# Dashboard Component', () => {
     });
 
     it('should have file configuration', () => {
-      expect(controller.files).toBeArrayOfSize(5);
+      expect(controller.files).toBeArrayOfSize(6);
       controller.files.forEach(x => {
         expect(x).toBeArrayOfStrings();
         x.forEach(file => expect(file).toStartWith('components/'));

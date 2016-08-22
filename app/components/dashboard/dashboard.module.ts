@@ -6,5 +6,5 @@ import Panel from './panel/panel';
 
 const ngModuleName = 'app.components.dashboard';
 
-export default angular.module(ngModuleName, ['ngComponentRouter', Material, Panel, Showcase])
+export default angular.module(ngModuleName, ['ngComponentRouter', Material, 'pascalprecht.translate', Panel, Showcase])
   .run(['$log', $log => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;

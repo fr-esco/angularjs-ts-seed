@@ -13,6 +13,7 @@
     "angular-translate": "registry:dt/angular-translate#2.4.0+20160729132354",
     "at-angular": "file:node_modules/angular15-typescript/lib/at-angular.d.ts",
     "d3": "registry:dt/d3#0.0.0+20160727131401",
+    "es6-shim": "registry:dt/es6-shim#0.31.2+20160602141504",
     "jasmine": "registry:dt/jasmine#2.2.0+20160621224255",
     "jasmine-expect": "registry:dt/jasmine-expect#2.0.0-beta2+20160317120654",
     "jquery": "registry:dt/jquery#1.10.0+20160704162008",

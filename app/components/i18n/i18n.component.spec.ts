@@ -9,7 +9,7 @@ let $module = angular.mock.module;
 let $inject = angular.mock.inject;
 let $dump = (arg: any): void => console.log(angular.mock.dump(arg));
 
-describe('# I18n Component', () => {
+xdescribe('# I18n Component', () => {
   let log;
 
   beforeEach($module(ngModuleName));

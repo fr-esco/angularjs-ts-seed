@@ -103,15 +103,19 @@ describe('# Showcase Component', () => {
       expect(tab.content).toBe('abc');
     });
 
-    it('should convert markdown', () => {
+    it('should convert markdown', $inject($timeout => {
       let tab = {
         name: 'showcase.readme.md',
         options: { mode: 'md' },
         content: 'abc'
       };
       expect(controller.markdown(tab, true)).toBe(true);
+      expect(tab.content).toBe('abc');
+
+      $timeout.flush();
+      $timeout.verifyNoPendingTasks();
       expect(tab.content).toBe('<p>abc</p>');
-    });
+    }));
 
     it('should not convert anything', () => {
       let tab = {

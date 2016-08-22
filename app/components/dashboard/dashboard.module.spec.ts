@@ -24,6 +24,7 @@ describe('# Dashboard Module', () => {
     it('should have deps', () => {
       expect(mod.requires).toContain('ngComponentRouter');
       expect(mod.requires).toContain('app.components.material');
+      expect(mod.requires).toContain('pascalprecht.translate');
       expect(mod.requires).toContain('app.components.dashboard.panel');
       expect(mod.requires).toContain('app.components.showcase');
     });

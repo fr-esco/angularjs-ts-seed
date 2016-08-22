@@ -13,7 +13,7 @@ describe('# Example External Directive', () => {
   let $log, $compile, $rootScope;
 
   beforeEach(() => {
-    $module(Example);
+    $module(Example, 'tpl');
 
     $inject((_$log_, _$compile_, _$rootScope_) => {
       $log = _$log_;

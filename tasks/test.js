@@ -78,7 +78,7 @@ gulp.task('run.karma', ['build.test'], function(done) {
 
   karma.start({
     configFile: join(__dirname, 'karma.conf.js'),
-    // singleRun: !argv.debug
+    singleRun: !argv.debug
   }, karmaDone);
 
   function karmaDone(exitCode) {
