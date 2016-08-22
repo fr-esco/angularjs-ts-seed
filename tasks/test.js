@@ -28,15 +28,15 @@ var tsProject = tsc.createProject('tsconfig.json', {
   sourceMap: true
 });
 
-gulp.task('build.copy.locale.json.test', function() {
-  return locales.forEach(function(locale) {
+gulp.task('build.copy.locale.json.test', function () {
+  return locales.forEach(function (locale) {
     gulp.src('./app/**/' + locale + '.json')
       .pipe(merge('locale-' + locale + '.json'))
       .pipe(gulp.dest(join(PATH.dest.test.all, 'i18n')));
   });
 });
 
-gulp.task('build.html.test', ['clean.test'], function() {
+gulp.task('build.html.test', ['clean.test'], function () {
   return gulp.src(PATH.src.html.directive)
     .pipe(ngHtml2Js({
       moduleName: 'tpl' || function (file) {
@@ -53,7 +53,7 @@ gulp.task('build.html.test', ['clean.test'], function() {
     .pipe(gulp.dest(PATH.dest.test.all));
 });
 
-gulp.task('build.test', function(done) {
+gulp.task('build.test', function (done) {
   runSequence('build.html.test', 'build.copy.locale.json.test');
   var result = gulp.src(PATH.src.app.test)
     .pipe(plumber())
@@ -61,7 +61,7 @@ gulp.task('build.test', function(done) {
     .pipe(tsc(tsProject));
 
   return result.js
-  .pipe(sourcemaps.write('.'))
+    // .pipe(sourcemaps.write('.'))
     /*.pipe(sourcemaps.write({
       includeContent: false,
       sourceRoot: function(file) {
@@ -70,10 +70,13 @@ gulp.task('build.test', function(done) {
         return pathParts.slice(root, -1).map(function() { return '..'; }).concat('app').join('/');
       }
     }))*/
+    .pipe(sourcemaps.write('./', {
+      sourceRoot: join(__dirname, '..', 'app')
+    }))
     .pipe(gulp.dest(PATH.dest.test.all));
 });
 
-gulp.task('run.karma', ['build.test'], function(done) {
+gulp.task('run.karma', ['build.test'], function (done) {
   var argv = yargs.argv;
 
   karma.start({
@@ -83,8 +86,8 @@ gulp.task('run.karma', ['build.test'], function(done) {
 
   function karmaDone(exitCode) {
     // gutil.log('Test Done with exit code: ' + exitCode);
-    argv.coverage && remapCoverage();
     if (exitCode === 0) {
+      argv.coverage && remapCoverage();
       done();
     } else {
       done('Unit test failed.');
@@ -106,10 +109,10 @@ function test() {
     .help('s')
     .argv;
 
-  gulp.start('run.karma');
-  watch('./app/**', function() {
+  watch('./app/**', function () {
     gulp.start('run.karma');
   });
+  return gulp.start('run.karma');
 }
 
 test.description = 'Run Unit Tests';
@@ -130,11 +133,11 @@ function remapCoverage() {
       reports: {
         'lcovonly': join(report, 'remap', 'lcov.info'),
         'json': join(report, 'remap', 'coverage.json'),
-        'html': join(report, 'remap', 'html-report'),
-        'text-summary': join(report, 'remap', 'text-summary.txt')
+        'html': join(report, 'remap', 'html-report')
+        // 'text-summary': join(report, 'remap', 'text-summary.txt')
       }
     }))
-    .on('finish', function() {
+    .on('finish', function () {
       gutil.log(gutil.colors.green('Remapping done! View the result in ' + join(report, 'remap', 'html-report')));
     });
 }
