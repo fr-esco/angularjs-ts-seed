@@ -17,9 +17,10 @@
   },
   "exclude": [
     "generator",
-    "node_modules",
-    "typings/main",
-    "typings/main.d.ts"
+    "node_modules"
+  ],
+  "files": [
+    "typings/index.d.ts"
   ],
   "compileOnSave": false,
   "buildOnSave": false,

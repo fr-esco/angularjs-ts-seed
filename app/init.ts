@@ -1,5 +1,5 @@
 /// <reference path="../typings/custom.system.d.ts" />
-/// <reference path="../typings/browser.d.ts" />
+/// <reference path="../typings/index.d.ts" />
 
 System.config({
   paths: { '*': '*.js?v=<%= VERSION %>' }
