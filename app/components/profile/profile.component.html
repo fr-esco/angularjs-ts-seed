@@ -1,59 +1,86 @@
-<tsfn-showcase file-list="::$ctrl.files" title="{{::$ctrl.title}}"></tsfn-showcase>
-
+<tsfn-showcase file-list="::$ctrl.files"
+               title="{{::$ctrl.title}}"></tsfn-showcase>
 <!-- TODO: Add validations -->
-<form name="userForm" novalidate>
+<form name="userForm"
+      novalidate="">
   <div ng-init="$ctrl.setForm(userForm)"></div>
-  <md-content md-theme="dark" class="md-padding" layout="row" layout-sm="column">
+  <md-content class="md-padding"
+              layout="row"
+              layout-sm="column"
+              md-theme="dark">
     <md-input-container>
       <label for="title">Username</label>
-      <input name="title" id="title" username-asynchro-validation ng-model="$ctrl.user.title" ng-minlength="8" required>
-      <div ng-messages="userForm.title.$error" ng-show="userForm.title.$dirty">
+      <input id="title"
+             name="title"
+             ng-minlength="8"
+             ng-model="$ctrl.user.title"
+             required=""
+             username-asynchro-validation="" />
+      <div ng-messages="userForm.title.$error"
+           ng-show="userForm.title.$dirty">
         <div ng-message="minlength">That's too short!</div>
         <div ng-message="required">Username required!</div>
         <div ng-message="asynchroValidator">Username already exists!</div>
-
       </div>
     </md-input-container>
     <md-input-container>
       <label for="email">Email</label>
-      <input name="email" id="email" ng-model="$ctrl.user.email" type="email" ng-pattern="/^[a-zA-Z0-9._%+-]+@flatlogic.com$/"
-        required>
-      <div ng-messages="userForm.email.$error" ng-show="userForm.email.$dirty">
+      <input id="email"
+             name="email"
+             ng-model="$ctrl.user.email"
+             ng-pattern="/^[a-zA-Z0-9._%+-]+@flatlogic.com$/"
+             required=""
+             type="email" />
+      <div ng-messages="userForm.email.$error"
+           ng-show="userForm.email.$dirty">
         <div ng-message="required">Email required!</div>
         <div ng-message="pattern">bad domain</div>
       </div>
     </md-input-container>
   </md-content>
   <md-content class="md-padding">
-
-    <div layout layout-sm="column">
+    <div layout=""
+         layout-sm="column">
       <md-input-container flex="80">
         <label for="company">Company (Disabled)</label>
-        <input id="company" ng-model="$ctrl.user.company" disabled>
+        <input disabled="disabled"
+               id="company"
+               ng-model="$ctrl.user.company" />
       </md-input-container>
-      <md-input-container flex>
+      <md-input-container flex="">
         <label for="submission-date">Submission Date</label>
-        <input name="submissiondate" id="submission-date" type="date" date-in-the-past-validation ng-model="$ctrl.user.submissionDate">
-        <div ng-messages="userForm.submissiondate.$error" ng-show="userForm.submissiondate.$dirty">
+        <input date-in-the-past-validation=""
+               id="submission-date"
+               name="submissiondate"
+               ng-model="$ctrl.user.submissionDate"
+               type="date" />
+        <div ng-messages="userForm.submissiondate.$error"
+             ng-show="userForm.submissiondate.$dirty">
           <div ng-message="validate">Invalid Date</div>
         </div>
       </md-input-container>
     </div>
-    <div layout layout-sm="column">
-      <md-input-container flex>
+    <div layout=""
+         layout-sm="column">
+      <md-input-container flex="">
         <label for="first-name">First Name</label>
-        <input id="first-name" ng-model="$ctrl.user.firstName">
+        <input id="first-name"
+               ng-model="$ctrl.user.firstName" />
       </md-input-container>
-      <md-input-container flex>
+      <md-input-container flex="">
         <label for="last-name">Last Name</label>
-        <input id="last-name" ng-model="$ctrl.user.lastName">
+        <input id="last-name"
+               ng-model="$ctrl.user.lastName" />
       </md-input-container>
     </div>
-    <div flex layout layout-sm="column">
+    <div flex=""
+         layout=""
+         layout-sm="column">
       <md-input-container>
         <label>Gender</label>
         <div flex-offset="70">
-          <md-radio-group layout="row" ng-model="$ctrl.user.gender">
+          <md-radio-group layout="row"
+                          ng-model="$ctrl.user.gender">
             <md-radio-button value="F">F</md-radio-button>
             <md-radio-button value="M">M</md-radio-button>
           </md-radio-group>
@@ -61,45 +88,67 @@
       </md-input-container>
     </div>
     <div>
-      <md-input-container flex>
+      <md-input-container flex="">
         <label for="input">Age</label>
-        <input type="number" name="input" id="input" ng-model="$ctrl.user.age" min="18" max="99">
-        <div ng-messages="userForm.input.$error" ng-show="userForm.input.$dirty">
-          <div div ng-message-exp="['max','min']">Not valid age! Age must be greater than 18 less than 99</div>
+        <input id="input"
+               max="99"
+               min="18"
+               name="input"
+               ng-model="$ctrl.user.age"
+               type="number" />
+        <div ng-messages="userForm.input.$error"
+             ng-show="userForm.input.$dirty">
+          <div div=""
+               ng-message-exp="['max','min']">Not valid age! Age must be greater than 18 less than 99</div>
         </div>
       </md-input-container>
     </div>
-    <md-input-container flex>
+    <md-input-container flex="">
       <label for="address">Address</label>
-      <input id="address" ng-model="$ctrl.user.address">
+      <input id="address"
+             ng-model="$ctrl.user.address" />
     </md-input-container>
-    <div layout layout-sm="column">
-      <md-input-container flex>
+    <div layout=""
+         layout-sm="column">
+      <md-input-container flex="">
         <label for="city">City</label>
-        <input id="city" ng-model="$ctrl.user.city">
+        <input id="city"
+               ng-model="$ctrl.user.city" />
       </md-input-container>
-      <md-input-container flex>
+      <md-input-container flex="">
         <label for="state">State</label>
-        <input ng-model-options="{ updateOn: 'blur' }" placeholder="e.g. IT" name="state" id="state" ng-model="$ctrl.user.state"
-          ng-pattern="/^[A-Za-z]*$/" ng-minlength="2" mimaxlength="2">
-        <div ng-messages="userForm.state.$error" multiple ng-show="userForm.state.$dirty">
+        <input id="state"
+               mimaxlength="2"
+               name="state"
+               ng-minlength="2"
+               ng-model="$ctrl.user.state"
+               ng-model-options="{ updateOn: 'blur' }"
+               ng-pattern="/^[A-Za-z]*$/"
+               placeholder="e.g. IT" />
+        <div multiple="multiple"
+             ng-messages="userForm.state.$error"
+             ng-show="userForm.state.$dirty">
           <div ng-message="pattern">Only character allowed</div>
-
           <div ng-message="minlength">That's too short!</div>
         </div>
       </md-input-container>
-      <md-input-container flex>
+      <md-input-container flex="">
         <label for="postal-code">Postal Code</label>
-        <input id="postal-code" ng-model="$ctrl.user.postalCode">
+        <input id="postal-code"
+               ng-model="$ctrl.user.postalCode" />
       </md-input-container>
     </div>
-
-    <md-input-container flex>
+    <md-input-container flex="">
       <label for="biography">About us</label>
-      <textarea id="biography" ng-model="$ctrl.user.biography" columns="1" md-maxlength="150"></textarea>
+      <textarea columns="1"
+                id="biography"
+                md-maxlength="150"
+                ng-model="$ctrl.user.biography"></textarea>
     </md-input-container>
-    <div flex>
-      <md-button ng-click="$ctrl.submitUser()" ng-disabled="userForm.$invalid" class="md-primary"> Submit </md-button>
+    <div flex="">
+      <md-button class="md-primary"
+                 ng-click="$ctrl.submitUser()"
+                 ng-disabled="userForm.$invalid">Submit</md-button>
     </div>
   </md-content>
 </form>

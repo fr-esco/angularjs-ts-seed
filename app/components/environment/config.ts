@@ -6,6 +6,6 @@ export default angular.module('app.components.environment', [])
   'apiBase': 'https://localhost/dev'
 })
 
-.constant('version', '1.10.0')
+.constant('version', '1.11.0')
 
 .name;

@@ -14,7 +14,7 @@ _This project is inspired by [angular2-seed](https://github.com/mgechev/angular2
 # Features
 * AngularJS **1.5.8**
 * Angular Component Router
-* Angular Material **1.1.0-RC5** ([doc](https://material.angularjs.org/latest/))
+* Angular Material **1.1.0** ([doc](https://material.angularjs.org/latest/))
 * SystemJS
 * Livereload (install [Chrome Plugin](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en) to enable this feature)
 * SCSS for styling ([doc](http://sass-lang.com/documentation/file.SASS_REFERENCE.html))
