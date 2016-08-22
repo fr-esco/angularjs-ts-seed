@@ -4,23 +4,28 @@
 // System['defaultJSExtensions'] = true;
 
 System.config({
-  packages: {
-    'app': {
-      'main': '../app',
-      'defaultExtension': 'js',
-    },
-    'components': {
-      'main': 'components',
-      'defaultExtension': 'js',
-    },
-  }
+  // packages: {
+  //   'app': {
+  //     // 'main': '../app', // DEV
+  //     'main': '../app',
+  //     'defaultExtension': 'js',
+  //   },
+  //   'components': {
+  //     'main': 'components',
+  //     'defaultExtension': 'js',
+  //   },
+  // }
   // paths: { '*': '*.js?v=<%= VERSION %>' }
 });
 
-System.import('app').then(System.import('./partials.js')).then(() => {
-  angular.module('app').requires.push('tpl');
+System.import('./app.js')
+  .then(System.import('./partials.js'))
+  .then(System.import('app') // PROD
+    .then(() => {
+      angular.module('app').requires.push('tpl');
 
-  angular.element(document)
-    .ready(() => angular.bootstrap(document.body, ['app']));
-})
+      angular.element(document)
+        .ready(() => angular.bootstrap(document.body, ['app']));
+    })
+  )
   .catch(console.error.bind(console));

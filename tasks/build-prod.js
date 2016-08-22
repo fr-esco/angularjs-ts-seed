@@ -25,7 +25,20 @@ var Builder = require('systemjs-builder');
 var yargs = require('yargs');
 
 var appProdBuilder = new Builder({
-  baseURL: 'file:./tmp',
+  // baseURL: 'file:./tmp',
+});
+
+appProdBuilder.config({
+  paths: {
+  },
+  packages: {
+    'tmp': {
+      main: 'tmp/*',
+    },
+  },
+  map: {
+    'app': 'tmp/app.js',
+  }
 });
 
 var HTMLMinifierOpts = {
@@ -47,8 +60,8 @@ var tsProject = tsc.createProject('tsconfig.json', {
 // Build prod.
 
 gulp.task('build.lib.prod', function () {
-  var jsOnly = filter('**/*.js', {restore: true}),
-    cssOnly = filter('**/*.css', {restore: true});
+  var jsOnly = filter('**/*.js', { restore: true }),
+    cssOnly = filter('**/*.css', { restore: true });
 
   return gulp.src(PATH.src.lib.js.concat(PATH.src.lib.css))
     .pipe(jsOnly)
@@ -100,9 +113,17 @@ gulp.task('build.js.tmp', ['lint.ts', 'lint.dts', 'build.html.tmp', 'environment
 
 // TODO: add inline source maps (System only generate separate source maps file).
 gulp.task('build.js.prod', ['build.js.tmp'], function () {
-  gulp.src(['./tmp/partials*.js']).pipe(gulp.dest(PATH.dest.prod.all));
-  return appProdBuilder.build('app', join(PATH.dest.prod.all, 'app.js'),
-    { minify: true }).catch(console.error.bind(console));
+  // gulp.src(['./tmp/partials*.js']).pipe(gulp.dest(PATH.dest.prod.all));
+  return appProdBuilder.bundle('app', './tmp/app.js',
+    { minify: true, mangle: true })
+    // .then(console.log.bind(console))
+    .then(function () {
+      return gulp.src(['./tmp/partials*.js', './tmp/app.js'])
+        .pipe($.replace('tmp/', ''))
+        .pipe($.replace('.js"', '"'))
+        .pipe(gulp.dest(join(PATH.dest.prod.all)));
+    })
+    .catch(console.error.bind(console));
 });
 
 gulp.task('build.init.prod', function () {
@@ -130,8 +151,8 @@ gulp.task('build.copy.locale.prod', function () {
 });
 
 gulp.task('build.assets.prod', ['build.js.prod', 'build.styles.prod'], function () {
-  var filterHTML = filter('*.html', {restore: true});
-  var filterCSS = filter('*.css', {restore: true});
+  var filterHTML = filter('*.html', { restore: true });
+  var filterCSS = filter('*.css', { restore: true });
   return gulp.src(['./app/**/!(*.directive|*.component|*.tpl).html', './app/**/*.css'])
     .pipe(filterHTML)
     .pipe(minifyHTML(HTMLMinifierOpts))
