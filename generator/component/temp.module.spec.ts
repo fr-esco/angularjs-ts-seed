@@ -1,4 +1,4 @@
-/// <reference path="<%= toComponents %>/../../typings/browser.d.ts" />
+/// <reference path="<%= toComponents %>/../../typings/index.d.ts" />
 
 import <%= upCaseName %> from './<%= name %>';
 
