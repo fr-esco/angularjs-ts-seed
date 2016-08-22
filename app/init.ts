@@ -1,6 +1,8 @@
 /// <reference path="../typings/custom.system.d.ts" />
 /// <reference path="../typings/index.d.ts" />
 
+System['defaultJSExtensions'] = true;
+
 System.config({
   paths: { '*': '*.js?v=<%= VERSION %>' }
 });
