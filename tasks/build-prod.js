@@ -7,8 +7,9 @@ var concat = require('gulp-concat');
 var filter = require('gulp-filter');
 var inject = require('gulp-inject');
 var $ = require('gulp-load-plugins')();
-var minifyCSS = require('gulp-minify-css');
+var minifyCSS = require('gulp-clean-css');
 var minifyHTML = require('gulp-minify-html');
+var ngAnnotate = require('gulp-ng-annotate');
 var ngHtml2Js = require("gulp-ng-html2js");
 var plumber = require('gulp-plumber');
 var sourcemaps = require('gulp-sourcemaps');
@@ -46,8 +47,8 @@ var tsProject = tsc.createProject('tsconfig.json', {
 // Build prod.
 
 gulp.task('build.lib.prod', function () {
-  var jsOnly = filter('**/*.js'),
-    cssOnly = filter('**/*.css');
+  var jsOnly = filter('**/*.js', {restore: true}),
+    cssOnly = filter('**/*.css', {restore: true});
 
   return gulp.src(PATH.src.lib.js.concat(PATH.src.lib.css))
     .pipe(jsOnly)
@@ -55,13 +56,16 @@ gulp.task('build.lib.prod', function () {
     .pipe(concat('lib.js'))
     // .pipe(gulp.dest(PATH.dest.prod.lib))
     .pipe($.ignore.exclude(['**/*.map']))
+    .pipe(ngAnnotate())
     .pipe(uglify().on('error', $.util.log))
     .pipe(sourcemaps.write())
-    .pipe(jsOnly.restore())
+    .pipe(jsOnly.restore)
     .pipe(cssOnly)
+    .pipe(sourcemaps.init())
     .pipe(concat('lib.css'))
     .pipe(minifyCSS())
-    .pipe(cssOnly.restore())
+    .pipe(sourcemaps.write())
+    .pipe(cssOnly.restore)
     .pipe(gulp.dest(PATH.dest.prod.lib));
 });
 
@@ -126,15 +130,15 @@ gulp.task('build.copy.locale.prod', function () {
 });
 
 gulp.task('build.assets.prod', ['build.js.prod', 'build.styles.prod'], function () {
-  var filterHTML = filter('*.html');
-  var filterCSS = filter('*.css');
+  var filterHTML = filter('*.html', {restore: true});
+  var filterCSS = filter('*.css', {restore: true});
   return gulp.src(['./app/**/!(*.directive|*.component|*.tpl).html', './app/**/*.css'])
     .pipe(filterHTML)
     .pipe(minifyHTML(HTMLMinifierOpts))
-    .pipe(filterHTML.restore())
+    .pipe(filterHTML.restore)
     .pipe(filterCSS)
     .pipe(minifyCSS())
-    .pipe(filterCSS.restore())
+    .pipe(filterCSS.restore)
     .pipe(gulp.dest(PATH.dest.prod.all));
 });
 
