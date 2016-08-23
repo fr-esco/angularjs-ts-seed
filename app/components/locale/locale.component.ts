@@ -5,7 +5,7 @@ import {ILocale} from './locale.model';
 
 'use strict';
 
-const ngComponentName = 'tsfnLocale';
+const ngComponentName = 'tsngLocale';
 
 @at.component(ngModuleName, ngComponentName, {
   bindings: {

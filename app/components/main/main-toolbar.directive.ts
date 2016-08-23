@@ -3,7 +3,7 @@ import MainController from './main.component';
 
 'use strict';
 
-const ngDirectiveName = 'tsfnMainToolbar';
+const ngDirectiveName = 'tsngMainToolbar';
 
 @at.directive(ngModuleName, ngDirectiveName, {
   restrict: 'E',

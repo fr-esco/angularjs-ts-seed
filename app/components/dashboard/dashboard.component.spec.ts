@@ -20,7 +20,7 @@ describe('# Dashboard Component', () => {
     beforeEach($inject(($log, $rootScope, $componentController) => {
       log = $log;
       scope = $rootScope.$new();
-      controller = $componentController('tsfnDashboard', { $scope: scope, version: 'TEST' });
+      controller = $componentController('tsngDashboard', { $scope: scope, version: 'TEST' });
     }));
 
     it('should be attached to the scope', () => {
@@ -28,7 +28,7 @@ describe('# Dashboard Component', () => {
     });
 
     it('should log registration', () => {
-      let loaded = ['ngComponent', 'tsfnDashboard', 'loaded'].join(' ');
+      let loaded = ['ngComponent', 'tsngDashboard', 'loaded'].join(' ');
       expect(log.debug.logs).toContain([loaded]);
     });
 

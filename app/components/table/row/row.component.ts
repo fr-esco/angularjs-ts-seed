@@ -2,7 +2,7 @@ import ngModuleName from './row.module';
 
 'use strict';
 
-const ngComponentName = 'tsfnRow';
+const ngComponentName = 'tsngRow';
 
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'table/row/row.component.html'

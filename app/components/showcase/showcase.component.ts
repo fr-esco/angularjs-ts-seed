@@ -10,7 +10,7 @@ interface ITab {
   content: string;
 }
 
-const ngComponentName = 'tsfnShowcase';
+const ngComponentName = 'tsngShowcase';
 
 @at.component(ngModuleName, ngComponentName, {
   bindings: {

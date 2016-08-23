@@ -4,7 +4,7 @@ import MessageService from './message.service';
 
 'use strict';
 
-const ngComponentName = 'tsfnMessageList';
+const ngComponentName = 'tsngMessageList';
 
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'message/message-list.component.html'

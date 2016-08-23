@@ -2,7 +2,7 @@ import ngModuleName from './profile.module';
 
 'use strict';
 
-const ngComponentName = 'tsfnProfile';
+const ngComponentName = 'tsngProfile';
 
 @at.component(ngModuleName, ngComponentName, {
 

@@ -20,7 +20,7 @@ describe('# Profile Component', () => {
     beforeEach($inject(($log, $rootScope, $componentController) => {
       log = $log;
       scope = $rootScope.$new();
-      controller = $componentController('tsfnProfile', { $scope: scope });
+      controller = $componentController('tsngProfile', { $scope: scope });
     }));
 
     it('should be attached to the scope', () => {
@@ -28,7 +28,7 @@ describe('# Profile Component', () => {
     });
 
     it('should log registration', () => {
-      let loaded = ['ngComponent', 'tsfnProfile', 'loaded'].join(' ');
+      let loaded = ['ngComponent', 'tsngProfile', 'loaded'].join(' ');
       expect(log.debug.logs).toContain([loaded]);
     });
 

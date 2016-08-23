@@ -1,4 +1,4 @@
-[![Angular Style Guide](https://img.shields.io/badge/Angular%20Style%20Guide-1.x%20ES2015-orange.svg?style=flat)](https://github.com/toddmotto/angular-styleguide)
+<!--- [![Angular Style Guide](https://img.shields.io/badge/Angular%20Style%20Guide-1.x%20ES2015-orange.svg?style=flat)](https://github.com/toddmotto/angular-styleguide) --->
 [![GitHub tag](https://img.shields.io/github/tag/fr-esco/angularjs-ts-seed.svg?maxAge=2592000)]()
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](http://opensource.org/licenses/MIT)
 [![Dependency Status](https://david-dm.org/fr-esco/angularjs-ts-seed.svg)](https://david-dm.org/fr-esco/angularjs-ts-seed)

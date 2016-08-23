@@ -2,15 +2,15 @@ import ngModuleName from './blog.module';
 
 'use strict';
 
-const ngComponentName = 'tsfnBlog';
+const ngComponentName = 'tsngBlog';
 
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'blog/blog.component.html',
   $routeConfig: [
-    { path: '/posts', name: 'PostList', component: 'tsfnPostList', useAsDefault: true, data: { title: 'Posts' } },
-    { path: '/posts/create', name: 'PostCreate', component: 'tsfnPostCreate', data: { title: 'New Post' } },
-    { path: '/posts/update/:id', name: 'PostUpdate', component: 'tsfnPostUpdate' },
-    { path: '/posts/:id', name: 'PostDetail', component: 'tsfnPostDetail' },
+    { path: '/posts', name: 'PostList', component: 'tsngPostList', useAsDefault: true, data: { title: 'Posts' } },
+    { path: '/posts/create', name: 'PostCreate', component: 'tsngPostCreate', data: { title: 'New Post' } },
+    { path: '/posts/update/:id', name: 'PostUpdate', component: 'tsngPostUpdate' },
+    { path: '/posts/:id', name: 'PostDetail', component: 'tsngPostDetail' },
   ]
 })
 @at.inject('$log')

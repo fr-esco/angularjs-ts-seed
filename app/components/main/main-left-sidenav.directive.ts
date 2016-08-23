@@ -3,7 +3,7 @@ import MainController from './main.component';
 
 'use strict';
 
-const ngDirectiveName = 'tsfnMainLeftSidenav';
+const ngDirectiveName = 'tsngMainLeftSidenav';
 
 @at.directive(ngModuleName, ngDirectiveName, {
   restrict: 'E',

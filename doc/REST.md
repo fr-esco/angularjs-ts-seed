@@ -135,7 +135,7 @@ And, if you want TypeScript features on it (such as Intellisense support), remem
 import ngModuleName from './post.module';
 import PostClient from './post-client.service';
 
-const ngComponentName = 'tsfnPostList';
+const ngComponentName = 'tsngPostList';
 
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'blog/post/post-list.component.html'
@@ -184,7 +184,7 @@ import PostClient from './post-client.service';
 
 'use strict';
 
-const ngComponentName = 'tsfnPostDetail';
+const ngComponentName = 'tsngPostDetail';
 
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'blog/post/post-detail.component.html'

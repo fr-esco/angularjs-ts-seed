@@ -2,7 +2,7 @@ import ngModuleName from './i18n.module';
 
 'use strict';
 
-const ngComponentName = 'tsfnI18n';
+const ngComponentName = 'tsngI18n';
 
 @at.component(ngModuleName, ngComponentName, {
   bindings: {

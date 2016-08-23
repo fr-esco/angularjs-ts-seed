@@ -20,7 +20,7 @@ describe('# Locale Component', () => {
     beforeEach($inject(($rootScope, $componentController, locale) => {
       scope = $rootScope.$new();
       service = locale;
-      controller = $componentController('tsfnLocale', { $scope: scope, locale: service }, {
+      controller = $componentController('tsngLocale', { $scope: scope, locale: service }, {
         fileList: ['example.html', 'example.ts', 'example.css'],
         title: 'Locale'
       });

@@ -6,7 +6,7 @@ import PostClient from './post-client.service';
 
 'use strict';
 
-const ngComponentName = 'tsfnPostComments';
+const ngComponentName = 'tsngPostComments';
 
 @at.component(ngModuleName, ngComponentName, {
   bindings: {

@@ -20,7 +20,7 @@ describe('# Showcase Component', () => {
     beforeEach($inject(($rootScope, $componentController, showcase) => {
       scope = $rootScope.$new();
       service = showcase;
-      controller = $componentController('tsfnShowcase', { $scope: scope, showcase: service }, {
+      controller = $componentController('tsngShowcase', { $scope: scope, showcase: service }, {
         fileList: ['example.html', 'example.ts', 'example.css'],
         title: 'Showcase'
       });

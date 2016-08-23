@@ -20,7 +20,7 @@ xdescribe('# Timezone Component', () => {
     beforeEach($inject(($log, $compile, $rootScope) => {
       log = $log;
       scope = $rootScope.$new();
-      element = angular.element('<tsfn-timezone my-attribute="{{attr}}" my-one-way-binding="outside"></tsfn-timezone>');
+      element = angular.element('<tsng-timezone my-attribute="{{attr}}" my-one-way-binding="outside"></tsng-timezone>');
       element = $compile(element)(scope);
       scope.attr = 'example';
       scope.outside = '1.5';
@@ -28,7 +28,7 @@ xdescribe('# Timezone Component', () => {
     }));
 
     it('should log registration', () => {
-      let loaded = ['ngComponent', 'tsfnTimezone', 'loaded'].join(' ');
+      let loaded = ['ngComponent', 'tsngTimezone', 'loaded'].join(' ');
       expect(log.debug.logs).toContain([loaded]);
     });
 
@@ -55,7 +55,7 @@ xdescribe('# Timezone Component', () => {
       let controller;
 
       beforeEach(() => {
-        controller = element.controller('tsfnTimezone');
+        controller = element.controller('tsngTimezone');
       });
 
       it('should expose test', () => {
@@ -78,7 +78,7 @@ xdescribe('# Timezone Component', () => {
 
     beforeEach($inject(($rootScope, $componentController) => {
       scope = $rootScope.$new();
-      controller = $componentController('tsfnTimezone', { $scope: scope }, {
+      controller = $componentController('tsngTimezone', { $scope: scope }, {
         myAttribute: 'example',
         myOneWayBinding: '1.5'
       });

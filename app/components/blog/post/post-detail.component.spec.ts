@@ -20,7 +20,7 @@ xdescribe('# PostDetail Component', () => {
     beforeEach($inject(($log, $compile, $rootScope) => {
       log = $log;
       scope = $rootScope.$new();
-      element = angular.element('<tsfn-post-detail my-attribute="{{attr}}" my-one-way-binding="outside"></tsfn-post-detail>');
+      element = angular.element('<tsng-post-detail my-attribute="{{attr}}" my-one-way-binding="outside"></tsng-post-detail>');
       element = $compile(element)(scope);
       scope.attr = 'example';
       scope.outside = '1.5';
@@ -28,7 +28,7 @@ xdescribe('# PostDetail Component', () => {
     }));
 
     it('should log registration', () => {
-      let loaded = ['ngComponent', 'tsfnPostDetail', 'loaded'].join(' ');
+      let loaded = ['ngComponent', 'tsngPostDetail', 'loaded'].join(' ');
       expect(log.debug.logs).toContain([loaded]);
     });
 
@@ -55,7 +55,7 @@ xdescribe('# PostDetail Component', () => {
       let controller;
 
       beforeEach(() => {
-        controller = element.controller('tsfnPostDetail');
+        controller = element.controller('tsngPostDetail');
       });
 
       it('should expose test', () => {
@@ -78,7 +78,7 @@ xdescribe('# PostDetail Component', () => {
 
     beforeEach($inject(($rootScope, $componentController) => {
       scope = $rootScope.$new();
-      controller = $componentController('tsfnPostDetail', { $scope: scope }, {
+      controller = $componentController('tsngPostDetail', { $scope: scope }, {
         myAttribute: 'example',
         myOneWayBinding: '1.5'
       });

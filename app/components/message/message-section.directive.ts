@@ -2,7 +2,7 @@ import ngModuleName from './message.module';
 
 'use strict';
 
-const ngDirectiveName = 'tsfnMessageSection';
+const ngDirectiveName = 'tsngMessageSection';
 
 @at.directive(ngModuleName, ngDirectiveName, {
   restrict: 'E',

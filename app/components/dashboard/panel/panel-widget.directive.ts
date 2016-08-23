@@ -2,7 +2,7 @@ import ngModuleName from './panel.module';
 
 'use strict';
 
-const ngDirectiveName = 'tsfnPanelWidget';
+const ngDirectiveName = 'tsngPanelWidget';
 
 @at.directive(ngModuleName, ngDirectiveName, {
   restrict: 'E',
