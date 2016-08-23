@@ -1,4 +1,4 @@
-/// <reference path="<%= toComponents %>/../../typings/browser.d.ts" />
+/// <reference path="<%= toComponents %>/../../typings/index.d.ts" />
 
 import ngModuleName from './<%= modName %>';
 import <%= upCaseName %>ClientService from './<%= name %>-client.service';

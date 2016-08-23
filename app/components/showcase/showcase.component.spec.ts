@@ -1,4 +1,4 @@
-/// <reference path="../../../typings/browser.d.ts" />
+/// <reference path="../../../typings/index.d.ts" />
 
 import ngModuleName from './showcase';
 import ShowcaseComponent from './showcase.component';
@@ -20,7 +20,7 @@ describe('# Showcase Component', () => {
     beforeEach($inject(($rootScope, $componentController, showcase) => {
       scope = $rootScope.$new();
       service = showcase;
-      controller = $componentController('tsfnShowcase', { $scope: scope, showcase: service }, {
+      controller = $componentController('tsngShowcase', { $scope: scope, showcase: service }, {
         fileList: ['example.html', 'example.ts', 'example.css'],
         title: 'Showcase'
       });
@@ -103,15 +103,19 @@ describe('# Showcase Component', () => {
       expect(tab.content).toBe('abc');
     });
 
-    it('should convert markdown', () => {
+    it('should convert markdown', $inject($timeout => {
       let tab = {
         name: 'showcase.readme.md',
         options: { mode: 'md' },
         content: 'abc'
       };
       expect(controller.markdown(tab, true)).toBe(true);
+      expect(tab.content).toBe('abc');
+
+      $timeout.flush();
+      $timeout.verifyNoPendingTasks();
       expect(tab.content).toBe('<p>abc</p>');
-    });
+    }));
 
     it('should not convert anything', () => {
       let tab = {

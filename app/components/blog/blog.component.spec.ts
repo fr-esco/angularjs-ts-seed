@@ -1,4 +1,4 @@
-/// <reference path="../../../typings/browser.d.ts" />
+/// <reference path="../../../typings/index.d.ts" />
 
 import ngModuleName from './blog';
 import BlogComponent from './blog.component';
@@ -20,7 +20,7 @@ xdescribe('# Blog Component', () => {
     beforeEach($inject(($log, $compile, $rootScope) => {
       log = $log;
       scope = $rootScope.$new();
-      element = angular.element('<tsfn-blog my-attribute="{{attr}}" my-one-way-binding="outside"></tsfn-blog>');
+      element = angular.element('<tsng-blog my-attribute="{{attr}}" my-one-way-binding="outside"></tsng-blog>');
       element = $compile(element)(scope);
       scope.attr = 'example';
       scope.outside = '1.5';
@@ -28,7 +28,7 @@ xdescribe('# Blog Component', () => {
     }));
 
     it('should log registration', () => {
-      let loaded = ['ngComponent', 'tsfnBlog', 'loaded'].join(' ');
+      let loaded = ['ngComponent', 'tsngBlog', 'loaded'].join(' ');
       expect(log.debug.logs).toContain([loaded]);
     });
 
@@ -55,7 +55,7 @@ xdescribe('# Blog Component', () => {
       let controller;
 
       beforeEach(() => {
-        controller = element.controller('tsfnBlog');
+        controller = element.controller('tsngBlog');
       });
 
       it('should expose test', () => {
@@ -78,7 +78,7 @@ xdescribe('# Blog Component', () => {
 
     beforeEach($inject(($rootScope, $componentController) => {
       scope = $rootScope.$new();
-      controller = $componentController('tsfnBlog', { $scope: scope }, {
+      controller = $componentController('tsngBlog', { $scope: scope }, {
         myAttribute: 'example',
         myOneWayBinding: '1.5'
       });

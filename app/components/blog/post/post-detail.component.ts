@@ -5,7 +5,7 @@ import PostClient from './post-client.service';
 
 'use strict';
 
-const ngComponentName = 'tsfnPostDetail';
+const ngComponentName = 'tsngPostDetail';
 
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'blog/post/post-detail.component.html'

@@ -8,7 +8,7 @@ interface IPostForm extends IPost {
   createdAtDate(newDate: Date): Date;
 }
 
-const ngComponentName = 'tsfnPostForm';
+const ngComponentName = 'tsngPostForm';
 
 @at.component(ngModuleName, ngComponentName, {
   bindings: {

@@ -64,7 +64,7 @@ function generator() {
   })();
 
   var toComponents = parentPath.split('/').map(function() { return '..'; });
-  var prefix = 'tsfn';
+  var prefix = 'tsng';
 
   return gulp.src(PATH.src.blankTemplates.component)
     .pipe(template({

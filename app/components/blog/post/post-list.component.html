@@ -1,25 +1,32 @@
 <div class="post">
-
   <md-toolbar md-theme="dark">
     <div class="md-toolbar-tools">
-      <h3><span ng-bind="::$ctrl.title"></span></h3>
-      <span flex></span>
+      <h3>
+        <span ng-bind="::$ctrl.title"></span>
+      </h3>
+      <span flex=""></span>
       <form ng-submit="$ctrl.search()">
-        <md-input-container md-no-float>
-          <input id="search" placeholder="Search..." ng-model="$ctrl.searchText">
+        <md-input-container md-no-float="">
+          <input id="search"
+                 ng-model="$ctrl.searchText"
+                 placeholder="Search..." />
         </md-input-container>
       </form>
-      <md-button class="toolbar-button" aria-label="Search" ng-click="$ctrl.search()">
+      <md-button aria-label="Search"
+                 class="toolbar-button"
+                 ng-click="$ctrl.search()">
         <i class="material-icons">search</i>
       </md-button>
-      <md-button class="toolbar-button" aria-label="Create" ng-link="['PostCreate']">
+      <md-button aria-label="Create"
+                 class="toolbar-button"
+                 ng-link="['PostCreate']">
         <i class="material-icons">add_circle_outline</i>
       </md-button>
     </div>
   </md-toolbar>
-
   <md-content layout="column">
-    <div class="table-responsive-vertical" md-whiteframe="2">
+    <div class="table-responsive-vertical"
+         md-whiteframe="2">
       <table class="table table-hover table-bordered">
         <thead>
           <tr>
@@ -31,14 +38,19 @@
         <tbody>
           <tr ng-repeat="post in $ctrl.posts track by post.id">
             <td>
-              <a ng-link="['PostDetail', {id: post.id}]" ng-bind="::post.title"></a>
+              <a ng-bind="::post.title"
+                 ng-link="['PostDetail', {id: post.id}]"></a>
             </td>
             <td ng-bind="post.createdAt | amDateFormat:'LLLL'"></td>
             <td>
-              <md-button class="md-icon-button md-raised" aria-label="Update" ng-click="$ctrl.update($event, post)">
+              <md-button aria-label="Update"
+                         class="md-icon-button md-raised"
+                         ng-click="$ctrl.update($event, post)">
                 <i class="material-icons">create</i>
               </md-button>
-              <md-button class="md-icon-button md-raised" aria-label="Delete" ng-click="$ctrl.delete($event, post)">
+              <md-button aria-label="Delete"
+                         class="md-icon-button md-raised"
+                         ng-click="$ctrl.delete($event, post)">
                 <i class="material-icons">delete_forever</i>
               </md-button>
             </td>
@@ -47,5 +59,4 @@
       </table>
     </div>
   </md-content>
-
 </div>

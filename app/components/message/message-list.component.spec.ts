@@ -1,4 +1,4 @@
-/// <reference path="../../../typings/browser.d.ts" />
+/// <reference path="../../../typings/index.d.ts" />
 
 import ngModuleName from './message';
 import MessageListComponent from './message-list.component';
@@ -35,7 +35,7 @@ describe('# MessageList Component', () => {
     beforeEach($inject(($log, $rootScope, $componentController) => {
       log = $log;
       scope = $rootScope.$new();
-      controller = $componentController('tsfnMessageList', { $scope: scope });
+      controller = $componentController('tsngMessageList', { $scope: scope });
     }));
 
     it('should be attached to the scope', () => {
@@ -43,7 +43,7 @@ describe('# MessageList Component', () => {
     });
 
     it('should log registration', () => {
-      let loaded = ['ngComponent', 'tsfnMessageList', 'loaded'].join(' ');
+      let loaded = ['ngComponent', 'tsngMessageList', 'loaded'].join(' ');
       expect(log.debug.logs).toContain([loaded]);
     });
 

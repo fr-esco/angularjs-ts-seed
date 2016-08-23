@@ -2,7 +2,7 @@ import ngModuleName from './dashboard.module';
 
 'use strict';
 
-const ngComponentName = 'tsfnDashboard';
+const ngComponentName = 'tsngDashboard';
 
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'dashboard/dashboard.component.html',

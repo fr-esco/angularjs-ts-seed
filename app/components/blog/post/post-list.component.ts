@@ -5,7 +5,7 @@ import PostClient from './post-client.service';
 
 'use strict';
 
-const ngComponentName = 'tsfnPostList';
+const ngComponentName = 'tsngPostList';
 
 @at.component(ngModuleName, ngComponentName, {
   bindings: {

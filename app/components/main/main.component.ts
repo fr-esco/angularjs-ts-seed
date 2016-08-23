@@ -4,16 +4,16 @@ import NavigationService from '../common/navigation.service';
 
 'use strict';
 
-const ngComponentName = 'tsfnMain';
+const ngComponentName = 'tsngMain';
 
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'main/main.component.html',
   $routeConfig: [
-    { path: '/dashboard', name: 'Dashboard', component: 'tsfnDashboard', data: { title: 'Dashboard' }, useAsDefault: true },
-    { path: '/profile', name: 'Profile', component: 'tsfnProfile', data: { title: 'Profile' } },
-    { path: '/table/...', name: 'Table', component: 'tsfnTable', data: { title: 'Table' } },
-    { path: '/blog/...', name: 'Blog', component: 'tsfnBlog', data: { title: 'Blog' }},
-    { path: '/i18n', name: 'I18n', component: 'tsfnI18n', data: { title: 'i18n' } }
+    { path: '/dashboard', name: 'Dashboard', component: 'tsngDashboard', data: { title: 'Dashboard' }, useAsDefault: true },
+    { path: '/profile', name: 'Profile', component: 'tsngProfile', data: { title: 'Profile' } },
+    { path: '/table/...', name: 'Table', component: 'tsngTable', data: { title: 'Table' } },
+    { path: '/blog/...', name: 'Blog', component: 'tsngBlog', data: { title: 'Blog' }},
+    { path: '/i18n', name: 'I18n', component: 'tsngI18n', data: { title: 'i18n' } }
   ]
 })
 @at.inject('navigationService', '$log', '$q', '$mdSidenav', '$mdBottomSheet', '$mdMenu', '$mdToast')

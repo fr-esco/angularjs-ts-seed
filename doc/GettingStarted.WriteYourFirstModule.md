@@ -85,17 +85,17 @@ example:
 ### Fourth Step
 
 In the last step you have to map the path '/example' with the component created on previous step.
-To do this you have to add a new RouteDefinition to the option $routeConfig of the tsfnMain component.
+To do this you have to add a new RouteDefinition to the option $routeConfig of the tsngMain component.
 example:
 ```typescript
  $routeConfig: [
-    { path: '/dashboard', name: 'Dashboard', component: 'tsfnDashboard', data: { title: 'Dashboard' }, useAsDefault: true },
-    { path: '/profile', name: 'Profile', component: 'tsfnProfile', data: { title: 'Profile' } },
-    { path: '/table/...', name: 'Table', component: 'tsfnTable', data: { title: 'Table' } }, 
-    [ path: '/example', name: 'Example', component: 'tsfnExample'}
+    { path: '/dashboard', name: 'Dashboard', component: 'tsngDashboard', data: { title: 'Dashboard' }, useAsDefault: true },
+    { path: '/profile', name: 'Profile', component: 'tsngProfile', data: { title: 'Profile' } },
+    { path: '/table/...', name: 'Table', component: 'tsngTable', data: { title: 'Table' } }, 
+    [ path: '/example', name: 'Example', component: 'tsngExample'}
   ]
 ```
-Above the path '/dashboard' is mapped with the **tsfnDashboard component**.  
+Above the path '/dashboard' is mapped with the **tsngDashboard component**.  
 The '...' after the '/table/' means that the route named Table is a **non-terminal route**. 
 
 # 4. Build, test and run

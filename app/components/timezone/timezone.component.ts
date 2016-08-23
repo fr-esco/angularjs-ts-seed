@@ -3,7 +3,7 @@ import TimezoneService from './timezone.provider';
 
 'use strict';
 
-const ngComponentName = 'tsfnTimezone';
+const ngComponentName = 'tsngTimezone';
 
 @at.component(ngModuleName, ngComponentName, {
   bindings: {

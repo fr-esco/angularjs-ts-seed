@@ -1,4 +1,4 @@
-/// <reference path="../../../typings/browser.d.ts" />
+/// <reference path="../../../typings/index.d.ts" />
 
 import ngModuleName from './locale';
 import {LocaleProvider} from './locale.provider';
@@ -11,7 +11,7 @@ let $inject = angular.mock.inject;
 let $dump = (arg: any): void => console.log(angular.mock.dump(arg));
 // let $dump = (arg: any): void => console.log(arg);
 
-describe('# Locale Provider', () => {
+xdescribe('# Locale Provider', () => {
   const loaded = ['ngProvider', 'locale', 'has loaded an', 'LocaleProviderService'].join(' ');
 
   let $log;

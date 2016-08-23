@@ -1,17 +1,27 @@
-<md-toolbar layout="row" layout-align="end center">
-  <md-button hide-sm class="toolbar-button" aria-label="Search">
+<md-toolbar layout="row"
+            layout-align="end center">
+  <md-button aria-label="Search"
+             class="toolbar-button"
+             hide-sm="">
     <i class="material-icons">search</i>
   </md-button>
-  <md-button hide-sm class="toolbar-button" aria-label="Notifications">
+  <md-button aria-label="Notifications"
+             class="toolbar-button"
+             hide-sm="">
     <i class="material-icons">notifications</i>
     <span class="notifications-label">7</span>
   </md-button>
-  <md-button hide-sm class="toolbar-button" aria-label="Settings" ng-click="$ctrl.toggleRightSidebar()">
+  <md-button aria-label="Settings"
+             class="toolbar-button"
+             hide-sm=""
+             ng-click="$ctrl.toggleRightSidebar()">
     <i class="material-icons">settings</i>
   </md-button>
-  <md-button hide-gt-sm ng-click="$ctrl.toggleItemsList()" aria-label="Menu">
+  <md-button aria-label="Menu"
+             hide-gt-sm=""
+             ng-click="$ctrl.toggleItemsList()">
     <i class="material-icons">menu</i>
   </md-button>
-  <tsfn-locale class="toolbar-button"></tsfn-locale>
-  <tsfn-timezone class="toolbar-button"></tsfn-timezone>
+  <tsng-locale class="toolbar-button"></tsng-locale>
+  <tsng-timezone class="toolbar-button"></tsng-timezone>
 </md-toolbar>

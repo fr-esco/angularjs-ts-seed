@@ -1,4 +1,4 @@
-/// <reference path="../../../typings/browser.d.ts" />
+/// <reference path="../../../typings/index.d.ts" />
 
 import Locale from './locale';
 
@@ -24,8 +24,10 @@ describe('# Locale Module', () => {
     it('should have deps', () => {
       expect(mod.requires).toContain('ngComponentRouter');
       expect(mod.requires).toContain('app.components.material');
-      expect(mod.requires).toContain('ui.codemirror');
-      expect(mod.requires).toContain('app.components.markdown');
+      expect(mod.requires).toContain('ngCookies');
+      expect(mod.requires).toContain('angularMoment');
+      expect(mod.requires).toContain('tmh.dynamicLocale');
+      expect(mod.requires).toContain('pascalprecht.translate');
     });
   });
 

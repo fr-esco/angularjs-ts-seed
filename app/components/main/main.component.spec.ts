@@ -1,4 +1,4 @@
-/// <reference path="../../../typings/browser.d.ts" />
+/// <reference path="../../../typings/index.d.ts" />
 
 import ngModuleName from './main';
 import MainComponent from './main.component';
@@ -57,7 +57,7 @@ describe('# Main Component', () => {
       leftClose = spyOn($mdSidenav('left'), 'close').and.callThrough();
       rightClose = spyOn($mdSidenav('right'), 'close').and.callThrough();
 
-      controller = $componentController('tsfnMain', { $scope: scope, $mdSidenav: mdSidenav });
+      controller = $componentController('tsngMain', { $scope: scope, $mdSidenav: mdSidenav });
     }));
 
     it('should be attached to the scope', () => {
@@ -65,7 +65,7 @@ describe('# Main Component', () => {
     });
 
     it('should log registration', () => {
-      let loaded = ['ngComponent', 'tsfnMain', 'loaded'].join(' ');
+      let loaded = ['ngComponent', 'tsngMain', 'loaded'].join(' ');
       expect(log.debug.logs).toContain([loaded]);
     });
 

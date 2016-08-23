@@ -1,9 +1,9 @@
-/// <reference path="../typings/browser.d.ts" />
+/// <reference path="../typings/index.d.ts" />
 
 import routing from './app.route';
 import {components} from './components/components';
 
-const ngMainComponentName = 'tsfnApp';
+const ngMainComponentName = 'tsngApp';
 
 let app = angular.module('app', [
   'ngComponentRouter',
@@ -34,7 +34,7 @@ class AppController {
 @at.component('app', ngMainComponentName, {
   templateUrl: 'app.html?v=<%= VERSION %>',
   $routeConfig: [
-    { path: '/...', name: 'Main', component: 'tsfnMain' },
+    { path: '/...', name: 'Main', component: 'tsngMain' },
   ]
 })
 @at.inject('$log')

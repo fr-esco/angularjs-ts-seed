@@ -1,4 +1,4 @@
-/// <reference path="../../../../typings/browser.d.ts" />
+/// <reference path="../../../../typings/index.d.ts" />
 
 import ngModuleName from './row';
 import RowComponent from './row.component';
@@ -20,7 +20,7 @@ describe('# Row Component', () => {
     beforeEach($inject(($log, $rootScope, $componentController) => {
       log = $log;
       scope = $rootScope.$new();
-      controller = $componentController('tsfnRow', { $scope: scope });
+      controller = $componentController('tsngRow', { $scope: scope });
     }));
 
     it('should be attached to the scope', () => {
@@ -28,7 +28,7 @@ describe('# Row Component', () => {
     });
 
     it('should log registration', () => {
-      let loaded = ['ngComponent', 'tsfnRow', 'loaded'].join(' ');
+      let loaded = ['ngComponent', 'tsngRow', 'loaded'].join(' ');
       expect(log.debug.logs).toContain([loaded]);
     });
   });

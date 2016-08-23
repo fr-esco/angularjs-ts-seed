@@ -1,10 +1,14 @@
-<md-content ng-controller="UsageController as vm" class="md-padding" layout="row">
-  <div flex>
-    <nvd3 options="vm.chartOptions" data="vm.ramChartData"></nvd3>
+<md-content class="md-padding"
+            layout="row"
+            ng-controller="UsageController as vm">
+  <div flex="">
+    <nvd3 data="vm.ramChartData"
+          options="vm.chartOptions"></nvd3>
     <h4 class="donut-chart-title">RAM</h4>
   </div>
-  <div flex>
-    <nvd3 options="vm.chartOptions" data="vm.storageChartData"></nvd3>
+  <div flex="">
+    <nvd3 data="vm.storageChartData"
+          options="vm.chartOptions"></nvd3>
     <h4 class="donut-chart-title">Storage</h4>
   </div>
 </md-content>

@@ -1,13 +1,15 @@
-<tsfn-showcase file-list="::$ctrl.files[0]" title="I18N" lazy="true"></tsfn-showcase>
+<tsng-showcase file-list="::$ctrl.files[0]"
+               lazy="true"
+               title="I18N"></tsng-showcase>
 <div layout="row">
   <div flex="33">
     <md-card>
       <md-card-content>
         <h2>Timezone</h2>
-        <p><strong>{{ 'TIMEZONE' | translate }}</strong></p>
         <p>
-          {{ $ctrl.clock | amDateFormat:'LLLL' }}
+          <strong>{{ 'TIMEZONE' | translate }}</strong>
         </p>
+        <p>{{ $ctrl.clock | amDateFormat:'LLLL' }}</p>
       </md-card-content>
     </md-card>
   </div>
@@ -15,7 +17,9 @@
     <md-card>
       <md-card-content>
         <h2>Locale</h2>
-        <p><strong>{{ 'LOCALE' | translate }}</strong></p>
+        <p>
+          <strong>{{ 'LOCALE' | translate }}</strong>
+        </p>
         <p>{{ 'CURRENT_LOCALE_ID' | translate }}{{$ctrl.$locale.id}}</p>
         <p>{{ 'A_BIG_NUMBER' | translate }}{{1234567890 | number}}</p>
         <p>{{ 'THE_EPOCH' | translate }}{{0 | date}}</p>
@@ -23,20 +27,22 @@
       </md-card-content>
     </md-card>
   </div>
-  <div flex>
+  <div flex="">
     <md-card>
       <md-card-content>
         <h2>I18N</h2>
         <p>
           <md-input-container>
             <label for="name">{{ 'NAME' | translate }}</label>
-            <input id="name" ng-model="$ctrl.name">
+            <input id="name"
+                   ng-model="$ctrl.name" />
           </md-input-container>
         </p>
         <p>
           <md-input-container>
             <label for="gender">{{ 'GENDER' | translate }}</label>
-            <md-select id="gender" ng-model="$ctrl.gender">
+            <md-select id="gender"
+                       ng-model="$ctrl.gender">
               <md-option value="male">{{ 'MALE' | translate }}</md-option>
               <md-option value="female">{{ 'FEMALE' | translate }}</md-option>
             </md-select>
@@ -45,14 +51,15 @@
         <p>
           <md-input-container>
             <label for="num-of-guests">{{ 'NUMBER_OF_NEPHEWS' | translate }}</label>
-            <input id="num-of-guests" ng-model="$ctrl.numOfguests">
+            <input id="num-of-guests"
+                   ng-model="$ctrl.numOfguests" />
           </md-input-container>
         </p>
         <p>{{ 'PLURAL' | translate: {gender: $ctrl.gender, num_guests: $ctrl.numOfguests, host: $ctrl.name} :"messageformat" }}</p>
-        <p><em>
-          One time binding: <br />
-          {{ ::'PLURAL' | translate: {gender: $ctrl.gender, num_guests: $ctrl.numOfguests, host: $ctrl.name} :"messageformat" }}
-        </em></p>
+        <p>
+          <em>One time binding: 
+          <br />{{ ::'PLURAL' | translate: {gender: $ctrl.gender, num_guests: $ctrl.numOfguests, host: $ctrl.name} :"messageformat" }}</em>
+        </p>
       </md-card-content>
     </md-card>
   </div>

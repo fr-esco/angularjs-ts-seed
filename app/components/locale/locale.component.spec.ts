@@ -1,4 +1,4 @@
-/// <reference path="../../../typings/browser.d.ts" />
+/// <reference path="../../../typings/index.d.ts" />
 
 import ngModuleName from './locale';
 import LocaleComponent from './locale.component';
@@ -20,7 +20,7 @@ describe('# Locale Component', () => {
     beforeEach($inject(($rootScope, $componentController, locale) => {
       scope = $rootScope.$new();
       service = locale;
-      controller = $componentController('tsfnLocale', { $scope: scope, locale: service }, {
+      controller = $componentController('tsngLocale', { $scope: scope, locale: service }, {
         fileList: ['example.html', 'example.ts', 'example.css'],
         title: 'Locale'
       });

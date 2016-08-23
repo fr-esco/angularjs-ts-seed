@@ -1,7 +1,10 @@
-<div class="locale" layout="column" ng-cloak>
-  <md-select md-container-class="md-accent" ng-model="$ctrl.locale" ng-change="$ctrl.changeLocale()">
-    <md-option ng-repeat="locale in $ctrl.locales" value="{{locale.value}}">
-      {{locale.text}}
-    </md-option>
+<div class="locale"
+     layout="column"
+     ng-cloak="">
+  <md-select md-container-class="md-accent"
+             ng-change="$ctrl.changeLocale()"
+             ng-model="$ctrl.locale">
+    <md-option ng-repeat="locale in $ctrl.locales"
+               value="{{locale.value}}">{{locale.text}}</md-option>
   </md-select>
 </div>

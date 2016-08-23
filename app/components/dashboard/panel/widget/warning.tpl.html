@@ -1,3 +1,6 @@
-<md-content ng-controller="WarningController as vm" layout="row" layout-align="center center">
-  <nvd3 options="vm.chartOptions" data="vm.warningChartData"></nvd3>
+<md-content layout="row"
+            layout-align="center center"
+            ng-controller="WarningController as vm">
+  <nvd3 data="vm.warningChartData"
+        options="vm.chartOptions"></nvd3>
 </md-content>

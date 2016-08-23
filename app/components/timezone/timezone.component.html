@@ -1,7 +1,9 @@
-<div layout="column" ng-cloak>
-  <md-select md-container-class="md-accent" ng-model="$ctrl.timezone" ng-change="$ctrl.changeTimezone()">
-    <md-option ng-repeat="timezone in $ctrl.timezones" value="{{timezone}}">
-      {{timezone}}
-    </md-option>
+<div layout="column"
+     ng-cloak="">
+  <md-select md-container-class="md-accent"
+             ng-change="$ctrl.changeTimezone()"
+             ng-model="$ctrl.timezone">
+    <md-option ng-repeat="timezone in $ctrl.timezones"
+               value="{{timezone}}">{{timezone}}</md-option>
   </md-select>
 </div>

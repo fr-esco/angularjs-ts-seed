@@ -13,14 +13,14 @@ The main router is in the **app component** (```app.ts```) that contains the opt
 @at.component('app', ngMainComponentName, {
   templateUrl: 'app.html?v=<%= VERSION %>',
   $routeConfig: [
-    { path: '/...', name: 'Main', component: 'tsfnMain' },
+    { path: '/...', name: 'Main', component: 'tsngMain' },
   ]
 })
 class App {
 }
 ```
 
-Above the path '/' is mapped with the **tsfnMain component**.
+Above the path '/' is mapped with the **tsngMain component**.
 The '...' after the '/' means that the route named Main is a **non-terminal route**.
 
 ### main component
@@ -32,9 +32,9 @@ The '...' after the '/' means that the route named Main is a **non-terminal rout
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'main/main.component.html',
  $routeConfig: [
-    { path: '/dashboard', name: 'Dashboard', component: 'tsfnDashboard', data: { title: 'Dashboard' }, useAsDefault: true },
-    { path: '/profile', name: 'Profile', component: 'tsfnProfile', data: { title: 'Profile' } },
-    { path: '/table/...', name: 'Table', component: 'tsfnTable', data: { title: 'Table' } }
+    { path: '/dashboard', name: 'Dashboard', component: 'tsngDashboard', data: { title: 'Dashboard' }, useAsDefault: true },
+    { path: '/profile', name: 'Profile', component: 'tsngProfile', data: { title: 'Profile' } },
+    { path: '/table/...', name: 'Table', component: 'tsngTable', data: { title: 'Table' } }
 
   ]
 })

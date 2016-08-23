@@ -2,7 +2,7 @@ import ngModuleName from './table.module';
 
 'use strict';
 
-const ngComponentName = 'tsfnTableDefault';
+const ngComponentName = 'tsngTableDefault';
 
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'table/table-default.component.html'

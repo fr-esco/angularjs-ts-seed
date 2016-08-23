@@ -1,4 +1,4 @@
-/// <reference path="../../../typings/browser.d.ts" />
+/// <reference path="../../../typings/index.d.ts" />
 
 import ngModuleName from './table';
 import TableComponent from './table.component';
@@ -34,7 +34,7 @@ describe('# Table Component', () => {
     beforeEach($inject(($log, $rootScope, $componentController) => {
       log = $log;
       scope = $rootScope.$new();
-      controller = $componentController('tsfnTable', { $scope: scope });
+      controller = $componentController('tsngTable', { $scope: scope });
     }));
 
     it('should be attached to the scope', () => {
@@ -42,7 +42,7 @@ describe('# Table Component', () => {
     });
 
     it('should log registration', () => {
-      let loaded = ['ngComponent', 'tsfnTable', 'loaded'].join(' ');
+      let loaded = ['ngComponent', 'tsngTable', 'loaded'].join(' ');
       expect(log.debug.logs).toContain([loaded]);
     });
 

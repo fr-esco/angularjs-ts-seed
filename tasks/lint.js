@@ -14,7 +14,7 @@ var yargs = require('yargs');
 
 function htmllintReporter(filepath, issues) {
   if (issues.length > 0) {
-    issues.forEach(function(issue) {
+    issues.forEach(function (issue) {
       gutil.log([
         gutil.colors.cyan('[gulp-htmllint]'),
         gutil.colors.white(filepath + ' [' + issue.line + ',' + issue.column + ']:'),
@@ -60,18 +60,20 @@ function lintTs() {
     .alias('r', 'report')
     // .string('r')
     .default({ 'r': 'prose' })
-    .choices('r', ['json', 'prose', 'verbose', 'full'])
+    .choices('r', ['checkstyle', 'json', 'prose', 'pmd', 'verbose', 'vso'])
     .alias('s', 'support')
     .help('s')
     .argv;
 
   return gulp.src(PATH.src.app.all.concat('!./app/components/environment/*'))
-    .pipe(tslint())
-    .pipe(tslint.report(argv.report), {
+    .pipe(tslint({
+      formatter: argv.report
+    }))
+    .pipe(tslint.report({
       emitError: false,
       reportLimit: 2,
       summarizeFailureOutput: true
-    });
+    }));
 }
 
 lintTs.description = 'Ensure TypeScript coding standards and best practices are applied using tslint';
@@ -92,12 +94,12 @@ gulp.task('lint', ['lint.html', 'lint.ts', 'lint.dts'], lint);
 function checkFolders(root) {
   var ko = [];
   checkFolder(root);
-  return ko.filter(function(file) {
+  return ko.filter(function (file) {
     return file[0] !== '_' && file.indexOf('MaterialIcons') < 0 && file.indexOf('i18n') < 0;
   });
 
   function checkFolder(dir) {
-    fs.readdirSync(dir).forEach(function(file) {
+    fs.readdirSync(dir).forEach(function (file) {
       if (/[^\.a-z0-9-]/.test(file)) {
         ko.push(file);
       }

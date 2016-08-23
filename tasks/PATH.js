@@ -43,8 +43,8 @@ module.exports = {
     // Order is quite important here for the HTML tag injection.
     lib: {
       js: [
-        './node_modules/es6-module-loader/dist/es6-module-loader-sans-promises.js',
-        './node_modules/es6-module-loader/dist/es6-module-loader-sans-promises.js.map',
+        './node_modules/es6-module-loader/dist/es6-module-loader.js',
+        './node_modules/es6-module-loader/dist/es6-module-loader.js.map',
         './node_modules/systemjs/dist/system.src.js',
         './node_modules/angular/angular.js',
         './node_modules/es6-shim/es6-shim.min.js',
@@ -95,8 +95,9 @@ module.exports = {
         './node_modules/angular-translate/dist/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js',
         './node_modules/angular-translate/dist/angular-translate-loader-partial/angular-translate-loader-partial.min.js',
         './node_modules/angular-translate/dist/angular-translate-handler-log/angular-translate-handler-log.min.js',
-        //'./node_modules/messageformat/lib/messageformat.js',
-        //'./node_modules/messageformat/lib/messageformat-parser.js',
+        // './node_modules/messageformat/bin/messageformat.js',
+        // './node_modules/messageformat/lib/messageformat.js',
+        // './node_modules/messageformat/lib/messageformat-parser.js',
         './node_modules/messageformat/messageformat.js',
         './node_modules/messageformat/locale/en.js',
         './node_modules/messageformat/locale/it.js',

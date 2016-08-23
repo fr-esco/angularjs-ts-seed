@@ -1,13 +1,13 @@
-<div layout="row" layout-fill>
-  <tsfn-main-left-sidenav></tsfn-main-left-sidenav>
-
-  <div layout="column" flex>
-    <tsfn-main-toolbar></tsfn-main-toolbar>
-
-    <md-content flex class="md-padding page-content">
+<div layout="row"
+     layout-fill="">
+  <tsng-main-left-sidenav></tsng-main-left-sidenav>
+  <div flex=""
+       layout="column">
+    <tsng-main-toolbar></tsng-main-toolbar>
+    <md-content class="md-padding page-content"
+                flex="">
       <ng-outlet></ng-outlet>
     </md-content>
   </div>
-
-  <tsfn-main-right-sidenav></tsfn-main-right-sidenav>
+  <tsng-main-right-sidenav></tsng-main-right-sidenav>
 </div>

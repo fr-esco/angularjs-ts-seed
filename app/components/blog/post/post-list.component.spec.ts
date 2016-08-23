@@ -1,4 +1,4 @@
-/// <reference path="../../../../typings/browser.d.ts" />
+/// <reference path="../../../../typings/index.d.ts" />
 
 import ngModuleName from './post';
 import PostListComponent from './post-list.component';
@@ -20,7 +20,7 @@ xdescribe('# PostList Component', () => {
     beforeEach($inject(($log, $compile, $rootScope) => {
       log = $log;
       scope = $rootScope.$new();
-      element = angular.element('<tsfn-post-list my-attribute="{{attr}}" my-one-way-binding="outside"></tsfn-post-list>');
+      element = angular.element('<tsng-post-list my-attribute="{{attr}}" my-one-way-binding="outside"></tsng-post-list>');
       element = $compile(element)(scope);
       scope.attr = 'example';
       scope.outside = '1.5';
@@ -28,7 +28,7 @@ xdescribe('# PostList Component', () => {
     }));
 
     it('should log registration', () => {
-      let loaded = ['ngComponent', 'tsfnPostList', 'loaded'].join(' ');
+      let loaded = ['ngComponent', 'tsngPostList', 'loaded'].join(' ');
       expect(log.debug.logs).toContain([loaded]);
     });
 
@@ -55,7 +55,7 @@ xdescribe('# PostList Component', () => {
       let controller;
 
       beforeEach(() => {
-        controller = element.controller('tsfnPostList');
+        controller = element.controller('tsngPostList');
       });
 
       it('should expose test', () => {
@@ -78,7 +78,7 @@ xdescribe('# PostList Component', () => {
 
     beforeEach($inject(($rootScope, $componentController) => {
       scope = $rootScope.$new();
-      controller = $componentController('tsfnPostList', { $scope: scope }, {
+      controller = $componentController('tsngPostList', { $scope: scope }, {
         myAttribute: 'example',
         myOneWayBinding: '1.5'
       });

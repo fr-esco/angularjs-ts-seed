@@ -1,4 +1,4 @@
-/// <reference path="../../../typings/browser.d.ts" />
+/// <reference path="../../../typings/index.d.ts" />
 
 import Example from './example';
 import ExampleDirective from './example-external.directive';
@@ -13,7 +13,7 @@ describe('# Example External Directive', () => {
   let $log, $compile, $rootScope;
 
   beforeEach(() => {
-    $module(Example);
+    $module(Example, 'tpl');
 
     $inject((_$log_, _$compile_, _$rootScope_) => {
       $log = _$log_;

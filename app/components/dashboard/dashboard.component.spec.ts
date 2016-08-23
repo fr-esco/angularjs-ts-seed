@@ -1,4 +1,4 @@
-/// <reference path="../../../typings/browser.d.ts" />
+/// <reference path="../../../typings/index.d.ts" />
 
 import ngModuleName from './dashboard';
 import DashboardComponent from './dashboard.component';
@@ -20,7 +20,7 @@ describe('# Dashboard Component', () => {
     beforeEach($inject(($log, $rootScope, $componentController) => {
       log = $log;
       scope = $rootScope.$new();
-      controller = $componentController('tsfnDashboard', { $scope: scope });
+      controller = $componentController('tsngDashboard', { $scope: scope, version: 'TEST' });
     }));
 
     it('should be attached to the scope', () => {
@@ -28,7 +28,7 @@ describe('# Dashboard Component', () => {
     });
 
     it('should log registration', () => {
-      let loaded = ['ngComponent', 'tsfnDashboard', 'loaded'].join(' ');
+      let loaded = ['ngComponent', 'tsngDashboard', 'loaded'].join(' ');
       expect(log.debug.logs).toContain([loaded]);
     });
 
@@ -40,7 +40,7 @@ describe('# Dashboard Component', () => {
     });
 
     it('should have file configuration', () => {
-      expect(controller.files).toBeArrayOfSize(5);
+      expect(controller.files).toBeArrayOfSize(6);
       controller.files.forEach(x => {
         expect(x).toBeArrayOfStrings();
         x.forEach(file => expect(file).toStartWith('components/'));
