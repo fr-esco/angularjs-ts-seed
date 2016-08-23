@@ -5,4 +5,4 @@ import Material from '../material/material';
 const ngModuleName = 'app.components.main';
 
 export default angular.module(ngModuleName, ['ngComponentRouter', Material])
-  .run(['$log', $log => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;
+  .run(['$log', ($log: angular.ILogService) => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;

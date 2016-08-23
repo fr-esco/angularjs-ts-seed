@@ -6,5 +6,5 @@ import Markdown from '../markdown/markdown';
 const ngModuleName = 'app.components.showcase';
 
 export default angular.module(ngModuleName, ['ngComponentRouter', Material, 'ui.codemirror', Markdown])
-  .config(['showcaseProvider', showcaseProvider => showcaseProvider.delay(1000)])
-  .run(['$log', $log => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;
+  .config(['showcaseProvider', (showcaseProvider: any) => showcaseProvider.delay(1000)])
+  .run(['$log', ($log: angular.ILogService) => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;

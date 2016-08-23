@@ -8,4 +8,4 @@ import Post from './post/post';
 const ngModuleName = 'app.components.blog';
 
 export default angular.module(ngModuleName, ['ngComponentRouter', Material, Comment, Post])
-  .run(['$log', $log => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;
+  .run(['$log', ($log: angular.ILogService) => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;

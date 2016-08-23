@@ -7,4 +7,4 @@ import Panel from './panel/panel';
 const ngModuleName = 'app.components.dashboard';
 
 export default angular.module(ngModuleName, ['ngComponentRouter', Material, 'pascalprecht.translate', Panel, Showcase])
-  .run(['$log', $log => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;
+  .run(['$log', ($log: angular.ILogService) => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;

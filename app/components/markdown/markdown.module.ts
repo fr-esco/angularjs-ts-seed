@@ -7,4 +7,4 @@ const ngModuleName = 'app.components.markdown';
 
 export default angular.module(ngModuleName, ['ngComponentRouter', Material, 'ng-showdown'])
   .config(config)
-  .run(['$log', $log => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;
+  .run(['$log', ($log: angular.ILogService) => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;

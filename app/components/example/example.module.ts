@@ -3,4 +3,4 @@
 const ngModuleName = 'app.components.example';
 
 export default angular.module(ngModuleName, ['ngComponentRouter'])
-  .run(['$log', $log => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;
+  .run(['$log', ($log: angular.ILogService) => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;

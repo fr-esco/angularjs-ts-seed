@@ -6,4 +6,4 @@ import Rest from '../../rest/rest';
 const ngModuleName = 'app.components.blog.comment';
 
 export default angular.module(ngModuleName, ['ngComponentRouter', Material, Rest])
-  .run(['$log', $log => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;
+  .run(['$log', ($log: angular.ILogService) => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;

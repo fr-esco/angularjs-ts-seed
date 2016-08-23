@@ -9,4 +9,4 @@ import Comment from '../comment/comment';
 const ngModuleName = 'app.components.blog.post';
 
 export default angular.module(ngModuleName, ['ngComponentRouter', Material, Markdown, Rest, Comment])
-  .run(['$log', $log => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;
+  .run(['$log', ($log: angular.ILogService) => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;

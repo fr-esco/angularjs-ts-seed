@@ -44,6 +44,7 @@ export default class ProfileComponent implements at.OnActivate, at.CanDeactivate
   public $routerOnActivate(next: at.ComponentInstruction) {
     this.title = next.routeData.data['title'];
   }
+
   public submitUser() {
     this.dialog.show(
       this.dialog.alert()
@@ -51,13 +52,13 @@ export default class ProfileComponent implements at.OnActivate, at.CanDeactivate
         .ok('Ok!')
     );
   }
+
   public setForm(form) {
     this.userForm = form;
-
   }
-  public $routerCanDeactivate() {
 
-    var confirm = this.q.defer();
+  public $routerCanDeactivate() {
+    const confirm = this.q.defer();
     if (this.userForm.$dirty) {
       this.dialog.show(
         this.dialog.confirm()
@@ -67,7 +68,7 @@ export default class ProfileComponent implements at.OnActivate, at.CanDeactivate
       ).then(() => { confirm.resolve(true); }, () => { confirm.resolve(false); });
       return confirm.promise;
     }
-
+    return this.q.when(true);
   }
 
 }
