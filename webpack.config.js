@@ -28,15 +28,6 @@ module.exports = {
       { test: /\.woff$/, loader: 'file-loader' },
       { test: /\.woff2$/, loader: 'file-loader' },
       { test: /\.eot$/, loader: 'file-loader' },
-      // {
-      //   test: /\.js?$/,
-      //   exclude: /(node_modules|bower_components)/,
-      //   loader: 'babel', // 'babel-loader' is also a legal name to reference
-      //   query: {
-      //     presets: ['es2015'],
-      //     cacheDirectory: true
-      //   }
-      // }
     ]
   },
   // context: __dirname,
