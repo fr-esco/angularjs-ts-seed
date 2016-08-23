@@ -19,20 +19,9 @@ let app = angular.module('app', [
 ]).config(routing)
   .value('$routerRootComponent', ngMainComponentName);
 
-// @at.controller('app', 'AppController')
-@at.directive('app', 'app', {
-  // controller: 'AppController',
-  link: (scope, element, attrs, ctrl) => {
-    console.log('App.directive', 'init');
-  },
-  restrict: 'E',
-  templateUrl: 'app.html?v=<%= VERSION %>'
-})
-class AppController {
-}
-
 @at.component('app', ngMainComponentName, {
-  templateUrl: 'app.html?v=<%= VERSION %>',
+  // templateUrl: 'app.html?v=<%= VERSION %>',
+  templateUrl: 'app.html',
   $routeConfig: [
     { path: '/...', name: 'Main', component: 'tsngMain' },
   ]
@@ -46,5 +35,5 @@ class App {
 
 export default app;
 
-// angular.element(document)
-//   .ready(() => angular.bootstrap(document.body, [app.name]));
+angular.element(document)
+  .ready(() => angular.bootstrap(document.body, [app.name]));

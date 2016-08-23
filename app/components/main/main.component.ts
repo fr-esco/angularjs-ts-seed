@@ -1,13 +1,14 @@
 import ngModuleName from './main.module';
 import {IMenuItem} from '../common/navigation-menu.model';
 import NavigationService from '../common/navigation.service';
+import BottomSheetController from '../bottom-sheet/bottom-sheet.controller';
 
 'use strict';
 
 const ngComponentName = 'tsngMain';
 
 @at.component(ngModuleName, ngComponentName, {
-  templateUrl: 'main/main.component.html',
+  templateUrl: 'components/main/main.component.html',
   $routeConfig: [
     { path: '/dashboard', name: 'Dashboard', component: 'tsngDashboard', data: { title: 'Dashboard' }, useAsDefault: true },
     { path: '/profile', name: 'Profile', component: 'tsngProfile', data: { title: 'Profile' } },
@@ -46,7 +47,7 @@ export default class MainComponent implements at.OnInit {
   public showActions($event: MouseEvent) {
     this.mdBottomSheet.show({
       parent: angular.element(document.getElementById('content')),
-      templateUrl: 'bottom-sheet/bottom-sheet.tpl.html',
+      templateUrl: 'components/bottom-sheet/bottom-sheet.controller.tpl.html',
       controller: BottomSheetController,
       controllerAs: 'vm'
     }).then(clickedItem => {
@@ -78,20 +79,5 @@ export default class MainComponent implements at.OnInit {
     this.mdBottomSheet.hide();
     this.mdSidenav('left').close().then(() => this.log.debug('Left sidenav closed'));
     this.mdSidenav('right').close().then(() => this.log.debug('Right sidenav closed'));
-  }
-}
-
-@at.inject('$mdBottomSheet')
-class BottomSheetController {
-  public actions = [
-    { name: 'Share', icon: 'share', url: 'https://www.google.com' },
-    { name: 'Star', icon: 'star', url: 'https://www.google.com' }
-  ];
-
-  constructor(private mdBottomSheet: angular.material.IBottomSheetService) {
-  }
-
-  public performAction(action) {
-    this.mdBottomSheet.hide(action);
   }
 }

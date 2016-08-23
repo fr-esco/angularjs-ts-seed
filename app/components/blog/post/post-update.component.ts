@@ -11,7 +11,7 @@ const ngComponentName = 'tsngPostUpdate';
   bindings: {
     $router: '<'
   },
-  templateUrl: 'blog/post/post-update.component.html'
+  templateUrl: 'components/blog/post/post-update.component.html'
 })
 @at.inject('postClient', '$log', '$mdDialog')
 export default class PostUpdateComponent implements angular.OnActivate, angular.CanDeactivate {

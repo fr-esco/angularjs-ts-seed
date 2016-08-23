@@ -5,7 +5,7 @@ import ngModuleName from './dashboard.module';
 const ngComponentName = 'tsngDashboard';
 
 @at.component(ngModuleName, ngComponentName, {
-  templateUrl: 'dashboard/dashboard.component.html',
+  templateUrl: 'components/dashboard/dashboard.component.html',
 })
 @at.inject('$log', '$translatePartialLoader', '$translate', '$locale', '$scope', 'version')
 export default class DashboardComponent implements at.OnActivate {

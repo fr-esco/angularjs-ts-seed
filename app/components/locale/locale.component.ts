@@ -11,7 +11,7 @@ const ngComponentName = 'tsngLocale';
   bindings: {
     locale: '@'
   },
-  templateUrl: 'locale/locale.component.html'
+  templateUrl: 'components/locale/locale.component.html'
 })
 @at.inject('locale', '$filter', '$log', '$q', '$timeout', '$translate', '$rootScope')
 export default class LocaleComponent implements at.OnInit {

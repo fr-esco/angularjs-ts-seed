@@ -5,7 +5,7 @@ import ngModuleName from './table.module';
 const ngComponentName = 'tsngTableDefault';
 
 @at.component(ngModuleName, ngComponentName, {
-  templateUrl: 'table/table-default.component.html'
+  templateUrl: 'components/table/table-default.component.html'
 })
 @at.inject('$log')
 export default class TableDefaultComponent {

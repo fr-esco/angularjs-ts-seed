@@ -7,7 +7,7 @@ import MessageService from './message.service';
 const ngComponentName = 'tsngMessageList';
 
 @at.component(ngModuleName, ngComponentName, {
-  templateUrl: 'message/message-list.component.html'
+  templateUrl: 'components/message/message-list.component.html'
 })
 @at.inject('messageService', '$log')
 export default class MessageListComponent implements at.OnInit {

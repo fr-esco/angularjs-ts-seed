@@ -5,7 +5,7 @@ import ngModuleName from './blog.module';
 const ngComponentName = 'tsngBlog';
 
 @at.component(ngModuleName, ngComponentName, {
-  templateUrl: 'blog/blog.component.html',
+  templateUrl: 'components/blog/blog.component.html',
   $routeConfig: [
     { path: '/posts', name: 'PostList', component: 'tsngPostList', useAsDefault: true, data: { title: 'Posts' } },
     { path: '/posts/create', name: 'PostCreate', component: 'tsngPostCreate', data: { title: 'New Post' } },

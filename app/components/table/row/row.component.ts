@@ -5,7 +5,7 @@ import ngModuleName from './row.module';
 const ngComponentName = 'tsngRow';
 
 @at.component(ngModuleName, ngComponentName, {
-  templateUrl: 'table/row/row.component.html'
+  templateUrl: 'components/table/row/row.component.html'
 })
 @at.inject('$log')
 export default class RowComponent {

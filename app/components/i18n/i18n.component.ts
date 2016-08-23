@@ -11,7 +11,7 @@ const ngComponentName = 'tsngI18n';
     clock: '<',
     numOfguests: '@'
   },
-  templateUrl: 'i18n/i18n.component.html'
+  templateUrl: 'components/i18n/i18n.component.html'
 })
 @at.inject('$log', '$interval', '$locale')
 export default class I18nComponent implements angular.OnActivate, at.OnInit, at.OnDestroy {

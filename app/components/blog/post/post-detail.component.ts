@@ -8,7 +8,7 @@ import PostClient from './post-client.service';
 const ngComponentName = 'tsngPostDetail';
 
 @at.component(ngModuleName, ngComponentName, {
-  templateUrl: 'blog/post/post-detail.component.html'
+  templateUrl: 'components/blog/post/post-detail.component.html'
 })
 @at.inject('postClient', '$filter', '$log')
 export default class PostDetailComponent implements angular.OnActivate {

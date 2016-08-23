@@ -11,7 +11,7 @@ const ngComponentName = 'tsngPostCreate';
   bindings: {
     $router: '<'
   },
-  templateUrl: 'blog/post/post-create.component.html'
+  templateUrl: 'components/blog/post/post-create.component.html'
 })
 @at.inject('postClient', '$log', '$mdDialog')
 export default class PostCreateComponent implements angular.OnActivate, angular.CanDeactivate {

@@ -10,7 +10,7 @@ const ngComponentName = 'tsngTimezone';
     timezone: '@',
     timezones: '<'
   },
-  templateUrl: 'timezone/timezone.component.html'
+  templateUrl: 'components/timezone/timezone.component.html'
 })
 @at.inject('timezone', 'moment', '$log')
 export default class TimezoneComponent implements at.OnInit {

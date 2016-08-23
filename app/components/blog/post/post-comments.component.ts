@@ -13,7 +13,7 @@ const ngComponentName = 'tsngPostComments';
     post: '<',
     title: '@sectionTitle'
   },
-  templateUrl: 'blog/post/post-comments.component.html'
+  templateUrl: 'components/blog/post/post-comments.component.html'
 })
 @at.inject('postClient', '$log', '$mdDialog')
 export default class PostCommentsComponent implements at.OnInit, at.OnChanges {

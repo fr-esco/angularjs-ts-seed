@@ -6,7 +6,7 @@ const ngDirectiveName = '<%= fullName %>';
 
 @at.directive(ngModuleName, ngDirectiveName, {
   restrict: 'A', // default: EA
-  templateUrl: '<%= path %>/<%= name %>.directive.html'
+  templateUrl: 'components/<%= path %>/<%= name %>.directive.html'
 })
 @at.inject('$log')
 export default class <%= upCaseName %>Directive {

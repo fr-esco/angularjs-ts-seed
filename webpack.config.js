@@ -7,7 +7,7 @@ module.exports = {
       { test: /\.js$/, loader: 'source-map-loader' },
       {
         test: /\.ts$/,
-        loader: 'baggage?[file].html&[file].css&[file].scss'
+        loader: 'baggage?[file].html&[file].tpl.html&[file].css&[file].scss'
       }
     ],
     loaders: [

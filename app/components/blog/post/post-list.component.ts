@@ -11,7 +11,7 @@ const ngComponentName = 'tsngPostList';
   bindings: {
     $router: '<'
   },
-  templateUrl: 'blog/post/post-list.component.html'
+  templateUrl: 'components/blog/post/post-list.component.html'
 })
 @at.inject('postClient', '$filter', '$log', '$mdDialog', 'amMoment')
 export default class PostListComponent implements angular.OnActivate {

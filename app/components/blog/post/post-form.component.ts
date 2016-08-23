@@ -16,7 +16,7 @@ const ngComponentName = 'tsngPostForm';
     onCancel: '&',
     onSubmit: '&'
   },
-  templateUrl: 'blog/post/post-form.component.html'
+  templateUrl: 'components/blog/post/post-form.component.html'
 })
 @at.inject('$log')
 export default class PostFormComponent {

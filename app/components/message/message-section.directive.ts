@@ -12,7 +12,7 @@ const ngDirectiveName = 'tsngMessageSection';
     theme: '@',
     messages: '='
   },
-  templateUrl: 'message/message-section.directive.html'
+  templateUrl: 'components/message/message-section.directive.html'
 })
 export default class MessagesSectionDirective {
 }

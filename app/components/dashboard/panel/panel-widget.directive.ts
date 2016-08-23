@@ -14,7 +14,7 @@ const ngDirectiveName = 'tsngPanelWidget';
     template: '@',
     options: '@'
   },
-  templateUrl: 'dashboard/panel/panel-widget.directive.html'
+  templateUrl: 'components/dashboard/panel/panel-widget.directive.html'
   // compile: (element, attrs, linker) => (scope, element) => {
   //   linker(scope, clone => {
   //     element.append(clone);

@@ -9,7 +9,7 @@ const ngComponentName = '<%= fullName %>';
     myAttribute: '@',
     myOneWayBinding: '<'
   },
-  templateUrl: '<%= path %>/<%= name %>.component.html'
+  templateUrl: 'components/<%= path %>/<%= name %>.component.html'
 })
 @at.inject('$log')
 export default class <%= upCaseName %>Component {

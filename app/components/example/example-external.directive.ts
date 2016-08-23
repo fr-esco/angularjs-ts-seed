@@ -7,7 +7,7 @@ const ngDirectiveName = 'exampleExternal';
 @at.directive(ngModuleName, ngDirectiveName, {
   replace: true,
   restrict: 'E',
-  templateUrl: 'example/example-external.directive.html'
+  templateUrl: 'components/example/example-external.directive.html'
 })
 @at.inject('$log')
 export default class ExampleExternalDirective {

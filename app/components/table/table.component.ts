@@ -7,7 +7,7 @@ import TableService from './table.service';
 const ngComponentName = 'tsngTable';
 
 @at.component(ngModuleName, ngComponentName, {
-  templateUrl: 'table/table.component.html',
+  templateUrl: 'components/table/table.component.html',
   $routeConfig: [
     { path: '/', name: 'Table Default', component: 'tsngTableDefault', data: { title: 'Table Default' }, useAsDefault: true },
     { path: '/row', name: 'Row', component: 'tsngRow', data: { title: 'Row' } },

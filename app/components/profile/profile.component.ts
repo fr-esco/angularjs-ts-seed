@@ -6,7 +6,7 @@ const ngComponentName = 'tsngProfile';
 
 @at.component(ngModuleName, ngComponentName, {
 
-  templateUrl: 'profile/profile.component.html'
+  templateUrl: 'components/profile/profile.component.html'
 })
 @at.inject('$log', '$mdDialog', '$q')
 export default class ProfileComponent implements at.OnActivate, at.CanDeactivate {
