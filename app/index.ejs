@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta content="IE=edge"
           http-equiv="X-UA-Compatible" />
-    <title>Angular Material Dashboard</title>
+    <title><%= htmlWebpackPlugin.options.pkg.title %></title>
     <meta content="Angularjs 1.5 TypeScript Seed"
           name="description" />
     <meta content="width=device-width, initial-scale=1"
@@ -28,8 +28,9 @@
     <tsng-app>Loading...</tsng-app>
     <!-- inject:js -->
     <!-- endinject -->
-    <!--<script src="init.js?v=<%= VERSION %>"></script>-->
-    <script src="bundle.js?v=<%= VERSION %>"></script>
-    <script src="bundle.js.map?v=<%= VERSION %>"></script>
+    <!--<script src="init.js?v=<%= htmlWebpackPlugin.options.pkg.version %>"></script>-->
+    <!--<script src="bundle.js?v=<%= htmlWebpackPlugin.options.pkg.version %>"></script>-->
+    <!--<script src="bundle.js.map?v=<%= htmlWebpackPlugin.options.pkg.version %>"></script>-->
+    <!-- <%= htmlWebpackPlugin.options.pkg.name + ' v' + htmlWebpackPlugin.options.pkg.version + ' built on ' + new Date() %> -->
   </body>
 </html>

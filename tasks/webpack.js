@@ -28,7 +28,7 @@ gulp.task('webpack.build.app.dev', done => {
 
 gulp.task('webpack.build.index.dev', () => {
   const target = gulp.src(injectableDevAssetsRef(), { read: false }).pipe($.plumber());
-  return gulp.src('./app/index.html')
+  return gulp.src(join(PATH.dest.dev.all, 'index.html'))
     .pipe($.plumber())
     .pipe($.inject(target, { transform: transformPath('dev') }))
     .pipe($.plumber())

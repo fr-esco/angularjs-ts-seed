@@ -1,4 +1,5 @@
 {
+  "name": "angular-ts-seed",
   "version": "1.11.0",
   "description": "Angularjs 1.5 TypeScript Seed",
   "repository": {
@@ -37,6 +38,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "autoprefixer-loader": "^3.2.0",
     "baggage-loader": "^0.2.4",
     "connect": "^3.4.1",
     "cordova-lib": "^6.3.1",
@@ -87,6 +89,7 @@
     "gulp-watch": "^4.3.9",
     "gulp-zip": "^3.2.0",
     "html-loader": "^0.4.3",
+    "html-webpack-plugin": "^2.22.0",
     "jasmine-core": "^2.4.1",
     "json-mock": "^0.1.0",
     "json-server": "^0.8.18",
