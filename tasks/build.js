@@ -14,7 +14,7 @@ function build() {
   if (argv.prod)
     gulp.start('build.prod');
   else
-    gulp.start('build.dev');
+    gulp.start('webpack.build.dev');
 }
 
 build.description = 'Build for either Development or the requested environment';
