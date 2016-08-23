@@ -107,7 +107,7 @@ gulp.task('build.js.tmp', ['lint.ts', 'lint.dts', 'build.html.tmp', 'environment
     .pipe(tsc(tsProject));
 
   return result.js
-    .pipe(template({ VERSION: getVersion() }))
+    .pipe(template({ VERSION: getVersion(), ENV: 'prod' }))
     .pipe(gulp.dest('tmp'));
 });
 
@@ -128,6 +128,7 @@ gulp.task('build.js.prod', ['build.js.tmp'], function () {
 
 gulp.task('build.init.prod', function () {
   var result = gulp.src('./app/init.ts')
+    .pipe($.preprocess({ context: { NODE_ENV: 'PRODUCTION', DEBUG: false } }))
     .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(tsc(tsProject));
@@ -135,7 +136,7 @@ gulp.task('build.init.prod', function () {
   return result.js
     .pipe($.ignore.exclude(['**/*.map']))
     .pipe(uglify().on('error', $.util.log))
-    .pipe(template({ VERSION: getVersion() }))
+    .pipe(template({ VERSION: getVersion(), ENV: 'prod' }))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(PATH.dest.prod.all));
 });
@@ -168,7 +169,7 @@ gulp.task('build.index.prod', function () {
     join(PATH.dest.prod.all, '*.css')], { read: false });
   return gulp.src('./app/index.html')
     .pipe(inject(target, { transform: transformPath('prod') }))
-    .pipe(template({ VERSION: getVersion() }))
+    .pipe(template({ VERSION: getVersion(), ENV: 'prod' }))
     .pipe(gulp.dest(PATH.dest.prod.all));
 });
 

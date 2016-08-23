@@ -4,11 +4,11 @@ var PATH = require('./PATH');
 
 var gulp = require('gulp');
 var concat = require('gulp-concat');
-var filter = require('gulp-filter');
 var inject = require('gulp-inject');
 var $ = require('gulp-load-plugins')();
 var ngHtml2Js = require("gulp-ng-html2js");
 var plumber = require('gulp-plumber');
+var preprocess = require('gulp-preprocess');
 var sourcemaps = require('gulp-sourcemaps');
 var template = require('gulp-template');
 var tsc = require('gulp-typescript');
@@ -46,6 +46,7 @@ gulp.task('build.lib.dev', function () {
 
 gulp.task('build.js.dev', ['lint.ts', 'lint.dts', 'environment.dev'], function () {
   var result = gulp.src(PATH.src.app.dev)
+    .pipe(preprocess({ context: { NODE_ENV: 'DEVELOPMENT', DEBUG: true } }))
     .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(tsc(tsProject));

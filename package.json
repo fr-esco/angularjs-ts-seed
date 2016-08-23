@@ -11,7 +11,7 @@
     "git.merge.preview": "git fetch upstream && git merge --no-commit upstream/master",
     "git.prepare": "git add . && git add -f tools/install.js && git commit -m'setup'",
     "git.setup": "git init && git remote add upstream https://github.com/fr-esco/angularjs-ts-seed.git",
-    "gulp.update": "npm i -D --progress=false gulp gulp-autoprefixer gulp-bump gulp-clean-css gulp-cli gulp-concat gulp-electron-packager gulp-filter gulp-folders gulp-htmllint gulp-if gulp-ignore gulp-inject gulp-livereload gulp-load-plugins gulp-merge-json gulp-minify-html gulp-ng-annotate gulp-ng-constant gulp-ng-html2js gulp-notify gulp-plumber gulp-rename gulp-replace gulp-sass gulp-sourcemaps gulp-strip-comments gulp-template gulp-tslint gulp-typescript gulp-uglify gulp-util gulp-watch gulp-zip",
+    "gulp.update": "npm i -D --progress=false gulp gulp-autoprefixer gulp-bump gulp-clean-css gulp-cli gulp-concat gulp-electron-packager gulp-filter gulp-folders gulp-htmllint gulp-if gulp-ignore gulp-inject gulp-livereload gulp-load-plugins gulp-merge-json gulp-minify-html gulp-ng-annotate gulp-ng-constant gulp-ng-html2js gulp-notify gulp-plumber gulp-preprocess gulp-rename gulp-replace gulp-sass gulp-sourcemaps gulp-strip-comments gulp-template gulp-tslint gulp-typescript gulp-uglify gulp-util gulp-watch gulp-zip",
     "ng.update": "npm i -S angular angular-animate angular-aria angular-cookies angular-i18n angular-message-format angular-messages angular-mocks angular-sanitize angular-touch",
     "postinstall": "typings install && gulp -T",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -69,6 +69,7 @@
     "gulp-ng-html2js": "^0.2.2",
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.1.0",
+    "gulp-preprocess": "^2.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
     "gulp-sass": "^2.3.2",
