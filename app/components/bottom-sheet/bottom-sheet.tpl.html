@@ -2,7 +2,10 @@
   <md-subheader>Select action</md-subheader>
   <md-list>
     <md-list-item ng-repeat="action in vm.actions">
-      <md-button class="md-list-item-content" ng-click="vm.performAction(action)" ng-href="{{action.url}}" target="_blank">
+      <md-button class="md-list-item-content"
+                 ng-click="vm.performAction(action)"
+                 ng-href="{{action.url}}"
+                 target="_blank">
         <i class="material-icons">{{action.icon}}</i>
         <span class="share-label">{{action.name}}</span>
       </md-button>

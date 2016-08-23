@@ -1,19 +1,22 @@
-<div class="post" layout="column">
-
+<div class="post"
+     layout="column">
   <md-toolbar md-theme="dark">
     <div class="md-toolbar-tools">
-      <h3><span ng-bind="::$ctrl.post.title"></span></h3>
-      <span flex></span>
-      <md-button class="toolbar-button" aria-label="Update" ng-link="['PostUpdate', { id: $ctrl.post.id }]">
+      <h3>
+        <span ng-bind="::$ctrl.post.title"></span>
+      </h3>
+      <span flex=""></span>
+      <md-button aria-label="Update"
+                 class="toolbar-button"
+                 ng-link="['PostUpdate', { id: $ctrl.post.id }]">
         <i class="material-icons">create</i>
       </md-button>
     </div>
   </md-toolbar>
-
-  <div layout-padding>
-    <p class="md-body-1" ng-bind-html="::$ctrl.post.content"></p>
+  <div layout-padding="">
+    <p class="md-body-1"
+       ng-bind-html="::$ctrl.post.content"></p>
   </div>
-
-  <tsng-post-comments section-title="Comments" post="::$ctrl.post"></tsng-post-comments>
-
+  <tsng-post-comments post="::$ctrl.post"
+                      section-title="Comments"></tsng-post-comments>
 </div>

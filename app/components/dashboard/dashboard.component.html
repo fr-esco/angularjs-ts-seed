@@ -1,39 +1,74 @@
-<div class="showcase-wrapper" layout="column" ng-cloak>
+<div class="showcase-wrapper"
+     layout="column"
+     ng-cloak="">
   <md-toolbar md-theme="grey">
     <div class="md-toolbar-tools">
-      <h3><span>Showcase</span></h3>
-      <span flex></span>
-      <md-button class="toolbar-button" aria-label="View Source" ng-click="$ctrl.showSource = !$ctrl.showSource">
-        <i class="material-icons" ng-hide="$ctrl.showSource">keyboard_arrow_right</i>
-        <i class="material-icons" ng-show="$ctrl.showSource">keyboard_arrow_down</i>
+      <h3>
+        <span>Showcase</span>
+      </h3>
+      <span flex=""></span>
+      <md-button aria-label="View Source"
+                 class="toolbar-button"
+                 ng-click="$ctrl.showSource = !$ctrl.showSource">
+        <i class="material-icons"
+           ng-hide="$ctrl.showSource">keyboard_arrow_right</i>
+        <i class="material-icons"
+           ng-show="$ctrl.showSource">keyboard_arrow_down</i>
       </md-button>
     </div>
   </md-toolbar>
   <md-divider></md-divider>
   <div ng-show="$ctrl.showSource">
     <tsng-showcase></tsng-showcase>
-    <tsng-showcase file-list="::$ctrl.files[0]" title="{{::$ctrl.title}}" lazy="true"></tsng-showcase>
-    <tsng-showcase file-list="::$ctrl.files[1]" title="Panel Widgets" lazy="true"></tsng-showcase>
+    <tsng-showcase file-list="::$ctrl.files[0]"
+                   lazy="true"
+                   title="{{::$ctrl.title}}"></tsng-showcase>
+    <tsng-showcase file-list="::$ctrl.files[1]"
+                   lazy="true"
+                   title="Panel Widgets"></tsng-showcase>
   </div>
 </div>
-
-<tsng-showcase file-list="::$ctrl.files[2]" title="Widgets" lazy="true"></tsng-showcase>
+<tsng-showcase file-list="::$ctrl.files[2]"
+               lazy="true"
+               title="Widgets"></tsng-showcase>
 <!--<tsng-showcase file-list="::$ctrl.files[5]" title="I18N" lazy="true"></tsng-showcase>-->
 <div layout-gt-md="row">
-  <tsng-panel-widget flex title="{{ 'SITE_VISITORS' | translate }}" template="dashboard/panel/widget/visitor.tpl.html" class="fixed-height-widget"></tsng-panel-widget>
-  <tsng-panel-widget flex title="{{ 'WARNINGS' | translate }}" template="dashboard/panel/widget/warning.tpl.html" class="fixed-height-widget"></tsng-panel-widget>
-  <tsng-panel-widget flex title="{{ ::'MEMORY_LOAD' | translate }}" template="dashboard/panel/widget/memory.tpl.html" class="fixed-height-widget"></tsng-panel-widget>
+  <tsng-panel-widget class="fixed-height-widget"
+                     flex=""
+                     template="dashboard/panel/widget/visitor.tpl.html"
+                     title="{{ 'SITE_VISITORS' | translate }}"></tsng-panel-widget>
+  <tsng-panel-widget class="fixed-height-widget"
+                     flex=""
+                     template="dashboard/panel/widget/warning.tpl.html"
+                     title="{{ 'WARNINGS' | translate }}"></tsng-panel-widget>
+  <tsng-panel-widget class="fixed-height-widget"
+                     flex=""
+                     template="dashboard/panel/widget/memory.tpl.html"
+                     title="{{ ::'MEMORY_LOAD' | translate }}"></tsng-panel-widget>
 </div>
-
 <!-- <tsng-showcase file-list="::$ctrl.files[3]" title="Widgets" lazy="true"></tsng-showcase> -->
 <div layout-gt-md="row">
-  <tsng-panel-widget flex title="Server Control dashboard/panel" template="dashboard/panel/widget/control-panel.tpl.html" class="fixed-height-widget"></tsng-panel-widget>
-  <tsng-panel-widget flex title="Usage Stats" template="dashboard/panel/widget/usage.tpl.html" class="fixed-height-widget"></tsng-panel-widget>
-  <tsng-panel-widget flex title="Autocomplete" template="dashboard/panel/widget/autocomplete.tpl.html" options="true" class="fixed-height-widget"></tsng-panel-widget>
+  <tsng-panel-widget class="fixed-height-widget"
+                     flex=""
+                     template="dashboard/panel/widget/control-panel.tpl.html"
+                     title="Server Control dashboard/panel"></tsng-panel-widget>
+  <tsng-panel-widget class="fixed-height-widget"
+                     flex=""
+                     template="dashboard/panel/widget/usage.tpl.html"
+                     title="Usage Stats"></tsng-panel-widget>
+  <tsng-panel-widget class="fixed-height-widget"
+                     flex=""
+                     options="true"
+                     template="dashboard/panel/widget/autocomplete.tpl.html"
+                     title="Autocomplete"></tsng-panel-widget>
 </div>
-
 <!-- <tsng-showcase file-list="::$ctrl.files[4]" title="Widgets" lazy="true"></tsng-showcase> -->
 <div layout-gt-md="row">
-  <tsng-panel-widget flex title="Performance" template="dashboard/panel/widget/performance.tpl.html" options="true"></tsng-panel-widget>
-  <tsng-panel-widget flex title="TODO list" template="dashboard/panel/widget/todo.tpl.html"></tsng-panel-widget>
+  <tsng-panel-widget flex=""
+                     options="true"
+                     template="dashboard/panel/widget/performance.tpl.html"
+                     title="Performance"></tsng-panel-widget>
+  <tsng-panel-widget flex=""
+                     template="dashboard/panel/widget/todo.tpl.html"
+                     title="TODO list"></tsng-panel-widget>
 </div>

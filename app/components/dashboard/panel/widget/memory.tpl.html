@@ -1,3 +1,6 @@
-<md-content ng-controller="MemoryController as vm" layout="row" layout-align="center center">
-  <nvd3 options="vm.chartOptions" data="vm.memoryChartData"></nvd3>
+<md-content layout="row"
+            layout-align="center center"
+            ng-controller="MemoryController as vm">
+  <nvd3 data="vm.memoryChartData"
+        options="vm.chartOptions"></nvd3>
 </md-content>
