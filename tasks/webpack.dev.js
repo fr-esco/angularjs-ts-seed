@@ -36,6 +36,7 @@ gulp.task('webpack.build.index.dev', () => {
 });
 
 gulp.task('webpack.build.assets.dev', ['webpack.build.js.dev', 'build.copy.locale.json.dev'], done => {
+  $.util.log($.util.colors.green('Application built successfully.'));
   done();
 });
 

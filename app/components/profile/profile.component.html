@@ -11,16 +11,17 @@
     <md-input-container>
       <label for="title">Username</label>
       <input id="title"
+             minlength="8"
              name="title"
-             ng-minlength="8"
              ng-model="$ctrl.user.title"
+             ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }"
              required=""
-             username-asynchro-validation="" />
+             username-async-validator="" />
       <div ng-messages="userForm.title.$error"
            ng-show="userForm.title.$dirty">
-        <div ng-message="minlength">That's too short!</div>
         <div ng-message="required">Username required!</div>
-        <div ng-message="asynchroValidator">Username already exists!</div>
+        <div ng-message="minlength">That's too short!</div>
+        <div ng-message="usernameAvailable">Username already exists!</div>
       </div>
     </md-input-container>
     <md-input-container>

@@ -53,6 +53,7 @@ gulp.task('webpack.build.index.prod', () => {
 });
 
 gulp.task('webpack.build.assets.prod', ['webpack.build.js.prod', 'build.copy.locale.json.prod'], done => {
+  $.util.log($.util.colors.green('Application built successfully.'));
   done();
 });
 
