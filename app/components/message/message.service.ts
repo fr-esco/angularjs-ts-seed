@@ -13,7 +13,6 @@ export interface IMessage {
 }
 
 @at.service(ngModuleName, ngServiceName)
-@at.inject('$log', '$q')
 export default class MessageService {
   private messages: Array<IMessage> = [
     {
@@ -60,12 +59,13 @@ export default class MessageService {
     }
   ];
 
-  constructor(private log: angular.ILogService, private q: angular.IQService) {
-    log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
+  constructor(private $log: angular.ILogService, private $q: angular.IQService) {
+    'ngInject';
+    $log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
   }
 
   public loadAllItems() {
-    return this.q.when(this.messages);
+    return this.$q.when(this.messages);
   }
 
 }

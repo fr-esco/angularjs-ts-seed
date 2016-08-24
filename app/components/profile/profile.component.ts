@@ -8,7 +8,6 @@ const ngComponentName = 'tsngProfile';
 
   templateUrl: 'components/profile/profile.component.html'
 })
-@at.inject('$log', '$mdDialog', '$q')
 export default class ProfileComponent implements at.OnActivate, at.CanDeactivate {
   public title: string;
   public userForm;
@@ -35,10 +34,11 @@ export default class ProfileComponent implements at.OnActivate, at.CanDeactivate
     'components/profile/profile.module.ts'
   ];
 
-  constructor(private log: angular.ILogService,
-    private dialog: angular.material.IDialogService,
-    private q: angular.IQService) {
-    log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+  constructor(private $log: angular.ILogService,
+    private $mdDialog: angular.material.IDialogService,
+    private $q: angular.IQService) {
+    'ngInject';
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
   }
 
   public $routerOnActivate(next: at.ComponentInstruction) {
@@ -46,8 +46,8 @@ export default class ProfileComponent implements at.OnActivate, at.CanDeactivate
   }
 
   public submitUser() {
-    this.dialog.show(
-      this.dialog.alert()
+    this.$mdDialog.show(
+      this.$mdDialog.alert()
         .textContent(this.user.title + ' submitted!')
         .ok('Ok!')
     );
@@ -58,17 +58,17 @@ export default class ProfileComponent implements at.OnActivate, at.CanDeactivate
   }
 
   public $routerCanDeactivate() {
-    const confirm = this.q.defer();
+    const confirm = this.$q.defer();
     if (this.userForm.$dirty) {
-      this.dialog.show(
-        this.dialog.confirm()
+      this.$mdDialog.show(
+        this.$mdDialog.confirm()
           .textContent('You have unsaved changes. Do you want to leave the page?')
           .ok('YES')
           .cancel('NO')
       ).then(() => { confirm.resolve(true); }, () => { confirm.resolve(false); });
       return confirm.promise;
     }
-    return this.q.when(true);
+    return this.$q.when(true);
   }
 
 }

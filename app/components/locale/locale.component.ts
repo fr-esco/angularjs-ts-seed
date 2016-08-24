@@ -19,13 +19,13 @@ export default class LocaleComponent implements at.OnInit {
   public locales: ILocale[];
 
   constructor(private localeService: LocaleService,
-    private filter: angular.IFilterService,
-    private log: angular.ILogService,
-    private q: angular.IQService,
-    private timeout: angular.ITimeoutService,
+    private $filter: angular.IFilterService,
+    private $log: angular.ILogService,
+    private $q: angular.IQService,
+    private $timeout: angular.ITimeoutService,
     private $translate: angular.translate.ITranslateService,
     private $rootScope: angular.IRootScopeService) {
-    log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
   }
 
   public $onInit() {

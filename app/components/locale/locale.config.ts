@@ -1,6 +1,7 @@
 'use strict';
 
 let config = (tmhDynamicLocaleProvider: angular.dynamicLocale.tmhDynamicLocaleProvider, $translateProvider: angular.translate.ITranslateProvider) => {
+  'ngInject';
   $translateProvider
     .addInterpolation('$translateMessageFormatInterpolation')
     .useStaticFilesLoader({
@@ -19,7 +20,5 @@ let config = (tmhDynamicLocaleProvider: angular.dynamicLocale.tmhDynamicLocalePr
 
   tmhDynamicLocaleProvider.localeLocationPattern(['lib/angular-locale_{{locale}}', '.', 'js'].join(''));
 };
-
-config.$inject = ['tmhDynamicLocaleProvider', '$translateProvider'];
 
 export default config;

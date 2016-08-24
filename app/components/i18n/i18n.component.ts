@@ -13,7 +13,6 @@ const ngComponentName = 'tsngI18n';
   },
   templateUrl: 'components/i18n/i18n.component.html'
 })
-@at.inject('$log', '$interval', '$locale')
 export default class I18nComponent implements angular.OnActivate, at.OnInit, at.OnDestroy {
   public title: string;
   public clock: number;
@@ -31,8 +30,9 @@ export default class I18nComponent implements angular.OnActivate, at.OnInit, at.
   private tickInterval = 1000; // ms
   private intervalPromise: angular.IPromise<number>;
 
-  constructor(private log: angular.ILogService, private $interval: angular.IIntervalService, public $locale: angular.ILocaleService) {
-    log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+  constructor(private $log: angular.ILogService, private $interval: angular.IIntervalService, public $locale: angular.ILocaleService) {
+    'ngInject';
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
   }
 
   public $routerOnActivate(next: at.ComponentInstruction) {

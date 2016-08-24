@@ -7,11 +7,11 @@ const ngComponentName = 'tsngRow';
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'components/table/row/row.component.html'
 })
-@at.inject('$log')
 export default class RowComponent {
   public test = true;
 
-  constructor(private log: angular.ILogService) {
-    log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+  constructor(private $log: angular.ILogService) {
+    'ngInject';
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
   }
 }

@@ -7,14 +7,14 @@ import TableService from './table.service';
 const ngControllerName = 'TableController';
 
 @at.controller(ngModuleName, ngControllerName)
-@at.inject('tableService', '$log')
 export default class TableController {
 
   public tableData = [];
 
   constructor(private tableService: TableService,
-    private log: angular.ILogService) {
-    log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
+    private $log: angular.ILogService) {
+    'ngInject';
+    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
 
     tableService.loadAllItems()
       .then(data => this.tableData = [].concat(data));

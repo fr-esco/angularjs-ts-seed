@@ -4,4 +4,5 @@ import ngModuleName from './profile.module';
 import './profile.asynchrovalidation';
 import './profile.component';
 import './profile.customvalidation';
+
 export default ngModuleName;

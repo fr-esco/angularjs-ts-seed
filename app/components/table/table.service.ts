@@ -12,7 +12,6 @@ interface IIssue {
 const ngServiceName = 'tableService';
 
 @at.service(ngModuleName, ngServiceName)
-@at.inject('$log', '$q')
 export default class TodoService {
   private tableData: Array<IIssue> = [
     {
@@ -65,12 +64,13 @@ export default class TodoService {
     }
   ];
 
-  constructor(private log: angular.ILogService, private q: angular.IQService) {
-    log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
+  constructor(private $log: angular.ILogService, private $q: angular.IQService) {
+    'ngInject';
+    $log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
   }
 
   public loadAllItems() {
-    return this.q.when(this.tableData);
+    return this.$q.when(this.tableData);
   }
 
 }

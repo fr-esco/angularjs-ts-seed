@@ -12,15 +12,15 @@ const ngDirectiveName = 'usernameAsynchroValidation';
   scope: {},
   link: (scope, elm, attrs, ctrl) => {
     elm.on('blur', () => {
-      var usernames = ['JohnJohn_88', 'Peter_77', 'usernameEx'];
+      const usernames = ['JohnJohn_88', 'Peter_77', 'usernameEx'];
 
       if (ctrl['$isEmpty'](ctrl['$modelValue'])) {
         // consider empty model valid
-        return scope['vm'].q.when();
+        return scope['vm'].$q.when();
       }
 
-      var def = scope['vm'].q.defer();
-      scope['vm'].timeout(() => {
+      const def = scope['vm'].$q.defer();
+      scope['vm'].$timeout(() => {
         // Mock a delayed response
         if (usernames.indexOf(ctrl['$modelValue']) === -1) {
           def.resolve(ctrl['$setValidity']('asynchroValidator', true));
@@ -32,8 +32,8 @@ const ngDirectiveName = 'usernameAsynchroValidation';
   }
 })
 
-@at.inject('$q', '$timeout')
 export default class Asynchrovalidation {
-  constructor(protected q: angular.IQService, protected timeout: angular.ITimeoutService) {
+  constructor(protected $q: angular.IQService, protected $timeout: angular.ITimeoutService) {
+    'ngInject';
   }
 }

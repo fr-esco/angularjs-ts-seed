@@ -17,8 +17,8 @@ export default class TimezoneComponent implements at.OnInit {
   public timezone;
   public timezones = [];
 
-  constructor(private timezoneService: TimezoneService, private moment: moment.MomentStatic, private log: angular.ILogService) {
-    log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+  constructor(private timezoneService: TimezoneService, private moment: moment.MomentStatic, private $log: angular.ILogService) {
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
   }
 
   public $onInit() {

@@ -11,10 +11,10 @@ const ngProviderName = 'serverExceptionHandler';
 @at.provider(ngModuleName, ngProviderName)
 export class ServerExceptionHandlerProvider implements angular.IServiceProvider {
   // $get must be declared as method, not as function property (eg. `$get = () => new Service();`)
-  @at.injectMethod('$log')
-  public $get(log: angular.ILogService): angular.IExceptionHandlerService {
+  public $get($log: angular.ILogService): angular.IExceptionHandlerService {
+    'ngInject';
     return (exception: ServerError, cause?: string) => {
-      log.debug('[serverExceptionHandler]');
+      $log.debug('[serverExceptionHandler]');
     };
   }
 }

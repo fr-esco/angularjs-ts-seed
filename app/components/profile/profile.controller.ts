@@ -5,7 +5,6 @@ import ngModuleName from './profile.module';
 const ngControllerName = 'ProfileController';
 
 @at.controller(ngModuleName, ngControllerName)
-@at.inject('$log')
 export default class ProfileController {
 
   public user = {
@@ -22,7 +21,8 @@ export default class ProfileController {
     postalCode: '220007'
   };
 
-  constructor(private log: angular.ILogService) {
-    log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
+  constructor(private $log: angular.ILogService) {
+    'ngInject';
+    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
   }
 }

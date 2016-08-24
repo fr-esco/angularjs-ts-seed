@@ -1,5 +1,6 @@
 let config = ($mdThemingProvider: angular.material.IThemingProvider,
   $mdIconProvider: angular.material.IIconProvider) => {
+  'ngInject';
   $mdThemingProvider
     .theme('default')
     .primaryPalette('grey', {
@@ -41,7 +42,5 @@ let config = ($mdThemingProvider: angular.material.IThemingProvider,
 
   $mdIconProvider.icon('user', 'assets/images/user.svg', 64);
 };
-
-config.$inject = ['$mdThemingProvider', '$mdIconProvider'];
 
 export default config;

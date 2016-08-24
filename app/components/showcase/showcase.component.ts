@@ -20,7 +20,6 @@ const ngComponentName = 'tsngShowcase';
   },
   templateUrl: 'components/showcase/showcase.component.html'
 })
-@at.inject('showcase', '$filter', '$log', '$q', '$timeout')
 export default class ShowcaseComponent implements at.OnInit {
   public fileList: string[];
   public lazy: boolean;
@@ -43,14 +42,14 @@ export default class ShowcaseComponent implements at.OnInit {
   private markdownFilter;
 
   constructor(private showcase: ShowcaseService,
-    private filter: angular.IFilterService,
-    private log: angular.ILogService,
-    private q: angular.IQService,
-    private timeout: angular.ITimeoutService,
-    private showdown) {
-    log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+    private $filter: angular.IFilterService,
+    private $log: angular.ILogService,
+    private $q: angular.IQService,
+    private $timeout: angular.ITimeoutService) {
+    'ngInject';
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
 
-    this.markdownFilter = filter('markdown');
+    this.markdownFilter = $filter('markdown');
   }
 
   public $onInit() {
@@ -64,13 +63,13 @@ export default class ShowcaseComponent implements at.OnInit {
   }
 
   public toggleSource() {
-    this.load().then(loaded => loaded ? this.toggleSourceInternal() : this.q.reject());
+    this.load().then(loaded => loaded ? this.toggleSourceInternal() : this.$q.reject());
   }
 
   public markdown(tab: ITab, convert = false) {
     if (tab.options.mode === 'md') {
       if (convert)
-        this.timeout(() => tab.content = this.markdownFilter(tab.content), 0, false);
+        this.$timeout(() => tab.content = this.markdownFilter(tab.content), 0, false);
       return true;
     }
 
@@ -90,17 +89,17 @@ export default class ShowcaseComponent implements at.OnInit {
         .then(() => this.loaded = true)
         .then(() => this.hideLoading());
     } else
-      return this.q.when(true);
+      return this.$q.when(true);
   }
 
   private showLoading() {
-    return this.q.when(this.loading = true);
+    return this.$q.when(this.loading = true);
   }
 
   private hideLoading() {
-    let deferred = this.q.defer();
+    let deferred = this.$q.defer();
     let delay = 200 + 15 * this.fileList.length;
-    this.timeout(() => deferred.resolve((this.loading = false) || true), delay);
+    this.$timeout(() => deferred.resolve((this.loading = false) || true), delay);
     return deferred.promise;
   }
 

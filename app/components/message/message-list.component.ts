@@ -9,12 +9,12 @@ const ngComponentName = 'tsngMessageList';
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'components/message/message-list.component.html'
 })
-@at.inject('messageService', '$log')
 export default class MessageListComponent implements at.OnInit {
   public messages: Array<IMessage> = [];
 
-  constructor(private messageService: MessageService, private log: angular.ILogService) {
-    log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+  constructor(private messageService: MessageService, private $log: angular.ILogService) {
+    'ngInject';
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
   }
 
   public $onInit() {

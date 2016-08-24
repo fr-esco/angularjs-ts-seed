@@ -13,7 +13,6 @@ const ngComponentName = 'tsngTable';
     { path: '/row', name: 'Row', component: 'tsngRow', data: { title: 'Row' } },
   ]
 })
-@at.inject('tableService', '$log')
 export default class TableComponent implements at.OnInit, at.OnActivate {
   public title: string;
   public tableData = [];
@@ -26,8 +25,9 @@ export default class TableComponent implements at.OnInit, at.OnActivate {
   ];
 
   constructor(private tableService: TableService,
-    private log: angular.ILogService) {
-    log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+    private $log: angular.ILogService) {
+    'ngInject';
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
   }
 
   public $onInit() {

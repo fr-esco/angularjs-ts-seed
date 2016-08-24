@@ -23,9 +23,9 @@ export class ShowcaseProvider implements IShowcaseProvider {
   }
 
   // $get must be declared as method, not as function property (eg. `$get = () => new Service();`)
-  @at.injectMethod('$log', '$http', '$q', '$timeout')
-  public $get(log: angular.ILogService, http: angular.IHttpService, q: angular.IQService, timeout: angular.ITimeoutService) {
-    return new ShowcaseProviderService(log, http, q, timeout, this.$delay);
+  public $get($log: angular.ILogService, $http: angular.IHttpService, $q: angular.IQService, $timeout: angular.ITimeoutService) {
+    'ngInject';
+    return new ShowcaseProviderService($log, $http, $q, $timeout, this.$delay);
   }
 }
 

@@ -9,7 +9,6 @@ interface IMessage {
 }
 
 @at.service(ngModuleName, ngServiceName)
-@at.inject('$log', '$q')
 export default class MessageHandlerService {
   private get ERROR() { return 2; }
   private get WARN() { return 1; }
@@ -21,8 +20,9 @@ export default class MessageHandlerService {
 
   private messageList = [[], [], []];
 
-  constructor(private log: angular.ILogService, private q: angular.IQService) {
-    log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
+  constructor(private $log: angular.ILogService, private $q: angular.IQService) {
+    'ngInject';
+    $log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
   }
 
   public add(message: IMessage) {
@@ -83,16 +83,16 @@ export default class MessageHandlerService {
 
   public flush(level?: number) {
     if (this.validateLevel(level)) {
-      let spool: angular.ILogCall = this.log.debug;
+      let spool: angular.ILogCall = this.$log.debug;
       switch (level) {
         case this.ERROR:
-          spool = this.log.error;
+          spool = this.$log.error;
           break;
         case this.WARN:
-          spool = this.log.warn;
+          spool = this.$log.warn;
           break;
         case this.INFO:
-          spool = this.log.info;
+          spool = this.$log.info;
           break;
         default:
           throw new TypeError('Invalid Message Level: ' + level);
@@ -101,7 +101,7 @@ export default class MessageHandlerService {
         this.messageList[level].forEach(message => spool(message));
         this.messageList[level] = [];
       } else
-        this.log.debug(`Empty List: ${this.levelList[level]}.`);
+        this.$log.debug(`Empty List: ${this.levelList[level]}.`);
     } else {
       this.flush(this.ERROR);
       this.flush(this.WARN);

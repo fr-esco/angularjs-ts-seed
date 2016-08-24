@@ -11,10 +11,10 @@ const ngProviderName = 'coreExceptionHandler';
 @at.provider(ngModuleName, ngProviderName)
 export class CoreExceptionHandlerProvider implements angular.IServiceProvider {
   // $get must be declared as method, not as function property (eg. `$get = () => new Service();`)
-  @at.injectMethod('$log')
-  public $get(log: angular.ILogService): angular.IExceptionHandlerService {
+  public $get($log: angular.ILogService): angular.IExceptionHandlerService {
+    'ngInject';
     return (exception: CoreError, cause?: string) => {
-      log.debug('[coreExceptionHandler]');
+      $log.debug('[coreExceptionHandler]');
     };
   }
 }

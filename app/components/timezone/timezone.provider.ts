@@ -23,9 +23,9 @@ export class TimezoneProvider implements ITimezoneProvider {
   }
 
   // $get must be declared as method, not as function property (eg. `$get = () => new Service();`)
-  @at.injectMethod('$log', 'moment', '$q', '$timeout')
-  public $get(log: angular.ILogService, moment: moment.MomentStatic, q: angular.IQService, timeout: angular.ITimeoutService) {
-    return new TimezoneProviderService(log, moment, q, timeout, this.notify);
+  public $get($log: angular.ILogService, moment: moment.MomentStatic, $q: angular.IQService, $timeout: angular.ITimeoutService) {
+    'ngInject';
+    return new TimezoneProviderService($log, moment, $q, $timeout, this.notify);
   }
 }
 
