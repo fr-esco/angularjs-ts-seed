@@ -4,7 +4,8 @@ var PATH = require('./PATH');
 
 var gulp = require('gulp');
 var concat = require('gulp-concat');
-var ngHtml2Js = require("gulp-ng-html2js");
+var ngAnnotate = require('gulp-ng-annotate');
+var ngHtml2Js = require('gulp-ng-html2js');
 var notify = require('gulp-notify');
 var plumber = require('gulp-plumber');
 var sourcemaps = require('gulp-sourcemaps');
@@ -12,7 +13,7 @@ var tsc = require('gulp-typescript');
 var gutil = require('gulp-util');
 var watch = require('gulp-watch');
 
-var karma = require('karma').server;
+var karmaServer = require('karma').Server;
 var path = require('path');
 var join = path.join;
 var remapIstanbul = require('remap-istanbul/lib/gulpRemapIstanbul');
@@ -36,7 +37,7 @@ gulp.task('build.copy.locale.json.test', function () {
   });
 });
 
-gulp.task('build.html.test', ['clean.test'], function () {
+gulp.task('build.html.test', function () {
   return gulp.src(PATH.src.html.directive)
     .pipe(ngHtml2Js({
       moduleName: 'tpl' || function (file) {
@@ -47,20 +48,21 @@ gulp.task('build.html.test', ['clean.test'], function () {
             return match.substr(1).toUpperCase();
           });
         }).join('.');
-      }
+      },
+      prefix: 'components/'
     }))
     .pipe(concat('partials.js'))
     .pipe(gulp.dest(PATH.dest.test.all));
 });
 
-gulp.task('build.test', function (done) {
-  runSequence('build.html.test', 'build.copy.locale.json.test');
+gulp.task('build.js.test', function () {
   var result = gulp.src(PATH.src.app.test)
     .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(tsc(tsProject));
 
   return result.js
+    .pipe(ngAnnotate())
     // .pipe(sourcemaps.write('.'))
     /*.pipe(sourcemaps.write({
       includeContent: false,
@@ -76,13 +78,17 @@ gulp.task('build.test', function (done) {
     .pipe(gulp.dest(PATH.dest.test.all));
 });
 
+gulp.task('build.test', ['clean.test'], function (done) {
+  runSequence(['build.html.test', 'build.copy.locale.json.test', 'build.js.test'], done);
+});
+
 gulp.task('run.karma', ['build.test'], function (done) {
   var argv = yargs.argv;
 
-  karma.start({
+  new karmaServer({
     configFile: join(__dirname, 'karma.conf.js'),
     singleRun: !argv.debug
-  }, karmaDone);
+  }, karmaDone).start();
 
   function karmaDone(exitCode) {
     // gutil.log('Test Done with exit code: ' + exitCode);

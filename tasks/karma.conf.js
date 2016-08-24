@@ -1,6 +1,8 @@
 // Karma configuration
 // Generated on Wed Jun 24 2015 12:13:39 GMT+0200 (CEST)
 
+const path = require('path');
+
 module.exports = function (config) {
   config.set({
 
@@ -81,8 +83,19 @@ module.exports = function (config) {
       './node_modules/angular-mocks/angular-mocks.js',
       './node_modules/angular-material/angular-material-mocks.js',
       './test/**/*.js',
-      './test/**/*.spec.js'
-    ].filter(js => !js.endsWith('.map')).map(js => '.' + js),
+      // './test/**/*.spec.js'
+    ].filter(js => !js.endsWith('.map')).map(js => '.' + js).concat([
+      {
+        pattern: '../test/i18n/*.json',
+        watched: false,
+        included: false,
+        served: true
+      }
+    ]),
+
+    proxies: {
+      '/i18n/': ['http://localhost:9876/absolute', path.resolve(__dirname, '..'), '/test/i18n/'].join('')
+    },
 
 
     // list of files to exclude

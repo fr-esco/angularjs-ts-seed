@@ -9,7 +9,7 @@ let $module = angular.mock.module;
 let $inject = angular.mock.inject;
 let $dump = (arg: any): void => console.log(angular.mock.dump(arg));
 
-describe('# Locale Component', () => {
+xdescribe('# Locale Component', () => {
   let log;
 
   beforeEach($module(ngModuleName));
