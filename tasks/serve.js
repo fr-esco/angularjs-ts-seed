@@ -167,9 +167,9 @@ function serve() {
     .argv;
 
   if (argv.prod)
-    gulp.start('serve.prod');
+    gulp.start('webpack.serve.prod');
   else
-    gulp.start('serve.dev');
+    gulp.start('webpack.serve.dev');
 }
 
 serve.description = 'Build for either Development or the requested environment and serve';

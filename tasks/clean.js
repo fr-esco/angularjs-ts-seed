@@ -20,6 +20,10 @@ gulp.task('clean.app.dev', function(done) {
     PATH.dest.dev.lib, '!' + join(PATH.dest.dev.lib, '*')]).then(() => done());
 });
 
+gulp.task('clean.pkg.dev', function(done) {
+  del(PATH.dest.pkg.dev).then(() => done());
+});
+
 gulp.task('clean.prod', function(done) {
   del(PATH.dest.prod.all).then(() => done());
 });
@@ -30,7 +34,7 @@ gulp.task('clean.app.prod', function(done) {
     PATH.dest.prod.lib, '!' + join(PATH.dest.prod.lib, '*')]).then(() => done());
 });
 
-gulp.task('clean.pkg', function(done) {
+gulp.task('clean.pkg.prod', function(done) {
   del(PATH.dest.pkg.prod).then(() => done());
 });
 

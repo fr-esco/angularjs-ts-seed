@@ -1,13 +1,15 @@
+'use strict';
+
 const path = require('path'),
   extend = require('extend'),
   pkg = require('./package.json');
 const webpack = require('webpack');
-const webpackConfig = require('./webpack.config');
+const webpackConfigDev = require('./webpack.config.dev');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
 
-module.exports = extend(true, webpackConfig, {
+module.exports = extend(true, {}, webpackConfigDev, {
   plugins: [
     new ngAnnotatePlugin({
       add: true,

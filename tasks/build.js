@@ -12,7 +12,7 @@ function build() {
     .argv;
 
   if (argv.prod)
-    gulp.start('build.prod');
+    gulp.start('webpack.build.prod');
   else
     gulp.start('webpack.build.dev');
 }

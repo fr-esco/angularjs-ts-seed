@@ -9,50 +9,67 @@ const join = require('path').join;
 const runSequence = require('run-sequence');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
-const webpackConfigDev = require('../webpack.config.dev');
+const webpackConfigProd = require('../webpack.config.prod');
 
 const version = require('../package').version;
 
-gulp.task('webpack.build.dev', done => {
-  runSequence(['clean.dev', 'clean.pkg.dev'], ['webpack.build.lib.dev', 'webpack.build.app.dev'], done);
+gulp.task('webpack.build.prod', done => {
+  runSequence(['clean.prod', 'clean.pkg.prod'], ['webpack.build.lib.prod', 'webpack.build.app.prod'], done);
 });
 
-gulp.task('webpack.build.lib.dev', () => {
+gulp.task('webpack.build.lib.prod', () => {
+  const jsOnly = $.filter('**/*.js', { restore: true }),
+    cssOnly = $.filter('**/*.css', { restore: true });
+
   return gulp.src(PATH.src.lib.js.concat(PATH.src.lib.css))
-    .pipe(gulp.dest(PATH.dest.dev.lib));
+    .pipe(jsOnly)
+    .pipe($.sourcemaps.init())
+    .pipe($.concat('lib.js'))
+    .pipe($.ignore.exclude(['**/*.smap']))
+    .pipe($.ngAnnotate())
+    .pipe($.uglify().on('error', $.util.log))
+    .pipe($.sourcemaps.write())
+    .pipe(jsOnly.restore)
+    .pipe(cssOnly)
+    .pipe($.sourcemaps.init())
+    .pipe($.concat('lib.css'))
+    .pipe($.cleanCss())
+    .pipe($.sourcemaps.write())
+    .pipe(cssOnly.restore)
+    .pipe(gulp.dest(PATH.dest.prod.lib));
 });
 
-gulp.task('webpack.build.app.dev', done => {
-  runSequence('clean.app.dev', 'webpack.build.assets.dev', 'webpack.build.index.dev', done);
+gulp.task('webpack.build.app.prod', done => {
+  runSequence('clean.app.prod', 'webpack.build.assets.prod', 'webpack.build.index.prod', done);
 });
 
-gulp.task('webpack.build.index.dev', () => {
-  const target = gulp.src(injectableDevAssetsRef(), { read: false });
-  return gulp.src(join(PATH.dest.dev.all, 'index.html'))
-    .pipe($.inject(target, { transform: transformPath('dev') }))
+gulp.task('webpack.build.index.prod', () => {
+  const target = gulp.src(join(PATH.dest.prod.lib, 'lib.{css,js}'), { read: false });
+  return gulp.src(join(PATH.dest.prod.all, 'index.html'))
+    .pipe($.inject(target, { transform: transformPath('prod') }))
     .pipe($.plumber())
     .pipe($.template({ VERSION: getVersion() }))
-    .pipe(gulp.dest(PATH.dest.dev.all));
+    .pipe(gulp.dest(PATH.dest.prod.all));
 });
 
-gulp.task('webpack.build.assets.dev', ['webpack.build.js.dev', 'build.copy.locale.json.dev'], done => {
+gulp.task('webpack.build.assets.prod', ['webpack.build.js.prod', 'build.copy.locale.json.prod'], done => {
   done();
 });
 
-const compilerDev = webpack(extend(true, webpackConfigDev, {
+const compilerProd = webpack(extend(true, webpackConfigProd, {
   output: {
-    path: PATH.dest.dev.all,
+    path: PATH.dest.prod.all,
   }
 }));
-gulp.task('webpack.build.js.dev', ['lint.ts', 'lint.dts', 'environment.dev'], done => {
-  webpack(extend(true, webpackConfigDev, {
+gulp.task('webpack.build.js.prod', ['lint.ts', 'lint.dts', 'environment.prod'], done => {
+  webpack(extend(true, webpackConfigProd, {
     output: {
-      path: PATH.dest.dev.all,
+      path: PATH.dest.prod.all,
     }
   }), (err, stats) => {
     if (err)
       throw new $.util.PluginError({
-        plugin: 'webpack.build.js.dev',
+        plugin: 'webpack.build.js.prod',
         message: ['Webpack Build Error',
           $.util.colors.red(err)].join('\n\t')
       });
@@ -77,20 +94,12 @@ function transformPath(env) {
   };
 }
 
-function injectableDevAssetsRef() {
-  var src = PATH.src.lib.js.concat(PATH.src.lib.css).map(function (path) {
-    return join(PATH.dest.dev.lib, path.split('/').pop());
-  });
-  src.push(join(PATH.dest.dev.all, '**/*.css'));
-  return src;
-}
+gulp.task('webpack.serve.prod', () => {
 
-gulp.task('webpack.serve.dev', () => {
-
-  const server = new WebpackDevServer(compilerDev, {
+  const server = new WebpackDevServer(compilerProd, {
     // webpack-dev-server options
 
-    contentBase: PATH.dest.dev.all,
+    contentBase: PATH.dest.prod.all,
 
     hot: true,
     // Enable special support for Hot Module Replacement

@@ -1,3 +1,5 @@
+'use strict';
+
 const PATH = require('./tasks/PATH');
 
 const path = require('path'),
@@ -67,4 +69,4 @@ module.exports = {
       flatten: true
     }]),
   ]
-}
+};
