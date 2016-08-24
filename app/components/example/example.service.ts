@@ -5,13 +5,13 @@ import ngModuleName from './example.module';
 const ngServiceName = 'example';
 
 @at.service(ngModuleName, ngServiceName)
-@at.inject('$log')
 export default class ExampleService {
   public nowTime: Date;
   public nextYear: number;
 
-  constructor(private log: angular.ILogService) {
-    log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
+  constructor(private $log: angular.ILogService) {
+    'ngInject';
+    $log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
   }
 
   public get message(): string {
@@ -25,7 +25,7 @@ export default class ExampleService {
       'UTC Date:    ' + d.toISOString(),
       'UTC Hours:   ' + d.getUTCHours()
     ];
-    if (flush) info.map(x => this.log.debug(x));
+    if (flush) info.map(x => this.$log.debug(x));
     return info.join('\n');
   }
 

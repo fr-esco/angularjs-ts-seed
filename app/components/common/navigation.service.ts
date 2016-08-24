@@ -6,7 +6,6 @@ import {IMenuItem} from './navigation-menu.model';
 const ngServiceName = 'navigationService';
 
 @at.service(ngModuleName, ngServiceName)
-@at.inject('$log', '$q')
 export default class NavigationService {
   private menuItems: Array<IMenuItem> = [
     {
@@ -41,12 +40,13 @@ export default class NavigationService {
     }
   ];
 
-  constructor(private log: angular.ILogService, private q: angular.IQService) {
-    log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
+  constructor(private $log: angular.ILogService, private $q: angular.IQService) {
+    'ngInject';
+    $log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
   }
 
   public loadAllItems() {
-    return this.q.when(this.menuItems);
+    return this.$q.when(this.menuItems);
   }
 
 }

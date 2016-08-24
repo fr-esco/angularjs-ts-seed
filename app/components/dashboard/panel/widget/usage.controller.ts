@@ -8,7 +8,6 @@ import UsageService from './usage.service';
 const ngControllerName = 'UsageController';
 
 @at.controller(ngModuleName, ngControllerName)
-@at.inject('usageService', '$log', '$q')
 export default class UsageController {
 
   public ramChartData: Array<IUsageData> = [];
@@ -31,11 +30,12 @@ export default class UsageController {
   };
 
   constructor(private usageService: UsageService,
-    private log: angular.ILogService,
-    private q: angular.IQService) {
-    log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
+    private $log: angular.ILogService,
+    private $q: angular.IQService) {
+    'ngInject';
+    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
 
-    q.all([this.loadRamData(), this.loadStorageData()]);
+    $q.all([this.loadRamData(), this.loadStorageData()]);
   }
 
   private loadRamData() {

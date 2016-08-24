@@ -13,10 +13,10 @@ const ngServiceName = 'commentClient';
 export default class CommentClientService extends BaseRestClient<IComment> {
   public get baseUrl() { return 'comments'; }
 
-  constructor(private log: angular.ILogService,
-    private q: angular.IQService,
+  constructor(private $log: angular.ILogService,
+    private $q: angular.IQService,
     protected restangular: restangular.IService) {
     super(restangular);
-    log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
+    $log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
   }
 }

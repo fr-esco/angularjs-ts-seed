@@ -6,15 +6,15 @@ import {IVisitor} from './visitor.model';
 const ngServiceName = 'visitorService';
 
 @at.service(ngModuleName, ngServiceName)
-@at.inject('$log', '$q')
 export default class VisitorService {
 
-  constructor(private log: angular.ILogService, private q: angular.IQService) {
-    log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
+  constructor(private $log: angular.ILogService, private $q: angular.IQService) {
+    'ngInject';
+    $log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
   }
 
   public getVisitorData(): ng.IPromise<IVisitor[]> {
-    return this.q.when([{ key: 'Mobile', y: 5264 }, { key: 'Desktop', y: 3872 }]);
+    return this.$q.when([{ key: 'Mobile', y: 5264 }, { key: 'Desktop', y: 3872 }]);
   }
 
 }

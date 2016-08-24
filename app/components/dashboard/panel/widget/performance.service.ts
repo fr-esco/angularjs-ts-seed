@@ -6,15 +6,15 @@ import {IPerformance} from './performance.model';
 const ngServiceName = 'performanceService';
 
 @at.service(ngModuleName, ngServiceName)
-@at.inject('$log', '$q')
 export default class PerformanceService {
 
-  constructor(private log: angular.ILogService, private q: angular.IQService) {
-    log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
+  constructor(private $log: angular.ILogService, private $q: angular.IQService) {
+    'ngInject';
+    $log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
   }
 
   public getPerformanceData(performancePeriod: string): ng.IPromise<IPerformance[]> {
-    return this.q.when(
+    return this.$q.when(
       performancePeriod === 'week' ? [
         {
           key: 'Middleware',

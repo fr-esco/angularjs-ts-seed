@@ -9,9 +9,9 @@ const ngDirectiveName = 'exampleSimple';
   restrict: 'E',
   template: '<h1>Title written, less than {{1 + 1}} times</h1>'
 })
-@at.inject('$log')
 export default class ExampleSimpleDirective {
-  constructor(private log: angular.ILogService) {
-    log.debug(['ngDirective', ngDirectiveName, 'loaded'].join(' '));
+  constructor(private $log: angular.ILogService) {
+    'ngInject';
+    $log.debug(['ngDirective', ngDirectiveName, 'loaded'].join(' '));
   }
 }

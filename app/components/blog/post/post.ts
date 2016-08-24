@@ -8,10 +8,5 @@ import './post-detail.component';
 import './post-form.component';
 import './post-list.component';
 import './post-update.component';
-// import './post.controller';
-// import './post.directive';
-// import './post.filter';
-// import './post.provider';
-// import './post.service';
 
 export default ngModuleName;

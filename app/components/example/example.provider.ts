@@ -23,18 +23,18 @@ export class ExampleProvider implements IExampleProvider {
   }
 
   // $get must be declared as method, not as function property (eg. `$get = () => new Service();`)
-  @at.injectMethod('$log')
-  public $get(log: angular.ILogService) {
-    return new ExampleProviderService(log, this.notify);
+  public $get($log: angular.ILogService) {
+    'ngInject';
+    return new ExampleProviderService($log, this.notify);
   }
 }
 
 export default class ExampleProviderService {
-  constructor(private log: angular.ILogService, private notify: boolean) {
+  constructor(private $log: angular.ILogService, private notify: boolean) {
     let s = ['ngProvider', ngProviderName, 'has loaded an', 'ExampleProviderService'].join(' ');
     if (notify)
-      log.info(s);
+      $log.info(s);
     else
-      log.debug(s);
+      $log.debug(s);
   }
 }

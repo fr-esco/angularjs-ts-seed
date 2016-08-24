@@ -18,7 +18,6 @@ const ngComponentName = 'tsngPostForm';
   },
   templateUrl: 'components/blog/post/post-form.component.html'
 })
-@at.inject('$log')
 export default class PostFormComponent {
   public post: IPost;
 
@@ -26,7 +25,8 @@ export default class PostFormComponent {
   private get postCreatedAt() { return this.postCreatedAtDate || (this.postCreatedAtDate = new Date(this.post.createdAt)); }
   private get postId() { return this.post.id; }
 
-  constructor(private log: angular.ILogService) {
-    log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+  constructor(private $log: angular.ILogService) {
+    'ngInject';
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
   }
 }

@@ -10,16 +10,16 @@ const ngComponentName = 'tsngPostDetail';
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'components/blog/post/post-detail.component.html'
 })
-@at.inject('postClient', '$filter', '$log')
 export default class PostDetailComponent implements angular.OnActivate {
   public post: IPost;
   private markdown;
 
   constructor(private postClient: PostClient,
-    private filter: angular.IFilterService,
-    private log: angular.ILogService) {
-    log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
-    this.markdown = filter('markdown');
+    private $filter: angular.IFilterService,
+    private $log: angular.ILogService) {
+    'ngInject';
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+    this.markdown = $filter('markdown');
   }
 
   public $routerOnActivate(next: angular.ComponentInstruction) {

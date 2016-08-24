@@ -10,7 +10,6 @@ interface IPoint {
 }
 
 @at.controller(ngModuleName, ngControllerName)
-@at.inject('$log', '$q')
 export default class WarningController {
 
   public warningChartData: () => Array<{ values: IPoint[], color: string, area: boolean }>;
@@ -31,15 +30,16 @@ export default class WarningController {
     }
   };
 
-  constructor(private log: angular.ILogService,
-    private q: angular.IQService) {
-    log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
+  constructor(private $log: angular.ILogService,
+    private $q: angular.IQService) {
+    'ngInject';
+    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
 
-    q.all([this.loadWarningData()]);
+    $q.all([this.loadWarningData()]);
   }
 
   private loadWarningData() {
-    return this.q.when(() => {
+    return this.$q.when(() => {
       let sin = [];
       for (let i = 0; i < 100; i++) {
         sin.push({ x: i, y: Math.abs(Math.cos(i / 10) * 0.25 * i + 0.9 - 0.4 * i) });

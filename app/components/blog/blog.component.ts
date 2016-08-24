@@ -13,7 +13,6 @@ const ngComponentName = 'tsngBlog';
     { path: '/posts/:id', name: 'PostDetail', component: 'tsngPostDetail' },
   ]
 })
-@at.inject('$log')
 export default class BlogComponent implements angular.OnActivate {
   public title: string;
 
@@ -48,8 +47,9 @@ export default class BlogComponent implements angular.OnActivate {
     ]
   ];
 
-  constructor(private log: angular.ILogService) {
-    log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+  constructor(private $log: angular.ILogService) {
+    'ngInject';
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
   }
 
   public $routerOnActivate(next: angular.ComponentInstruction) {

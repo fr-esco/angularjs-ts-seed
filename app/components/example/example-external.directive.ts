@@ -9,11 +9,11 @@ const ngDirectiveName = 'exampleExternal';
   restrict: 'E',
   templateUrl: 'components/example/example-external.directive.html'
 })
-@at.inject('$log')
 export default class ExampleExternalDirective {
   public test = true;
 
-  constructor(private log: angular.ILogService) {
-    log.debug(['ngDirective', ngDirectiveName, 'loaded'].join(' '));
+  constructor(private $log: angular.ILogService) {
+    'ngInject';
+    $log.debug(['ngDirective', ngDirectiveName, 'loaded'].join(' '));
   }
 }

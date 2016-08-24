@@ -5,7 +5,6 @@ import ngModuleName from './widget.module';
 const ngControllerName = 'MemoryController';
 
 @at.controller(ngModuleName, ngControllerName)
-@at.inject('$log')
 export default class MemoryController {
   public memoryChartData = [{ key: 'memory', y: 42 }, { key: 'free', y: 58 }];
 
@@ -31,7 +30,8 @@ export default class MemoryController {
     }
   };
 
-  constructor(private log: angular.ILogService) {
-    log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
+  constructor(private $log: angular.ILogService) {
+    'ngInject';
+    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
   }
 }

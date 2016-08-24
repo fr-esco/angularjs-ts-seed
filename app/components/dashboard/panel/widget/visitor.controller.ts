@@ -8,7 +8,6 @@ import VisitorService from './visitor.service';
 const ngControllerName = 'VisitorController';
 
 @at.controller(ngModuleName, ngControllerName)
-@at.inject('visitorService', '$log', '$q')
 export default class VisitorController {
 
   public visitorChartData: Array<IVisitor> = [];
@@ -30,11 +29,12 @@ export default class VisitorController {
   };
 
   constructor(private visitorService: VisitorService,
-    private log: angular.ILogService,
-    private q: angular.IQService) {
-    log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
+    private $log: angular.ILogService,
+    private $q: angular.IQService) {
+    'ngInject';
+    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
 
-    q.all([this.loadVisitorData()]);
+    $q.all([this.loadVisitorData()]);
   }
 
   private loadVisitorData() {

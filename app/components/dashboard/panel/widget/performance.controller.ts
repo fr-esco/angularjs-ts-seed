@@ -8,7 +8,6 @@ import PerformanceService from './performance.service';
 const ngControllerName = 'PerformanceController';
 
 @at.controller(ngModuleName, ngControllerName)
-@at.inject('performanceService', '$log', '$q')
 export default class PerformanceController {
 
   public performanceChartData: Array<IPerformance> = [];
@@ -34,11 +33,12 @@ export default class PerformanceController {
   };
 
   constructor(private performanceService: PerformanceService,
-    private log: angular.ILogService,
-    private q: angular.IQService) {
-    log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
+    private $log: angular.ILogService,
+    private $q: angular.IQService) {
+    'ngInject';
+    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
 
-    q.all([this.loadData()]);
+    $q.all([this.loadData()]);
   }
 
   public changePeriod() {

@@ -7,7 +7,6 @@ const ngComponentName = 'tsngDashboard';
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'components/dashboard/dashboard.component.html',
 })
-@at.inject('$log', '$translatePartialLoader', '$translate', '$locale', '$scope', 'version')
 export default class DashboardComponent implements at.OnActivate {
   public title: string;
 
@@ -58,14 +57,15 @@ export default class DashboardComponent implements at.OnActivate {
     ]
   ];
 
-  constructor(private log: angular.ILogService,
-  private $translatePartialLoader: any,
-  private $translate: any,
-  private $locale: angular.ILocaleService,
-  private $scope,
-  private version: string) {
-    log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
-    log.debug(['VERSION:', version].join(' '));
+  constructor(private $log: angular.ILogService,
+    private $translatePartialLoader: any,
+    private $translate: any,
+    private $locale: angular.ILocaleService,
+    private $scope,
+    private version: string) {
+    'ngInject';
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+    $log.debug(['VERSION:', version].join(' '));
   }
 
   public $routerOnActivate(next: at.ComponentInstruction) {

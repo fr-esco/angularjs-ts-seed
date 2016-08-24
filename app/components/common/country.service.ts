@@ -6,7 +6,6 @@ import {ICountry, ICountryItem} from './country.model';
 const ngServiceName = 'countryService';
 
 @at.service(ngModuleName, ngServiceName)
-@at.inject('$log', '$q')
 export default class CountryService {
   private countries: Array<ICountry> = [
     { name: 'Afghanistan', code: 'AF' },
@@ -254,12 +253,13 @@ export default class CountryService {
     { name: 'Zimbabwe', code: 'ZW' }
   ];
 
-  constructor(private log: angular.ILogService, private q: angular.IQService) {
-    log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
+  constructor(private $log: angular.ILogService, private $q: angular.IQService) {
+    'ngInject';
+    $log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
   }
 
   public loadAllItems(): angular.IPromise<Array<ICountryItem>> {
-    return this.q.when(this.countries.map(country => ({
+    return this.$q.when(this.countries.map(country => ({
       value: country.name.toLowerCase(),
       display: country.name,
       code: country.code

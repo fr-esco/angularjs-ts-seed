@@ -13,7 +13,6 @@ const ngComponentName = 'tsngPostCreate';
   },
   templateUrl: 'components/blog/post/post-create.component.html'
 })
-@at.inject('postClient', '$log', '$mdDialog')
 export default class PostCreateComponent implements angular.OnActivate, angular.CanDeactivate {
   public $router: angular.Router;
 
@@ -23,9 +22,10 @@ export default class PostCreateComponent implements angular.OnActivate, angular.
   private complete = false;
 
   constructor(private postClient: PostClient,
-    private log: angular.ILogService,
-    private mdDialog: angular.material.IDialogService) {
-    log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+    private $log: angular.ILogService,
+    private $mdDialog: angular.material.IDialogService) {
+    'ngInject';
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
   }
 
   public $routerOnActivate(next: angular.ComponentInstruction) {
@@ -33,13 +33,13 @@ export default class PostCreateComponent implements angular.OnActivate, angular.
   }
 
   public $routerCanDeactivate() {
-    let confirm = this.mdDialog.confirm()
+    let confirm = this.$mdDialog.confirm()
       .ariaLabel('Leave Page Confirmation')
       .ok('ok')
       .cancel('cancel')
       .title(['Leave Page?'].join(''))
       .textContent(['Are you sure?', 'All changes will be lost.'].join(' '));
-    return this.complete || this.mdDialog.show(confirm)
+    return this.complete || this.$mdDialog.show(confirm)
       .then(() => true, () => false)
       .finally(() => confirm = undefined);
   }
@@ -50,7 +50,7 @@ export default class PostCreateComponent implements angular.OnActivate, angular.
 
   public confirm(post: IPost) {
     return this.postClient.create(post)
-      .then(post => this.post = post, this.log.error)
+      .then(post => this.post = post, this.$log.error)
       // .then(this.log.debug)
       .then(() => this.complete = true, () => this.complete = false)
       .then(() => this.$router.navigate(['PostDetail', { id: this.post.id }]));

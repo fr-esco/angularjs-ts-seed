@@ -16,11 +16,11 @@ export default class PostClientService extends BaseRestClient<IPost> {
   public get baseUrl() { return 'posts'; }
 
   constructor(private commentClient: CommentClient,
-    private log: angular.ILogService,
-    private q: angular.IQService,
+    private $log: angular.ILogService,
+    private $q: angular.IQService,
     protected restangular: restangular.IService) {
     super(restangular);
-    log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
+    $log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
   }
 
   public comments(post: IPost, params?);

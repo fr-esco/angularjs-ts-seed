@@ -8,15 +8,15 @@ import TodoService from './todo.service';
 const ngControllerName = 'TodoController';
 
 @at.controller(ngModuleName, ngControllerName)
-@at.inject('todoService', '$log')
 export default class TodoController {
 
   public todos: Array<ITodo> = [];
   public todoText: string;
 
   constructor(private todoService: TodoService,
-    private log: angular.ILogService) {
-    log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
+    private $log: angular.ILogService) {
+    'ngInject';
+    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
 
     todoService.loadAllItems().then(todos => this.todos = [].concat(todos));
   }

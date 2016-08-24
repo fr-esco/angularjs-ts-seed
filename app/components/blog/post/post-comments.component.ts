@@ -15,16 +15,16 @@ const ngComponentName = 'tsngPostComments';
   },
   templateUrl: 'components/blog/post/post-comments.component.html'
 })
-@at.inject('postClient', '$log', '$mdDialog')
 export default class PostCommentsComponent implements at.OnInit, at.OnChanges {
   public title: string;
   public post: IPost;
   public comments: IComment[];
 
   constructor(private postClient: PostClient,
-    private log: angular.ILogService,
-    private mdDialog: angular.material.IDialogService) {
-    log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+    private $log: angular.ILogService,
+    private $mdDialog: angular.material.IDialogService) {
+    'ngInject';
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
   }
 
   public $onInit() {
@@ -46,24 +46,24 @@ export default class PostCommentsComponent implements at.OnInit, at.OnChanges {
     let alert: angular.material.IAlertDialog;
     this.postClient.comment(this.post, commentId)
       .then(comment =>
-        alert = this.mdDialog.alert()
+        alert = this.$mdDialog.alert()
           .targetEvent($event)
           .ok('ok')
           .title(commentId + '')
           .htmlContent(comment.content))
-      .then(() => this.mdDialog.show(alert))
+      .then(() => this.$mdDialog.show(alert))
       .finally(() => alert = undefined);
   }
 
   public delete($event: PointerEvent, comment: IComment) {
-    let confirm = this.mdDialog.confirm()
+    let confirm = this.$mdDialog.confirm()
       .targetEvent($event)
       .ariaLabel('Delete Confirmation')
       .ok('ok')
       .cancel('cancel')
       .title(['Delete ', comment.id, '?'].join(''))
       .textContent(['Delete ', comment.id, '?'].join(''));
-    this.mdDialog.show(confirm)
+    this.$mdDialog.show(confirm)
       .then(() => this.postClient.commentDelete(this.post, comment))
       .then(() => this.comments.indexOf(comment))
       .then(index => this.comments.splice(index, 1))

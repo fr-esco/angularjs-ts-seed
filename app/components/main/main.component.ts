@@ -17,7 +17,6 @@ const ngComponentName = 'tsngMain';
     { path: '/i18n', name: 'I18n', component: 'tsngI18n', data: { title: 'i18n' } }
   ]
 })
-// @at.inject('navigationService', '$log', '$q', '$mdSidenav', '$mdBottomSheet', '$mdMenu', '$mdToast')
 export default class MainComponent implements at.OnInit {
 
   public menuItems: Array<IMenuItem> = [];
