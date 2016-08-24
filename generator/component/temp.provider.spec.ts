@@ -37,7 +37,6 @@ describe('# <%= upCaseName %> Provider', () => {
     });
 
     it('should be an instance of <%= upCaseName %>Provider', () => {
-      expect(provider).toHaveMethod('$get');
       expect(provider).toHaveMethod('makeNoise');
     });
   });

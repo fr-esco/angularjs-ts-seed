@@ -37,7 +37,6 @@ describe('# Showcase Provider', () => {
     });
 
     it('should be an instance of ShowcaseProvider', () => {
-      expect(provider).toHaveMethod('$get');
       expect(provider).toHaveMethod('delay');
     });
   });
