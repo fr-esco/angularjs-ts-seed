@@ -1,6 +1,7 @@
 const path = require('path'),
   pkg = require('./package.json');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
 
 module.exports = {
   module: {
@@ -14,6 +15,7 @@ module.exports = {
       }
     ],
     loaders: [
+      { test: /\.json$/, loader: 'json' },
       // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
       { test: /\.tsx?$/, exclude: [/\.(spec|e2e)\.tsx?$/], loader: 'ts' },
       {
@@ -39,13 +41,18 @@ module.exports = {
   devtool: 'source-map',
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
-    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
+    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.json']
   },
   plugins: [
     new HtmlWebpackPlugin({
+      chunksSortMode: 'dependency',
       filename: 'index.html',
       pkg: pkg,
       template: './app/index.ejs'
+    }),
+    new ngAnnotatePlugin({
+      add: true,
+      // other ng-annotate options here
     })
   ]
 }

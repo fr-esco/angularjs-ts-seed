@@ -9,7 +9,7 @@ const join = require('path').join;
 const runSequence = require('run-sequence');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
-const webpackConfig = require('../webpack.config');
+const webpackConfig = require('../webpack.config.prod');
 
 const version = require('../package').version;
 
@@ -62,7 +62,7 @@ gulp.task('webpack.build.js.dev', ['lint.ts', 'lint.dts', 'environment.dev'], do
     if (jsonStats.errors.length > 0)
       return $.util.log($.util.colors.red(jsonStats.errors));
     if (jsonStats.warnings.length > 0)
-      return $.util.log($.util.colors.yellow(jsonStats.warnings));
+      $.util.log($.util.colors.yellow(jsonStats.warnings));
     done();
   });
 });
