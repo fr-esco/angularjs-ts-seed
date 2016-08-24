@@ -9,7 +9,8 @@ const join = require('path').join;
 const runSequence = require('run-sequence');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
-const webpackConfig = require('../webpack.config.prod');
+const webpackConfig = require('../webpack.config');
+// const webpackConfig = require('../webpack.config.prod');
 
 const version = require('../package').version;
 
@@ -27,17 +28,15 @@ gulp.task('webpack.build.app.dev', done => {
 });
 
 gulp.task('webpack.build.index.dev', () => {
-  const target = gulp.src(injectableDevAssetsRef(), { read: false }).pipe($.plumber());
+  const target = gulp.src(injectableDevAssetsRef(), { read: false });
   return gulp.src(join(PATH.dest.dev.all, 'index.html'))
-    .pipe($.plumber())
     .pipe($.inject(target, { transform: transformPath('dev') }))
     .pipe($.plumber())
     .pipe($.template({ VERSION: getVersion() }))
-    .pipe($.plumber())
     .pipe(gulp.dest(PATH.dest.dev.all));
 });
 
-gulp.task('webpack.build.assets.dev', ['webpack.build.js.dev', 'webpack.build.copy.assets.dev', 'build.copy.locale.dev', 'build.copy.locale.json.dev'], done => {
+gulp.task('webpack.build.assets.dev', ['webpack.build.js.dev', 'build.copy.locale.json.dev'], done => {
   done();
 });
 
@@ -67,11 +66,6 @@ gulp.task('webpack.build.js.dev', ['lint.ts', 'lint.dts', 'environment.dev'], do
   });
 });
 
-gulp.task('webpack.build.copy.assets.dev', () => {
-  return gulp.src(['./app/assets/**/*'])
-    .pipe(gulp.dest(join(PATH.dest.dev.all, 'assets')));
-});
-
 function getVersion() {
   return version;
 }
@@ -98,7 +92,6 @@ gulp.task('webpack.serve.dev', () => {
     // webpack-dev-server options
 
     contentBase: PATH.dest.dev.all,
-    // or: contentBase: "http://localhost/",
 
     hot: true,
     // Enable special support for Hot Module Replacement
@@ -117,9 +110,9 @@ gulp.task('webpack.serve.dev', () => {
     // Use "*" to proxy all paths to the specified server.
     // This is useful if you want to get rid of 'http://localhost:8080/' in script[src],
     // and has many other use cases (see https://github.com/webpack/webpack-dev-server/pull/127 ).
-    proxy: {
-      "*": "http://localhost:9090"
-    },
+    // proxy: {
+    //   '*': 'http://localhost:9090'
+    // },
 
     setup: function (app) {
       // Here you can access the Express app object and add your own custom middleware to it.
@@ -132,21 +125,20 @@ gulp.task('webpack.serve.dev', () => {
 
     // pass [static options](http://expressjs.com/en/4x/api.html#express.static) to inner express server
     staticOptions: {
-
     },
 
     // webpack-dev-middleware options
     quiet: false,
     noInfo: false,
     lazy: true,
-    filename: "bundle.js",
+    filename: 'bundle.js',
     watchOptions: {
       aggregateTimeout: 300,
       poll: 1000
     },
     // It's a required option.
     // publicPath: "/assets/",
-    headers: { "X-Custom-Header": "yes" },
+    headers: { 'X-Custom-Header': 'yes' },
     stats: { colors: true }
   });
 

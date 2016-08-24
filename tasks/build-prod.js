@@ -94,7 +94,8 @@ gulp.task('build.html.tmp', ['lint.html', 'lint.dts'], function () {
             return match.substr(1).toUpperCase();
           });
         }).join('.');
-      }
+      },
+      prefix: 'components/'
     }))
     .pipe(concat('partials.js'))
     .pipe(uglify())
@@ -107,6 +108,7 @@ gulp.task('build.js.tmp', ['lint.ts', 'lint.dts', 'build.html.tmp', 'environment
     .pipe(tsc(tsProject));
 
   return result.js
+    .pipe(ngAnnotate())
     .pipe(template({ VERSION: getVersion(), ENV: 'prod' }))
     .pipe(gulp.dest('tmp'));
 });

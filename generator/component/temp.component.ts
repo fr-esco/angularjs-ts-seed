@@ -11,11 +11,11 @@ const ngComponentName = '<%= fullName %>';
   },
   templateUrl: 'components/<%= path %>/<%= name %>.component.html'
 })
-@at.inject('$log')
 export default class <%= upCaseName %>Component {
   public test = true;
 
-  constructor(private log: angular.ILogService) {
-    log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+  constructor(private $log: angular.ILogService) {
+    'ngInject';
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
   }
 }

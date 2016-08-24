@@ -26,10 +26,10 @@ let app = angular.module('app', [
     { path: '/...', name: 'Main', component: 'tsngMain' },
   ]
 })
-@at.inject('$log')
 class App {
-  constructor(private log: angular.ILogService) {
-    log.debug(['ngComponent', ngMainComponentName, 'loaded'].join(' '));
+  constructor(private $log: angular.ILogService) {
+    'ngInject';
+    $log.debug(['ngComponent', ngMainComponentName, 'loaded'].join(' '));
   }
 }
 

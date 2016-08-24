@@ -13,10 +13,10 @@ const ngServiceName = '<%= fullName %>Client';
 export default class <%= upCaseName %>ClientService extends BaseRestClient <I<%= upCaseName %>> {
   public get baseUrl() { return '<%= fullName %>s'; }
 
-  constructor(private log: angular.ILogService,
-    private q: angular.IQService,
+  constructor(private $log: angular.ILogService,
+    private $q: angular.IQService,
     protected restangular: restangular.IService) {
     super(restangular);
-    log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
+    $log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
   }
 }

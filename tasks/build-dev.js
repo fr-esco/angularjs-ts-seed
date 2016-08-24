@@ -69,7 +69,8 @@ gulp.task('build.html.dev', ['lint.html', 'lint.dts'], function () {
             return match.substr(1).toUpperCase();
           });
         }).join('.');
-      }
+      },
+      prefix: 'components/'
     }))
     .pipe(concat('partials.js'))
     .pipe(gulp.dest(PATH.dest.dev.all))

@@ -1,5 +1,8 @@
+const PATH = require('./tasks/PATH');
+
 const path = require('path'),
   pkg = require('./package.json');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
 
@@ -53,6 +56,15 @@ module.exports = {
     new ngAnnotatePlugin({
       add: true,
       // other ng-annotate options here
-    })
+    }),
+    new CopyWebpackPlugin([{
+      from: './app/assets',
+      to: 'assets'
+    }]),
+    new CopyWebpackPlugin([{
+      from: './node_modules/angular-i18n/angular-locale_+(en|it).js',
+      to: 'lib',
+      flatten: true
+    }]),
   ]
 }

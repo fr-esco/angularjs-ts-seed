@@ -8,11 +8,11 @@ const ngDirectiveName = '<%= fullName %>';
   restrict: 'A', // default: EA
   templateUrl: 'components/<%= path %>/<%= name %>.directive.html'
 })
-@at.inject('$log')
 export default class <%= upCaseName %>Directive {
   public test = true;
 
-  constructor(private log: angular.ILogService) {
-    log.debug(['ngDirective', ngDirectiveName, 'loaded'].join(' '));
+  constructor(private $log: angular.ILogService) {
+    'ngInject';
+    $log.debug(['ngDirective', ngDirectiveName, 'loaded'].join(' '));
   }
 }

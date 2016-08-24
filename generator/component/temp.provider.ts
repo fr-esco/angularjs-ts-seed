@@ -23,18 +23,18 @@ export class <%= upCaseName %>Provider implements I<%= upCaseName %>Provider {
   }
 
   // $get must be declared as method, not as function property (eg. `$get = () => new Service();`)
-  @at.injectMethod('$log')
-  public $get(log: angular.ILogService) {
-    return new <%= upCaseName %>ProviderService(log, this.notify);
+  public $get($log: angular.ILogService) {
+    'ngInject';
+    return new <%= upCaseName %>ProviderService($log, this.notify);
   }
 }
 
 export default class <%= upCaseName %>ProviderService {
-  constructor(private log: angular.ILogService, private notify: boolean) {
+  constructor(private $log: angular.ILogService, private notify: boolean) {
     let s = ['ngProvider', ngProviderName, 'has loaded an', '<%= upCaseName %>ProviderService'].join(' ');
     if (notify)
-      log.info(s);
+      $log.info(s);
     else
-      log.debug(s);
+      $log.debug(s);
   }
 }

@@ -3,12 +3,9 @@ const path = require('path'),
   pkg = require('./package.json');
 const webpack = require('webpack');
 const webpackConfig = require('./webpack.config');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
-
-// const OccurenceOrderPlugin = require('webpack/lib/optimize/OccurenceOrderPlugin');
-// const DedupePlugin = require('webpack/lib/optimize/DedupePlugin');
-// const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 
 module.exports = extend(true, webpackConfig, {
   plugins: [
@@ -55,6 +52,15 @@ module.exports = extend(true, webpackConfig, {
       filename: 'index.html',
       pkg: pkg,
       template: './app/index.ejs'
-    })
+    }),
+    new CopyWebpackPlugin([{
+      from: './app/assets',
+      to: 'assets'
+    }]),
+    new CopyWebpackPlugin([{
+      from: './node_modules/angular-i18n/angular-locale_+(en|it).js',
+      to: 'lib',
+      flatten: true
+    }]),
   ]
 });

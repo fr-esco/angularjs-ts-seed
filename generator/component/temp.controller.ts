@@ -5,11 +5,11 @@ import ngModuleName from './<%= modName %>.module';
 const ngControllerName = '<%= upCaseName %>Controller';
 
 @at.controller(ngModuleName, ngControllerName)
-@at.inject('$log')
 export default class <%= upCaseName %>Controller {
 
-  constructor(private log: angular.ILogService) {
-    log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
+  constructor(private $log: angular.ILogService) {
+    'ngInject';
+    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
   }
 
 }
