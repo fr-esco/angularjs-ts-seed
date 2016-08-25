@@ -43,8 +43,8 @@ module.exports = {
     // Order is quite important here for the HTML tag injection.
     lib: {
       js: [
-        './node_modules/es6-module-loader/dist/es6-module-loader.js',
-        './node_modules/es6-module-loader/dist/es6-module-loader.js.map',
+        // './node_modules/es6-module-loader/dist/es6-module-loader.js',
+        // './node_modules/es6-module-loader/dist/es6-module-loader.js.map',
         './node_modules/systemjs/dist/system.src.js',
         './node_modules/angular/angular.js',
         './node_modules/es6-shim/es6-shim.min.js',

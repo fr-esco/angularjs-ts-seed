@@ -5,10 +5,17 @@ const PATH = require('./tasks/PATH');
 const path = require('path'),
   pkg = require('./package.json');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
 
 module.exports = {
+  /**
+   * Source map for Karma from the help of karma-sourcemap-loader &  karma-webpack
+   *
+   * Do not change, leave as is or it wont work.
+   * See: https://github.com/webpack/karma-webpack#source-maps
+   */
+  devtool: 'inline-source-map',
+
   module: {
     preLoaders: [
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
@@ -16,53 +23,33 @@ module.exports = {
       {
         test: /\.ts$/,
         exclude: [/\.(spec|e2e)\.ts$/],
-        loader: 'baggage?[file].html&[file].tpl.html&[file].css&[file].scss'
+        loader: 'baggage?[file].spec.ts'
       }
     ],
     loaders: [
       { test: /\.json$/, loader: 'json' },
       // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
-      { test: /\.tsx?$/, exclude: [/\.(spec|e2e)\.tsx?$/], loader: 'ts' },
+      { test: /\.tsx?$/, exclude: [/\.e2e\.tsx?$/], loader: 'ts' },
       {
         test: /\.html$/,
         loader: 'ngtemplate?relativeTo=' + (path.resolve(__dirname)) + '/app/!html'
       },
-      { test: /\.css$/, loader: 'style!css' },
-      {
-        test: /\.scss$/,
-        loaders: ['style', 'css', 'autoprefixer', 'sass']
-      },
-      { test: /\.png$/, loader: 'url?limit=100000' },
-      { test: /\.jpg$/, loader: 'file' },
-      { test: /\.(ttf|woff|woff2|eot)$/, loader: 'file' },
     ]
   },
-  // context: __dirname,
   entry: './app/app.ts',
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'test'),
     filename: 'bundle.js'
   },
-  devtool: 'cheap-module-source-map',
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
-    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.json']
+    extensions: ['', '.ts', '.tsx', '.js', '.json']
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      chunksSortMode: 'dependency',
-      filename: 'index.html',
-      pkg: pkg,
-      template: './app/index.ejs'
-    }),
     new ngAnnotatePlugin({
       add: true,
       // other ng-annotate options here
     }),
-    new CopyWebpackPlugin([{
-      from: './app/assets',
-      to: 'assets'
-    }]),
     new CopyWebpackPlugin([{
       from: './node_modules/angular-i18n/angular-locale_+(en|it).js',
       to: 'lib',

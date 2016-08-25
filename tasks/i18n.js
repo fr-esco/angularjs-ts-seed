@@ -24,3 +24,11 @@ gulp.task('build.copy.locale.json.prod', function() {
       .pipe(gulp.dest(join(PATH.dest.prod.all, 'i18n')));
   });
 });
+
+gulp.task('build.copy.locale.json.test', function () {
+  return locales.forEach(function (locale) {
+    gulp.src('./app/**/' + locale + '.json')
+      .pipe(merge('locale-' + locale + '.json'))
+      .pipe(gulp.dest(join(PATH.dest.test.all, 'i18n')));
+  });
+});

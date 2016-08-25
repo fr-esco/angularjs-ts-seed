@@ -29,14 +29,6 @@ var tsProject = tsc.createProject('tsconfig.json', {
   sourceMap: true
 });
 
-gulp.task('build.copy.locale.json.test', function () {
-  return locales.forEach(function (locale) {
-    gulp.src('./app/**/' + locale + '.json')
-      .pipe(merge('locale-' + locale + '.json'))
-      .pipe(gulp.dest(join(PATH.dest.test.all, 'i18n')));
-  });
-});
-
 gulp.task('build.html.test', function () {
   return gulp.src(PATH.src.html.directive)
     .pipe(ngHtml2Js({

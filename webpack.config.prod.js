@@ -10,6 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
 
 module.exports = extend(true, {}, webpackConfigDev, {
+  devtool: 'source-map',
   plugins: [
     new ngAnnotatePlugin({
       add: true,
