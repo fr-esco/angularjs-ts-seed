@@ -33,7 +33,7 @@ gulp.task('build.cordova.copy.dev', function () {
 });
 
 gulp.task('build.cordova.dev', function (cb) {
-  runSequence('cordova.clean', 'build.dev', 'build.cordova.copy.dev', () => {
+  runSequence('cordova.clean', 'build.cordova.copy.dev', () => {
     process.chdir('cordova');
     cordova
       .build({ platforms: [platform()] })
@@ -46,7 +46,7 @@ gulp.task('build.cordova.dev', function (cb) {
 });
 
 gulp.task('cordova.emulate.dev', function (cb) {
-  runSequence('cordova.clean', 'build.dev', 'build.cordova.copy.dev', () => {
+  runSequence('cordova.clean', 'build.cordova.copy.dev', () => {
     process.chdir('cordova');
     cordova
       .emulate({ platforms: [platform()], livereload: true, consolelogs: true })
@@ -59,7 +59,7 @@ gulp.task('cordova.emulate.dev', function (cb) {
 });
 
 gulp.task('cordova.run.dev', function (cb) {
-  runSequence('cordova.clean', 'build.dev', 'build.cordova.copy.dev', () => {
+  runSequence('cordova.clean', 'build.cordova.copy.dev', () => {
     process.chdir('cordova');
     cordova
       .run({ platforms: [platform()] })
