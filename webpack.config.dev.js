@@ -9,6 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
 
 module.exports = {
+  devtool: 'cheap-module-source-map',
   module: {
     preLoaders: [
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
@@ -38,7 +39,7 @@ module.exports = {
     ]
   },
   // context: __dirname,
-  entry: ['./app/app.ts'],
+  entry: './app/app.ts',
   output: {
     path: PATH.dest.dev.all,
     publicPath: 'http://localhost:8080/',
@@ -55,7 +56,6 @@ module.exports = {
       app.use('*/components', require('express').static(path.join(__dirname, 'app', 'components')));
     },
   },
-  devtool: 'cheap-module-source-map',
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
     extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.json']

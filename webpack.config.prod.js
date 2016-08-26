@@ -1,16 +1,34 @@
 'use strict';
 
+const PATH = require('./tasks/PATH');
+
 const path = require('path'),
-  extend = require('extend'),
-  pkg = require('./package.json');
+  pkg = require('./package.json'),
+  dev = require('./webpack.config.dev');
 const webpack = require('webpack');
-const webpackConfigDev = require('./webpack.config.dev');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
 
-module.exports = extend(true, {}, webpackConfigDev, {
+module.exports = {
   devtool: 'source-map',
+  module: dev.module,
+  entry: dev.entry,
+  output: {
+    path: PATH.dest.prod.all,
+    publicPath: 'http://localhost:8080/',
+    filename: 'bundle.js'
+  },
+  devServer: {
+    contentBase: PATH.dest.prod.all,
+    setup: function (app) {
+      app.use('*/components', require('express').static(path.join(__dirname, 'app', 'components')));
+    },
+  },
+  resolve: {
+    // Add '.ts' and '.tsx' as resolvable extensions.
+    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.json']
+  },
   plugins: [
     new ngAnnotatePlugin({
       add: true,
@@ -66,4 +84,4 @@ module.exports = extend(true, {}, webpackConfigDev, {
       flatten: true
     }]),
   ]
-});
+};
