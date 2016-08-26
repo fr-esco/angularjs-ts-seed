@@ -42,6 +42,7 @@ lib
 test
 config.ts
 db.json
+index.ejs
 
 .history
 .orig

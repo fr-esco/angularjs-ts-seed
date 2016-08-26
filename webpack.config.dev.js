@@ -38,10 +38,22 @@ module.exports = {
     ]
   },
   // context: __dirname,
-  entry: './app/app.ts',
+  entry: ['./app/app.ts'],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: PATH.dest.dev.all,
+    publicPath: 'http://localhost:8080/',
     filename: 'bundle.js'
+  },
+  devServer: {
+    contentBase: PATH.dest.dev.all,
+    setup: function (app) {
+      // Here you can access the Express app object and add your own custom middleware to it.
+      // For example, to define custom handlers for some paths:
+      // app.get('/some/path', function(req, res) {
+      //   res.json({ custom: 'response' });
+      // });
+      app.use('*/components', require('express').static(path.join(__dirname, 'app', 'components')));
+    },
   },
   devtool: 'cheap-module-source-map',
   resolve: {
