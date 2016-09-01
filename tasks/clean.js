@@ -39,7 +39,7 @@ gulp.task('clean.pkg.prod', function(done) {
 });
 
 gulp.task('clean.tmp', function(done) {
-  del('tmp').then(done);
+  del('tmp').then(() => done());
 });
 
 gulp.task('clean.test', function(done) {
