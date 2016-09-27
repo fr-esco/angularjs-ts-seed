@@ -19,7 +19,7 @@ const argv = yargs.reset()
   .describe('e', 'Target environment')
 
   .alias('p', 'platform')
-  .choices('p', ['browser', 'desktop', 'mobile'])
+  .choices('p', ['browser', 'desktop', 'android', 'ios'])
   .describe('p', 'Target platform')
 
   .alias('w', 'watch')
@@ -36,26 +36,63 @@ const log = utils.console('[' + chalk.cyan('build') + ']')
 const env = argv.env || process.env.NODE_ENV || 'dev'
 const platform = argv.platform || process.env.NODE_PLATFORM || 'browser'
 
+const runAll = require('npm-run-all')
 const spawn = require('child_process').spawn
-const gulp = spawn(`gulp webpack.build.${env}`, ['--env', env], { stdio: 'inherit', shell: true })
 
-// ls.stdout.on('data', (data) => {
-//   log.debug(`stdout: ${data}`)
-// })
-
-// ls.stderr.on('data', (data) => {
-//   log.error(`stderr: ${data}`)
-// })
-
-gulp.on('close', (code) => {
-  if (code === 0) {
-    log.info(`gulp build exited with code ${code}`)
-    const webpackOptions = ['--profile', '--progress', '--config', `webpack.config.${env}`]
-    if (argv.watch) webpackOptions.push('--watch')
-    const webpack = spawn(`webpack`, webpackOptions, { stdio: 'inherit', shell: true })
-      .on('close', (code) => {
-        log.info(`webpack build exited with code ${code}`)
-      })
-  } else
-    log.error(`gulp build exited with code ${code}`)
-})
+switch (platform) {
+  case 'browser':
+    runAll([`clean -- --env=${env} --platform=${platform}`, `lint`], {
+      parallel: true,
+      stderr: process.stderr,
+      stdout: process.stdout
+    }).then(results => {
+      const code = results.reduce((code, result) => (code += result.code), 0)
+      if (code === 0) {
+        spawn(`gulp webpack.build.${env}`, ['--env', env], { stdio: 'inherit', shell: true })
+          .on('close', (code) => {
+            if (code === 0) {
+              log.info(`gulp build exited with code ${code}`)
+              const webpackOptions = ['--profile', '--progress', '--config', `webpack.config.${env}`]
+              if (argv.watch) webpackOptions.push('--watch')
+              const webpack = spawn(`webpack`, webpackOptions, { stdio: 'inherit', shell: true })
+                .on('close', (code) => {
+                  log.info(`webpack build exited with code ${code}`)
+                })
+            } else
+              log.error(`gulp build exited with code ${code}`)
+          })
+      } else {
+        log.error(`build ${platform} error`, code)
+      }
+    }).catch(err => {
+      log.error(`build ${platform} error`, err)
+    })
+    break
+  case 'android':
+  case 'ios':
+  case 'mobile':
+    runAll([`clean -- --env=${env} --platform=${platform}`, `build -- --env=${env} --platform=browser --watch=${argv.watch}`], {
+      parallel: false,
+      stderr: process.stderr,
+      stdout: process.stdout
+    }).then(results => {
+      const code = results.reduce((code, result) => (code += result.code), 0)
+      if (code === 0) {
+        const src = PATH.dst[env].all
+        const dst = PATH.dst[env].www
+        shell.cp('-R', src, dst)
+        spawn(`cd cordova && cordova build ${platform} && cd ..`, [], { stdio: 'inherit', shell: true })
+          .on('close', (code) => {
+            if (code === 0) {
+              log.info(`cordova build exited with code ${code}`)
+            } else
+              log.error(`cordova build exited with code ${code}`)
+          })
+      } else {
+        log.error(`build ${platform} error`, code)
+      }
+    }).catch(err => {
+      log.error('build mobile error', err)
+    })
+    break
+}
