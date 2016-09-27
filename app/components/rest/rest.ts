@@ -1,6 +1,6 @@
-import ngModuleName from './rest.module';
+import ngModuleName from './rest.module'
 
 // import angular objects in alphabetical order
-// import './rest.component';
+// import './rest.component'
 
-export default ngModuleName;
+export default ngModuleName

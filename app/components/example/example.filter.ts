@@ -1,17 +1,17 @@
-import ngModuleName from './example.module';
+import ngModuleName from './example.module'
 
-'use strict';
+'use strict'
 
-const ngFilterName = 'example';
+const ngFilterName = 'example'
 
 @at.filter(ngModuleName, ngFilterName)
 export default class ExampleFilter implements at.IFilter {
 
   constructor(private $log: angular.ILogService) {
-    'ngInject';
-    $log.debug(['ngFilter', ngFilterName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngFilter', ngFilterName, 'loaded'].join(' '))
   }
 
-  public transform = (input: string | Array<any>): number => !input ? 0 : input.length;
+  public transform = (input: string | Array<any>): number => !input ? 0 : input.length
 
 }

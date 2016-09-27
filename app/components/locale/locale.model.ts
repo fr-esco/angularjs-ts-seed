@@ -1,6 +1,6 @@
-'use strict';
+'use strict'
 
 export interface ILocale {
-  value: string;
-  text: string;
+  value: string
+  text: string
 }

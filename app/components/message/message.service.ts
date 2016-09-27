@@ -1,15 +1,15 @@
-import ngModuleName from './message.module';
+import ngModuleName from './message.module'
 
-'use strict';
+'use strict'
 
-const ngServiceName = 'messageService';
+const ngServiceName = 'messageService'
 
 export interface IMessage {
-  userPhoto: string;
-  subject: string;
-  userName: string;
-  date: string;
-  text: string;
+  userPhoto: string
+  subject: string
+  userName: string
+  date: string
+  text: string
 }
 
 @at.service(ngModuleName, ngServiceName)
@@ -57,15 +57,15 @@ export default class MessageService {
       date: '1945',
       text: 'For the discovery of the Exclusion Principle, also called the Pauli principle'
     }
-  ];
+  ]
 
   constructor(private $log: angular.ILogService, private $q: angular.IQService) {
-    'ngInject';
-    $log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngService', ngServiceName, 'loaded'].join(' '))
   }
 
   public loadAllItems() {
-    return this.$q.when(this.messages);
+    return this.$q.when(this.messages)
   }
 
 }

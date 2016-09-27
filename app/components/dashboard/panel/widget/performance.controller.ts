@@ -1,17 +1,17 @@
-import ngModuleName from './widget.module';
+import ngModuleName from './widget.module'
 
-import {IPerformance} from './performance.model';
-import PerformanceService from './performance.service';
+import {IPerformance} from './performance.model'
+import PerformanceService from './performance.service'
 
-'use strict';
+'use strict'
 
-const ngControllerName = 'PerformanceController';
+const ngControllerName = 'PerformanceController'
 
 @at.controller(ngModuleName, ngControllerName)
 export default class PerformanceController {
 
-  public performanceChartData: Array<IPerformance> = [];
-  public performancePeriod = 'week';
+  public performanceChartData: Array<IPerformance> = []
+  public performancePeriod = 'week'
   public chartOptions = {
     chart: {
       type: 'stackedAreaChart',
@@ -30,22 +30,22 @@ export default class PerformanceController {
       },
       showControls: false
     }
-  };
+  }
 
   constructor(private performanceService: PerformanceService,
     private $log: angular.ILogService,
     private $q: angular.IQService) {
-    'ngInject';
-    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '))
 
-    $q.all([this.loadData()]);
+    $q.all([this.loadData()])
   }
 
   public changePeriod() {
-    return this.loadData();
+    return this.loadData()
   }
 
   private loadData() {
-    return this.performanceService.getPerformanceData(this.performancePeriod).then(performanceData => this.performanceChartData = performanceData);
+    return this.performanceService.getPerformanceData(this.performancePeriod).then(performanceData => this.performanceChartData = performanceData)
   }
 }

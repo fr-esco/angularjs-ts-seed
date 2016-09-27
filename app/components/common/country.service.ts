@@ -1,9 +1,9 @@
-import ngModuleName from './common.module';
-import {ICountry, ICountryItem} from './country.model';
+import ngModuleName from './common.module'
+import {ICountry, ICountryItem} from './country.model'
 
-'use strict';
+'use strict'
 
-const ngServiceName = 'countryService';
+const ngServiceName = 'countryService'
 
 @at.service(ngModuleName, ngServiceName)
 export default class CountryService {
@@ -251,11 +251,11 @@ export default class CountryService {
     { name: 'Yemen', code: 'YE' },
     { name: 'Zambia', code: 'ZM' },
     { name: 'Zimbabwe', code: 'ZW' }
-  ];
+  ]
 
   constructor(private $log: angular.ILogService, private $q: angular.IQService) {
-    'ngInject';
-    $log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngService', ngServiceName, 'loaded'].join(' '))
   }
 
   public loadAllItems(): angular.IPromise<Array<ICountryItem>> {
@@ -263,7 +263,7 @@ export default class CountryService {
       value: country.name.toLowerCase(),
       display: country.name,
       code: country.code
-    })));
+    })))
   }
 
 }

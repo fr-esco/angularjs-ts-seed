@@ -1,6 +1,6 @@
-import ngModuleName from './blog.module';
+import ngModuleName from './blog.module'
 
 // import angular objects in alphabetical order
-import './blog.component';
+import './blog.component'
 
-export default ngModuleName;
+export default ngModuleName

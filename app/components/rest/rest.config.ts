@@ -1,9 +1,9 @@
-'use strict';
+'use strict'
 
 let config = (restangularProvider: restangular.IProvider) => {
-  restangularProvider.setBaseUrl('http://localhost:3000/');
-};
+  restangularProvider.setBaseUrl('http://localhost:3000/')
+}
 
-config.$inject = ['RestangularProvider'];
+config.$inject = ['RestangularProvider']
 
-export default config;
+export default config

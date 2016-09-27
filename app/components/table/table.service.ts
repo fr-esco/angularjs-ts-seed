@@ -1,15 +1,15 @@
-import ngModuleName from './table.module';
+import ngModuleName from './table.module'
 
-'use strict';
+'use strict'
 
 interface IIssue {
-  issue: string;
-  progress: number;
-  status: string;
-  class: string;
+  issue: string
+  progress: number
+  status: string
+  class: string
 }
 
-const ngServiceName = 'tableService';
+const ngServiceName = 'tableService'
 
 @at.service(ngModuleName, ngServiceName)
 export default class TodoService {
@@ -62,15 +62,15 @@ export default class TodoService {
       status: 'Done',
       class: 'md-accent'
     }
-  ];
+  ]
 
   constructor(private $log: angular.ILogService, private $q: angular.IQService) {
-    'ngInject';
-    $log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngService', ngServiceName, 'loaded'].join(' '))
   }
 
   public loadAllItems() {
-    return this.$q.when(this.tableData);
+    return this.$q.when(this.tableData)
   }
 
 }

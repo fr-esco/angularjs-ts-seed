@@ -1,6 +1,6 @@
-import ngModuleName from './dashboard.module';
+import ngModuleName from './dashboard.module'
 
 // import angular objects in alphabetical order
-import './dashboard.component';
+import './dashboard.component'
 
-export default ngModuleName;
+export default ngModuleName

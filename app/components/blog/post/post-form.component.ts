@@ -1,14 +1,14 @@
-import ngModuleName from './post.module';
+import ngModuleName from './post.module'
 
-import {IPost} from './post.model';
+import {IPost} from './post.model'
 
-'use strict';
+'use strict'
 
 interface IPostForm extends IPost {
-  createdAtDate(newDate: Date): Date;
+  createdAtDate(newDate: Date): Date
 }
 
-const ngComponentName = 'tsngPostForm';
+const ngComponentName = 'tsngPostForm'
 
 @at.component(ngModuleName, ngComponentName, {
   bindings: {
@@ -19,14 +19,14 @@ const ngComponentName = 'tsngPostForm';
   templateUrl: 'components/blog/post/post-form.component.html'
 })
 export default class PostFormComponent {
-  public post: IPost;
+  public post: IPost
 
-  private postCreatedAtDate: Date;
-  private get postCreatedAt() { return this.postCreatedAtDate || (this.postCreatedAtDate = new Date(this.post.createdAt)); }
-  private get postId() { return this.post.id; }
+  private postCreatedAtDate: Date
+  private get postCreatedAt() { return this.postCreatedAtDate || (this.postCreatedAtDate = new Date(this.post.createdAt)) }
+  private get postId() { return this.post.id }
 
   constructor(private $log: angular.ILogService) {
-    'ngInject';
-    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '))
   }
 }

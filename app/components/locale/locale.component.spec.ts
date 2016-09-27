@@ -1,33 +1,33 @@
 /// <reference path="../../../typings/index.d.ts" />
 
-import ngModuleName from './locale';
-import LocaleComponent from './locale.component';
+import ngModuleName from './locale'
+import LocaleComponent from './locale.component'
 
-'use strict';
+'use strict'
 
-let $module = angular.mock.module;
-let $inject = angular.mock.inject;
-let $dump = (arg: any): void => console.log(angular.mock.dump(arg));
+let $module = angular.mock.module
+let $inject = angular.mock.inject
+let $dump = (arg: any): void => console.log(angular.mock.dump(arg))
 
 xdescribe('# Locale Component', () => {
-  let log;
+  let log
 
-  beforeEach($module(ngModuleName));
+  beforeEach($module(ngModuleName))
 
   describe('## With $componentController', () => {
-    let controller, scope, service;
+    let controller, scope, service
 
     beforeEach($inject(($rootScope, $componentController, locale) => {
-      scope = $rootScope.$new();
-      service = locale;
+      scope = $rootScope.$new()
+      service = locale
       controller = $componentController('tsngLocale', { $scope: scope, locale: service }, {
         fileList: ['example.html', 'example.ts', 'example.css'],
         title: 'Locale'
-      });
-    }));
+      })
+    }))
 
     it('should be attached to the scope', () => {
-      expect(scope.$ctrl).toBe(controller);
-    });
-  });
-});
+      expect(scope.$ctrl).toBe(controller)
+    })
+  })
+})

@@ -1,44 +1,44 @@
 /// <reference path="../../../typings/index.d.ts" />
 
-import ngModuleName from './exception';
-import MessageHandlerService from './message-handler.service';
+import ngModuleName from './exception'
+import MessageHandlerService from './message-handler.service'
 
-'use strict';
+'use strict'
 
-let $module = angular.mock.module;
-let $inject = angular.mock.inject;
-let $dump = (arg: any): void => console.log(angular.mock.dump(arg));
+let $module = angular.mock.module
+let $inject = angular.mock.inject
+let $dump = (arg: any): void => console.log(angular.mock.dump(arg))
 
 describe('# MessageHandler Service', () => {
-  let $log, $rootScope;
-  let service: MessageHandlerService;
+  let $log, $rootScope
+  let service: MessageHandlerService
 
   beforeEach(() => {
-    $module(ngModuleName);
+    $module(ngModuleName)
 
     $inject((_$log_, _$rootScope_, _messageHandler_) => {
-      $log = _$log_;
-      $rootScope = _$rootScope_;
-      service = _messageHandler_;
-    });
-  });
+      $log = _$log_
+      $rootScope = _$rootScope_
+      service = _messageHandler_
+    })
+  })
 
   describe('## Existence', () => {
     it('should exist', () => {
-      expect(service).not.toBeUndefined();
-      expect(service).not.toBeNull();
-    });
+      expect(service).not.toBeUndefined()
+      expect(service).not.toBeNull()
+    })
 
     it('should be an instance of MessageHandlerService', () => {
-      expect(service).toEqual(jasmine.any(MessageHandlerService));
-    });
-  });
+      expect(service).toEqual(jasmine.any(MessageHandlerService))
+    })
+  })
 
   describe('## Log enabled', () => {
     it('should log registration', () => {
-      let loaded = ['ngService', 'messageHandler', 'loaded'].join(' ');
-      expect($log.debug.logs).toContain([loaded]);
-    });
-  });
+      let loaded = ['ngService', 'messageHandler', 'loaded'].join(' ')
+      expect($log.debug.logs).toContain([loaded])
+    })
+  })
 
-});
+})

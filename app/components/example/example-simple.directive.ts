@@ -1,8 +1,8 @@
-import ngModuleName from './example.module';
+import ngModuleName from './example.module'
 
-'use strict';
+'use strict'
 
-const ngDirectiveName = 'exampleSimple';
+const ngDirectiveName = 'exampleSimple'
 
 @at.directive(ngModuleName, ngDirectiveName, {
   replace: true,
@@ -11,7 +11,7 @@ const ngDirectiveName = 'exampleSimple';
 })
 export default class ExampleSimpleDirective {
   constructor(private $log: angular.ILogService) {
-    'ngInject';
-    $log.debug(['ngDirective', ngDirectiveName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngDirective', ngDirectiveName, 'loaded'].join(' '))
   }
 }

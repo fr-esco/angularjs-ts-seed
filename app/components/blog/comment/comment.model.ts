@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
 export interface IComment {
-  id: number;
-  createdAt: string;
-  postId: number;
-  content: string;
+  id: number
+  createdAt: string
+  postId: number
+  content: string
 }

@@ -1,8 +1,8 @@
-import ngModuleName from './panel.module';
+import ngModuleName from './panel.module'
 
-'use strict';
+'use strict'
 
-const ngDirectiveName = 'tsngPanelWidget';
+const ngDirectiveName = 'tsngPanelWidget'
 
 @at.directive(ngModuleName, ngDirectiveName, {
   restrict: 'E',
@@ -17,8 +17,8 @@ const ngDirectiveName = 'tsngPanelWidget';
   templateUrl: 'components/dashboard/panel/panel-widget.directive.html'
   // compile: (element, attrs, linker) => (scope, element) => {
   //   linker(scope, clone => {
-  //     element.append(clone);
-  //   });
+  //     element.append(clone)
+  //   })
   // }
 })
 export default class PanelWidgetDirective {

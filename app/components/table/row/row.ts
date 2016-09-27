@@ -1,6 +1,6 @@
-import ngModuleName from './row.module';
+import ngModuleName from './row.module'
 
 // import angular objects in alphabetical order
-import './row.component';
+import './row.component'
 
-export default ngModuleName;
+export default ngModuleName

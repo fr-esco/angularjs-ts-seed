@@ -1,9 +1,9 @@
 /// <reference path="../typings/index.d.ts" />
 
-import routing from './app.route';
-import {components} from './components/components';
+import routing from './app.route'
+import {components} from './components/components'
 
-const ngMainComponentName = 'tsngApp';
+const ngMainComponentName = 'tsngApp'
 
 let app = angular.module('app', [
   'ngComponentRouter',
@@ -17,7 +17,7 @@ let app = angular.module('app', [
   'angularMoment',
   components.name,
 ]).config(routing)
-  .value('$routerRootComponent', ngMainComponentName);
+  .value('$routerRootComponent', ngMainComponentName)
 
 @at.component('app', ngMainComponentName, {
   // templateUrl: 'app.html?v=<%= VERSION %>',
@@ -28,12 +28,12 @@ let app = angular.module('app', [
 })
 class App {
   constructor(private $log: angular.ILogService) {
-    'ngInject';
-    $log.debug(['ngComponent', ngMainComponentName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngComponent', ngMainComponentName, 'loaded'].join(' '))
   }
 }
 
-export default app;
+export default app
 
 angular.element(document)
-  .ready(() => angular.bootstrap(document.body, [app.name]));
+  .ready(() => angular.bootstrap(document.body, [app.name]))

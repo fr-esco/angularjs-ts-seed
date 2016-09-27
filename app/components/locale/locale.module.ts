@@ -1,9 +1,9 @@
-import Material from '../material/material';
-import config from './locale.config';
+import Material from '../material/material'
+import config from './locale.config'
 
-'use strict';
+'use strict'
 
-const ngModuleName = 'app.components.locale';
+const ngModuleName = 'app.components.locale'
 
 export default angular.module(ngModuleName, ['ngComponentRouter', Material, 'ngCookies', 'angularMoment', 'tmh.dynamicLocale', 'pascalprecht.translate'])
   .config(config)
@@ -12,8 +12,8 @@ export default angular.module(ngModuleName, ['ngComponentRouter', Material, 'ngC
     $translate: angular.translate.ITranslateService,
     $filter: angular.IFilterService,
     amMoment: any) => {
-    'ngInject';
-    $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '));
-    $rootScope['$translate'] = $translate;
-    $rootScope['amMoment'] = amMoment;
-  }).name;
+    'ngInject'
+    $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))
+    $rootScope['$translate'] = $translate
+    $rootScope['amMoment'] = amMoment
+  }).name

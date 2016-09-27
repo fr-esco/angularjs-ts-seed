@@ -1,22 +1,22 @@
-import ngModuleName from './table.module';
+import ngModuleName from './table.module'
 
-import TableService from './table.service';
+import TableService from './table.service'
 
-'use strict';
+'use strict'
 
-const ngControllerName = 'TableController';
+const ngControllerName = 'TableController'
 
 @at.controller(ngModuleName, ngControllerName)
 export default class TableController {
 
-  public tableData = [];
+  public tableData = []
 
   constructor(private tableService: TableService,
     private $log: angular.ILogService) {
-    'ngInject';
-    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '))
 
     tableService.loadAllItems()
-      .then(data => this.tableData = [].concat(data));
+      .then(data => this.tableData = [].concat(data))
   }
 }

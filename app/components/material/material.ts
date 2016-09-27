@@ -1,6 +1,6 @@
-import ngModuleName from './material.module';
+import ngModuleName from './material.module'
 
 // import angular objects in alphabetical order
-// import './material.service';
+// import './material.service'
 
-export default ngModuleName;
+export default ngModuleName

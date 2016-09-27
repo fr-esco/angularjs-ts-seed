@@ -1,12 +1,12 @@
-import ngModuleName from './widget.module';
+import ngModuleName from './widget.module'
 
-'use strict';
+'use strict'
 
-const ngControllerName = 'MemoryController';
+const ngControllerName = 'MemoryController'
 
 @at.controller(ngModuleName, ngControllerName)
 export default class MemoryController {
-  public memoryChartData = [{ key: 'memory', y: 42 }, { key: 'free', y: 58 }];
+  public memoryChartData = [{ key: 'memory', y: 42 }, { key: 'free', y: 58 }]
 
   public chartOptions = {
     chart: {
@@ -28,10 +28,10 @@ export default class MemoryController {
       titleOffset: -10,
       margin: { bottom: -80, left: -20, right: -20 }
     }
-  };
+  }
 
   constructor(private $log: angular.ILogService) {
-    'ngInject';
-    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '))
   }
 }

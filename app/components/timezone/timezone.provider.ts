@@ -1,55 +1,55 @@
-import ngModuleName from './timezone.module';
+import ngModuleName from './timezone.module'
 
-'use strict';
+'use strict'
 
 // the provider will be available as 'timezoneProvider'
 // the created service will be available as 'timezone'
-const ngProviderName = 'timezone';
+const ngProviderName = 'timezone'
 
 interface ITimezoneProvider extends angular.IServiceProvider {
-  makeNoise(value: boolean): void;
+  makeNoise(value: boolean): void
 }
 
 @at.provider(ngModuleName, ngProviderName)
 export class TimezoneProvider implements ITimezoneProvider {
-  private notify = true;
+  private notify = true
 
   constructor() {
-    this.notify = true;
+    this.notify = true
   }
 
   public makeNoise(value: boolean): void {
-    this.notify = value;
+    this.notify = value
   }
 
-  // $get must be declared as method, not as function property (eg. `$get = () => new Service();`)
-  public $get($log: angular.ILogService, moment: moment.MomentStatic, $q: angular.IQService, $timeout: angular.ITimeoutService) {
-    'ngInject';
-    return new TimezoneProviderService($log, moment, $q, $timeout, this.notify);
+  // $get must be declared as method, not as function property (eg. `$get = () => new Service()`)
+  public $get($log: angular.ILogService, moment: any, $q: angular.IQService, $timeout: angular.ITimeoutService) {
+    'ngInject'
+    return new TimezoneProviderService($log, moment, $q, $timeout, this.notify)
   }
 }
 
 export default class TimezoneProviderService {
   constructor(private log: angular.ILogService,
-    private moment: moment.MomentStatic,
+    private moment: any,
     private q: angular.IQService,
     private timeout: angular.ITimeoutService,
     private notify: boolean) {
 
-    let s = ['ngProvider', ngProviderName, 'has loaded an', 'TimezoneProviderService'].join(' ');
+    let s = ['ngProvider', ngProviderName, 'has loaded an', 'TimezoneProviderService'].join(' ')
     if (notify)
-      log.info(s);
+      log.info(s)
     else
-      log.debug(s);
+      log.debug(s)
   }
 
   public getTimezones(): angular.IPromise<string[]> {
-    let deferred = this.q.defer();
-    this.timeout(() => deferred.resolve(this.moment.tz.names()), Math.random() * 1000);
-    return deferred.promise;
+    let deferred = this.q.defer()
+    this.timeout(() => deferred.resolve(this.moment.tz.names()), Math.random() * 1000)
+    return deferred.promise
   }
 
   public set(timezone: string) {
-    this.moment.tz.setDefault(timezone);
+    this.moment.tz.setDefault(timezone)
   }
 }

@@ -1,8 +1,8 @@
-import ngModuleName from './profile.module';
+import ngModuleName from './profile.module'
 
-'use strict';
+'use strict'
 
-const ngControllerName = 'ProfileController';
+const ngControllerName = 'ProfileController'
 
 @at.controller(ngModuleName, ngControllerName)
 export default class ProfileController {
@@ -19,10 +19,10 @@ export default class ProfileController {
     biography: ['We are young and ambitious full service design and technology company.',
       'Our focus is JavaScript development and User Interface design.'].join(' '),
     postalCode: '220007'
-  };
+  }
 
   constructor(private $log: angular.ILogService) {
-    'ngInject';
-    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '))
   }
 }

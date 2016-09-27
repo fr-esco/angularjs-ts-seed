@@ -1,8 +1,8 @@
-import ngModuleName from './blog.module';
+import ngModuleName from './blog.module'
 
-'use strict';
+'use strict'
 
-const ngComponentName = 'tsngBlog';
+const ngComponentName = 'tsngBlog'
 
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'components/blog/blog.component.html',
@@ -14,7 +14,7 @@ const ngComponentName = 'tsngBlog';
   ]
 })
 export default class BlogComponent implements angular.OnActivate {
-  public title: string;
+  public title: string
 
   private files = [
     [
@@ -45,14 +45,14 @@ export default class BlogComponent implements angular.OnActivate {
       'components/rest/rest.model.ts',
       'components/rest/rest.module.ts',
     ]
-  ];
+  ]
 
   constructor(private $log: angular.ILogService) {
-    'ngInject';
-    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '))
   }
 
   public $routerOnActivate(next: angular.ComponentInstruction) {
-    this.title = next.routeData.data['title'];
+    this.title = next.routeData.data['title']
   }
 }

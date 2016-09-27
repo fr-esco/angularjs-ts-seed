@@ -1,9 +1,9 @@
-import ngModuleName from './common.module';
-import {IMenuItem} from './navigation-menu.model';
+import ngModuleName from './common.module'
+import {IMenuItem} from './navigation-menu.model'
 
-'use strict';
+'use strict'
 
-const ngServiceName = 'navigationService';
+const ngServiceName = 'navigationService'
 
 @at.service(ngModuleName, ngServiceName)
 export default class NavigationService {
@@ -38,15 +38,15 @@ export default class NavigationService {
       sref: '.i18n',
       link: ['I18n']
     }
-  ];
+  ]
 
   constructor(private $log: angular.ILogService, private $q: angular.IQService) {
-    'ngInject';
-    $log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngService', ngServiceName, 'loaded'].join(' '))
   }
 
   public loadAllItems() {
-    return this.$q.when(this.menuItems);
+    return this.$q.when(this.menuItems)
   }
 
 }

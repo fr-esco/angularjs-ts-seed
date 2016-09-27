@@ -1,6 +1,6 @@
-'use strict';
+'use strict'
 
 export interface ITodo {
-  done: boolean;
-  text: string;
+  done: boolean
+  text: string
 }

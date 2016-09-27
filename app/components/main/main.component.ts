@@ -1,11 +1,11 @@
-import ngModuleName from './main.module';
-import {IMenuItem} from '../common/navigation-menu.model';
-import NavigationService from '../common/navigation.service';
-import BottomSheetController from '../bottom-sheet/bottom-sheet.controller';
+import ngModuleName from './main.module'
+import {IMenuItem} from '../common/navigation-menu.model'
+import NavigationService from '../common/navigation.service'
+import BottomSheetController from '../bottom-sheet/bottom-sheet.controller'
 
-'use strict';
+'use strict'
 
-const ngComponentName = 'tsngMain';
+const ngComponentName = 'tsngMain'
 
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'components/main/main.component.html',
@@ -19,8 +19,8 @@ const ngComponentName = 'tsngMain';
 })
 export default class MainComponent implements at.OnInit {
 
-  public menuItems: Array<IMenuItem> = [];
-  public title: string;
+  public menuItems: Array<IMenuItem> = []
+  public title: string
 
   constructor(private navigationService: NavigationService,
     private $log: angular.ILogService,
@@ -29,19 +29,19 @@ export default class MainComponent implements at.OnInit {
     private $mdBottomSheet: angular.material.IBottomSheetService,
     private $mdMenu: angular.material.IMenuService,
     private $mdToast: angular.material.IToastService) {
-    'ngInject';
-    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '))
   }
 
   public $onInit() {
     this.navigationService.loadAllItems()
-      .then(menuItems => this.menuItems = [].concat(menuItems));
+      .then(menuItems => this.menuItems = [].concat(menuItems))
   }
 
   public selectItem(item) {
-    this.title = item.name;
-    this.clearSidebars();
-    this.showSimpleToast(this.title);
+    this.title = item.name
+    this.clearSidebars()
+    this.showSimpleToast(this.title)
   }
 
   public showActions($event: MouseEvent) {
@@ -51,8 +51,8 @@ export default class MainComponent implements at.OnInit {
       controller: BottomSheetController,
       controllerAs: 'vm'
     }).then(clickedItem => {
-      clickedItem && this.$log.debug(clickedItem.name + ' clicked!');
-    });
+      clickedItem && this.$log.debug(clickedItem.name + ' clicked!')
+    })
   }
 
   public showSimpleToast(title: string) {
@@ -61,23 +61,23 @@ export default class MainComponent implements at.OnInit {
         .textContent(title)
         .hideDelay(2000)
         .position('bottom right')
-    );
+    )
   }
 
   public toggleItemsList() {
-    this.$mdBottomSheet.hide();
-    this.$mdSidenav('left').toggle().then(() => this.$log.debug('Left sidenav toggled'));
+    this.$mdBottomSheet.hide()
+    this.$mdSidenav('left').toggle().then(() => this.$log.debug('Left sidenav toggled'))
   }
 
   public toggleRightSidebar() {
     this.$mdMenu.hide()
       .then(this.$mdSidenav('right').toggle)
-      .then(() => this.$log.debug('Right sidenav toggled'));
+      .then(() => this.$log.debug('Right sidenav toggled'))
   }
 
   private clearSidebars() {
-    this.$mdBottomSheet.hide();
-    this.$mdSidenav('left').close().then(() => this.$log.debug('Left sidenav closed'));
-    this.$mdSidenav('right').close().then(() => this.$log.debug('Right sidenav closed'));
+    this.$mdBottomSheet.hide()
+    this.$mdSidenav('left').close().then(() => this.$log.debug('Left sidenav closed'))
+    this.$mdSidenav('right').close().then(() => this.$log.debug('Right sidenav closed'))
   }
 }

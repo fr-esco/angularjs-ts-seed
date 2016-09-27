@@ -1,12 +1,12 @@
-import ngModuleName from './post.module';
+import ngModuleName from './post.module'
 
 // import angular objects in alphabetical order
-import './post-client.service';
-import './post-create.component';
-import './post-comments.component';
-import './post-detail.component';
-import './post-form.component';
-import './post-list.component';
-import './post-update.component';
+import './post-client.service'
+import './post-create.component'
+import './post-comments.component'
+import './post-detail.component'
+import './post-form.component'
+import './post-list.component'
+import './post-update.component'
 
-export default ngModuleName;
+export default ngModuleName

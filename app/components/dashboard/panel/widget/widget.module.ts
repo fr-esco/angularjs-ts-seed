@@ -1,8 +1,8 @@
-import Material from '../../../material/material';
+import Material from '../../../material/material'
 
-'use strict';
+'use strict'
 
-const ngModuleName = 'app.components.dashboard.panel.widget';
+const ngModuleName = 'app.components.dashboard.panel.widget'
 
 export default angular.module(ngModuleName, ['ngComponentRouter', Material, 'nvd3'])
-  .run(['$log', $log => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;
+  .run(['$log', $log => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name

@@ -1,6 +1,6 @@
-'use strict';
+'use strict'
 
 export interface IVisitor {
-  key: string;
-  y: number;
+  key: string
+  y: number
 }

@@ -1,39 +1,39 @@
-import ngModuleName from './widget.module';
+import ngModuleName from './widget.module'
 
-import {ICountryItem} from '../../../common/country.model';
-import CountryService from '../../../common/country.service';
+import {ICountryItem} from '../../../common/country.model'
+import CountryService from '../../../common/country.service'
 
-'use strict';
+'use strict'
 
-const ngControllerName = 'AutocompleteController';
+const ngControllerName = 'AutocompleteController'
 
 @at.controller(ngModuleName, ngControllerName)
 export default class AutocompleteController {
 
-  public countries: Array<ICountryItem> = [];
-  public selectedCountry: ICountryItem;
-  public searchText: string;
-  public disableCaching = true;
+  public countries: Array<ICountryItem> = []
+  public selectedCountry: ICountryItem
+  public searchText: string
+  public disableCaching = true
 
   constructor(private countryService: CountryService,
     private $log: angular.ILogService,
     private $q: angular.IQService,
     private $timeout: angular.ITimeoutService) {
-    'ngInject';
-    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '))
 
-    countryService.loadAllItems().then(countries => this.countries = [].concat(countries));
+    countryService.loadAllItems().then(countries => this.countries = [].concat(countries))
   }
 
   public querySearch(query?: string) {
     let results = query ? this.countries.filter(this.createFilterFor(query)) : [],
-      deferred = this.$q.defer();
-    this.$timeout(() => deferred.resolve(results), Math.random() * 1000, false);
-    return deferred.promise;
+      deferred = this.$q.defer()
+    this.$timeout(() => deferred.resolve(results), Math.random() * 1000, false)
+    return deferred.promise
   }
 
   private createFilterFor(query: string) {
-    let lowercaseQuery = angular.lowercase(query);
-    return country => country.value.indexOf(lowercaseQuery) === 0;
+    let lowercaseQuery = angular.lowercase(query)
+    return country => country.value.indexOf(lowercaseQuery) === 0
   }
 }

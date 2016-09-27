@@ -1,6 +1,6 @@
-import ngModuleName from './markdown.module';
+import ngModuleName from './markdown.module'
 
 // import angular objects in alphabetical order
-import './markdown.filter';
+import './markdown.filter'
 
-export default ngModuleName;
+export default ngModuleName

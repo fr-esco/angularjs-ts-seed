@@ -1,8 +1,8 @@
-import ngModuleName from './i18n.module';
+import ngModuleName from './i18n.module'
 
-'use strict';
+'use strict'
 
-const ngComponentName = 'tsngI18n';
+const ngComponentName = 'tsngI18n'
 
 @at.component(ngModuleName, ngComponentName, {
   bindings: {
@@ -14,11 +14,11 @@ const ngComponentName = 'tsngI18n';
   templateUrl: 'components/i18n/i18n.component.html'
 })
 export default class I18nComponent implements angular.OnActivate, at.OnInit, at.OnDestroy {
-  public title: string;
-  public clock: number;
-  public gender = 'male';
-  public name = 'John';
-  public numOfguests = 1;
+  public title: string
+  public clock: number
+  public gender = 'male'
+  public name = 'John'
+  public numOfguests = 1
   public files = [
     [
       'components/i18n/i18n.component.html',
@@ -26,24 +26,24 @@ export default class I18nComponent implements angular.OnActivate, at.OnInit, at.
       'components/i18n/i18n/en.json',
       'components/i18n/i18n/it.json'
     ]
-  ];
-  private tickInterval = 1000; // ms
-  private intervalPromise: angular.IPromise<number>;
+  ]
+  private tickInterval = 1000 // ms
+  private intervalPromise: angular.IPromise<number>
 
   constructor(private $log: angular.ILogService, private $interval: angular.IIntervalService, public $locale: angular.ILocaleService) {
-    'ngInject';
-    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '))
   }
 
   public $routerOnActivate(next: at.ComponentInstruction) {
-    this.title = next.routeData.data['title'];
+    this.title = next.routeData.data['title']
   }
 
   public $onInit() {
-    this.intervalPromise = this.$interval(() => this.clock = Date.now(), this.tickInterval);
+    this.intervalPromise = this.$interval(() => this.clock = Date.now(), this.tickInterval)
   }
 
   public $onDestroy(){
-    this.$interval.cancel(this.intervalPromise);
+    this.$interval.cancel(this.intervalPromise)
   }
 }

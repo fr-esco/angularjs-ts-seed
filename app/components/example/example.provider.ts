@@ -1,40 +1,40 @@
-import ngModuleName from './example.module';
+import ngModuleName from './example.module'
 
-'use strict';
+'use strict'
 
 // the provider will be available as 'sampleProvider'
 // the created service will be available as 'sample'
-const ngProviderName = 'sample';
+const ngProviderName = 'sample'
 
 interface IExampleProvider extends angular.IServiceProvider {
-  makeNoise(value: boolean): void;
+  makeNoise(value: boolean): void
 }
 
 @at.provider(ngModuleName, ngProviderName)
 export class ExampleProvider implements IExampleProvider {
-  private notify = true;
+  private notify = true
 
   constructor() {
-    this.notify = true;
+    this.notify = true
   }
 
   public makeNoise(value: boolean): void {
-    this.notify = value;
+    this.notify = value
   }
 
-  // $get must be declared as method, not as function property (eg. `$get = () => new Service();`)
+  // $get must be declared as method, not as function property (eg. `$get = () => new Service()`)
   public $get($log: angular.ILogService) {
-    'ngInject';
-    return new ExampleProviderService($log, this.notify);
+    'ngInject'
+    return new ExampleProviderService($log, this.notify)
   }
 }
 
 export default class ExampleProviderService {
   constructor(private $log: angular.ILogService, private notify: boolean) {
-    let s = ['ngProvider', ngProviderName, 'has loaded an', 'ExampleProviderService'].join(' ');
+    let s = ['ngProvider', ngProviderName, 'has loaded an', 'ExampleProviderService'].join(' ')
     if (notify)
-      $log.info(s);
+      $log.info(s)
     else
-      $log.debug(s);
+      $log.debug(s)
   }
 }

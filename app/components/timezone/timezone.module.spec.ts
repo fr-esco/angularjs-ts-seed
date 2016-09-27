@@ -1,62 +1,62 @@
 /// <reference path="../../../typings/index.d.ts" />
 
-import Timezone from './timezone';
+import Timezone from './timezone'
 
-'use strict';
+'use strict'
 
-let $module = angular.mock.module;
-let $inject = angular.mock.inject;
-let $dump = (arg: any): void => console.log(angular.mock.dump(arg));
+let $module = angular.mock.module
+let $inject = angular.mock.inject
+let $dump = (arg: any): void => console.log(angular.mock.dump(arg))
 
 describe('# Timezone Module', () => {
-  beforeEach($module(Timezone));
+  beforeEach($module(Timezone))
 
   describe('## Existence', () => {
-    let mod;
+    let mod
 
-    beforeEach(() => mod = angular.module(Timezone));
+    beforeEach(() => mod = angular.module(Timezone))
 
     it('should exist', () => {
-      expect(mod).not.toBeUndefined();
-      expect(mod).not.toBeNull;
-    });
+      expect(mod).not.toBeUndefined()
+      expect(mod).not.toBeNull
+    })
 
     it('should have deps', () => {
-      expect(mod.requires).toContain('ngComponentRouter');
-      expect(mod.requires).toContain('app.components.material');
-    });
-  });
+      expect(mod.requires).toContain('ngComponentRouter')
+      expect(mod.requires).toContain('app.components.material')
+    })
+  })
 
   describe('## Log enabled', () => {
-    let $log;
+    let $log
 
     beforeEach(() => {
       $inject(_$log_ => {
-        $log = _$log_;
-      });
-    });
+        $log = _$log_
+      })
+    })
 
     it('should log registration', () => {
-      let loaded = ['ngModule', Timezone, 'loaded'].join(' ');
-      expect($log.debug.logs).toContain([loaded]);
-    });
-  });
+      let loaded = ['ngModule', Timezone, 'loaded'].join(' ')
+      expect($log.debug.logs).toContain([loaded])
+    })
+  })
 
   describe('## Log disabled', () => {
-    let $log;
+    let $log
 
     beforeEach(() => {
       $module($logProvider => {
-        $logProvider.debugEnabled(false);
-      });
+        $logProvider.debugEnabled(false)
+      })
 
       $inject(_$log_ => {
-        $log = _$log_;
-      });
-    });
+        $log = _$log_
+      })
+    })
 
     it('should not log registration', () => {
-      expect($log.assertEmpty).not.toThrow();
-    });
-  });
-});
+      expect($log.assertEmpty).not.toThrow()
+    })
+  })
+})

@@ -1,7 +1,7 @@
-import ngModuleName from './profile.module';
-'use strict';
+import ngModuleName from './profile.module'
+'use strict'
 
-const ngDirectiveName = 'dateInThePastValidation';
+const ngDirectiveName = 'dateInThePastValidation'
 
 @at.directive(ngModuleName, ngDirectiveName, {
   restrict: 'A',
@@ -9,19 +9,19 @@ const ngDirectiveName = 'dateInThePastValidation';
   link: (scope, elm, attrs, ctrl) => {
 
     ctrl['$validators'].validate = (modelValue, viewValue) => {
-      const today = new Date();
+      const today = new Date()
 
       if (ctrl['$isEmpty'](modelValue) || modelValue > today) {
-        return false;
+        return false
       }
 
-      return true;
-    };
+      return true
+    }
   }
 })
 export default class ExamplesCustomValidation {
   constructor(private $log: angular.ILogService) {
-    'ngInject';
-    $log.debug(['ngDirective', ngDirectiveName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngDirective', ngDirectiveName, 'loaded'].join(' '))
   }
 }

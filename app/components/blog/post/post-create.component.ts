@@ -1,11 +1,11 @@
-import ngModuleName from './post.module';
+import ngModuleName from './post.module'
 
-import {IPost} from './post.model';
-import PostClient from './post-client.service';
+import {IPost} from './post.model'
+import PostClient from './post-client.service'
 
-'use strict';
+'use strict'
 
-const ngComponentName = 'tsngPostCreate';
+const ngComponentName = 'tsngPostCreate'
 
 @at.component(ngModuleName, ngComponentName, {
   bindings: {
@@ -14,22 +14,22 @@ const ngComponentName = 'tsngPostCreate';
   templateUrl: 'components/blog/post/post-create.component.html'
 })
 export default class PostCreateComponent implements angular.OnActivate, angular.CanDeactivate {
-  public $router: angular.Router;
+  public $router: angular.Router
 
-  public title: string;
-  public post: IPost;
+  public title: string
+  public post: IPost
 
-  private complete = false;
+  private complete = false
 
   constructor(private postClient: PostClient,
     private $log: angular.ILogService,
     private $mdDialog: angular.material.IDialogService) {
-    'ngInject';
-    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '))
   }
 
   public $routerOnActivate(next: angular.ComponentInstruction) {
-    this.title = next.routeData.data['title'];
+    this.title = next.routeData.data['title']
   }
 
   public $routerCanDeactivate() {
@@ -38,14 +38,14 @@ export default class PostCreateComponent implements angular.OnActivate, angular.
       .ok('ok')
       .cancel('cancel')
       .title(['Leave Page?'].join(''))
-      .textContent(['Are you sure?', 'All changes will be lost.'].join(' '));
+      .textContent(['Are you sure?', 'All changes will be lost.'].join(' '))
     return this.complete || this.$mdDialog.show(confirm)
       .then(() => true, () => false)
-      .finally(() => confirm = undefined);
+      .finally(() => confirm = undefined)
   }
 
   public cancel() {
-    return this.$router.navigate(['PostList']);
+    return this.$router.navigate(['PostList'])
   }
 
   public confirm(post: IPost) {
@@ -53,7 +53,7 @@ export default class PostCreateComponent implements angular.OnActivate, angular.
       .then(post => this.post = post, this.$log.error)
       // .then(this.log.debug)
       .then(() => this.complete = true, () => this.complete = false)
-      .then(() => this.$router.navigate(['PostDetail', { id: this.post.id }]));
+      .then(() => this.$router.navigate(['PostDetail', { id: this.post.id }]))
   }
 
 }

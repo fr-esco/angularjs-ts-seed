@@ -1,17 +1,17 @@
-import ngModuleName from './table.module';
+import ngModuleName from './table.module'
 
-'use strict';
+'use strict'
 
-const ngComponentName = 'tsngTableDefault';
+const ngComponentName = 'tsngTableDefault'
 
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'components/table/table-default.component.html'
 })
 export default class TableDefaultComponent {
-  public test = true;
+  public test = true
 
   constructor(private $log: angular.ILogService) {
-    'ngInject';
-    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '))
   }
 }

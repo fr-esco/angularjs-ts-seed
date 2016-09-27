@@ -1,9 +1,9 @@
-import Material from '../../material/material';
-import Widget from './widget/widget';
+import Material from '../../material/material'
+import Widget from './widget/widget'
 
-'use strict';
+'use strict'
 
-const ngModuleName = 'app.components.dashboard.panel';
+const ngModuleName = 'app.components.dashboard.panel'
 
 export default angular.module(ngModuleName, ['ngComponentRouter', Material, Widget])
-  .run(['$log', ($log: angular.ILogService) => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;
+  .run(['$log', ($log: angular.ILogService) => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name

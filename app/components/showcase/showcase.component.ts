@@ -1,16 +1,16 @@
-import ngModuleName from './showcase.module';
+import ngModuleName from './showcase.module'
 
-import ShowcaseService from './showcase.provider';
+import ShowcaseService from './showcase.provider'
 
-'use strict';
+'use strict'
 
 interface ITab {
-  title: string;
-  options: any;
-  content: string;
+  title: string
+  options: any
+  content: string
 }
 
-const ngComponentName = 'tsngShowcase';
+const ngComponentName = 'tsngShowcase'
 
 @at.component(ngModuleName, ngComponentName, {
   bindings: {
@@ -21,15 +21,15 @@ const ngComponentName = 'tsngShowcase';
   templateUrl: 'components/showcase/showcase.component.html'
 })
 export default class ShowcaseComponent implements at.OnInit {
-  public fileList: string[];
-  public lazy: boolean;
+  public fileList: string[]
+  public lazy: boolean
 
-  public showSource = false;
-  public selected = 0;
-  public tabs: ITab[] = [];
+  public showSource = false
+  public selected = 0
+  public tabs: ITab[] = []
 
-  public loaded = false;
-  public loading = false;
+  public loaded = false
+  public loading = false
 
   private modes = {
     html: 'htmlmixed',
@@ -37,19 +37,19 @@ export default class ShowcaseComponent implements at.OnInit {
     json: { name: 'javascript', json: true },
     scss: 'sass',
     ts: { name: 'javascript', typescript: true }
-  };
+  }
 
-  private markdownFilter;
+  private markdownFilter
 
   constructor(private showcase: ShowcaseService,
     private $filter: angular.IFilterService,
     private $log: angular.ILogService,
     private $q: angular.IQService,
     private $timeout: angular.ITimeoutService) {
-    'ngInject';
-    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '))
 
-    this.markdownFilter = $filter('markdown');
+    this.markdownFilter = $filter('markdown')
   }
 
   public $onInit() {
@@ -57,58 +57,58 @@ export default class ShowcaseComponent implements at.OnInit {
       this.fileList = [
         'components/showcase/showcase.scss',
         'components/showcase/showcase.readme.md'
-      ];
+      ]
     if (!this.lazy)
-      this.load();
+      this.load()
   }
 
   public toggleSource() {
-    this.load().then(loaded => loaded ? this.toggleSourceInternal() : this.$q.reject());
+    this.load().then(loaded => loaded ? this.toggleSourceInternal() : this.$q.reject())
   }
 
   public markdown(tab: ITab, convert = false) {
     if (tab.options.mode === 'md') {
       if (convert)
-        this.$timeout(() => tab.content = this.markdownFilter(tab.content), 0, false);
-      return true;
+        this.$timeout(() => tab.content = this.markdownFilter(tab.content), 0, false)
+      return true
     }
 
-    return false;
+    return false
   }
 
   private toggleSourceInternal() {
-    this.showSource = !this.showSource;
+    this.showSource = !this.showSource
   }
 
   private load() {
     if (!this.loaded) {
-      // this.fileList.push('components/showcase/showcase.scss');
+      // this.fileList.push('components/showcase/showcase.scss')
       return this.showLoading()
         .then(() => this.showcase.load(this.fileList))
         .then(files => this.tabs = this.fileList.map(path => this.fileToTab(path, files[path])))
         .then(() => this.loaded = true)
-        .then(() => this.hideLoading());
+        .then(() => this.hideLoading())
     } else
-      return this.$q.when(true);
+      return this.$q.when(true)
   }
 
   private showLoading() {
-    return this.$q.when(this.loading = true);
+    return this.$q.when(this.loading = true)
   }
 
   private hideLoading() {
-    let deferred = this.$q.defer();
-    let delay = 200 + 15 * this.fileList.length;
-    this.$timeout(() => deferred.resolve((this.loading = false) || true), delay);
-    return deferred.promise;
+    let deferred = this.$q.defer()
+    let delay = 200 + 15 * this.fileList.length
+    this.$timeout(() => deferred.resolve((this.loading = false) || true), delay)
+    return deferred.promise
   }
 
   private fileToTab(path: string, content: string): ITab {
-    let parts = path.split('/');
-    let name = parts[parts.length - 1];
+    let parts = path.split('/')
+    let name = parts[parts.length - 1]
 
-    parts = name.split('.');
-    let ext = parts[parts.length - 1];
+    parts = name.split('.')
+    let ext = parts[parts.length - 1]
 
     let options = {
       mode: this.modes[ext] || ext,
@@ -116,14 +116,14 @@ export default class ShowcaseComponent implements at.OnInit {
       lineNumbers: true,
       readOnly: true,
       autoRefresh: true
-    };
+    }
 
-    // this.log.debug(name, options);
+    // this.log.debug(name, options)
 
     return {
       title: name,
       options: options,
       content: content
-    };
+    }
   }
 }

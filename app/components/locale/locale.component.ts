@@ -1,11 +1,11 @@
-import ngModuleName from './locale.module';
+import ngModuleName from './locale.module'
 
-import LocaleService from './locale.provider';
-import {ILocale} from './locale.model';
+import LocaleService from './locale.provider'
+import {ILocale} from './locale.model'
 
-'use strict';
+'use strict'
 
-const ngComponentName = 'tsngLocale';
+const ngComponentName = 'tsngLocale'
 
 @at.component(ngModuleName, ngComponentName, {
   bindings: {
@@ -15,8 +15,8 @@ const ngComponentName = 'tsngLocale';
 })
 @at.inject('locale', '$filter', '$log', '$q', '$timeout', '$translate', '$rootScope')
 export default class LocaleComponent implements at.OnInit {
-  public locale: string;
-  public locales: ILocale[];
+  public locale: string
+  public locales: ILocale[]
 
   constructor(private localeService: LocaleService,
     private $filter: angular.IFilterService,
@@ -25,23 +25,23 @@ export default class LocaleComponent implements at.OnInit {
     private $timeout: angular.ITimeoutService,
     private $translate: angular.translate.ITranslateService,
     private $rootScope: angular.IRootScopeService) {
-    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '))
   }
 
   public $onInit() {
     this.localeService.load().then(data => {
-      this.locales = data;
-      this.locale = data[0].value;
-      this.localeService.set(this.locale);
+      this.locales = data
+      this.locale = data[0].value
+      this.localeService.set(this.locale)
       // On locale change, apply translation
       this.$rootScope.$on('$localeChangeSuccess', (event: angular.IAngularEvent, locale: string, $locale: angular.ILocaleService) => {
-        event.currentScope['$translate'].use(locale);
-        event.currentScope['amMoment'].changeLocale(locale);
-      });
-    });
+        event.currentScope['$translate'].use(locale)
+        event.currentScope['amMoment'].changeLocale(locale)
+      })
+    })
   }
 
   public changeLocale() {
-    this.localeService.set(this.locale);
+    this.localeService.set(this.locale)
   }
 }

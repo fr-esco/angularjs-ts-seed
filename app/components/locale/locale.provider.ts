@@ -1,36 +1,36 @@
-import ngModuleName from './locale.module';
+import ngModuleName from './locale.module'
 
-import {ILocale} from './locale.model';
+import {ILocale} from './locale.model'
 
-'use strict';
+'use strict'
 
 // the provider will be available as 'localeProvider'
 // the created service will be available as 'locale'
-const ngProviderName = 'locale';
+const ngProviderName = 'locale'
 
 interface ILocaleProvider extends angular.IServiceProvider {
-  makeNoise(value: boolean): void;
+  makeNoise(value: boolean): void
 }
 
 @at.provider(ngModuleName, ngProviderName)
 export class LocaleProvider implements ILocaleProvider {
-  private notify = true;
+  private notify = true
 
   constructor() {
-    this.notify = true;
+    this.notify = true
   }
 
   public makeNoise(value: boolean): void {
-    this.notify = value;
+    this.notify = value
   }
 
-  // $get must be declared as method, not as function property (eg. `$get = () => new Service();`)
+  // $get must be declared as method, not as function property (eg. `$get = () => new Service()`)
   public $get($log: angular.ILogService,
     $q: angular.IQService,
     $timeout: angular.ITimeoutService,
     tmhDynamicLocale: angular.dynamicLocale.tmhDynamicLocaleService) {
-    'ngInject';
-    return new LocaleProviderService($log, $q, $timeout, tmhDynamicLocale, this.notify);
+    'ngInject'
+    return new LocaleProviderService($log, $q, $timeout, tmhDynamicLocale, this.notify)
   }
 }
 
@@ -40,20 +40,20 @@ export default class LocaleProviderService {
     private timeout: angular.ITimeoutService,
     private tmhDynamicLocale: angular.dynamicLocale.tmhDynamicLocaleService,
     private notify: boolean) {
-    let s = ['ngProvider', ngProviderName, 'has loaded an', 'LocaleProviderService'].join(' ');
+    let s = ['ngProvider', ngProviderName, 'has loaded an', 'LocaleProviderService'].join(' ')
     if (notify)
-      log.info(s);
+      log.info(s)
     else
-      log.debug(s);
+      log.debug(s)
   }
 
   public load(): angular.IPromise<ILocale[]> {
-    let deferred = this.q.defer();
-    this.timeout(() => deferred.resolve([{ value: 'en', text: 'EN' }, { value: 'it', text: 'IT' }]), Math.random() * 1000);
-    return deferred.promise;
+    let deferred = this.q.defer()
+    this.timeout(() => deferred.resolve([{ value: 'en', text: 'EN' }, { value: 'it', text: 'IT' }]), Math.random() * 1000)
+    return deferred.promise
   }
 
   public set(locale: string): void {
-    return this.tmhDynamicLocale.set(locale);
+    return this.tmhDynamicLocale.set(locale)
   }
 }

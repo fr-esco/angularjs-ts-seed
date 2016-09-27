@@ -1,10 +1,10 @@
-import Material from '../material/material';
-import Showcase from '../showcase/showcase';
-import Panel from './panel/panel';
+import Material from '../material/material'
+import Showcase from '../showcase/showcase'
+import Panel from './panel/panel'
 
-'use strict';
+'use strict'
 
-const ngModuleName = 'app.components.dashboard';
+const ngModuleName = 'app.components.dashboard'
 
 export default angular.module(ngModuleName, ['ngComponentRouter', Material, 'pascalprecht.translate', Panel, Showcase])
-  .run(['$log', ($log: angular.ILogService) => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;
+  .run(['$log', ($log: angular.ILogService) => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name

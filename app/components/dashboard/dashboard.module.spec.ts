@@ -1,65 +1,65 @@
 /// <reference path="../../../typings/index.d.ts" />
 
-import Dashboard from './dashboard';
+import Dashboard from './dashboard'
 
-'use strict';
+'use strict'
 
-let $module = angular.mock.module;
-let $inject = angular.mock.inject;
-let $dump = (arg: any): void => console.log(angular.mock.dump(arg));
+let $module = angular.mock.module
+let $inject = angular.mock.inject
+let $dump = (arg: any): void => console.log(angular.mock.dump(arg))
 
 describe('# Dashboard Module', () => {
-  beforeEach($module(Dashboard));
+  beforeEach($module(Dashboard))
 
   describe('## Existence', () => {
-    let mod;
+    let mod
 
-    beforeEach(() => mod = angular.module(Dashboard));
+    beforeEach(() => mod = angular.module(Dashboard))
 
     it('should exist', () => {
-      expect(mod).not.toBeUndefined();
-      expect(mod).not.toBeNull;
-    });
+      expect(mod).not.toBeUndefined()
+      expect(mod).not.toBeNull
+    })
 
     it('should have deps', () => {
-      expect(mod.requires).toContain('ngComponentRouter');
-      expect(mod.requires).toContain('app.components.material');
-      expect(mod.requires).toContain('pascalprecht.translate');
-      expect(mod.requires).toContain('app.components.dashboard.panel');
-      expect(mod.requires).toContain('app.components.showcase');
-    });
-  });
+      expect(mod.requires).toContain('ngComponentRouter')
+      expect(mod.requires).toContain('app.components.material')
+      expect(mod.requires).toContain('pascalprecht.translate')
+      expect(mod.requires).toContain('app.components.dashboard.panel')
+      expect(mod.requires).toContain('app.components.showcase')
+    })
+  })
 
   describe('## Log enabled', () => {
-    let $log;
+    let $log
 
     beforeEach(() => {
       $inject(_$log_ => {
-        $log = _$log_;
-      });
-    });
+        $log = _$log_
+      })
+    })
 
     it('should log registration', () => {
-      let loaded = ['ngModule', Dashboard, 'loaded'].join(' ');
-      expect($log.debug.logs).toContain([loaded]);
-    });
-  });
+      let loaded = ['ngModule', Dashboard, 'loaded'].join(' ')
+      expect($log.debug.logs).toContain([loaded])
+    })
+  })
 
   describe('## Log disabled', () => {
-    let $log;
+    let $log
 
     beforeEach(() => {
       $module($logProvider => {
-        $logProvider.debugEnabled(false);
-      });
+        $logProvider.debugEnabled(false)
+      })
 
       $inject(_$log_ => {
-        $log = _$log_;
-      });
-    });
+        $log = _$log_
+      })
+    })
 
     it('should not log registration', () => {
-      expect($log.assertEmpty).not.toThrow();
-    });
-  });
-});
+      expect($log.assertEmpty).not.toThrow()
+    })
+  })
+})

@@ -1,16 +1,16 @@
-import ngModuleName from './widget.module';
+import ngModuleName from './widget.module'
 
-import {IVisitor} from './visitor.model';
-import VisitorService from './visitor.service';
+import {IVisitor} from './visitor.model'
+import VisitorService from './visitor.service'
 
-'use strict';
+'use strict'
 
-const ngControllerName = 'VisitorController';
+const ngControllerName = 'VisitorController'
 
 @at.controller(ngModuleName, ngControllerName)
 export default class VisitorController {
 
-  public visitorChartData: Array<IVisitor> = [];
+  public visitorChartData: Array<IVisitor> = []
 
   public chartOptions = {
     chart: {
@@ -26,19 +26,19 @@ export default class VisitorController {
       title: 'Over 9K',
       margin: { top: -10 }
     }
-  };
+  }
 
   constructor(private visitorService: VisitorService,
     private $log: angular.ILogService,
     private $q: angular.IQService) {
-    'ngInject';
-    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '))
 
-    $q.all([this.loadVisitorData()]);
+    $q.all([this.loadVisitorData()])
   }
 
   private loadVisitorData() {
-    return this.visitorService.getVisitorData().then(data => this.visitorChartData = data);
+    return this.visitorService.getVisitorData().then(data => this.visitorChartData = data)
   }
 
 }

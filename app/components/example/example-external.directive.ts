@@ -1,8 +1,8 @@
-import ngModuleName from './example.module';
+import ngModuleName from './example.module'
 
-'use strict';
+'use strict'
 
-const ngDirectiveName = 'exampleExternal';
+const ngDirectiveName = 'exampleExternal'
 
 @at.directive(ngModuleName, ngDirectiveName, {
   replace: true,
@@ -10,10 +10,10 @@ const ngDirectiveName = 'exampleExternal';
   templateUrl: 'components/example/example-external.directive.html'
 })
 export default class ExampleExternalDirective {
-  public test = true;
+  public test = true
 
   constructor(private $log: angular.ILogService) {
-    'ngInject';
-    $log.debug(['ngDirective', ngDirectiveName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngDirective', ngDirectiveName, 'loaded'].join(' '))
   }
 }

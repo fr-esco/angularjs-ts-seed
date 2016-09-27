@@ -1,8 +1,8 @@
-import Material from '../material/material';
+import Material from '../material/material'
 
-'use strict';
+'use strict'
 
-const ngModuleName = 'app.components.i18n.i18n';
+const ngModuleName = 'app.components.i18n.i18n'
 
 export default angular.module(ngModuleName, ['ngComponentRouter', Material])
-  .run(['$log', ($log: angular.ILogService) => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;
+  .run(['$log', ($log: angular.ILogService) => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name

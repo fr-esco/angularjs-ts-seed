@@ -1,8 +1,8 @@
-import Material from '../../material/material';
+import Material from '../../material/material'
 
-'use strict';
+'use strict'
 
-const ngModuleName = 'app.components.table.row';
+const ngModuleName = 'app.components.table.row'
 
 export default angular.module(ngModuleName, ['ngComponentRouter', Material])
-  .run(['$log', ($log: angular.ILogService) => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;
+  .run(['$log', ($log: angular.ILogService) => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name

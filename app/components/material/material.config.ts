@@ -1,6 +1,6 @@
 let config = ($mdThemingProvider: angular.material.IThemingProvider,
   $mdIconProvider: angular.material.IIconProvider) => {
-  'ngInject';
+  'ngInject'
   $mdThemingProvider
     .theme('default')
     .primaryPalette('grey', {
@@ -9,19 +9,19 @@ let config = ($mdThemingProvider: angular.material.IThemingProvider,
     .accentPalette('teal', {
       'default': '500'
     })
-    .warnPalette('defaultPrimary');
+    .warnPalette('defaultPrimary')
 
   $mdThemingProvider.theme('dark', 'default')
     .primaryPalette('defaultPrimary')
-    .dark();
+    .dark()
 
   $mdThemingProvider.theme('grey', 'default')
-    .primaryPalette('grey');
+    .primaryPalette('grey')
 
   $mdThemingProvider.theme('custom', 'default')
     .primaryPalette('defaultPrimary', {
       'hue-1': '50'
-    });
+    })
 
   $mdThemingProvider.definePalette('defaultPrimary', {
     '50': '#FFFFFF',
@@ -38,9 +38,9 @@ let config = ($mdThemingProvider: angular.material.IThemingProvider,
     'A200': '#E75753',
     'A400': '#E75753',
     'A700': '#E75753'
-  });
+  })
 
-  $mdIconProvider.icon('user', 'assets/images/user.svg', 64);
-};
+  $mdIconProvider.icon('user', 'assets/images/user.svg', 64)
+}
 
-export default config;
+export default config

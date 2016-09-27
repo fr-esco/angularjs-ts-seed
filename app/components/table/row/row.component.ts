@@ -1,17 +1,17 @@
-import ngModuleName from './row.module';
+import ngModuleName from './row.module'
 
-'use strict';
+'use strict'
 
-const ngComponentName = 'tsngRow';
+const ngComponentName = 'tsngRow'
 
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'components/table/row/row.component.html'
 })
 export default class RowComponent {
-  public test = true;
+  public test = true
 
   constructor(private $log: angular.ILogService) {
-    'ngInject';
-    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '))
   }
 }

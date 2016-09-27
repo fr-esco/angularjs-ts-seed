@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
 export interface IMenuItem {
-  name: string;
-  icon: string;
-  sref: string;
-  link: string[];
+  name: string
+  icon: string
+  sref: string
+  link: string[]
 }

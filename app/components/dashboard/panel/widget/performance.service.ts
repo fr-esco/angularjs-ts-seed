@@ -1,16 +1,16 @@
-import ngModuleName from './widget.module';
-import {IPerformance} from './performance.model';
+import ngModuleName from './widget.module'
+import {IPerformance} from './performance.model'
 
-'use strict';
+'use strict'
 
-const ngServiceName = 'performanceService';
+const ngServiceName = 'performanceService'
 
 @at.service(ngModuleName, ngServiceName)
 export default class PerformanceService {
 
   constructor(private $log: angular.ILogService, private $q: angular.IQService) {
-    'ngInject';
-    $log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngService', ngServiceName, 'loaded'].join(' '))
   }
 
   public getPerformanceData(performancePeriod: string): ng.IPromise<IPerformance[]> {
@@ -59,7 +59,7 @@ export default class PerformanceService {
               [11, 88], [12, 76], [13, 84], [14, 71], [15, 62], [16, 73], [17, 82], [18, 80], [19, 92], [20, 68],
               [21, 71], [22, 70], [23, 78], [24, 80], [25, 59], [26, 74], [27, 80], [28, 51], [29, 67]]
           }
-        ]);
+        ])
   }
 
 }

@@ -1,9 +1,9 @@
-import cfg from './material.config';
+import cfg from './material.config'
 
-'use strict';
+'use strict'
 
-const ngModuleName = 'app.components.material';
+const ngModuleName = 'app.components.material'
 
 export default angular.module(ngModuleName, ['ngComponentRouter', 'ngMaterial', 'ngMessages'])
   .config(cfg)
-  .run(['$log', ($log: angular.ILogService) => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;
+  .run(['$log', ($log: angular.ILogService) => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name

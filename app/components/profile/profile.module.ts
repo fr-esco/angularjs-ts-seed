@@ -1,9 +1,9 @@
-import Material from '../material/material';
-import Showcase from '../showcase/showcase';
+import Material from '../material/material'
+import Showcase from '../showcase/showcase'
 
-'use strict';
+'use strict'
 
-const ngModuleName = 'app.components.profile';
+const ngModuleName = 'app.components.profile'
 
 export default angular.module(ngModuleName, ['ngComponentRouter', Material, Showcase])
-  .run(['$log', ($log: angular.ILogService) => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;
+  .run(['$log', ($log: angular.ILogService) => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name

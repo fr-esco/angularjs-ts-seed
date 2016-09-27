@@ -1,16 +1,16 @@
-import ngModuleName from './profile.module';
+import ngModuleName from './profile.module'
 
-'use strict';
+'use strict'
 
-const ngComponentName = 'tsngProfile';
+const ngComponentName = 'tsngProfile'
 
 @at.component(ngModuleName, ngComponentName, {
 
   templateUrl: 'components/profile/profile.component.html'
 })
 export default class ProfileComponent implements at.OnActivate, at.CanDeactivate {
-  public title: string;
-  public userForm;
+  public title: string
+  public userForm
   public user = {
     title: 'Admin',
     email: 'contact@flatlogic.com',
@@ -26,23 +26,23 @@ export default class ProfileComponent implements at.OnActivate, at.CanDeactivate
     birthdate: '',
     gender: '',
     age: null
-  };
+  }
 
   public files = [
     'components/profile/profile.component.html',
     'components/profile/profile.component.ts',
     'components/profile/profile.module.ts'
-  ];
+  ]
 
   constructor(private $log: angular.ILogService,
     private $mdDialog: angular.material.IDialogService,
     private $q: angular.IQService) {
-    'ngInject';
-    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '))
   }
 
   public $routerOnActivate(next: at.ComponentInstruction) {
-    this.title = next.routeData.data['title'];
+    this.title = next.routeData.data['title']
   }
 
   public submitUser() {
@@ -50,25 +50,25 @@ export default class ProfileComponent implements at.OnActivate, at.CanDeactivate
       this.$mdDialog.alert()
         .textContent(this.user.title + ' submitted!')
         .ok('Ok!')
-    );
+    )
   }
 
   public setForm(form) {
-    this.userForm = form;
+    this.userForm = form
   }
 
   public $routerCanDeactivate() {
-    const confirm = this.$q.defer();
+    const confirm = this.$q.defer()
     if (this.userForm.$dirty) {
       this.$mdDialog.show(
         this.$mdDialog.confirm()
           .textContent('You have unsaved changes. Do you want to leave the page?')
           .ok('YES')
           .cancel('NO')
-      ).then(() => { confirm.resolve(true); }, () => { confirm.resolve(false); });
-      return confirm.promise;
+      ).then(() => { confirm.resolve(true) }, () => { confirm.resolve(false) })
+      return confirm.promise
     }
-    return this.$q.when(true);
+    return this.$q.when(true)
   }
 
 }

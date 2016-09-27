@@ -1,14 +1,14 @@
-import ngModuleName from './dashboard.module';
+import ngModuleName from './dashboard.module'
 
-'use strict';
+'use strict'
 
-const ngComponentName = 'tsngDashboard';
+const ngComponentName = 'tsngDashboard'
 
 @at.component(ngModuleName, ngComponentName, {
   templateUrl: 'components/dashboard/dashboard.component.html',
 })
 export default class DashboardComponent implements at.OnActivate {
-  public title: string;
+  public title: string
 
   public files = [
     [
@@ -55,7 +55,7 @@ export default class DashboardComponent implements at.OnActivate {
       'components/dashboard/i18n/en.json',
       'components/dashboard/i18n/it.json'
     ]
-  ];
+  ]
 
   constructor(private $log: angular.ILogService,
     private $translatePartialLoader: any,
@@ -63,13 +63,13 @@ export default class DashboardComponent implements at.OnActivate {
     private $locale: angular.ILocaleService,
     private $scope,
     private version: string) {
-    'ngInject';
-    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
-    $log.debug(['VERSION:', version].join(' '));
+    'ngInject'
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '))
+    $log.debug(['VERSION:', version].join(' '))
   }
 
   public $routerOnActivate(next: at.ComponentInstruction) {
-    this.title = next.routeData.data['title'];
-    this.$translatePartialLoader.addPart('dashboard');
+    this.title = next.routeData.data['title']
+    this.$translatePartialLoader.addPart('dashboard')
   }
 }

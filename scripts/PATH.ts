@@ -1,4 +1,8 @@
-const join = require('path').join
+/// <reference path="../typings/index.d.ts" />
+
+import {join} from 'path'
+
+'use strict'
 
 const dst = {
   all: 'dist',
@@ -32,7 +36,7 @@ const src = {
 
 }
 
-module.exports = {
+export default {
   dst: dst,
   src: src
 }

@@ -1,6 +1,6 @@
-'use strict';
+'use strict'
 
 export interface ITimezone {
-  value: string;
-  text: string;
+  value: string
+  text: string
 }

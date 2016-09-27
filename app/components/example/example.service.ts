@@ -1,21 +1,21 @@
-import ngModuleName from './example.module';
+import ngModuleName from './example.module'
 
-'use strict';
+'use strict'
 
-const ngServiceName = 'example';
+const ngServiceName = 'example'
 
 @at.service(ngModuleName, ngServiceName)
 export default class ExampleService {
-  public nowTime: Date;
-  public nextYear: number;
+  public nowTime: Date
+  public nextYear: number
 
   constructor(private $log: angular.ILogService) {
-    'ngInject';
-    $log.debug(['ngService', ngServiceName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngService', ngServiceName, 'loaded'].join(' '))
   }
 
   public get message(): string {
-    return this.nowTime.getFullYear() === this.nextYear ? 'Happy new Year!' : 'Keep on counting down...!';
+    return this.nowTime.getFullYear() === this.nextYear ? 'Happy new Year!' : 'Keep on counting down...!'
   }
 
   public dumpDate(d: Date, flush: boolean = true): string {
@@ -24,10 +24,10 @@ export default class ExampleService {
       'Local Hours: ' + d.getHours(),
       'UTC Date:    ' + d.toISOString(),
       'UTC Hours:   ' + d.getUTCHours()
-    ];
-    if (flush) info.map(x => this.$log.debug(x));
-    return info.join('\n');
+    ]
+    if (flush) info.map(x => this.$log.debug(x))
+    return info.join('\n')
   }
 
-  public addHours = (d: Date, h: number) => d.setTime(d.getTime() + (h * 60 * 60 * 1000));
+  public addHours = (d: Date, h: number) => d.setTime(d.getTime() + (h * 60 * 60 * 1000))
 }

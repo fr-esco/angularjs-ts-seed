@@ -1,18 +1,18 @@
-import ngModuleName from './widget.module';
+import ngModuleName from './widget.module'
 
-'use strict';
+'use strict'
 
-const ngControllerName = 'WarningController';
+const ngControllerName = 'WarningController'
 
 interface IPoint {
-  x: number;
-  y: number;
+  x: number
+  y: number
 }
 
 @at.controller(ngModuleName, ngControllerName)
 export default class WarningController {
 
-  public warningChartData: () => Array<{ values: IPoint[], color: string, area: boolean }>;
+  public warningChartData: () => Array<{ values: IPoint[], color: string, area: boolean }>
 
   public chartOptions = {
     chart: {
@@ -28,24 +28,24 @@ export default class WarningController {
       showXAxis: false,
       tooltip: { contentGenerator: d => ['<span class="custom-tooltip">', Math.round(d.point.y), '</span>'].join('') }
     }
-  };
+  }
 
   constructor(private $log: angular.ILogService,
     private $q: angular.IQService) {
-    'ngInject';
-    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '))
 
-    $q.all([this.loadWarningData()]);
+    $q.all([this.loadWarningData()])
   }
 
   private loadWarningData() {
     return this.$q.when(() => {
-      let sin = [];
+      let sin = []
       for (let i = 0; i < 100; i++) {
-        sin.push({ x: i, y: Math.abs(Math.cos(i / 10) * 0.25 * i + 0.9 - 0.4 * i) });
+        sin.push({ x: i, y: Math.abs(Math.cos(i / 10) * 0.25 * i + 0.9 - 0.4 * i) })
       }
-      return [{ values: sin, color: 'rgb(0, 150, 136)', area: true }];
-    }).then(generator => this.warningChartData = generator);
+      return [{ values: sin, color: 'rgb(0, 150, 136)', area: true }]
+    }).then(generator => this.warningChartData = generator)
   }
 
 }

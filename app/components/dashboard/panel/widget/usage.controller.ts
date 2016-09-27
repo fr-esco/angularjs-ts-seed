@@ -1,17 +1,17 @@
-import ngModuleName from './widget.module';
+import ngModuleName from './widget.module'
 
-import {IUsageData} from './usage.model';
-import UsageService from './usage.service';
+import {IUsageData} from './usage.model'
+import UsageService from './usage.service'
 
-'use strict';
+'use strict'
 
-const ngControllerName = 'UsageController';
+const ngControllerName = 'UsageController'
 
 @at.controller(ngModuleName, ngControllerName)
 export default class UsageController {
 
-  public ramChartData: Array<IUsageData> = [];
-  public storageChartData: Array<IUsageData> = [];
+  public ramChartData: Array<IUsageData> = []
+  public storageChartData: Array<IUsageData> = []
 
   public chartOptions = {
     chart: {
@@ -27,22 +27,22 @@ export default class UsageController {
       title: '83%',
       margin: { top: -10, left: -20, right: -20 }
     }
-  };
+  }
 
   constructor(private usageService: UsageService,
     private $log: angular.ILogService,
     private $q: angular.IQService) {
-    'ngInject';
-    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngController', ngControllerName, 'loaded'].join(' '))
 
-    $q.all([this.loadRamData(), this.loadStorageData()]);
+    $q.all([this.loadRamData(), this.loadStorageData()])
   }
 
   private loadRamData() {
-    return this.usageService.getRamData().then(data => this.ramChartData = data);
+    return this.usageService.getRamData().then(data => this.ramChartData = data)
   }
 
   private loadStorageData() {
-    return this.usageService.getStorageData().then(data => this.storageChartData = data);
+    return this.usageService.getStorageData().then(data => this.storageChartData = data)
   }
 }

@@ -1,14 +1,16 @@
 #! /usr/bin/env node
 
+import * as shell from 'shelljs'
+
+import PATH from './PATH'
+import utils from './utils'
+
+import * as yargs from 'yargs'
+
 'use strict'
 
-require('shelljs/global')
-
-const PATH = require('./PATH');
-const utils = require('./utils');
-
 const chalk = require('chalk')
-const yargs = require('yargs')
+const del = require('del')
 
 const argv = yargs.reset()
   .usage('Usage: npm run clean -- [--env <dev | prod>] [--platform <browser | desktop | mobile>] [--target <all | lib>]')
@@ -19,7 +21,7 @@ const argv = yargs.reset()
 
   .alias('t', 'target')
   .choices('t', ['all', 'lib'])
-  .describe('t', 'Task name')
+  .describe('t', 'Target Name')
 
   .alias('p', 'platform')
   .choices('p', ['browser', 'desktop', 'mobile'])
@@ -31,8 +33,6 @@ const argv = yargs.reset()
 
 const log = utils.console('[' + chalk.cyan('clean') + ']')
 
-const del = require('del')
-
 const env = argv.env || process.env.NODE_ENV || 'dev'
 const target = argv.target || process.env.NODE_TARGET || 'all'
 const platform = argv.platform || process.env.NODE_PLATFORM || 'browser'
@@ -40,10 +40,10 @@ const platform = argv.platform || process.env.NODE_PLATFORM || 'browser'
 const key = { browser: target, desktop: 'pkg', mobile: 'www' }[platform]
 const folder = PATH.dst[env][key]
 
-if (test('-e', folder)) {
-  if (!test('-d', folder))
+if (shell.test('-e', folder)) {
+  if (!shell.test('-d', folder))
     log.warn(utils.ERRNO_MESSAGES[utils.ERRNO_CODES.ENOTDIR], chalk.cyan(folder))
-  del(folder).then(() => log.verbose('%s successfully deleted', chalk.cyan(folder)))
+  del(folder).then(() => log.verbose(chalk.cyan(folder), 'successfully deleted'))
 } else {
   log.error(utils.ERRNO_MESSAGES[utils.ERRNO_CODES.ENOENT], chalk.cyan(folder))
 }

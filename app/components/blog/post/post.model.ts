@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
 export interface IPost {
-  id: number;
-  createdAt: string;
-  title: string;
-  content: string;
+  id: number
+  createdAt: string
+  title: string
+  content: string
 }

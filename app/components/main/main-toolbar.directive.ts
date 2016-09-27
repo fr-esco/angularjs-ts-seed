@@ -1,9 +1,9 @@
-import ngModuleName from './main.module';
-import MainController from './main.component';
+import ngModuleName from './main.module'
+import MainController from './main.component'
 
-'use strict';
+'use strict'
 
-const ngDirectiveName = 'tsngMainToolbar';
+const ngDirectiveName = 'tsngMainToolbar'
 
 @at.directive(ngModuleName, ngDirectiveName, {
   restrict: 'E',

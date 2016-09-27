@@ -21,7 +21,8 @@
   },
   "exclude": [
     "generator",
-    "node_modules"
+    "node_modules",
+    "scripts"
   ],
   "files": [
     "app/app.ts",
