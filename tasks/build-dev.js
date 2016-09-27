@@ -94,7 +94,7 @@ gulp.task('build.assets.dev', ['build.js.dev', 'build.html.dev', 'build.copy.ass
     .pipe($.livereload());
 });
 
-gulp.task('build.index.dev', function () {
+gulp.task('build.index.dev', function (done) {
   var target = gulp.src(injectableDevAssetsRef(), { read: false });
   return gulp.src('./app/index.html')
     .pipe(inject(target, { transform: transformPath('dev') }))

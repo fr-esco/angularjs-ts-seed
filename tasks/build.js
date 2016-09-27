@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 
-function build() {
+function build(done) {
   var argv = require('yargs').reset()
     .usage('Usage: gulp build -p')
     .alias('p', 'prod')
@@ -12,9 +12,9 @@ function build() {
     .argv;
 
   if (argv.prod)
-    gulp.start('webpack.build.prod');
+    return gulp.start('webpack.build.prod', () => done());
   else
-    gulp.start('webpack.build.dev');
+    return gulp.start('webpack.build.dev', () => done());
 }
 
 build.description = 'Build for either Development or the requested environment';
