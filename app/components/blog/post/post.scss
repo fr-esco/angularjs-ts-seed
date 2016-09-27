@@ -1,18 +1,15 @@
 @import '../../../stylesheets/index';
 
 .post {
-  // padding: 0 $layout-gutter-width / 2;
-  // @media screen and (min-width: $layout-breakpoint-sm) {
-    // padding: 0 $layout-gutter-width;
-  // }
-
   md-toolbar {
     form {
       padding-top: $layout-gutter-width;
     }
   }
 
-  .table td {
-    vertical-align: inherit;
+  .table {
+    td {
+      vertical-align: inherit;
+    }
   }
 }

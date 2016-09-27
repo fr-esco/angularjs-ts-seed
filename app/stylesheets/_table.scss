@@ -39,7 +39,7 @@ $table-border-color: #e0e0e0;
   }
 
   > thead > tr > th {
-    border-bottom: 1px solid rgba(0, 0, 0, .12);
+    border-bottom: 1px solid $table-bg-hover;
     color: $table-header-font-color;
     font-weight: $table-header-font-weight;
     vertical-align: bottom;
@@ -57,7 +57,7 @@ $table-border-color: #e0e0e0;
   }
 
   > tbody + tbody {
-    border-top: 1px solid rgba(0, 0, 0, .12);
+    border-top: 1px solid $table-bg-hover;
   }
 
   // Nesting
@@ -80,12 +80,10 @@ $table-border-color: #e0e0e0;
   > thead,
   > tbody,
   > tfoot {
-    > tr {
-      > th,
-      > td {
-        border: 0;
-        border-bottom: 1px solid $table-border-color;
-      }
+    > th,
+    > td {
+      border: 0;
+      border-bottom: 1px solid $table-border-color;
     }
   }
 
@@ -143,7 +141,7 @@ $table-border-color: #e0e0e0;
             vertical-align: middle;
           }
 
-          > td[data-title]:before {
+          > td[data-title]::before {
             color: $table-header-font-color;
             content: attr(data-title);
             float: left;
@@ -170,27 +168,25 @@ $table-border-color: #e0e0e0;
 
       // Nuke the appropriate borders so that the parent can handle them
       > tbody {
-        > tr {
-          > td {
-            border: 0;
-            border-bottom: 1px solid $table-border-color;
-          }
+        > td {
+          border: 0;
+          border-bottom: 1px solid $table-border-color;
+        }
 
-          > td:last-child {
-            border-bottom: 0;
-          }
+        > td:last-child {
+          border-bottom: 0;
         }
       }
     }
 
     // Special overrides for the striped tables
     > .table-striped {
-      > tbody > tr > td,
+      > tbody > td,
       > tbody > tr:nth-child(odd) {
         background-color: $table-bg;
       }
 
-      > tbody > tr > td:nth-child(odd) {
+      > tbody > td:nth-child(odd) {
         background-color: $table-bg-accent;
       }
     }

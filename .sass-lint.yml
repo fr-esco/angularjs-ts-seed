@@ -1,3 +1,12 @@
 files:
   include:
     - 'app/**/*.s+(a|c)ss'
+  ignore:
+    - 'app/**/_icons.scss'
+rules:
+  force-attribute-nesting: 0
+  force-pseudo-nesting: 0
+  no-qualifying-elements:
+    - 1
+    -
+      allow-element-with-attribute: 1
