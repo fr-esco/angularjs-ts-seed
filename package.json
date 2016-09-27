@@ -17,6 +17,7 @@
     "serve.dev": "webpack-dev-server --config webpack.config.dev --progress --profile --watch-poll --inline --hot",
     "preserve.prod": "gulp build --prod",
     "serve.prod": "webpack-dev-server -p --config webpack.config.prod --progress --profile --watch-poll --inline --hot",
+    "prebuild": "npm-run-all -p clean lint",
     "build": "ts-node ./scripts/build.ts",
     "serve": "npm run serve.dev",
     "prebuild.cordova": "npm run build.dev",

@@ -186,8 +186,10 @@ $table-border-color: #e0e0e0;
         background-color: $table-bg;
       }
 
-      > tbody td:nth-child(odd) {
-        background-color: $table-bg-accent;
+      > tbody {
+        td:nth-child(odd) {
+          background-color: $table-bg-accent;
+        }
       }
     }
 
