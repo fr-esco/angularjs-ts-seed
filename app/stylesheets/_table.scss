@@ -28,8 +28,8 @@ $table-border-color: #e0e0e0;
   > thead,
   > tbody,
   > tfoot {
-    > th,
-    > td {
+    th,
+    td {
       @include transition(all, .3s, ease);
       border-top: 0;
       padding: $table-cell-padding;
@@ -80,8 +80,8 @@ $table-border-color: #e0e0e0;
   > thead,
   > tbody,
   > tfoot {
-    > th,
-    > td {
+    th,
+    td {
       border: 0;
       border-bottom: 1px solid $table-border-color;
     }
@@ -168,12 +168,12 @@ $table-border-color: #e0e0e0;
 
       // Nuke the appropriate borders so that the parent can handle them
       > tbody {
-        > td {
+        td {
           border: 0;
           border-bottom: 1px solid $table-border-color;
         }
 
-        > td:last-child {
+        td:last-child {
           border-bottom: 0;
         }
       }
@@ -186,7 +186,7 @@ $table-border-color: #e0e0e0;
         background-color: $table-bg;
       }
 
-      > tbody > td:nth-child(odd) {
+      > tbody td:nth-child(odd) {
         background-color: $table-bg-accent;
       }
     }

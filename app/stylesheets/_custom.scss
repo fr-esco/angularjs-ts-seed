@@ -3,6 +3,7 @@ $main-bg-color: #ececec;
 $text-color: #7a7a7a;
 $accent-color: rgb(0, 150, 136);
 $warning-color: #e75753;
+$white: #fff;
 
 // VARIABLES
 $left-sidenav-width: 110px;
@@ -28,8 +29,8 @@ body {
 }
 
 .share-label {
-  vertical-align: middle;
   margin-left: $layout-gutter-width;
+  vertical-align: middle;
 }
 
 .page-content {
@@ -37,8 +38,8 @@ body {
 }
 
 .widget-progress {
-  width: 95% !important;
   margin-left: $layout-gutter-width;
+  width: 95% !important;
 }
 
 // UTILS
@@ -47,8 +48,8 @@ body {
 }
 
 .img-circle {
-  height: $layout-gutter-width * 3;
   border-radius: 50%;
+  height: $layout-gutter-width * 3;
   margin: 0 $layout-gutter-width;
 }
 
@@ -62,21 +63,21 @@ body {
 }
 
 .notifications-label {
-  width: $layout-gutter-width;
+  background-color: $warning-color;
+  border-radius: 50%;
+  font-size: 12px;
   height: $layout-gutter-width;
   line-height: $layout-gutter-width;
-  text-align: center;
-  border-radius: 50%;
   position: absolute;
-  font-size: 12px;
-  top: 2px;
   right: 2px;
-  background-color: $warning-color;
+  text-align: center;
+  top: 2px;
+  width: $layout-gutter-width;
 }
 
 // panel-widget
 .panel-widget {
-  background-color: white;
+  background-color: $white;
 
   &-toolbar {
     box-shadow: none;
@@ -89,12 +90,11 @@ body {
 }
 
 .options {
-  -webkit-transition: all linear 0.5s;
-  transition: all linear 0.5s;
-}
+  transition: opacity linear .5s;
 
-.options.ng-hide {
-  opacity: 0;
+  &.ng-hide {
+    opacity: 0;
+  }
 }
 
 .fixed-height-widget {
@@ -107,93 +107,64 @@ body {
 }
 
 .custom-tooltip {
-  font-size: $font-size-large;
   color: $text-color;
+  font-size: $font-size-large;
   text-align: center;
 }
 
 // OVERRIDES
 // angular material overrides
 md-radio-group {
-  border: none;
+  border: 0;
 }
 
 md-icon {
   height: auto;
 }
 
-md-sidenav.md-locked-open.md-sidenav-left {
-  width: $left-sidenav-width;
-  min-width: $left-sidenav-width;
-  max-width: $left-sidenav-width;
-}
-
-a.md-button.md-warn.md-raised,
-a.md-button.md-warn.md-fab,
-.md-button.md-warn.md-raised,
-.md-button.md-warn.md-fab {
-  color: white;
-}
-
-md-radio-button.md-accent.md-checked .md-label span {
-  color: $accent-color;
-}
-
-.md-toolbar-tools h1 {
-  font-size: $font-size-large;
-}
-
-md-backdrop.md-sidenav-backdrop {
-  position: fixed;
-}
-
-md-content.md-dark-theme {
-  background-color: rgb(66, 66, 66);
-}
-
-md-content.md-default-theme,
-md-content {
-  color: rgba(0, 0, 0, 0.87);
-  background-color: rgb(255, 255, 255);
+md-sidenav {
+  &.md-locked-open {
+    &.md-sidenav-left {
+      max-width: $left-sidenav-width;
+      min-width: $left-sidenav-width;
+      width: $left-sidenav-width;
+    }
+  }
 }
 
 // libs overrides
 .material-icons {
   vertical-align: middle;
+
+  &.md-18 {
+    font-size: 18px;
+  }
+
+  &.md-24 {
+    font-size: 24px;
+  }
+
+  &.md-36 {
+    font-size: 36px;
+  }
+
+  &.md-48 {
+    font-size: 48px;
+  }
 }
 
-.material-icons.md-18 {
-  font-size: 18px;
-}
-
-.material-icons.md-24 {
-  font-size: 24px;
-}
-
-.material-icons.md-36 {
-  font-size: 36px;
-}
-
-.material-icons.md-48 {
-  font-size: 48px;
-}
-
-.nvd3.nv-pie .nv-pie-title {
-  fill: rgb(68, 68, 68);
-  font-weight: $font-weight-bold;
-  font-size: $font-size-large !important;
+.nvd3 {
+  &.nv-pie {
+    .nv-pie-title {
+      fill: darken($text-color, 50%);
+      font-size: $font-size-large !important;
+      font-weight: $font-weight-bold;
+    }
+  }
 }
 
 .nvtooltip {
   background-color: transparent;
-  border: none;
+  border: 0;
   font-weight: $font-weight-bold;
-}
-
-.orange .md-bar2 {
-  background-color: orange;
-}
-
-.orange .md-container {
-  background-color: rgb(255, 236, 201);
 }

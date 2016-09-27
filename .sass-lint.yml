@@ -6,6 +6,7 @@ files:
 rules:
   force-attribute-nesting: 0
   force-pseudo-nesting: 0
+  no-important: 0
   no-qualifying-elements:
     - 1
     -
