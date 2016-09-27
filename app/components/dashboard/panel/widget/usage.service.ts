@@ -1,5 +1,5 @@
-import ngModuleName from './widget.module'
 import {IUsageData} from './usage.model'
+import ngModuleName from './widget.module'
 
 'use strict'
 

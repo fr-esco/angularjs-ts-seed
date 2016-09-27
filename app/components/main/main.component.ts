@@ -1,7 +1,7 @@
-import ngModuleName from './main.module'
+import BottomSheetController from '../bottom-sheet/bottom-sheet.controller'
 import {IMenuItem} from '../common/navigation-menu.model'
 import NavigationService from '../common/navigation.service'
-import BottomSheetController from '../bottom-sheet/bottom-sheet.controller'
+import ngModuleName from './main.module'
 
 'use strict'
 

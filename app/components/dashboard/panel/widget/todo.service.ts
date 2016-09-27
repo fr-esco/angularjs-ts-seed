@@ -1,5 +1,5 @@
-import ngModuleName from './widget.module'
 import {ITodo} from './todo.model'
+import ngModuleName from './widget.module'
 
 'use strict'
 

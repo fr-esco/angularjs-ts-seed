@@ -1,5 +1,5 @@
-import Material from '../material/material'
 import BottomSheet from '../bottom-sheet/bottom-sheet'
+import Material from '../material/material'
 
 'use strict'
 

@@ -1,8 +1,7 @@
-import ngModuleName from './post.module'
-
 import {IComment} from '../comment/comment.model'
-import {IPost} from './post.model'
 import PostClient from './post-client.service'
+import {IPost} from './post.model'
+import ngModuleName from './post.module'
 
 'use strict'
 

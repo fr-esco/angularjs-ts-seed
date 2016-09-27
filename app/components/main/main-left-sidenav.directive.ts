@@ -1,5 +1,5 @@
-import ngModuleName from './main.module'
 import MainController from './main.component'
+import ngModuleName from './main.module'
 
 'use strict'
 

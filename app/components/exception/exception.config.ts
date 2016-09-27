@@ -1,6 +1,6 @@
 import ngModuleName from './exception.module'
 
-import {CoreError, ServerError, isHttpException} from './exception.model'
+import {CoreError, isHttpException, ServerError } from './exception.model'
 import MessageHandlerService from './message-handler.service'
 
 'use strict'

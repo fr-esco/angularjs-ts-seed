@@ -1,7 +1,7 @@
 import ngModuleName from './locale.module'
 
-import LocaleService from './locale.provider'
 import {ILocale} from './locale.model'
+import LocaleService from './locale.provider'
 
 'use strict'
 

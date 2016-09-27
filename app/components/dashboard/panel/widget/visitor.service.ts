@@ -1,5 +1,5 @@
-import ngModuleName from './widget.module'
 import {IVisitor} from './visitor.model'
+import ngModuleName from './widget.module'
 
 'use strict'
 

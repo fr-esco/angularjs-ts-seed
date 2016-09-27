@@ -1,7 +1,7 @@
 import ngModuleName from './post.module'
 
-import {IPost} from './post.model'
 import PostClient from './post-client.service'
+import {IPost} from './post.model'
 
 'use strict'
 

@@ -1,5 +1,5 @@
-import ngModuleName from './widget.module'
 import {IPerformance} from './performance.model'
+import ngModuleName from './widget.module'
 
 'use strict'
 

@@ -2,9 +2,9 @@ import ngModuleName from './post.module'
 
 import {BaseRestClient} from '../../rest/rest.model'
 
-import {IPost} from './post.model'
-import {IComment} from '../comment/comment.model'
 import CommentClient from '../comment/comment-client.service'
+import {IComment} from '../comment/comment.model'
+import {IPost} from './post.model'
 
 'use strict'
 

@@ -1,7 +1,7 @@
 /// <reference path="../../../../../typings/index.d.ts" />
 
-import ngModuleName from './widget'
 import ControlPanelController from './control-panel.controller'
+import ngModuleName from './widget'
 
 'use strict'
 

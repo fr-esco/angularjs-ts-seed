@@ -1,5 +1,5 @@
-import Material from '../material/material'
 import Markdown from '../markdown/markdown'
+import Material from '../material/material'
 
 'use strict'
 

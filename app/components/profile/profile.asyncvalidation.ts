@@ -1,5 +1,5 @@
-import ngModuleName from './profile.module'
 import AddclientComponent from './profile.component'
+import ngModuleName from './profile.module'
 
 'use strict'
 
