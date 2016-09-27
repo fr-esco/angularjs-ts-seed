@@ -45,6 +45,7 @@ db.json
 index.ejs
 
 .history
+.npmrc
 .orig
 .typingsrc
 .vscode
