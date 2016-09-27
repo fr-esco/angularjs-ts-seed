@@ -1,40 +1,40 @@
-import ngModuleName from './<%= modName %>.module';
+import ngModuleName from './<%= modName %>.module'
 
-'use strict';
+'use strict'
 
 // the provider will be available as '<%= fullName %>Provider'
 // the created service will be available as '<%= fullName %>'
-const ngProviderName = '<%= fullName %>';
+const ngProviderName = '<%= fullName %>'
 
 interface I<%= upCaseName %>Provider extends angular.IServiceProvider {
-  makeNoise(value: boolean): void;
+  makeNoise(value: boolean): void
 }
 
 @at.provider(ngModuleName, ngProviderName)
 export class <%= upCaseName %>Provider implements I<%= upCaseName %>Provider {
-  private notify = true;
+  private notify = true
 
   constructor() {
-    this.notify = true;
+    this.notify = true
   }
 
   public makeNoise(value: boolean): void {
-    this.notify = value;
+    this.notify = value
   }
 
-  // $get must be declared as method, not as function property (eg. `$get = () => new Service();`)
+  // $get must be declared as method, not as function property (eg. `$get = () => new Service()`)
   public $get($log: angular.ILogService) {
-    'ngInject';
-    return new <%= upCaseName %>ProviderService($log, this.notify);
+    'ngInject'
+    return new <%= upCaseName %>ProviderService($log, this.notify)
   }
 }
 
 export default class <%= upCaseName %>ProviderService {
   constructor(private $log: angular.ILogService, private notify: boolean) {
-    let s = ['ngProvider', ngProviderName, 'has loaded an', '<%= upCaseName %>ProviderService'].join(' ');
+    let s = ['ngProvider', ngProviderName, 'has loaded an', '<%= upCaseName %>ProviderService'].join(' ')
     if (notify)
-      $log.info(s);
+      $log.info(s)
     else
-      $log.debug(s);
+      $log.debug(s)
   }
 }

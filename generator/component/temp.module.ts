@@ -1,8 +1,8 @@
-import Material from '<%= toComponents %>/material/material';
+import Material from '<%= toComponents %>/material/material'
 
-'use strict';
+'use strict'
 
-const ngModuleName = 'app.components.<%= modName %>';
+const ngModuleName = 'app.components.<%= modName %>'
 
 export default angular.module(ngModuleName, ['ngComponentRouter', Material])
-  .run(['$log', ($log: angular.ILogService) => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name;
+  .run(['$log', ($log: angular.ILogService) => $log.debug(['ngModule', ngModuleName, 'loaded'].join(' '))]).name

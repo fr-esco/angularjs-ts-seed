@@ -1,8 +1,8 @@
 // COLORS
-$main-bg-color: #ECECEC;
-$text-color: #7A7A7A;
+$main-bg-color: #ececec;
+$text-color: #7a7a7a;
 $accent-color: rgb(0, 150, 136);
-$warning-color: #E75753;
+$warning-color: #e75753;
 
 // VARIABLES
 $left-sidenav-width: 110px;
@@ -11,14 +11,12 @@ $font-weight-bold: 600;
 $font-size-large: 22px;
 
 // Layout (from angular-material.scss)
-
-$baseline-grid:            8px !default;
-$layout-gutter-width:      ($baseline-grid * 2) !default;
-
-$layout-breakpoint-xs:     600px !default;
-$layout-breakpoint-sm:     960px !default;
-$layout-breakpoint-md:     1280px !default;
-$layout-breakpoint-lg:     1920px !default;
+$baseline-grid: 8px !default;
+$layout-gutter-width: ($baseline-grid * 2) !default;
+$layout-breakpoint-xs: 600px !default;
+$layout-breakpoint-sm: 960px !default;
+$layout-breakpoint-md: 1280px !default;
+$layout-breakpoint-lg: 1920px !default;
 
 // LAYOUT
 body {
@@ -91,12 +89,12 @@ body {
 }
 
 .options {
-  -webkit-transition:all linear 0.5s;
-  transition:all linear 0.5s;
+  -webkit-transition: all linear 0.5s;
+  transition: all linear 0.5s;
 }
 
 .options.ng-hide {
-  opacity:0;
+  opacity: 0;
 }
 
 .fixed-height-widget {
@@ -104,7 +102,7 @@ body {
 }
 
 // charts
-.donut-chart-title{
+.donut-chart-title {
   text-align: center;
 }
 
@@ -130,7 +128,10 @@ md-sidenav.md-locked-open.md-sidenav-left {
   max-width: $left-sidenav-width;
 }
 
-a.md-button.md-warn.md-raised, a.md-button.md-warn.md-fab, .md-button.md-warn.md-raised, .md-button.md-warn.md-fab {
+a.md-button.md-warn.md-raised,
+a.md-button.md-warn.md-fab,
+.md-button.md-warn.md-raised,
+.md-button.md-warn.md-fab {
   color: white;
 }
 
@@ -147,12 +148,13 @@ md-backdrop.md-sidenav-backdrop {
 }
 
 md-content.md-dark-theme {
-    background-color: rgb(66,66,66);
+  background-color: rgb(66, 66, 66);
 }
 
-md-content.md-default-theme, md-content {
-    color: rgba(0,0,0,0.87);
-    background-color: rgb(255,255,255);
+md-content.md-default-theme,
+md-content {
+  color: rgba(0, 0, 0, 0.87);
+  background-color: rgb(255, 255, 255);
 }
 
 // libs overrides
@@ -160,10 +162,21 @@ md-content.md-default-theme, md-content {
   vertical-align: middle;
 }
 
-.material-icons.md-18 { font-size: 18px; }
-.material-icons.md-24 { font-size: 24px; }
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-18 {
+  font-size: 18px;
+}
+
+.material-icons.md-24 {
+  font-size: 24px;
+}
+
+.material-icons.md-36 {
+  font-size: 36px;
+}
+
+.material-icons.md-48 {
+  font-size: 48px;
+}
 
 .nvd3.nv-pie .nv-pie-title {
   fill: rgb(68, 68, 68);
@@ -182,5 +195,5 @@ md-content.md-default-theme, md-content {
 }
 
 .orange .md-container {
-  background-color: rgb(255, 236, 201)
+  background-color: rgb(255, 236, 201);
 }

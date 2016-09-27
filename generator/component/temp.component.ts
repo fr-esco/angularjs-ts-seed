@@ -1,8 +1,8 @@
-import ngModuleName from './<%= modName %>.module';
+import ngModuleName from './<%= modName %>.module'
 
-'use strict';
+'use strict'
 
-const ngComponentName = '<%= fullName %>';
+const ngComponentName = '<%= fullName %>'
 
 @at.component(ngModuleName, ngComponentName, {
   bindings: {
@@ -12,10 +12,10 @@ const ngComponentName = '<%= fullName %>';
   templateUrl: 'components/<%= path %>/<%= name %>.component.html'
 })
 export default class <%= upCaseName %>Component {
-  public test = true;
+  public test = true
 
   constructor(private $log: angular.ILogService) {
-    'ngInject';
-    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '));
+    'ngInject'
+    $log.debug(['ngComponent', ngComponentName, 'loaded'].join(' '))
   }
 }
