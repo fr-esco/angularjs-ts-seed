@@ -15,7 +15,7 @@ const chalk = require('chalk')
 const pkg = require('../package.json')
 
 const argv = yargs.reset()
-  .usage('Usage: npm run build -- [--env <dev | prod>] [--platform <browser | desktop | mobile>] [--watch]')
+  .usage('Usage: npm run build -- [--env <dev | prod>] [--platform <browser | desktop | mobile>] [--watch] [--only]')
 
   .alias('e', 'env')
   .choices('e', ['dev', 'prod'])
@@ -29,6 +29,11 @@ const argv = yargs.reset()
   .boolean('w')
   .default('w', false)
   .describe('w', 'Watch source files for automatic rebuilding')
+
+  .alias('o', 'only')
+  .boolean('o')
+  .default('o', false)
+  .describe('o', 'Serve without rebuilding')
 
   .alias('s', 'support')
   .help('s')
@@ -44,7 +49,14 @@ const spawn = require('child_process').spawn
 
 switch (platform) {
   case 'browser':
-    buildBrowser(env, argv)
+    buildBrowser(env, argv, false).then(code => {
+      const webpackOptions = ['--profile', '--progress', '--config', `webpack.config.${env}`, '--watch-poll', '--inline', '--hot']
+      if (env === 'prod') webpackOptions.push('-p')
+      spawn(`webpack-dev-server`, webpackOptions, { stdio: 'inherit', shell: true })
+        .on('close', (code) => {
+          log.info(`webpack serve exited with code ${code}`)
+        })
+    })
     break
   case 'android':
   case 'ios':

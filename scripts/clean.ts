@@ -9,9 +9,6 @@ import * as yargs from 'yargs'
 
 'use strict'
 
-const chalk = require('chalk')
-const del = require('del')
-
 const argv = yargs.reset()
   .usage('Usage: npm run clean -- [--env <dev | prod>] [--platform <browser | desktop | mobile>] [--target <all | lib>]')
 
@@ -31,6 +28,8 @@ const argv = yargs.reset()
   .help('s')
   .argv
 
+const chalk = require('chalk')
+const del = require('del')
 const log = utils.console('[' + chalk.cyan('clean') + ']')
 
 const env = argv.env || process.env.NODE_ENV || 'dev'
@@ -54,6 +53,7 @@ if (shell.test('-e', folder)) {
 }
 
 const spawn = require('child_process').spawn
+
 switch (platform) {
   case 'browser':
     break

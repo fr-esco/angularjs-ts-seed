@@ -18,9 +18,7 @@
     "preserve.prod": "gulp build --prod",
     "serve.prod": "webpack-dev-server -p --config webpack.config.prod --progress --profile --watch-poll --inline --hot",
     "build": "ts-node ./scripts/build.ts",
-    "serve": "npm run serve.dev",
-    "prebuild.cordova": "npm run build.dev",
-    "build.cordova": "gulp cordova --task build --env dev",
+    "serve": "ts-node ./scripts/serve.ts",
     "git.merge": "git fetch upstream && git merge upstream/master",
     "git.merge.preview": "git fetch upstream && git merge --no-commit upstream/master",
     "git.prepare": "git add . && git commit -m'setup'",
@@ -29,8 +27,7 @@
     "ng.update": "npm i -S angular angular-animate angular-aria angular-cookies angular-i18n angular-message-format angular-messages angular-mocks angular-sanitize angular-touch",
     "typings.update": "typings prune && typings install angular angular-animate angular-component-router angular-cookies angular-dynamic-locale angular-hotkeys angular-material angular-mocks angular-resource angular-sanitize angular-translate es6-shim jasmine jasmine-expect jquery node nvd3 restangular shelljs yargs --save --global --source=dt",
     "postinstall": "typings install && gulp -T",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "hello": "node ./scripts/hello.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "angularjs",
