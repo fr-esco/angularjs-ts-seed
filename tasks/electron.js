@@ -42,7 +42,7 @@ function registerElectronEnvPkgTasks() {
 
     var taskName = ['package', 'electron', env, 'win32'].join('.');
     gulp.task(taskName,
-      [['build', 'electron', env].join('.')],
+      // [['build', 'electron', env].join('.')],
       function () {
         var argv = yargs.reset()
           .usage('Usage: gulp ' + taskName + ' -n <appname>')
@@ -76,7 +76,7 @@ function registerElectronEnvPkgTasks() {
 
     taskName = ['package', 'electron', env, 'win64'].join('.');
     gulp.task(taskName,
-      [['build', 'electron', env].join('.')],
+      // [['build', 'electron', env].join('.')],
       function () {
         var argv = yargs.reset()
           .usage('Usage: gulp ' + taskName + ' -n <appname>')
@@ -110,7 +110,7 @@ function registerElectronEnvPkgTasks() {
 
     taskName = ['package', 'electron', env, 'macosx'].join('.');
     gulp.task(taskName,
-      [['build', 'electron', env].join('.')],
+      // [['build', 'electron', env].join('.')],
       function () {
         var argv = yargs.reset()
           .usage('Usage: gulp ' + taskName + ' -n <appname>')
@@ -142,11 +142,10 @@ function registerElectronEnvPkgTasks() {
           .pipe(electron(options, console.error.bind(console)));
       });
 
-
   });
 }
 
-function electronTask() {
+function electronTask(done) {
   var argv = yargs.reset()
     .usage('Usage: gulp electron -n <appname> -p <win32 | win64> [-e <dev | prod>]')
     .alias('n', 'name')
@@ -160,14 +159,14 @@ function electronTask() {
     .describe('e', 'Target environment')
 
     .alias('p', 'platform')
-    .choices('p', ['win32', 'win64','macosx'])
+    .choices('p', ['win32', 'win64', 'macosx'])
     .describe('p', 'Target platform')
 
     .alias('s', 'support')
     .help('s')
     .argv;
 
-  gulp.start(['package', 'electron', argv.env, argv.platform].join('.'));
+  gulp.start(['package', 'electron', argv.env, argv.platform].join('.'), () => done());
 }
 
 electronTask.description = 'Package Electron application for the specified environment/platform';

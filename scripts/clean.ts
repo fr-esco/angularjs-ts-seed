@@ -24,7 +24,7 @@ const argv = yargs.reset()
   .describe('t', 'Target Name')
 
   .alias('p', 'platform')
-  .choices('p', ['browser', 'desktop', 'android', 'ios'])
+  .choices('p', ['browser', 'desktop', 'win32', 'win64', 'macosx', 'android', 'ios'])
   .describe('p', 'Target platform')
 
   .alias('s', 'support')
@@ -37,7 +37,11 @@ const env = argv.env || process.env.NODE_ENV || 'dev'
 const target = argv.target || process.env.NODE_TARGET || 'all'
 const platform = argv.platform || process.env.NODE_PLATFORM || 'browser'
 
-const key = { browser: target, desktop: 'pkg', mobile: 'www', android: 'www', ios: 'www' }[platform]
+const key = {
+  browser: target,
+  desktop: 'pkg', win32: 'pkg', win64: 'pkg', macosx: 'pkg',
+  mobile: 'www', android: 'www', ios: 'www'
+}[platform]
 let folder = PATH.dst[env][key]
 
 if (shell.test('-e', folder)) {
@@ -63,5 +67,7 @@ switch (platform) {
         } else
           log.error(`cordova clean exited with code ${code}`)
       })
+    break
+  case 'desktop':
     break
 }

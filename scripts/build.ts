@@ -10,6 +10,7 @@ import * as yargs from 'yargs'
 'use strict'
 
 const chalk = require('chalk')
+const pkg = require('../package.json')
 
 const argv = yargs.reset()
   .usage('Usage: npm run build -- [--env <dev | prod>] [--platform <browser | desktop | mobile>] [--watch]')
@@ -19,7 +20,7 @@ const argv = yargs.reset()
   .describe('e', 'Target environment')
 
   .alias('p', 'platform')
-  .choices('p', ['browser', 'desktop', 'android', 'ios'])
+  .choices('p', ['browser', 'desktop', 'win32', 'win64', 'macosx', 'android', 'ios'])
   .describe('p', 'Target platform')
 
   .alias('w', 'watch')
@@ -92,7 +93,38 @@ switch (platform) {
         log.error(`build ${platform} error`, code)
       }
     }).catch(err => {
-      log.error('build mobile error', err)
+      log.error(`build ${platform} error`, err)
+    })
+    break
+  case 'win32':
+  case 'win64':
+  case 'macosx':
+  case 'desktop':
+    const timestamp = (new Date()).toJSON().replace(/-/g, '').replace(/:/g, '').substring(0, 13)
+    runAll([`clean -- --env=${env} --platform=${platform}`, `build -- --env=${env} --platform=browser --watch=${argv.watch}`], {
+      parallel: false,
+      stderr: process.stderr,
+      stdout: process.stdout
+    }).then(results => {
+      const code = results.reduce((code, result) => (code += result.code), 0)
+      if (code === 0) {
+        const src = PATH.dst[env].all
+        const dst = PATH.dst[env].all
+        shell.cp('-R', ['package.json', 'electron.extra.*.js', 'electron.preload.js'], dst)
+        shell.cp('electron.conf.package.js', [dst, pkg.main].join('/'))
+        shell.sed('-i', 'http://localhost:8080', '.', [dst, 'index.html'].join('/'))
+        spawn(`gulp electron`, ['--name', 'electron-' + timestamp, '--env', env, '--platform', platform], { stdio: 'inherit', shell: true })
+          .on('close', (code) => {
+            if (code === 0) {
+              log.info(`electron build exited with code ${code}`)
+            } else
+              log.error(`electron build exited with code ${code}`)
+          })
+      } else {
+        log.error(`build ${platform} error`, code)
+      }
+    }).catch(err => {
+      log.error(`build ${platform} error`, err)
     })
     break
 }
