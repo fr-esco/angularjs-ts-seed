@@ -28,10 +28,10 @@ module.exports = {
         test: /\.html$/,
         loader: 'ngtemplate?relativeTo=' + (path.resolve(__dirname)) + '/app/!html'
       },
-      { test: /\.css$/, loader: 'style!css' },
+      { test: /\.css$/, loader: 'style!css!resolve-url' },
       {
         test: /\.scss$/,
-        loaders: ['style', 'css', 'autoprefixer', 'sass']
+        loaders: ['style', 'css', 'autoprefixer', 'resolve-url', 'sass?sourceMap']
       },
       { test: /\.png$/, loader: 'url?limit=100000' },
       { test: /\.jpg$/, loader: 'file' },
@@ -42,7 +42,7 @@ module.exports = {
   entry: './app/app.ts',
   output: {
     path: PATH.dest.dev.all,
-    publicPath: 'http://localhost:8080/',
+    // publicPath: 'http://localhost:8080/',
     filename: 'bundle.js'
   },
   devServer: {

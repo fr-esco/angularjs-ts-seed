@@ -16,7 +16,13 @@ const chalk = require('chalk')
 const pkg = require('../package.json')
 
 const argv = yargs.reset()
-  .usage('Usage: npm run serve -- [--env <dev | prod>] [--platform <browser | desktop | mobile>] [--watch] [--only] [--port=8080]')
+  .usage('Usage: npm run serve -- ' +
+  '[--env <dev | prod>] [--platform <browser | desktop | mobile>] [--watch] [--only] [--port=8080] [--device <browser | emulator | physical>]')
+
+  .alias('d', 'device')
+  .choices('d', ['browser', 'emulator', 'physical'])
+  .default('d', 'browser')
+  .describe('d', 'Target Device (mobile only)')
 
   .alias('e', 'env')
   .choices('e', ['dev', 'prod'])
@@ -54,10 +60,11 @@ const platform = argv.platform || process.env.NODE_PLATFORM || 'browser'
 
 const runAll = require('npm-run-all')
 const spawn = require('child_process').spawn
+const open = require('open')
 
 switch (platform) {
   case 'browser':
-    buildBrowser(env, argv, false).then(serveBrowser)
+    buildBrowser(env, argv, false).then(serveBrowser).then(() => open('http://localhost:8080'))
     break
   case 'android':
   case 'ios':
@@ -65,7 +72,10 @@ switch (platform) {
       parallel: false,
       stderr: process.stderr,
       stdout: process.stdout
-    }).then(serveCordova).catch(err => {
+    }).then(serveCordova).then(() => {
+      if (argv.device === 'browser')
+        open(`http://localhost:${argv.port}`)
+    }).catch(err => {
       log.error(`serve ${platform} error`, err)
     })
     break
@@ -100,14 +110,32 @@ function serveCordova(results = []) {
     const dst = PATH.dst[env].www
     shell.cp('-R', src + '/*', dst)
     shell.cd('cordova')
-    shell.sed('-i', ':8080', ':' + argv.port, ['..', dst, 'index.html'].join('/'))
-    spawn(`cordova prepare ${platform} && cordova serve ${argv.port}`, [], { stdio: 'inherit', shell: true })
-      .on('close', (code) => {
-        if (code === 0) {
-          log.info(`cordova serve exited with code ${code}`)
-        } else
-          log.error(`cordova serve exited with code ${code}`)
-      })
+
+    let x
+    const opts = []
+    if (argv.only) opts.push('--nobuild')
+    switch (argv.device) {
+      case 'browser':
+        shell.sed('-i', ':8080', ':' + argv.port, ['..', dst, 'index.html'].join('/'))
+        x = spawn(`cordova prepare ${platform} && cordova serve ${argv.port}`, opts, { stdio: 'inherit', shell: true })
+        break
+      case 'emulator':
+        shell.sed('-i', 'http://localhost:8080', '.', ['..', dst, 'index.html'].join('/'))
+        opts.push('--emulator')
+        x = spawn(`cordova run ${platform}`, opts, { stdio: 'inherit', shell: true })
+        break
+      case 'physical':
+        shell.sed('-i', 'http://localhost:8080', '.', ['..', dst, 'index.html'].join('/'))
+        opts.push('--device')
+        x = spawn(`cordova run ${platform}`, opts, { stdio: 'inherit', shell: true })
+        break
+    }
+    x.on('close', (code) => {
+      if (code === 0) {
+        log.info(`cordova serve exited with code ${code}`)
+      } else
+        log.error(`cordova serve exited with code ${code}`)
+    })
   } else {
     log.error(`serve ${platform} error`, code)
   }

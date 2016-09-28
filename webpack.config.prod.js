@@ -16,7 +16,7 @@ module.exports = {
   entry: dev.entry,
   output: {
     path: PATH.dest.prod.all,
-    publicPath: 'http://localhost:8080/',
+    // publicPath: 'http://localhost:8080/',
     filename: 'bundle.js'
   },
   devServer: {

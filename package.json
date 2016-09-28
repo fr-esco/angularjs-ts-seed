@@ -128,6 +128,7 @@
     "phantomjs-prebuilt": "^2.1.12",
     "remap-istanbul": "^0.6.4",
     "require-dir": "^0.3.0",
+    "resolve-url-loader": "^1.6.0",
     "run-sequence": "^1.2.2",
     "sass-lint": "^1.9.1",
     "sass-loader": "^4.0.0",
