@@ -22,7 +22,7 @@ const argv = yargs.reset()
   .describe('e', 'Target environment')
 
   .alias('p', 'platform')
-  .choices('p', ['browser', 'desktop', 'win32', 'win64', 'macosx', 'android', 'ios'])
+  .choices('p', ['browser', 'win32', 'win64', 'macosx', 'android', 'ios'])
   .describe('p', 'Target platform')
 
   .alias('w', 'watch')
@@ -48,7 +48,6 @@ switch (platform) {
     break
   case 'android':
   case 'ios':
-  case 'mobile':
     runAll([`clean -- --env=${env} --platform=${platform}`, `build -- --env=${env} --platform=browser --watch=${argv.watch}`], {
       parallel: false,
       stderr: process.stderr,
@@ -76,7 +75,6 @@ switch (platform) {
   case 'win32':
   case 'win64':
   case 'macosx':
-  case 'desktop':
     const timestamp = (new Date()).toJSON().replace(/-/g, '').replace(/:/g, '').substring(0, 13)
     runAll([`clean -- --env=${env} --platform=${platform}`, `build -- --env=${env} --platform=browser --watch=${argv.watch}`], {
       parallel: false,

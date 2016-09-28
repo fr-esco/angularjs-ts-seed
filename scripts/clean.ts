@@ -21,7 +21,7 @@ const argv = yargs.reset()
   .describe('t', 'Target Name')
 
   .alias('p', 'platform')
-  .choices('p', ['browser', 'desktop', 'win32', 'win64', 'macosx', 'android', 'ios'])
+  .choices('p', ['browser', 'win32', 'win64', 'macosx', 'android', 'ios'])
   .describe('p', 'Target platform')
 
   .alias('s', 'support')
@@ -38,8 +38,8 @@ const platform = argv.platform || process.env.NODE_PLATFORM || 'browser'
 
 const key = {
   browser: target,
-  desktop: 'pkg', win32: 'pkg', win64: 'pkg', macosx: 'pkg',
-  mobile: 'www', android: 'www', ios: 'www'
+  win32: 'pkg', win64: 'pkg', macosx: 'pkg',
+  android: 'www', ios: 'www'
 }[platform]
 let folder = PATH.dst[env][key]
 
@@ -59,7 +59,6 @@ switch (platform) {
     break
   case 'android':
   case 'ios':
-  case 'mobile':
     spawn(`cd cordova && cordova clean ${platform} && cd ..`, [], { stdio: 'inherit', shell: true })
       .on('close', (code) => {
         if (code === 0) {
@@ -68,6 +67,8 @@ switch (platform) {
           log.error(`cordova clean exited with code ${code}`)
       })
     break
-  case 'desktop':
+  case 'win32':
+  case 'win64':
+  case 'macosx':
     break
 }
