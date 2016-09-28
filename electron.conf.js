@@ -42,7 +42,7 @@ function createMainWindow() {
   });
 
   //mainWindow.loadURL(`file://${__dirname}/index.html`);
-  mainWindow.loadURL('http://localhost:5555/');
+  mainWindow.loadURL('http://localhost:8080/');
   // mainWindow.toggleDevTools();
   client.create(mainWindow)
 

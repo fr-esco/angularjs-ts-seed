@@ -57,17 +57,7 @@ const spawn = require('child_process').spawn
 
 switch (platform) {
   case 'browser':
-    buildBrowser(env, argv, false).then(code => {
-      if (code) return
-      const dst = PATH.dst[env].all
-      // shell.sed('-i', ':8080', ':' + argv.port, [dst, 'index.html'].join('/'))
-      const webpackOptions = ['--profile', '--progress', '--config', `webpack.config.${env}`, '--watch-poll', '--inline', '--hot'/*, '--port', argv.port*/]
-      if (env === 'prod') webpackOptions.push('-p')
-      spawn(`webpack-dev-server`, webpackOptions, { stdio: 'inherit', shell: true })
-        .on('close', (code) => {
-          log.info(`webpack serve exited with code ${code}`)
-        })
-    })
+    buildBrowser(env, argv, false).then(serveBrowser)
     break
   case 'android':
   case 'ios':
@@ -82,33 +72,25 @@ switch (platform) {
   case 'win32':
   case 'win64':
   case 'macosx':
-    const timestamp = (new Date()).toJSON().replace(/-/g, '').replace(/:/g, '').substring(0, 13)
-    runAll([`clean -- --env=${env} --platform=${platform}`, `build -- --env=${env} --platform=browser --watch=${argv.watch}`], {
+    argv.only ? serveElectron() : runAll([`clean -- --env=${env} --platform=${platform}`, `build -- --env=${env} --platform=browser --watch=${argv.watch}`], {
       parallel: false,
       stderr: process.stderr,
       stdout: process.stdout
-    }).then(results => {
-      const code = results.reduce((code, result) => (code += result.code), 0)
-      if (code === 0) {
-        const src = PATH.dst[env].all
-        const dst = PATH.dst[env].all
-        shell.cp('-R', ['package.json', 'electron.extra.*.js', 'electron.preload.js'], dst)
-        shell.cp('electron.conf.package.js', [dst, pkg.main].join('/'))
-        shell.sed('-i', 'http://localhost:8080', '.', [dst, 'index.html'].join('/'))
-        spawn(`gulp electron`, ['--name', 'electron-' + timestamp, '--env', env, '--platform', platform], { stdio: 'inherit', shell: true })
-          .on('close', (code) => {
-            if (code === 0) {
-              log.info(`electron build exited with code ${code}`)
-            } else
-              log.error(`electron build exited with code ${code}`)
-          })
-      } else {
-        log.error(`build ${platform} error`, code)
-      }
-    }).catch(err => {
-      log.error(`build ${platform} error`, err)
+    }).then(serveElectron).catch(err => {
+      log.error(`serve ${platform} error`, err)
     })
     break
+}
+
+function serveBrowser(code) {
+  if (code) return
+  // shell.sed('-i', ':8080', ':' + argv.port, [dst, 'index.html'].join('/'))
+  const webpackOptions = ['--profile', '--progress', '--config', `webpack.config.${env}`, '--watch-poll', '--inline', '--hot'/*, '--port', argv.port*/]
+  if (env === 'prod') webpackOptions.push('-p')
+  return spawn(`webpack-dev-server`, webpackOptions, { stdio: 'inherit', shell: true })
+    .on('close', (code) => {
+      log.info(`webpack serve exited with code ${code}`)
+    })
 }
 
 function serveCordova(results = []) {
@@ -126,6 +108,19 @@ function serveCordova(results = []) {
         } else
           log.error(`cordova serve exited with code ${code}`)
       })
+  } else {
+    log.error(`serve ${platform} error`, code)
+  }
+}
+
+function serveElectron(results = []) {
+  const code = results.reduce((code, result) => (code += result.code), 0)
+  if (code === 0) {
+    serveBrowser(0)
+
+    const electron = require('electron-connect').server.create()
+
+    return electron.start()
   } else {
     log.error(`serve ${platform} error`, code)
   }
