@@ -68,6 +68,7 @@ switch (platform) {
     break
   case 'android':
   case 'ios':
+    // https://github.com/apache/cordova-lib/tree/rel/6.2.0/cordova-lib/src/cordova
     argv.only ? serveCordova() : runAll([`clean -- --env=${env} --platform=${platform}`, `build -- --env=${env} --platform=browser --watch=${argv.watch}`], {
       parallel: false,
       stderr: process.stderr,
