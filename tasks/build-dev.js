@@ -88,7 +88,7 @@ gulp.task('build.copy.assets.dev', function () {
     .pipe($.livereload());
 });
 
-gulp.task('build.assets.dev', ['build.js.dev', 'build.html.dev', 'build.copy.assets.dev', 'build.styles.dev', 'build.copy.locale.dev', 'build.copy.locale.json.dev'], function () {
+gulp.task('build.assets.dev', ['build.js.dev', 'build.html.dev', 'build.copy.assets.dev', 'build.copy.locale.dev', 'build.copy.locale.json.dev'], function () {
   return gulp.src(['./app/**/!(*.directive|*.component|*.tpl).html', './app/**/*.css'])
     .pipe(gulp.dest(PATH.dest.dev.all))
     .pipe($.livereload());

@@ -10,7 +10,7 @@ const runSequence = require('run-sequence');
 const version = require('../package.json').version;
 
 gulp.task('webpack.build.dev', done => {
-  runSequence(['clean.dev', 'clean.pkg.dev'], 'webpack.build.lib.dev', 'webpack.build.app.dev', done);
+  runSequence('webpack.build.lib.dev', 'webpack.build.app.dev', done);
 });
 
 gulp.task('webpack.build.lib.dev', () => {
@@ -19,7 +19,7 @@ gulp.task('webpack.build.lib.dev', () => {
 });
 
 gulp.task('webpack.build.app.dev', done => {
-  runSequence('clean.app.dev', ['webpack.build.assets.dev', 'webpack.build.index.dev'], done);
+  runSequence(['webpack.build.assets.dev', 'webpack.build.index.dev'], done);
 });
 
 gulp.task('webpack.build.index.dev', () => {

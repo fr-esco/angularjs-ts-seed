@@ -10,7 +10,7 @@ const runSequence = require('run-sequence');
 const version = require('../package').version;
 
 gulp.task('webpack.build.prod', done => {
-  runSequence(['clean.prod', 'clean.pkg.prod'], 'webpack.build.lib.prod', 'webpack.build.app.prod', done);
+  runSequence('webpack.build.lib.prod', 'webpack.build.app.prod', done);
 });
 
 gulp.task('webpack.build.lib.prod', () => {
@@ -36,7 +36,7 @@ gulp.task('webpack.build.lib.prod', () => {
 });
 
 gulp.task('webpack.build.app.prod', done => {
-  runSequence('clean.app.prod', ['webpack.build.assets.prod', 'webpack.build.index.prod'], done);
+  runSequence(['webpack.build.assets.prod', 'webpack.build.index.prod'], done);
 });
 
 gulp.task('webpack.build.index.prod', () => {

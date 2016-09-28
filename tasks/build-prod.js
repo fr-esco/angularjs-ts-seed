@@ -153,7 +153,7 @@ gulp.task('build.copy.locale.prod', function () {
     .pipe(gulp.dest(PATH.dest.prod.lib));
 });
 
-gulp.task('build.assets.prod', ['build.js.prod', 'build.styles.prod'], function () {
+gulp.task('build.assets.prod', ['build.js.prod'], function () {
   var filterHTML = filter('*.html', { restore: true });
   var filterCSS = filter('*.css', { restore: true });
   return gulp.src(['./app/**/!(*.directive|*.component|*.tpl).html', './app/**/*.css'])
