@@ -82,7 +82,7 @@ gulp.task('build.lib.prod', function () {
     .pipe(gulp.dest(PATH.dest.prod.lib));
 });
 
-gulp.task('build.html.tmp', ['lint.html', 'lint.dts'], function () {
+gulp.task('build.html.tmp', ['lint.dts'], function () {
   return gulp.src(PATH.src.html.directive)
     .pipe(minifyHTML(HTMLMinifierOpts))
     .pipe(ngHtml2Js({
@@ -102,7 +102,7 @@ gulp.task('build.html.tmp', ['lint.html', 'lint.dts'], function () {
     .pipe(gulp.dest('tmp'));
 });
 
-gulp.task('build.js.tmp', ['lint.ts', 'lint.dts', 'build.html.tmp', 'environment.prod'], function () {
+gulp.task('build.js.tmp', ['lint.dts', 'build.html.tmp', 'environment.prod'], function () {
   var result = gulp.src(PATH.src.app.prod)
     .pipe(plumber())
     .pipe(tsc(tsProject));

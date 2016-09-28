@@ -44,7 +44,7 @@ gulp.task('build.lib.dev', function () {
     .pipe($.livereload());
 });
 
-gulp.task('build.js.dev', ['lint.ts', 'lint.dts', 'environment.dev'], function () {
+gulp.task('build.js.dev', ['lint.dts', 'environment.dev'], function () {
   var result = gulp.src(PATH.src.app.dev)
     .pipe(preprocess({ context: { NODE_ENV: 'DEVELOPMENT', DEBUG: true } }))
     .pipe(plumber())
@@ -58,7 +58,7 @@ gulp.task('build.js.dev', ['lint.ts', 'lint.dts', 'environment.dev'], function (
     .pipe($.livereload());
 });
 
-gulp.task('build.html.dev', ['lint.html', 'lint.dts'], function () {
+gulp.task('build.html.dev', ['lint.dts'], function () {
   return gulp.src(PATH.src.html.directive)
     .pipe(ngHtml2Js({
       moduleName: 'tpl' || function (file) {

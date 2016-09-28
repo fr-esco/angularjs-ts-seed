@@ -26,7 +26,7 @@ gulp.task('webpack.build.assets.test', ['webpack.build.js.test', 'build.copy.loc
   done();
 });
 
-gulp.task('webpack.build.js.test', ['lint.ts', 'lint.dts', 'environment.dev'], done => {
+gulp.task('webpack.build.js.test', ['lint.dts', 'environment.dev'], done => {
   webpack(extend(true, webpackConfigTest, {
     output: {
       path: PATH.dest.test.all,

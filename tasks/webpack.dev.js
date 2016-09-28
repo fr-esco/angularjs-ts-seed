@@ -31,7 +31,7 @@ gulp.task('webpack.build.index.dev', () => {
     .pipe(gulp.dest(PATH.src.app.root));
 });
 
-gulp.task('webpack.build.assets.dev', ['lint.ts', 'lint.dts', 'environment.dev', 'build.copy.locale.json.dev'], done => {
+gulp.task('webpack.build.assets.dev', ['lint.dts', 'environment.dev', 'build.copy.locale.json.dev'], done => {
   done();
 });
 

@@ -1,44 +1,15 @@
 'use strict';
 
-var PATH = require('./PATH');
+const PATH = require('./PATH');
 
-var gulp = require('gulp');
-var htmllint = require('gulp-htmllint');
-var tslint = require('gulp-tslint');
-var gutil = require('gulp-util');
+const gulp = require('gulp');
+const gutil = require('gulp-util');
 
-var fs = require('fs');
-var join = require('path').join;
-var runSequence = require('run-sequence');
-var yargs = require('yargs');
-
-function htmllintReporter(filepath, issues) {
-  if (issues.length > 0) {
-    issues.forEach(function (issue) {
-      gutil.log([
-        gutil.colors.cyan('[gulp-htmllint]'),
-        gutil.colors.white(filepath + ' [' + issue.line + ',' + issue.column + ']:'),
-        gutil.colors.red('(' + issue.code + ') ' + issue.msg)
-      ].join(' '));
-    });
-
-    process.exitCode = 1;
-  }
-}
-
-function lintHtml() {
-  return gulp.src(PATH.src.html.all.concat('!app/index.html'))
-    .pipe(htmllint({}, htmllintReporter));
-}
-
-lintHtml.description = 'Ensure HTML coding standards and best practices are applied using htmllint';
-
-lintHtml.flags = {};
-
-gulp.task('lint.html', lintHtml);
+const fs = require('fs');
+const join = require('path').join;
 
 function lintDts() {
-  var ko = checkFolders(PATH.src.app.root);
+  const ko = checkFolders(PATH.src.app.root);
   if (ko.length > 0) {
     throw new gutil.PluginError({
       plugin: 'lint.dts',
@@ -54,45 +25,14 @@ lintDts.description = 'Ensure Directory Tree Structure (DTS) standards are appli
 
 gulp.task('lint.dts', lintDts);
 
-function lintTs() {
-  var argv = yargs.reset()
-    .usage('Usage: gulp lint.ts -r [string]')
-    .alias('r', 'report')
-    // .string('r')
-    .default({ 'r': 'prose' })
-    .choices('r', ['checkstyle', 'json', 'prose', 'pmd', 'verbose', 'vso'])
-    .alias('s', 'support')
-    .help('s')
-    .argv;
-
-  return gulp.src(PATH.src.app.all.concat('!./app/components/environment/*'))
-    .pipe(tslint({
-      formatter: argv.report
-    }))
-    .pipe(tslint.report({
-      emitError: false,
-      reportLimit: 2,
-      summarizeFailureOutput: true
-    }));
-}
-
-lintTs.description = 'Ensure TypeScript coding standards and best practices are applied using tslint';
-
-lintTs.flags = {
-  '-r, --report': 'Report for gulp-tslint',
-  '-s, --support': 'Show help'
-};
-
-gulp.task('lint.ts', lintTs);
-
 function lint() { }
 
 lint.description = 'Ensure coding standards and best practices are applied using linters';
 
-gulp.task('lint', ['lint.html', 'lint.ts', 'lint.dts'], lint);
+gulp.task('lint', ['lint.dts'], lint);
 
 function checkFolders(root) {
-  var ko = [];
+  const ko = [];
   checkFolder(root);
   return ko.filter(function (file) {
     return file[0] !== '_' && file.indexOf('MaterialIcons') < 0 && file.indexOf('i18n') < 0;

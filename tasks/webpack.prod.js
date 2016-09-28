@@ -48,7 +48,7 @@ gulp.task('webpack.build.index.prod', () => {
     .pipe(gulp.dest(PATH.src.app.root));
 });
 
-gulp.task('webpack.build.assets.prod', ['lint.ts', 'lint.dts', 'environment.prod', 'build.copy.locale.json.prod'], done => {
+gulp.task('webpack.build.assets.prod', ['lint.dts', 'environment.prod', 'build.copy.locale.json.prod'], done => {
   $.util.log($.util.colors.green('Application built successfully.'));
   done();
 });
